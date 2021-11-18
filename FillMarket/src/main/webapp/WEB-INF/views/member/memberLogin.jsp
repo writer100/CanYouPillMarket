@@ -24,8 +24,8 @@
 
 </head>
 <body>
-	<c:import url="views/common/header.jsp" />
-	<c:import url="views/common/navbar.jsp" />
+	<c:import url="../common/header.jsp"/>
+	<c:import url="../common/navbar.jsp"/>
 
 	<main class="form-signin">
 		<div id="login-div">
@@ -80,13 +80,8 @@
 		</div>
 	</main>
 	
-	<!-- JQuery CDN-->
-	<script src="https://code.jquery.com/jquery-2.2.4.js"
-		integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-		crossorigin="anonymous">
-		
-	</script>
-	<c:import url="views/common/footer.jsp" />
+	
+	<c:import url="../common/footer.jsp"/>
 </body>
 
 </html>
