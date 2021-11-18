@@ -22,7 +22,7 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 
-	@RequestMapping("cartInsert.do")
+	@RequestMapping("/cart/cartInsert.do")
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		cart.setCartUserId(userId);
@@ -40,7 +40,7 @@ public class CartController {
 		return "cart/cartList";
 	}
 	
-	@RequestMapping("cartList.do")
+	@RequestMapping("/cart/cartList.do")
 	public ModelAndView cartList(HttpSession session, ModelAndView mav) {
 		String userId = (String)session.getAttribute("userId");	// 세션에 저장된 userId
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -64,14 +64,15 @@ public class CartController {
 	
 	}
 	
-	@RequestMapping("cartDelete.do")
+
+	@RequestMapping("/cart/cartDelete.do")
 	public String cartDelete(@RequestParam int cNo) {
 		cartService.deleteCart(cNo);
 		
 		return "cart/cartList.do";
 	}
 	
-	@RequestMapping("cartUpdate.do")
+	@RequestMapping("/cart/cartUpdate.do")
 	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pNo, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		// 레코드의 갯수만큼 반복문 실행

@@ -15,14 +15,14 @@
 	</style>
 	<script>
 		function fn_goCart(){
-			location.href = "${pageContext.request.contextPath}/cart/cart.do";
+			location.href = "${pageContext.request.contextPath}/cart/cartList.do";
 		}
 		
 		$(function(){
 			$("div[id]").on("click",function(){
 				var pNo = $(this).attr("id");
 				console.log("PNo="+PNo);
-				location.href = "${pageContext.request.contextPath}/cart/cart.do?pno="+PNo;
+				location.href = "${pageContext.request.contextPath}/cart/cartList.do?pno="+PNo;
 			});
 		});
 	</script>

@@ -4,8 +4,8 @@
 <mapper namespace="cartSQL">
 	
 	<insert id="insertCart" parameterType="Cart">
-		INSERT INTO CART (CARTNO, CARTUSERID, PNO, AMOUNT, PNAME, PPRICE, ORDERPRICE)
-		VALUES (SEQ_CARTNO.NEXTVAL, #{ cartUserId }, #{ pNo }, #{ amount }, #{ pName }, #{ pPrice }, #{ orderPrice })
+		INSERT INTO CART (CARTNO, CARTUSERID, PNO, AMOUNT, PNAME, PPRICE)
+		VALUES (SEQ_CARTNO.NEXTVAL, #{ cartUserId }, #{ pNo }, #{ amount }, #{ pName }, #{ pPrice })
 	</insert>
 	
 	<select id="listCart" resultType="Cart">
