@@ -8,112 +8,88 @@
 <head>
 	<meta charset="UTF-8">
 	<title>상품 목록</title>
-	<!-- 헤더 -->
+	<script
+		src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<!-- css -->
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/css/style.css">
+	
 	<style>
-		/*장바구니버튼*/
-		input#btn-add{float:right; margin: 0 0 15px;}
-	</style>
-	<script>
-		function fn_goCart(){
-			location.href = "${pageContext.request.contextPath}/cart/cart.do";
-		}
+	.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+    justify-content: center;
+}
+    
+	input#btn-search{float:right; background-color: rgb(231, 133, 110);}
 		
-		$(function(){
-			$("div[id]").on("click",function(){
-				var pNo = $(this).attr("id");
-				console.log("PNo="+PNo);
-				location.href = "${pageContext.request.contextPath}/cart/cart.do?pno="+PNo;
-			});
-		});
-	</script>
+	</style>
 </head>
 <body>
+	<!-- 헤더와 네비바 -->
+	<c:import url="../common/header.jsp" />
+	<c:import url="../common/navbar.jsp" />
 	<div id="container">
 	  <!-- 네비게이터 바 -->
 	  
-	    <div class="row product">
+	    <div class="row product" wieth="90%">
 	        <!-- 검색창 -->
-	        <form class="">
 		        <div role="group" class="input-group d-flex align-items-center justify-content-center my-3"><!---->
-			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px inset; border-radius: 2px; border: 0px;" id="productSearch">
-			        <button type="submit" class="btn p-0 btn-link">
+			        <form class="search" style="width: 1000px;">
+			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; wieth : 80%" id="productSearch">
+			        <button type="submit" class="btn-search">
 			        	검색
 			        </button>
+			        </form>
 		        </div>
-	        </form>
-	        <!-- 상품리스트 -->
-	        <div class="col-4">
-	        <div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
+
+			<div class="row row-cols-1 row-cols-md-4 g-4" style="width: 1024px;">
+			<c:forEach items="${list}" var="product"> 
+			  <div class="col">
+			    <div class="card h-100">
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/${product.changename}" class="card-img-top" alt="썸네일" id="thumnail">
+					  <div class="card-body" id="${ product.pno }">
+					    <h5 class="card-title">${ product.pname }</h5>
+					    <p class="card-text">${ product.pprice }</p>
+					    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.pno });">장바구니 담기</button>
+					  </div>
+			    </div>
 			  </div>
+			  </c:forEach>
+			  
 			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
+			<div>
+			<br />
 			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-			<div class="card" style="width: 18rem;">
-			  <img src="..." class="card-img-top" alt="...">
-			  <div class="card-body" id="${ product.PNo }">
-			    <h5 class="card-title">${ product.PName }</h5>
-			    <p class="card-text">${ product.PPrice }</p>
-			    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.PNo });">장바구니 담기</button>
-			  </div>
-			</div>
-	        </div>
 	        <!-- 페이지 번호 -->
 	        <div class="ListNum">
 	           <c:out value=" ${pageBar}" escapeXml="false"/>
 	        </div>
 	    </div>
-	<!-- 푸터 -->
 	</div>
+	<c:import url="../common/footer.jsp" />
+	
+	<script>
+		function fn_goCart(){
+			location.href = "${pageContext.request.contextPath}/cart/cartInsert.do";
+		}
+		
+		$(function(){
+			$(".card-body[id]").on("click",function(){
+				var pno = $(this).attr("id");
+				console.log("pno="+pno);
+				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno;
+			});
+		});
+	</script>
+	<!-- JQuery CDN-->
+	<script src="https://code.jquery.com/jquery-2.2.4.js"
+		integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+		crossorigin="anonymous></script>	
 </body>
 </html>

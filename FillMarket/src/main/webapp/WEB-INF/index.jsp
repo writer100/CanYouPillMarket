@@ -24,8 +24,8 @@
 
 </head>
 <body>
-	<c:import url="views/common/header.jsp" />
-	<c:import url="views/common/navbar.jsp" />
+	<c:import url="views/common/header.jsp"/>
+	<c:import url="views/common/navbar.jsp"/>
 
 	<main>
 
@@ -204,6 +204,6 @@
 		</div>
 	</main>
 
-	<c:import url="views/common/footer.jsp" />
+	<c:import url="views/common/footer.jsp"/>
 </body>
 </html>

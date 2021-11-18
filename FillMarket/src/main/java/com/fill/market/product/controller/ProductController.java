@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fill.market.admin.model.vo.PAttachment;
+import com.fill.market.admin.model.vo.Product;
 import com.fill.market.common.Utils;
 import com.fill.market.product.model.service.ProductService;
 
@@ -52,5 +54,18 @@ public class ProductController {
 		
 		return "product/productList";
 	}	
+	
+	@RequestMapping("/product/productView.do")
+	public String productView(@RequestParam int pno, Model model) {
+		
+		Product product = productService.selectOneProduct(pno);
+		
+		List<PAttachment> pattachmentList = productService.selectPAttachmentList(pno);
+		
+		model.addAttribute("product", product);
+		model.addAttribute("pattachmentList", pattachmentList);
+		
+		return "product/productView";
+	}
 
 }
