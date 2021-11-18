@@ -29,4 +29,17 @@ public class MemberController {
 		return "member/memberLogin";
 
 	}
+	
+	/**
+	 * Auth : GiChang
+	 * Date : 2021-11-18
+	 * 이용약관 이동 처리 
+	 * 
+	 * */
+	@RequestMapping("/member/agreement.do")
+	public String agreement() {
+		
+		return "member/agreement";
+
+	}
 }

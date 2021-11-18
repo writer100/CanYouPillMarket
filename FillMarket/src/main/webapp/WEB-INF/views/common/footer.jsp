@@ -9,7 +9,7 @@
 	<footer class="py-5">
 		<div class="row py-4">
 			<div class="col-3">
-				<h5 class="footer-head">회사정보</h5>
+				<h5 style="color: rgb(216, 83, 55);">회사정보</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2 p-0 text-dark">CanYouPillMarket.</li>
 					<li class="nav-item mb-1 p-0 text-secondary">상 &nbsp;&nbsp; 호
@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="col-3">
-				<h5 class="footer-head">고객센터</h5>
+				<h5 style="color: rgb(216, 83, 55);">고객센터</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2 p-0 text-dark">1234-1234</li>
 					<li class="nav-item mb-1 p-0 text-secondary">WEEK
@@ -35,7 +35,7 @@
 			</div>
 
 			<div class="col-3">
-				<h5 class="footer-head">계좌정보</h5>
+				<h5 style="color: rgb(216, 83, 55);">계좌정보</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2 p-0 text-dark">예금주 &nbsp;&nbsp; :
 						캔유필마켓</li>
@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="col-3">
-				<h5 class="footer-head">반품</h5>
+				<h5 style="color: rgb(216, 83, 55);">반품</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2"><a href="#"
 						class="nav-link p-0 text-dark">교환/반품 정책 확인 ▶︎</a></li>

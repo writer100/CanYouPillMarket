@@ -23,61 +23,64 @@
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 
 </head>
-<body>
+<body id="wrap_body">
 	<c:import url="../common/header.jsp"/>
 	<c:import url="../common/navbar.jsp"/>
 
-	<main class="form-signin">
-		<div id="login-div">
-			<form action="memberLoginEnd.do">
-				
-				<h1 class="h3 mb-3 mt-5 fw-normal">Sign in</h1>
+	    <main class="form-signin">
+        <div id="login-div">
+            
+                
+                <h1 class="h3 mb-3 fw-normal mt-4">Sign in</h1>
 
-				<div class="form-group">
-					<label for="id"></label> <input type="text" name="userId"
-						class="form-control" placeholder="아이디를 입력하세요.">
-				</div>
+                <div class="form-group">
+                    <label for="id"></label> <input type="text" name="userId" class="form-control"
+                        placeholder="아이디를 입력하세요.">
+                </div>
 
-				<div class="form-group">
-					<label for="password"></label> <input type="password"
-						name="password" class="form-control" placeholder="비밀번호를 입력하세요.">
-				</div>
+                <div class="form-group">
+                    <label for="password"></label> <input type="password" name="password" class="form-control"
+                        placeholder="비밀번호를 입력하세요.">
+                </div>
 
-				<div class="checkbox mb-3 mt-3">
-					<label> <input type="checkbox" value="remember-me">
-						아이디 기억하기
-					</label>
-				</div>
-				<button class="btn" type="submit" value="Submit" id="loginBtn">로그인</button>
+                <div class="checkbox mb-3 mt-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> 아이디 기억하기
+                    </label>
+                </div>
+                <button class="btn" type="submit" value="Submit" id="loginBtn">로그인</button>
 
-			</form>
-			<button class="btn" type="submit" value="Submit" id="signBtn">
-				<a href="#" id="signBtn-a" class="btn-signup">회원가입</a>
-			</button>
+            
+            
+            
+            <button class="btn" type="submit" value="Submit" id="signBtn">
+                <a href="${pageContext.request.contextPath}/member/agreement.do" id="signBtn-a" class="btn-signup">회원가입</a>
+            </button>
+            
 
-			<nav class="findBox mt-3">
-				<a href="#">아이디/비밀번호 찾기</a>
-			</nav>
+            <nav class="findBox mt-3">
+                <a href="#">아이디/비밀번호 찾기</a>
+            </nav>
 
-			<h3 class="mt-2" style="text-align: left;">간편 로그인</h3>
+            <h3 class="mt-2" style="text-align: left;">간편 로그인</h3>
 
-			<div class="bigContainer">
-				<div class="loginApiBox">
+            <div class="bigContainer">
+                <div class="loginApiBox">
 
-					<!-- 카카오톡 로그인 버튼 -->
-					<button class="btn ApiBtn" type="submit" value="Submit"
-						style="background-color: rgb(252, 233, 78);">카카오톡 로그인</button>
-					<!-- // 카카오톡 로그인 버튼 -->
+                    <!-- 카카오톡 로그인 버튼 -->
+                    <button class="btn ApiBtn" type="submit" value="Submit"
+                        style="background-color: rgb(252, 233, 78);">카카오톡 로그인</button>
+                    <!-- // 카카오톡 로그인 버튼 -->
 
-					<!-- 네이버 로그인 버튼 -->
-					<button class="btn ApiBtn ms-4" type="submit" value="Submit"
-						style="background-color: rgb(96, 197, 58); color: white;">네이버
-						로그인</button>
-					<!-- // 네이버 로그인 버튼 -->
-				</div>
-			</div>
-		</div>
-	</main>
+                    <!-- 네이버 로그인 버튼 -->
+                    <button class="btn ApiBtn ms-4" type="submit" value="Submit"
+                        style="background-color: rgb(96, 197, 58); color: white;">네이버
+                        로그인</button>
+                    <!-- // 네이버 로그인 버튼 -->
+                </div>
+            </div>
+        </div>
+    </main>
 	
 	
 	<c:import url="../common/footer.jsp"/>
