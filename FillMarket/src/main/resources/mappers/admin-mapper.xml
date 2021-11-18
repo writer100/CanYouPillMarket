@@ -84,14 +84,24 @@
 	<!-- 사용자관리 -->
 	
 	<select id="selectUserList" resultType="Member">
-		SELECT *
-		FROM MEMBER
+		SELECT * FROM MEMBER
 		ORDER BY ENROLLDATE DESC
 	</select>
 	
 	<select id="selectUserTotalContents" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
+
+	</select>
+	
+	<select id="selectUser" parameterType="String" resultType="Member">
+		SELECT * FROM MEMBER WHERE USERID = #{userid}
 	</select>
 
-
+	<update id="userDelete" parameterType="String">
+		UPDATE MEMBER SET STATUS = 'N' WHERE USERID = #{userid}
+	</update>
+	
+	<update id="userRes" parameterType="String">
+		UPDATE MEMBER SET STATUS = 'Y' WHERE USERID = #{userid}
+	</update>
 </mapper>

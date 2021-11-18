@@ -38,9 +38,9 @@
 		
 		$(function(){
 			$("tr[id]").on("click",function(){
-				var pno = $(this).attr("id");
-				console.log("pno="+pno);
-				location.href = "${pageContext.request.contextPath}/admin/adminView.do?pno="+pno;
+				var userid = $(this).attr("id");
+				console.log("userid="+userid);
+				location.href = "${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userid;
 			});
 		});
 	</script>

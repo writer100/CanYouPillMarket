@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 
@@ -97,6 +98,21 @@ public class AdminDAO {
 		
 		return sqlSession.selectOne("adminSQL.selectUserTotalContents");
 
+	}
+
+	public Member adminSelectUser(String userid) {
+		
+		return sqlSession.selectOne("adminSQL.selectUser", userid);
+	}
+
+	public int userDelete(String userid) {
+		
+		return sqlSession.update("adminSQL.userDelete",userid);
+	}
+
+	public int userRes(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("adminSQL.userRes",userid);
 	}
 
 

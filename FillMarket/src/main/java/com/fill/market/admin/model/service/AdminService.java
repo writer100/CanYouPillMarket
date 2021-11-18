@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fill.market.admin.model.dao.AdminDAO;
+import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 
@@ -113,6 +114,21 @@ public class AdminService {
 	public int selectUserTotalContents() {
 		
 		return adminDAO.selectUserTotalContents();
+	}
+
+	public Member adminSelectUser(String userid) {
+		
+		return adminDAO.adminSelectUser(userid);
+	}
+
+	public int userDelete(String userid) {
+		
+		return adminDAO.userDelete(userid);
+	}
+
+	public int userRes(String userid) {
+	
+		return adminDAO.userRes(userid);
 	}
 
 
