@@ -26,6 +26,7 @@ public class CartController {
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		cart.setCartUserId(userId);
+		
 		// 추가하려는 상품이 장바구니에 있는지 검사
 		int count = cartService.countCart(cart.getPNo(), userId);
 		count = false ? cartService.updateCart(cart) : cartService.insertCart(cart);
