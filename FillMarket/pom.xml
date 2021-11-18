@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fill</groupId>
 	<artifactId>market</artifactId>
-	<name>PillMarket</name>
+	<name>FillMarket</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
