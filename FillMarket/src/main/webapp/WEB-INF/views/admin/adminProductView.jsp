@@ -104,7 +104,7 @@
                     <td class="title">이미지</td>
                     <td>
                     	<c:forEach items="${attachList}" var="a" varStatus="vs">
-							<img src="${pageContext.request.contextPath}/resources/productUpload/${a.changename}" alt="" />
+							<img style="width:300px; height:300px;" src="${pageContext.request.contextPath}/resources/productUpload/${a.changename}" alt="" />
 						</c:forEach>
 					</td>
                 </tr>

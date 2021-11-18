@@ -64,7 +64,8 @@
 					<c:forEach items="${list}" var="p"> 
 					<tr id="${p.pno}">
 						<td class="mini">${p.pno}</td>
-						<td class="mini"><c:choose>
+						<td class="mini">
+								<c:choose>
                         			<c:when test="${p.cno == 1 }">뼈/관절</c:when>
                         			<c:when test="${p.cno == 2 }">면역력</c:when>
                         			<c:when test="${p.cno == 3 }">소화/장</c:when>

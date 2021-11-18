@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fill.market.admin.model.service.AdminService;
+import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.common.Utils;
@@ -51,9 +52,10 @@ public class AdminController {
 		int totalContents = adminService.selectProductTotalContents();
 
 		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminProductList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, ""
+				+ ".do");
 
-		// System.out.println("list : " + list);
+		 System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
 
 		model.addAttribute("list", list);
@@ -343,7 +345,56 @@ public class AdminController {
 
 		return "admin/adminUserManage";
 
+	}
+	
+	@RequestMapping("/admin/adminUserView.do")
+	public String adminUserView(@RequestParam String userid, Model model) {
+		
+		Member member = adminService.adminSelectUser(userid);
+		
+		model.addAttribute("member", member);
+		
+		return "admin/adminUserView";
+	}
+	
+	@RequestMapping("/admin/userDelete.do")
+	@ResponseBody
+	public boolean userDelete(@RequestParam String userid) {
+		
+		int result = adminService.userDelete(userid);
+		System.out.println(result);
+		
+		if(result == 1) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+		}
+		
+		
+
 		
 	}
+	@RequestMapping("/admin/userRes.do")
+	@ResponseBody
+	public boolean userRes(@RequestParam String userid) {
+		
+		int result = adminService.userRes(userid);
+		System.out.println(result);
+		
+		if(result == 1) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+		}
+		
+		
 
+		
+	}
 }
