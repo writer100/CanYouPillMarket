@@ -7,11 +7,10 @@
 	
 	<!-- #1 DBCP Connection -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<!-- <property name="url" value="jdbc:oracle:thin:@1.212.197.133:49164:xe"/> -->
-		<property name="username" value="FILLMARKET"/> <!-- SPRING1 / SPRING2 -->
-		<property name="password" value="FILLMARKET"/>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@1.212.197.133:49164:xe" />
+		<property name="username" value="PillMarket" />
+		<property name="password" value="PillMarket" />
 	</bean>
 	
 	<!-- #2 MyBatis Session create -->
