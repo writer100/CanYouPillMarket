@@ -24,8 +24,10 @@
     margin-right: calc(-.5 * var(--bs-gutter-x));
     margin-left: calc(-.5 * var(--bs-gutter-x));
     justify-content: center;
-}
-    
+	}
+	
+	.search{ text-align: center; }
+	
 	input#btn-search{float:right; background-color: rgb(231, 133, 110);}
 		
 	</style>

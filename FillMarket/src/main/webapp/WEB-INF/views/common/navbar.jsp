@@ -14,37 +14,44 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExample06">
+                
                 <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle ms-4" href="#" id="dropdown06" data-bs-toggle="dropdown"
                             aria-expanded="false">전체</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown06">
-                            <li><a class="dropdown-item" href="#">소화/장</a></li>
-                            <li><a class="dropdown-item" href="#">면역력</a></li>
-                            <li><a class="dropdown-item" href="#">뼈/관절</a></li>
-                            <li><a class="dropdown-item" href="#">심장/혈관/혈당</a></li>
-                            <li><a class="dropdown-item" href="#">치아/구강</a></li>
-                            <li><a class="dropdown-item" href="#">피부</a></li>
+                            
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/product/productList.do" ${product.cno == 1 }>뼈/관절</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/product/productList.do" ${product.cno == 2 }>면역력</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/product/productList.do" ${product.cno == 3 }>소화/장</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/product/productList.do" ${product.cno == 4 }>눈</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/product/productList.do" ${product.cno == 5 }>모발</a></li>
                         </ul>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">소화/장</a>
+                    	                       
+                        <a class="nav-link ms-4 ps-5"  href="${pageContext.request.contextPath}/product/productList.do" >뼈/관절</a>
+                    	
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">면역력</a>
+                        
+                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do">면역력</a>
+                    
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">뼈/관절</a>
+                        
+                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do">소화/장</a>
+                    
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">심장/혈관/혈당</a>
+                        
+                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do">눈</a>
+                    
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">치아/구강</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ms-4 ps-5" href="#">피부</a>
+                        
+                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do">모발</a>
+                    
                     </li>
                     
                 </ul>
