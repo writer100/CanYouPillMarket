@@ -26,11 +26,15 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 
-<script>
+<!-- <script>
+    /* Dom요소를 잡아준 후 */
     const form = document.querySelector("#form__wrap");
     const checkBoxes = document.querySelectorAll(".input__check input");
     const submitButton = document.querySelector("button");
 
+    /* 체크박스에서 이벤트가 일어날 때마다 상태를 확인해서 변화시켜 주어야 하기 때문에 */
+    /* true / false 여부를 확인하며 제어할 수 있도록 */
+    /* 체크 박스의 체크여부를 저장하는 임시 저장 공간 */
     const agreements = {
         agree1: false,
         agree2: false,
@@ -48,7 +52,7 @@
 
         toggleSubmitButton();
     }
-</script>
+</script> -->
 
 <style>
 * {
@@ -165,7 +169,7 @@ ul {
 	<div class="wrap">
 		
 		<div class="contents">
-			<form action="memberEnroll.jsp" method="POST" id="form__wrap">
+			<form action="${pageContext.request.contextPath}/member/memberEnroll.do" method="POST" id="form__wrap">
 
 				<ul class="terms__list">
 					<li class="terms__box">

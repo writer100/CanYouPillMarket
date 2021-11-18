@@ -42,4 +42,14 @@ public class MemberController {
 		return "member/agreement";
 
 	}
+	
+	/**
+	 * 회원가입 접근 확인
+	 * @return
+	 */
+	@RequestMapping("/member/memberEnroll.do")
+	public String memberEnroll() {
+		
+		return "member/memberEnroll";
+	}
 }
