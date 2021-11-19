@@ -28,8 +28,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
-	<c:import url="views/common/header.jsp" />
-	<c:import url="views/common/navbar.jsp" />
+	<c:import url="../common/header.jsp" />
+	<c:import url="../common/navbar.jsp" />
 	<br>
 	<br>
 	<section class="section">
@@ -39,8 +39,8 @@
 		<br> <br>
 		<c:choose>
 			<c:when test="${ map.count == 0 }">
-    		장바구니가 비어있습니다.
-    	</c:when>
+				<div id="emptyMsg">장바구니가 비어있습니다.</div>
+			</c:when>
 			<c:otherwise>
 				<div class="cart_tb">
 					<form name="cart_frm" id="cart_frm" method="post"
@@ -59,19 +59,20 @@
 								<c:forEach var="cartList" items="${map.list}" varStatus="i">
 									<tr>
 										<td id="productImg">
-											<!-- <img src="${ cartLst.thumgImg }"> --> <img
-											src="/">
+											<!-- <img src="${ cartLst.thumgImg }"> --> <img src="/">
 										</td>
 										<td style="text-align: left;"><h5>${ cartList.pName }</h5></td>
-										<td><fmt:formatNumber pattern="###,###,###"
-												value="${ cartList.pPrice }" /></td>
-										<td><input style="width: 35px;" type="number"
-											value="${ cartList.amount }">
-											<button type="submit" id="updateBtn">수정</button> <input
-											type="hidden" name="pNo" value="${ cartList.pNo }"></td>
-										<td><fmt:formatNumber pattern="###,###,###"
-												value="${ cartList.orderPrice }" /></td>
-										<td id="deleteBtn"><a href="${path}/cart/cartDelete.do?cNo=${cartList.cNo}"><i id="deleteIcon" class="fas fa-times"></i></a></td>
+										<td><fmt:formatNumber pattern="###,###,###" value="${ cartList.pPrice }" /></td>
+										<td>
+											<input style="width: 35px;" type="number" value="${ cartList.amount }">
+											<button type="submit" id="updateBtn">수정</button> 
+											<input type="hidden" name="pNo" value="${ cartList.pNo }">
+										</td>
+										<td><fmt:formatNumber pattern="###,###,###" value="${ cartList.orderPrice }" /></td>
+										<td id="deleteBtn">
+											<a href="${path}/cart/cartDelete.do?cNo=${cartList.cNo}">
+											<i id="deleteIcon" class="fas fa-times"></i></a>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -80,8 +81,9 @@
 						<table id="cartList2">
 							<tr>
 								<td><b>Total</b></td>
-								<td style="text-align: right;"><b><fmt:formatNumber
-											pattern="###,###,###" value="${ map.sumPrice }" /></b></td>
+								<td style="text-align: right;">
+								<b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }" /></b>
+								</td>
 							</tr>
 							<tr>
 								<td>배송비</td>
@@ -94,8 +96,7 @@
 								<td><b>총 주문 금액</b></td>
 								<td style="text-align: right;">
 									<h3>
-										<fmt:formatNumber pattern="###,###,###"
-											value="${ map.allSum }" />
+										<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" />
 									</h3>
 								</td>
 							</tr>
@@ -106,6 +107,6 @@
 		</c:choose>
 		</div>
 	</section>
-	<c:import url="views/common/footer.jsp" />
+	<c:import url="../common/footer.jsp" />
 </body>
 </html>

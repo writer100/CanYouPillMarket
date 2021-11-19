@@ -9,9 +9,45 @@
 	</insert>
 	
 	<select id="listCart" resultType="Cart">
-		SELECT * FROM CART
-		ORDER BY CARTNO DESC
+		SELECT C.*, (PPRICE * AMOUNT) ORDERPRICE, PA.CHANGENAME, PA.PNO AS ATTACHMENTPNO
+		FROM CART C, PATTACHMENT PA
+		WHERE C.PNO = PA.PNO
+		  AND C.CARTUSERID = #{ cartUserId }
+		ORDER BY C.CARTNO DESC
 	</select>
+	
+	<select id="sumPrice" resultType="int">
+		SELECT NVL(SUM(PPRICE*AMOUNT), 0) ORDERPRICE
+		FROM CART
+		WHERE PNO = #{ pNo }
+		  AND CARTUSERID = #{ cartUserId }
+	</select>
+	
+	<update id="modifyCart" parameterType="Cart">
+		UPDATE TABLE CART
+		SET AMOUNT = #{ amount }
+		WHERE CARTUSERID = #{ cartUserId }
+		AND CARTNO = #{ cartNo }
+	</update>
+	
+	<delete id="deleteCart" parameterType="int">
+		DELETE FROM CART
+		WHERE CARTNO = #{ cartNo }
+	</delete>
+	
+	<select id="countCart" resultType="int">
+		SELECT COUNT(*)
+		FROM CART
+		WHERE CARTUSERID = #{ cartUserId }
+		AND PNO = #{ pNo }
+	</select>
+	
+	<update id="updateCart" parameterType="Cart">
+		UPDATE CART
+		SET AMOUNT = AMOUNT + #{ amount }
+		WHERE CARTUSERID = #{ cartUserId }
+		AND PNO = #{ pNo }
+	</update>
 	
 	<!-- Access to #{ field } -->
 </mapper>

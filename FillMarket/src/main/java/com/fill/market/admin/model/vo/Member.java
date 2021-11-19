@@ -20,6 +20,9 @@ public class Member implements Serializable{
 	private String password;
 	private String userName;
 	private Date birth;
+	private String birthYear;
+	private String birthMonth;
+	private String birthDay;
 	private String gender;
 	private String email;
 	private String phone;
