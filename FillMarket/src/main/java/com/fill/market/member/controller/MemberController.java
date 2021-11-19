@@ -1,7 +1,8 @@
 package com.fill.market.member.controller;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.member.model.service.MemberService;
 
-
+@SessionAttributes({"member"})
 @Controller
 public class MemberController {
 	
@@ -68,7 +71,7 @@ public class MemberController {
 	 * 
 	 * */
 	@RequestMapping("/member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member m, Model model) { // HttpServletRequest / RequestParam / CommandMap
+	public String memberEnrollEnd(SessionStatus status, Member m, Model model) { // HttpServletRequest / RequestParam / CommandMap
 		
 		System.out.println("받아온 정보 확인 : " + m);
 		
@@ -117,6 +120,8 @@ public class MemberController {
 							  @RequestParam String password,
 							  Model model) {  
 		
+		HttpSession session;
+		
 		System.out.println("로그인 기능 접근 확인!");
 		
 		// 1. 아이디를 통해 회원 정보 조회
@@ -146,6 +151,30 @@ public class MemberController {
 		
 		return "common/msg";
 		
+	}
+	
+	/**
+	 * Auth : GiChang
+	 * Date : 2021-11-19
+	 * 로그아웃 처리 
+	 * 
+	 **/
+	@RequestMapping("/member/memberLogout.do")
+	public String memberLogout(SessionStatus status, Model model) {
+		
+		String loc = "/";
+		String msg = "";
+
+		if( ! status.isComplete() ) {
+			status.setComplete();
+			
+			msg = "로그아웃 되셨습니다!";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
 	}
 	
 	
