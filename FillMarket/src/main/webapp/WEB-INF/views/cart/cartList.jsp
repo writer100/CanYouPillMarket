@@ -35,76 +35,83 @@
 	<section class="section">
 		<div class="top">
 			<span class="cart">장바구니</span>
+			<span><button id="deleteChecked">선택 상품 삭제</button></span>
 		</div>
 		<br> <br>
-		<c:choose>
-			<c:when test="${ map.count == 0 }">
-				<div id="emptyMsg">장바구니가 비어있습니다.</div>
-			</c:when>
-			<c:otherwise>
-				<div class="cart_tb">
-					<form name="cart_frm" id="cart_frm" method="post"
-						action="${pageContext.request.contextPath}/cart/cartUpdate.do">
-						<table id="cartList">
-							<thead>
+		<div class="cart_tb">
+			<table id="cartList">
+				<thead>
+                        <tr>
+                            <th width="30px"></th>
+                            <th width="200px">이미지</th>
+                            <th width="570px">상 품</th>
+                            <th width="180px">가 격</th>
+                            <th width="100px">수 량</th>
+                            <th width="180px">합 계</th>
+                            <th width="20px"></th>
+                        </tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${ map.count != null }">
+							<c:forEach var="cartList" items="${map.list}" varStatus="i">
 								<tr>
-									<th colspan="2" width="770px">상 품</th>
-									<th width="200px">가 격</th>
-									<th width="100px">수 량</th>
-									<th width="200px">합 계</th>
-									<th width="30px"></th>
+									<td id="productImg">
+										<!-- <img src="${ cartLst.thumgImg }"> --> <img src="/">
+									</td>
+									<td style="text-align: left;"><h5>${ cartList.pName }</h5></td>
+									<td>
+										<fmt:formatNumber pattern="###,###,###" value="${ cartList.pPrice }" />
+									</td>
+									<td>
+										<input style="width: 35px;" type="number" value="${ cartList.amount }">
+										<button type="submit" id="updateBtn">수정</button> 
+										<input type="hidden" name="cartNo" value="${ map.count }">
+										<input type="hidden" name="pNo" value="${ cartList.pNo }">
+									</td>
+									<td>
+										<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderPrice }" />
+									</td>
+									<td id="deleteBtn">
+										<a href="${path}/cart/cartDelete.do?cNo=${cartList.cNo}"> 
+										<i id="deleteIcon" class="fas fa-times"></i></a>
+									</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="cartList" items="${map.list}" varStatus="i">
-									<tr>
-										<td id="productImg">
-											<!-- <img src="${ cartLst.thumgImg }"> --> <img src="/">
-										</td>
-										<td style="text-align: left;"><h5>${ cartList.pName }</h5></td>
-										<td><fmt:formatNumber pattern="###,###,###" value="${ cartList.pPrice }" /></td>
-										<td>
-											<input style="width: 35px;" type="number" value="${ cartList.amount }">
-											<button type="submit" id="updateBtn">수정</button> 
-											<input type="hidden" name="pNo" value="${ cartList.pNo }">
-										</td>
-										<td><fmt:formatNumber pattern="###,###,###" value="${ cartList.orderPrice }" /></td>
-										<td id="deleteBtn">
-											<a href="${path}/cart/cartDelete.do?cNo=${cartList.cNo}">
-											<i id="deleteIcon" class="fas fa-times"></i></a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<br>
-						<table id="cartList2">
+				</tbody>
+			</table>
+			<br>
+			<table id="cartList2">
+				<tr>
+					<td><b>Total</b></td>
+					<td style="text-align: right;"><b><fmt:formatNumber
+								pattern="###,###,###" value="${ map.sumPrice }" /></b></td>
+				</tr>
+				<tr>
+					<td>배송비</td>
+					<td style="text-align: right;">${ map.fee }</td>
+				</tr>
+			</table>
+			<br> <br>
+			<table id="cartList2">
+				<tr>
+					<td><b>총 주문 금액</b></td>
+					<td style="text-align: right;">
+						<h3>
+							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" />
+						</h3>
+					</td>
+				</tr>
+				</c:forEach>
+					</c:when>
+						<c:otherwise>
 							<tr>
-								<td><b>Total</b></td>
-								<td style="text-align: right;">
-								<b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }" /></b>
-								</td>
+								<td colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
 							</tr>
-							<tr>
-								<td>배송비</td>
-								<td style="text-align: right;">${ map.fee }</td>
-							</tr>
-						</table>
-						<br> <br>
-						<table id="cartList2">
-							<tr>
-								<td><b>총 주문 금액</b></td>
-								<td style="text-align: right;">
-									<h3>
-										<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" />
-									</h3>
-								</td>
-							</tr>
-						</table>
-						<input type="hidden" name="cartNo" value="${ map.count }">
-					</form>
-			</c:otherwise>
-		</c:choose>
+						</c:otherwise>
+				</c:choose>
+			</table>
+
+
 		</div>
 	</section>
 	<c:import url="../common/footer.jsp" />

@@ -25,7 +25,7 @@ public class CartController {
 	@RequestMapping("/cart/cartInsert.do")
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
-		cart.setCartUserId(userId);
+		cart.setCartuserid(userId);
 		
 		// 추가하려는 상품이 장바구니에 있는지 검사
 		int count = cartService.countCart(cart.getPno(), userId);
@@ -74,14 +74,14 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart/cartUpdate.do")
-	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pNo, HttpSession session) {
+	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		// 레코드의 갯수만큼 반복문 실행
-		for(int i = 0; i < pNo.length; i++) {
+		for(int i = 0; i < pno.length; i++) {
 			Cart cart = new Cart();
-			cart.setCartUserId(userId);
+			cart.setCartuserid(userId);
 			cart.setAmount(amount[i]);
-			cart.setPNo(pNo[i]);
+			cart.setPno(pno[i]);
 			cartService.modifyCart(cart);
 		}
 		

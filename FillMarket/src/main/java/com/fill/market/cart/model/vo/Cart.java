@@ -17,11 +17,11 @@ public class Cart implements Serializable {
 	private static final long serialVersionUID = 23231L;
 	
 	private int cartno;
-	private String cartUserId;
+	private String cartuserid;
 	private int pno;
 	private int amount;
 	private String pname;
 	private int pprice;
-	private int orderPrice;
+	private int orderprice;
 
 }

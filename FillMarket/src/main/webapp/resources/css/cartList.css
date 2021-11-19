@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-header {
-	height: 230px;
-	background-color: cornsilk;
-	text-align: center;
-}
-
 .section {
 	width: 1400px;
 	/* background-color: crimson; */
@@ -25,12 +19,19 @@ header {
 
 #emptyMsg {
 	text-align: center;
-	font-size : 30px;
-	height : 300px;
+	font-size: 30px;
+	height: 300px;
 }
 
-.btns {
+#deleteChecked {
 	float: right;
+	border: 1px solid lightgray;
+	background-color: rgb(240, 240, 240);
+	border-radius: 25px;
+	width: 120px;
+	height: 30px;
+	font-size: 13px;
+	cursor: pointer;
 }
 
 .cart_tb {
@@ -42,6 +43,10 @@ header {
 #cartList, #cartList2 {
 	border-collapse: collapse;
 	text-align: center;
+}
+
+#cartList thead tr {
+	background-color: #ececec;
 }
 
 #cartList th {
@@ -82,3 +87,8 @@ header {
 #cartList2 tr td:last-child {
 	width: 1100px
 }
+
+/*
+#cartList2 tr:nth-child td {
+	padding : 20px;
+}*/
