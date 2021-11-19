@@ -113,5 +113,14 @@
 		SELECT COUNT(*) FROM QNA
 	</select>
 	
+	<select id="selectQNAView" resultType="QNA" parameterType="int">
+		SELECT * FROM QNA
+		WHERE QANO = #{qano}
+	</select>
+	
+	<select id="selectReply" resultType="QNARE" parameterType="int">
+		SELECT * FROM QNARE
+		WHERE QANO = #{qano}
+	</select>
 		
 </mapper>

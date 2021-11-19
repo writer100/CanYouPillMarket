@@ -22,6 +22,8 @@ import com.fill.market.admin.model.service.AdminService;
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
+import com.fill.market.admin.model.vo.QNA;
+import com.fill.market.admin.model.vo.QNARE;
 import com.fill.market.common.Utils;
 
 @Controller
@@ -378,7 +380,7 @@ public class AdminController {
 	public boolean userRes(@RequestParam String userId) {
 
 		int result = adminService.userRes(userId);
-		System.out.println(result);
+		// System.out.println(result);
 
 		if (result == 1) {
 
@@ -419,7 +421,7 @@ public class AdminController {
 		// 페이지 처리 Utils 사용하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminQNAList.do");
 
-		 System.out.println("list : " + list);
+		// System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
 
 		model.addAttribute("list", list);
@@ -430,4 +432,22 @@ public class AdminController {
 		return "admin/adminQNAList";
 
 	}
+	
+	
+	@RequestMapping("admin/QnAView.do")
+	public String qnaView(@RequestParam int qano, Model model) {
+		
+		QNA qna = adminService.selectQNAView(qano);
+		List<QNARE> reply = adminService.selectReply(qano);
+		
+		// System.out.println(reply);
+		// System.out.println(reply.size());
+		
+			
+		model.addAttribute("reply",reply);
+		model.addAttribute("qna",qna);
+			
+			return "admin/adminQNAView";
+		}
+		
 }

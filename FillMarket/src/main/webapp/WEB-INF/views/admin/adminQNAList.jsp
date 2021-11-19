@@ -35,11 +35,11 @@
                             </thead>
                             
                             <c:forEach items="${list}" var = "q">
-                                <tr onclick="alert(${q.qano });">
+                                <tr onclick="adminQnAView(${q.qano});">
                                     <td>${q.qano }</td>
-                                    <td>${q.qatitle }</td>
-                                    <td>${q.qauserid }</td>
-                                    <td>${q.qauploaddate }</td>
+                                    <td>${q.qaTitle }</td>
+                                    <td>${q.qaUserId }</td>
+                                    <td>${q.qaUploadDate }</td>
                                     <td>${q.cstatus }</td>
                                 </tr>
                             </c:forEach>
@@ -74,6 +74,13 @@
                                          self.location = "list" + '' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
                                      });
                                  });
+                                 
+                                 function adminQnAView(qano){
+
+                                	 location.href = "${pageContext.request.contextPath}/admin/QnAView.do?qano="+qano;
+                                	 	
+                                 }
+                                 
                             </script>
                         </div>
 

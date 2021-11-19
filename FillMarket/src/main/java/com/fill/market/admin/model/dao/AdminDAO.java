@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
+import com.fill.market.admin.model.vo.QNA;
+import com.fill.market.admin.model.vo.QNARE;
 
 @Repository
 public class AdminDAO {
@@ -137,6 +139,16 @@ public class AdminDAO {
 	public int selectQNATotalContents() {
 		
 		return sqlSession.selectOne("adminSQL.selectQNATotalContents");
+	}
+
+	public QNA selectQNAView(int qano) {
+		
+		return sqlSession.selectOne("adminSQL.selectQNAView", qano);
+	}
+
+	public List<QNARE> selectReply(int qano) {
+		
+		return sqlSession.selectList("adminSQL.selectReply", qano);
 	}
 
 

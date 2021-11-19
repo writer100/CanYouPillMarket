@@ -18,6 +18,7 @@
  		<typeAlias alias="Cart" type="com.fill.market.cart.model.vo.Cart"/>
  		<typeAlias alias="Board" type="com.fill.market.board.model.vo.Board"/>
  		<typeAlias alias="QNA" type="com.fill.market.admin.model.vo.QNA"/>
- 		
+ 		<typeAlias alias="QNARE" type="com.fill.market.admin.model.vo.QNARE"/>
  	</typeAliases>
+ 	
  </configuration>

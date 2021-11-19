@@ -10,6 +10,8 @@ import com.fill.market.admin.model.dao.AdminDAO;
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
+import com.fill.market.admin.model.vo.QNA;
+import com.fill.market.admin.model.vo.QNARE;
 
 
 @Service
@@ -147,6 +149,17 @@ public class AdminService {
 		
 		return adminDAO.selectQNATotalContents();
 	}
+
+	public QNA selectQNAView(int qano) {
+		
+		return adminDAO.selectQNAView(qano);
+	}
+
+	public List<QNARE> selectReply(int qano) {
+		
+		return adminDAO.selectReply(qano);
+	}
+
 
 
 }
