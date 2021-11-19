@@ -15,7 +15,7 @@
             <ul class="nav">
                 <li class="nav-item"><a href="#" class="nav-link text-dark">MY PAGE</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-dark">MY HEART</a></li>
-                <li class="nav-item"><a href="#" class="nav-link text-dark">SHOPPING BAG</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/cartList.do" class="nav-link text-dark">SHOPPING BAG</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/member/memberLogin.do" class="nav-link text-dark">LOGIN / JOIN</a></li>
             </ul>
         </header>
