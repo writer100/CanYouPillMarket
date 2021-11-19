@@ -13,7 +13,7 @@ body {
 
 #wrapper {
     position: relative;
-    height: 100%;
+    height: 1290px;    
 }
 
 #content {
@@ -128,7 +128,7 @@ select {
 
 #alertTxt {
     position: absolute;
-    top: 19px;
+    top: 14px;
     right: 38px;
     font-size: 12px;
     color: red;
