@@ -14,11 +14,14 @@ import lombok.NoArgsConstructor;
 @Component
 public class Member {
 
-	private String userid;
-	private int leveltype;
+	private String userId;
+	private int levelType;
 	private String password;
-	private String username;
+	private String userName;
 	private Date birth;
+	private String birthYear;
+	private String birthMonth;
+	private String birthDay;
 	private String gender;
 	private String email;
 	private String phone;

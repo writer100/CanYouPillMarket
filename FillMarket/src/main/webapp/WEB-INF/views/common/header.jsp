@@ -8,7 +8,7 @@
 <header>
 	<div class="container">
         <header class="d-flex flex-wrap justify-content-center py-1 mb-4">
-            <a href="/" class="me-md-auto mt-4 ">
+            <a href="${pageContext.request.contextPath }" class="me-md-auto mt-4 ">
                 <img src="${pageContext.request.contextPath }/resources/images/final_logo.png" width="340">
             </a>
 
