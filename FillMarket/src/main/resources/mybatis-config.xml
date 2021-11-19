@@ -16,6 +16,7 @@
  		<typeAlias alias="PAttachment" type="com.fill.market.admin.model.vo.PAttachment"/>
  		<typeAlias alias="Member" type="com.fill.market.admin.model.vo.Member"/>
  		<typeAlias alias="Cart" type="com.fill.market.cart.model.vo.Cart"/>
+ 		<typeAlias alias="Board" type="com.fill.market.board.model.vo.Board"/>
  		
  	</typeAliases>
  </configuration>
