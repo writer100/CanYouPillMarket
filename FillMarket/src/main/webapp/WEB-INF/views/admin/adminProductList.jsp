@@ -77,7 +77,7 @@
 						</td>
 						<td>${p.pname}</td>
 						<td class="mini">${p.pstock}</td>
-						<td class="mini">${p.pprice }</td>
+						<td class="mini"><fmt:formatNumber pattern="###,###,###" value="${p.pprice }"/></td>
 					</tr>
 					</c:forEach>
 				</table>

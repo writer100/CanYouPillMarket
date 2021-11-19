@@ -37,7 +37,7 @@
 				<li><a href="#"><i class="fas fa-stream"></i>매출관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/adminUserManageList.do"><i class="fas fa-calendar-week"></i>사용자관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/adminProductList.do"><i class="fas fa-question-circle"></i>상품관리</a></li>
-				<li><a href="#"><i class="fas fa-envelope"></i>문의</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/adminQNAList.do"><i class="fas fa-envelope"></i>문의</a></li>
 			</ul>
 		</div>
 	</header>

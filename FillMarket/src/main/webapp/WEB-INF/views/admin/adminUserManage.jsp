@@ -38,9 +38,9 @@
 		
 		$(function(){
 			$("tr[id]").on("click",function(){
-				var userid = $(this).attr("id");
-				console.log("userid="+userid);
-				location.href = "${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userid;
+				var userId = $(this).attr("id");
+				console.log("userId="+userId);
+				location.href = "${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userId;
 			});
 		});
 	</script>
@@ -50,7 +50,7 @@
 			<section id="board-container" class="container" >
 			<br />
 				<h1>사용자 관리</h1>
-				<input type="button" value="상품등록" id="btn-add" class="btn btn-outline-success" onclick="fn_goProductForm();"/>
+				<br /><br /><br />
 				<input type="text" />
 				<table id="tbl-board" class="table table-striped table-hover">
 					<tr>
@@ -64,9 +64,9 @@
 						
 					</tr>
 					<c:forEach items="${list}" var="m"> 
-					<tr id="${m.userid }">
-						<td class="mid">${m.userid }</td>
-						<td class="mini">${m.username }</td>
+					<tr id="${m.userId }">
+						<td class="mid">${m.userId }</td>
+						<td class="mini">${m.userName }</td>
 						<td class="long">${m.address }</td>
 						<td class="mid">${m.phone }</td>
 						<td class="mid">${m.birth }</td>

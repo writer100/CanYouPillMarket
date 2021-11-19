@@ -37,12 +37,12 @@ text-align: center;
 					<table class="table table-striped">
 						<tr>
 							<td>아이디</td>
-							<td>${member.userid }</td>
+							<td>${member.userId }</td>
 						</tr>
 
 						<tr>
 							<td>이름</td>
-							<td>${member.username }</td>
+							<td>${member.userName }</td>
 						</tr>
 
 						<tr>
@@ -79,13 +79,13 @@ text-align: center;
 								<c:choose>
 									<c:when test="${status eq 'Y'}">
 									
-										<button onclick="userDelete('${member.userid}');"
+										<button onclick="userDelete('${member.userId}');"
 										class="btn btn-danger">회원삭제</button>
 										
 									</c:when>
 									<c:when test="${status eq 'N'}">
 									
-										<button onclick="userRes('${member.userid}');"
+										<button onclick="userRes('${member.userId}');"
 										class="btn btn-danger">회원복구</button>
 				
 									</c:when>
@@ -109,13 +109,13 @@ text-align: center;
 	<!-- container end-->
 
 <script>
-	function userDelete(userid){
-		var check = confirm("회원 " +userid+ " 님의 아이디를 삭제하시겠습니까");
+	function userDelete(userId){
+		var check = confirm("회원 " +userId+ " 님의 아이디를 삭제하시겠습니까");
 		
 		if(check == true){
 			$.ajax({
 				url : '${pageContext.request.contextPath}/admin/userDelete.do',
-				data : { userid : userid }, 
+				data : { userId : userId }, 
 				dataType : 'json',
 				success : function(data){
 					if(data == true) {
@@ -130,18 +130,18 @@ text-align: center;
 			alert("취소되었습니다.")
 		}
 	}
-	function userRes(userid){
-		var check = confirm("회원 " +userid+ " 님의 아이디를 복구하시겠습니까");
+	function userRes(userId){
+		var check = confirm("회원 " +userId+ " 님의 아이디를 복구하시겠습니까");
 		
 		if(check == true){
 			$.ajax({
 				url : '${pageContext.request.contextPath}/admin/userRes.do',
-				data : { userid : userid }, 
+				data : {userId : userId}, 
 				dataType : 'json',
 				success : function(data){
 					if(data == true) {
 						alert("회원 복구 완료!");
-						location.href="${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userid;
+						location.href="${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userId;
 					} else {
 						alert("회원 복구 실패!");
 					}

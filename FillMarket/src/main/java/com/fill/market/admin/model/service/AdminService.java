@@ -121,14 +121,31 @@ public class AdminService {
 		return adminDAO.adminSelectUser(userid);
 	}
 
-	public int userDelete(String userid) {
+	public int userDelete(String userId) {
 		
-		return adminDAO.userDelete(userid);
+		return adminDAO.userDelete(userId);
 	}
 
-	public int userRes(String userid) {
+	public int userRes(String userId) {
 	
-		return adminDAO.userRes(userid);
+		return adminDAO.userRes(userId);
+	}
+
+	
+	
+	
+	
+	
+	
+	// ------------------------------- 문의 게시판 --------------------------------------//
+	public List<Map<String, String>> selectQNAList(int cPage, int numPerPage) {
+
+		return adminDAO.selectQNAList(cPage, numPerPage);
+	}
+
+	public int selectQNATotalContents() {
+		
+		return adminDAO.selectQNATotalContents();
 	}
 
 

@@ -1,5 +1,6 @@
 package com.fill.market.admin.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
@@ -12,12 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Component
-public class Member {
+public class Member implements Serializable{
 
-	private String userid;
-	private int leveltype;
+	private String userId;
+	private int levelType;
 	private String password;
-	private String username;
+	private String userName;
 	private Date birth;
 	private String gender;
 	private String email;

@@ -105,16 +105,39 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminSQL.selectUser", userid);
 	}
 
-	public int userDelete(String userid) {
+	public int userDelete(String userId) {
 		
-		return sqlSession.update("adminSQL.userDelete",userid);
+		return sqlSession.update("adminSQL.userDelete",userId);
 	}
 
-	public int userRes(String userid) {
+	public int userRes(String userId) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("adminSQL.userRes",userid);
+		return sqlSession.update("adminSQL.userRes",userId);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ------------------------------- 문의 게시판 --------------------------------------------- //
+	
+	public List<Map<String, String>> selectQNAList(int cPage, int numPerPage) {
+		
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("adminSQL.selectQNAList", null, rows);
+	}
+
+	public int selectQNATotalContents() {
+		
+		return sqlSession.selectOne("adminSQL.selectQNATotalContents");
+	}
 
 
 }

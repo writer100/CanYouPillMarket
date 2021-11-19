@@ -28,8 +28,6 @@
 		SELECT COUNT(*) FROM PRODUCT, PATTACHMENT 
 		WHERE PRODUCT.PNO = PATTACHMENT.PNO
     	AND PATTACHMENT.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = PRODUCT.PNO)
-
-
 	</select>
 	
 	<insert id="insertProduct" parameterType="Product">
@@ -90,7 +88,6 @@
 	
 	<select id="selectUserTotalContents" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
-
 	</select>
 	
 	<select id="selectUser" parameterType="String" resultType="Member">
@@ -98,10 +95,23 @@
 	</select>
 
 	<update id="userDelete" parameterType="String">
-		UPDATE MEMBER SET STATUS = 'N' WHERE USERID = #{userid}
+		UPDATE MEMBER SET STATUS = 'N' WHERE USERID = #{userId}
 	</update>
 	
 	<update id="userRes" parameterType="String">
-		UPDATE MEMBER SET STATUS = 'Y' WHERE USERID = #{userid}
+		UPDATE MEMBER SET STATUS = 'Y' WHERE USERID = #{userId}
 	</update>
+	
+	
+	<!-- 문의 게시판 -->
+	<select id="selectQNAList" resultType="QNA">
+		SELECT * FROM QNA
+		ORDER BY QAUPLOADDATE DESC
+	</select>
+	
+	<select id="selectQNATotalContents" resultType="int">
+		SELECT COUNT(*) FROM QNA
+	</select>
+	
+		
 </mapper>

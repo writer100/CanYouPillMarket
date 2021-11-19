@@ -90,7 +90,7 @@
                 </tr>
                 <tr>
                     <td class="title">판매가</td>
-                    <td>${product.pprice}</td>
+                    <td><fmt:formatNumber pattern="###,###,###" value="${product.pprice}" /></td>
                 </tr>
                 <tr>
                     <td class="title">제품설명</td>
