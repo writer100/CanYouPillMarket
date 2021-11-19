@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberSQL">
+
+
+
+
 	<!-- 선언부 resultMap, include-sql -->
 	<!-- 
 	<resultMap id="resultMember" type="Member">
@@ -14,5 +18,7 @@
 		#{ phone }, #{ address }, SYSDATE, default )
 	</insert>
 		
-	
+	<select id="selectOne" parameterType="string" resultType="Member">
+		SELECT * FROM MEMBER WHERE USERID = #{ userId }	
+	</select>
 </mapper>

@@ -22,8 +22,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Member selectOneMember(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("memberSQL.selectOne", userId);
+		
 	}
 
 	@Override
