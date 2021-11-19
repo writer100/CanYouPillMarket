@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardSQL">
+
+	<select id="selectBoardList" resultType="com.fill.market.board.model.vo.Board">
+		SELECT QANO, QAUSERID, QATITLE, QACONTENT, QAUPLOADDATE, STATUS
+		FROM QNA
+		ORDER BY QAUPLOADDATE DESC, QANO DESC
+	</select>
+		<select id="selectBoardTotalContents" resultType="int">
+		SELECT COUNT(*) FROM QNA
+	</select>
+	
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD (BOARDNO, BOARDTITLE, BOARDWRITER, BOARDCONTENT)
+		VALUES (SEQ_BOARDNO.NEXTVAL, #{ boardTitle }, #{ boardWriter }, #{ boardContent })
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<!--
+	<select id="selectOneBoard" parameterType="int" resultType="Board">
+		SELECT * FROM BOARD WHERE BOARDNO = #{ boardNo }
+	</select>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD SET BOARDTITLE = #{ boardTitle }, BOARDCONTENT = #{ boardContent }
+		WHERE BOARDNO = #{ boardNo }
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM BOARD WHERE BOARDNO = #{ boardNo }
+	</delete> -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

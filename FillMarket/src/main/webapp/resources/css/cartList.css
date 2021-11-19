@@ -23,6 +23,12 @@ header {
 	font-size: 22pt;
 }
 
+#emptyMsg {
+	text-align: center;
+	font-size : 30px;
+	height : 300px;
+}
+
 .btns {
 	float: right;
 }
