@@ -17,28 +17,28 @@ public class ProductServiceImpl implements ProductService {
 	ProductDAO productDAO;
 	
 	@Override
-	public List<Map<String, String>> selectProductList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectProductList(int cPage, int numPerPage, int cno) {
 		
-		return productDAO.selectProductList(cPage, numPerPage);
+		return productDAO.selectProductList(cPage, numPerPage, cno);
 	}
 
 	@Override
-	public int selectProductTotalContents() {
+	public int selectProductTotalContents(int cno) {
 		
-		return productDAO.selectProductTotalContents();
+		return productDAO.selectProductTotalContents(cno);
 	}
 
 
 	@Override
-	public Product selectOneProduct(int pNo) {
+	public Product selectOneProduct(int pno) {
 		
-		return productDAO.selectOneProduct(pNo);
+		return productDAO.selectOneProduct(pno);
 	}
 
 	@Override
-	public List<PAttachment> selectPAttachmentList(int pNo) {
+	public List<PAttachment> selectPAttachmentList(int pno) {
 		
-		return productDAO.selectPAttachmentList(pNo);
+		return productDAO.selectPAttachmentList(pno);
 	}
 
 

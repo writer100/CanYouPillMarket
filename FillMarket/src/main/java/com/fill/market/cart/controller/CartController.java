@@ -28,7 +28,7 @@ public class CartController {
 		cart.setCartUserId(userId);
 		
 		// 추가하려는 상품이 장바구니에 있는지 검사
-		int count = cartService.countCart(cart.getPNo(), userId);
+		int count = cartService.countCart(cart.getPno(), userId);
 		count = false ? cartService.updateCart(cart) : cartService.insertCart(cart);
 		if(count == 0) {
 			// 없으면 isnert

@@ -28,7 +28,6 @@
 	
 	.search{ text-align: center; }
 	
-	input#btn-search{float:right; background-color: rgb(231, 133, 110);}
 		
 	</style>
 </head>
@@ -44,7 +43,7 @@
 		        <div role="group" class="input-group d-flex align-items-center justify-content-center my-3"><!---->
 			        <form class="search" style="width: 1000px;">
 			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; wieth : 80%" id="productSearch">
-			        <button type="submit" class="btn-search">
+			        <button type="submit" class="btn btn-outline-info">
 			        	검색
 			        </button>
 			        </form>
@@ -54,11 +53,11 @@
 			<c:forEach items="${list}" var="product"> 
 			  <div class="col">
 			    <div class="card h-100">
-			        <img src="${pageContext.request.contextPath}/resources/productUpload/${product.changename}" class="card-img-top" alt="썸네일" id="thumnail">
-					  <div class="card-body" id="${ product.pno }">
-					    <h5 class="card-title">${ product.pname }</h5>
-					    <p class="card-text">${ product.pprice }</p>
-					    <button type="button" class="btn btn-outline-info" onclick="goCart(${ product.pno });">장바구니 담기</button>
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png" class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
+					  <div class="card-body" style="z-index:10;">
+					    <h5 class="card-title" id="${ product.pname }">${ product.pname }</h5>
+					    <p class="card-text" id="${ product.pprice }">${ product.pprice }</p>
+					    <button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					  </div>
 			    </div>
 			  </div>
@@ -77,15 +76,33 @@
 	<c:import url="../common/footer.jsp" />
 	
 	<script>
-		function fn_goCart(){
-			location.href = "${pageContext.request.contextPath}/cart/cartInsert.do";
+	var divs = document.querySelectorAll('div');
+	divs.forEach(function(div){
+		div.addEventListener('click',logEvent, { 
+			capture : true
+		})
+	});
+	
+	function logEvent(event){
+		console.log(event.currentTarget.className);
+	}
+		function goCart(pno, pname, pprice){
+			location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
 		}
 		
 		$(function(){
-			$(".card-body[id]").on("click",function(){
+			$("img[id]").on("click",function(){
+				var pno = $(this).attr('id');
+				location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
+			});
+		});
+		
+		
+		$(function(){
+			$(".card-img-top[id]").on("click",function(){
 				var pno = $(this).attr("id");
 				console.log("pno="+pno);
-				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno;
+				location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
 			});
 		});
 	</script>

@@ -17,16 +17,16 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectProductList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectProductList(int cPage, int numPerPage, int cno) {
 		RowBounds rows = new RowBounds((cPage - 1 )* numPerPage, numPerPage);
 		
-		return sqlSession.selectList("productSQL.selectProductList", null, rows);
+		return sqlSession.selectList("productSQL.selectProductList", cno, rows);
 	}
 
 	@Override
-	public int selectProductTotalContents() {
+	public int selectProductTotalContents(int cno) {
 		
-		return sqlSession.selectOne("productSQL.selectProductTotalContents");
+		return sqlSession.selectOne("productSQL.selectProductTotalContents", cno);
 	}
 
 

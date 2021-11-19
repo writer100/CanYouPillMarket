@@ -29,7 +29,7 @@
 	<div class="container" style="width: 70%">
 		
 		<div class="row"><h1 class="page-header" style="text-align: center; margin-bottom: 50px;">${product.pname}</h1>
-			<input type="hidden" value="${product.pno}" id="productId">
+			<input type="hidden" value="${product.pno}" id="pno">
 		</div>
 		<div class="row" style="float: left; text-align: center; width:35%;">
 			<img alt="productPhoto" src="/resources/productUpload${pattachment.changename}" width="150%"">
@@ -37,22 +37,23 @@
 
 		<div class="row productInfo" style="width: 40%; float: right;" >
 			<div class="form-group" style="text-align: center;">
-				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pInfo}</small></h3>
+				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pinfo}</small></h3>
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
-				<input type="hidden" value="${product.pprice}" id="price">
+				<input type="hidden" value="${product.pprice}" id="pprice">
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>배송비 : </label><span>&nbsp;2500원</span>
-				<p>도서산간지역 배송비 5000원 / 3만원 이상 결제시 무료배송</p>
+				<p>도서산간지역 배송비 5000원</p>
 			</div>
 	
 			<div class="form-horizontal" style="text-align: left;">
 				<label>구매수량 : </label> 
 				<select class="form-control" id="select_count">
-				<c:forEach begin="1" end="${product.pstock}" var="count">
-					<option>${count}</option></c:forEach>
+				<c:forEach begin="1" end="${product.pstock}" var="product">
+					<option>${product.pstock}</option>
+				</c:forEach>
 				</select>
 			</div>	
 			<hr>
@@ -67,7 +68,41 @@
 			<hr>	
 		</div>
 	</div>
-	
+	<div class="container">
+		<div class="row nav">
+			<nav id="middle_nav">
+				<ul class="nav nav-tabs nav-justified">
+					<li id="about">상품상세</li>
+					<li id="review">리뷰</li>
+				</ul>
+			</nav>
+		</div>
+		
+		<div class="row" style="margin: 50px 0;">
+			<h1 class="jumbotron">
+				<div class="container">
+					<h1>Hello world</h1>
+					<small>This is product page.</small>
+				</div>
+			</h1>
+		</div>
+		
+		<div class="row about_product" style="text-align: center;">
+			<h1 class="page-header">상품 상세</h1>
+
+		</div>
+		<div class="row reviews" style="text-align: center; margin: 80px 0;">
+			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
+			<c:forEach begin="1" end="5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Panel title</h3>
+				</div>
+				<div class="panel-body">Panel content</div>
+			</div>
+			</c:forEach>
+		</div>
+
 	<c:import url="../common/footer.jsp" />
 		
 </body>

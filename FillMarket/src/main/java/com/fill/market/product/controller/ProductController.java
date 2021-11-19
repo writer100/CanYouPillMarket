@@ -25,6 +25,7 @@ public class ProductController {
 	@RequestMapping("/product/productList.do")
 	public String selectBoardList(
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			@RequestParam(value="cno", required=false, defaultValue="0") int cno,
 			Model model
 			) {
 		
@@ -33,12 +34,12 @@ public class ProductController {
 		
 		// 현재 페이지와 한 페이지당 게시글 수를 같이 가지고 DB에 조회
 		// 현재  페이지의 상품 수 
-		List<Map<String, String>> list = productService.selectProductList(cPage, numPerPage);
+		List<Map<String, String>> list = productService.selectProductList(cPage, numPerPage, cno);
 				//컬럼명  값
 				// ㄴ> list에 저 둘이 담기고 담기고 담겨서 목록 생성
 		
 		// 전체 상품 수
-		int totalContents = productService.selectProductTotalContents();
+		int totalContents = productService.selectProductTotalContents(cno);
 		
 		// 페이지 처리 Utils 사용하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");

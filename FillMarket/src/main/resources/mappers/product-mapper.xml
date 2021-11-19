@@ -6,18 +6,24 @@
 	<select id="selectProductList" resultType="Product">
 		SELECT P.*, (SELECT COUNT(*) FROM PATTACHMENT WHERE PNO = P.PNO) FILECOUNT
 		FROM PRODUCT P
+		<if test="cno != 0">
+		WHERE CNO = #{ cno }
+		</if>
 		ORDER BY PENROLL DESC, PNO DESC
 	</select>
 	
 	<select id="selectProductTotalContents" resultType="int">
 		SELECT COUNT(*) FROM PRODUCT
+		<if test="cno != 0">
+		WHERE CNO = #{ cno }
+		</if>
 	</select>
 	
 	<select id="selectOneProduct" parameterType="int" resultType="Product">
-		SELECT * FROM PRODUCT WHERE BOARDNO = #{ pNo }
+		SELECT * FROM PRODUCT WHERE PNO = #{ pno }
 	</select>
 	
 	<select id="selectPAttachmentList" parameterType="int" resultType="PAttachment">
-		SELECT *FROM PATTACHMENT WHERE PRODUCTNO = #{ pNo }
+		SELECT *FROM PATTACHMENT WHERE PNO = #{ pno }
 	</select>
 </mapper>

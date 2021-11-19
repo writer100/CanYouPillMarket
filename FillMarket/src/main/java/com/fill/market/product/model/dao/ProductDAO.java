@@ -8,9 +8,9 @@ import com.fill.market.admin.model.vo.Product;
 
 public interface ProductDAO {
 
-	List<Map<String, String>> selectProductList(int cPage, int numPerPage);
+	List<Map<String, String>> selectProductList(int cPage, int numPerPage, int cno);
 
-	int selectProductTotalContents();
+	int selectProductTotalContents(int cno);
 
 	Product selectOneProduct(int pNo);
 
