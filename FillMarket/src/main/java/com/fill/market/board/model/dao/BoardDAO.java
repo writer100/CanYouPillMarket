@@ -18,6 +18,4 @@ public interface BoardDAO {
 	int updateBoard(Board board);
 
 	int deleteBoard(int boardNo);
-
-	int deleteFile(int attNo);
 }

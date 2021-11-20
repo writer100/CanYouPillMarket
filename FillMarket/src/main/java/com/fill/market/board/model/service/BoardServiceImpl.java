@@ -32,12 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(Board board) {
 		
 		int boardResult = boardDAO.insertBoard(board);
-		
-		// 첨부파일이 boardNo를 알 수 있는 방법
-		// 1. BoardDAO를 통해서 가장 최근에 추가된 게시글 번호 가져오기 ( O )
-		// 2. mapper 파일을 통해서             ..  
-		
-				
+
 		return boardResult;
 	}
 

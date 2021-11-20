@@ -14,26 +14,26 @@
 	
 	
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO BOARD (BOARDNO, BOARDTITLE, BOARDWRITER, BOARDCONTENT)
-		VALUES (SEQ_BOARDNO.NEXTVAL, #{ boardTitle }, #{ boardWriter }, #{ boardContent })
-		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+		INSERT INTO QNA (QANO, QAUSERID, QATITLE, QACONTENT)
+		VALUES (SEQ_QANO.NEXTVAL, #{qauserid}, #{ qatitle }, #{ qacontent })
+		<!-- <selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
 			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
-		</selectKey>
+		</selectKey> -->
 	</insert>
 	
-	<!--
-	<select id="selectOneBoard" parameterType="int" resultType="Board">
-		SELECT * FROM BOARD WHERE BOARDNO = #{ boardNo }
-	</select>
 	
+	<select id="selectOneBoard" parameterType="int" resultType="Board">
+		SELECT * FROM QNA WHERE QANO = #{ qano }
+	</select>
+
 	<update id="updateBoard" parameterType="Board">
-		UPDATE BOARD SET BOARDTITLE = #{ boardTitle }, BOARDCONTENT = #{ boardContent }
-		WHERE BOARDNO = #{ boardNo }
+		UPDATE QNA SET QATITLE = #{ qatitle }, QACONTENT = #{ qacontent }
+		WHERE QANO = #{ qano }
 	</update>
 	
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM BOARD WHERE BOARDNO = #{ boardNo }
-	</delete> -->
+		DELETE FROM QNA WHERE QANO = #{ qano }
+	</delete>
 	
 </mapper>
 

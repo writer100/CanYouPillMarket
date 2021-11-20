@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Component
 public class QNARE implements Serializable {
+
+	private static final long serialVersionUID = 1212L;
 	private int rno;
 	private int qano;
 	private String qauserid;

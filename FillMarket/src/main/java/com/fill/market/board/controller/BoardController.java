@@ -48,7 +48,7 @@ public class BoardController {
 		int totalContents = boardService.selectBoardTotalContents();
 		
 		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "qnaList.do");
 		
 		System.out.println("list : " + list);
 		System.out.println("pageBar : " + pageBar);
@@ -76,7 +76,7 @@ public class BoardController {
 		// 게시글 DB에 등록
 		int result = boardService.insertBoard(board);
 		
-		String loc = "/board/boardList.do";
+		String loc = "/qna/qnaList.do";
 		String msg = "";
 		
 		if( result > 0) {
@@ -92,18 +92,18 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("/board/boardView.do")
+	@RequestMapping("/qna/qnaView.do")
 	public String boardView(@RequestParam int no, Model model) {
 		
 		Board board = boardService.selectOneBoard(no);
 		
 		model.addAttribute("board", board);
 		
-		return "board/boardView";
+		return "qna/qnaView";
 	}
 	
 	
-	@RequestMapping("/board/boardUpdateView.do")
+	@RequestMapping("/qna/qnaUpdateView.do")
 	public String boardUpdateView(@RequestParam int boardNo, Model model) {
 		
 		Board board = boardService.updateView(boardNo);
@@ -111,24 +111,22 @@ public class BoardController {
 		
 		model.addAttribute("board", board);
 
-		return "board/boardUpdateView";		
+		return "qna/qnaUpdateView";		
 	}
 	
-	@RequestMapping("/board/boardUpdate.do")
-	public String boardUpdate(Board board, HttpServletRequest request, Model model, 
-							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles) {
+	@RequestMapping("/qna/qnaUpdate.do")
+	public String boardUpdate(Board board, HttpServletRequest request, Model model){
 		// 1. 원본 게시글 불러와 수정하기
-		int boardNo = board.getQaNo();
-		
+		int boardNo = board.getQano();
+		System.out.println(boardNo);
 		Board originBoard = boardService.updateView(boardNo);
 		
-		originBoard.setQaTitle( board.getQaTitle() );
-		originBoard.setQaContent( board.getQaContent() );
-		
-		
+		originBoard.setQatitle( board.getQatitle() );
+		originBoard.setQacontent( board.getQacontent() );
+
 		int result = boardService.updateBoard(originBoard);  // 서비스 찾아가서 마저 구현해주기
 		
-		String loc = "/board/boardList.do";
+		String loc = "/qna/qnaList.do";
 		String msg = "";
 		
 		if( result > 0 ) {
@@ -143,18 +141,16 @@ public class BoardController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/board/boardDelete.do")
+	@RequestMapping("/qna/qnaDelete.do")
 	public String boardDelete(@RequestParam int boardNo,
 							  HttpServletRequest request,
 							  Model model) {
-		
-		String savePath = request.getServletContext().getRealPath("/resources/boardUpload");
 		
 		
 		// 게시글 삭제
 		int result = boardService.deleteBoard(boardNo); // 서비스 이동~!
 		
-		String loc = "/board/boardList.do";
+		String loc = "/qna/qnaList.do";
 		String msg = "";
 
 		

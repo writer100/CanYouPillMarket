@@ -14,7 +14,7 @@
             
             <ul class="nav">
                 <c:if test="${empty member}">
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">SERVICE</a></li>
+                    <li class="nav-item"><a href="${pageContext.request.contextPath}/qna/qnaList.do" class="nav-link text-dark">SERVICE</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/memberLogin.do" class="nav-link text-dark">LOGIN / JOIN</a></li>
                 </c:if>
             </ul>

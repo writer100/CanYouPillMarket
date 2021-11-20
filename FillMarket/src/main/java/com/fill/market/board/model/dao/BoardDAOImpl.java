@@ -57,11 +57,4 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.delete("boardSQL.deleteBoard", boardNo);
 	}
 
-
-	@Override
-	public int deleteFile(int attNo) {
-		
-		return sqlSession.delete("boardSQL.deleteFile", attNo);
-	}
-
 }
