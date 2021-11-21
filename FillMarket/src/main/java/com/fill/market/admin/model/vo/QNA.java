@@ -24,4 +24,6 @@ public class QNA implements Serializable {
 	private String status;
 	private String cstatus;
 	
+	private String rcontent;
+	
 }
