@@ -121,7 +121,7 @@
 						<label for="pswd1">비밀번호</label>
 					</h5>
 					<span class="box int_pass"> 
-					<input type="text" id="pswd1"
+					<input type="password" id="pswd1"
 						class="int" maxlength="20"
 						placeholder="영문 소문자, 숫자, 특수기호(_),(-) 5~20자" name="password">
 						<span id="alertTxt">사용불가</span>
@@ -133,7 +133,7 @@
 					<h5 class="join_title mt-3">
 						<label for="pswd2">비밀번호 확인</label>
 					</h5>
-					<span class="box int_pass_check"> <input type="text"
+					<span class="box int_pass_check"> <input type="password"
 						id="pswd2" class="int" maxlength="20">
 					</span> <span class="error_next_box"></span>
 				</div>
