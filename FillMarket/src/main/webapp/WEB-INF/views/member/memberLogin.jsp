@@ -27,11 +27,11 @@
 	<c:import url="../common/header.jsp" />
 	<c:import url="../common/navbar.jsp" />
 
-	<main class="form-signin">
+	<main class="form-signin pb-5 mb-5 pt-5">
 		<div id="login-div">
 
 
-			<h1 class="h3 mb-3 fw-normal mt-4">Sign in</h1>
+			<h1 class="h3 mb-3 fw-normal mt-5">Sign in</h1>
 
 			<form
 				action="${pageContext.request.contextPath}/member/memberLoginEnd.do"

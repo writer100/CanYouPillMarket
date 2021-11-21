@@ -43,52 +43,54 @@
 				<thead>
                         <tr>
                             <th width="30px"></th>
-                            <th width="200px">이미지</th>
+                            <th width="160px">이미지</th>
                             <th width="570px">상 품</th>
                             <th width="180px">가 격</th>
-                            <th width="100px">수 량</th>
+                            <th width="120px">수 량</th>
                             <th width="180px">합 계</th>
                             <th width="20px"></th>
                         </tr>
 				</thead>
 				<tbody>
-					<c:choose>
-						<c:when test="${ map.count != null }">
-							<c:forEach var="cartList" items="${map.list}" varStatus="i">
-								<tr>
-									<td id="productImg">
-										<!-- <img src="${ cartLst.thumgImg }"> --> <img src="/">
-									</td>
-									<td style="text-align: left;"><h5>${ cartList.pName }</h5></td>
-									<td>
-										<fmt:formatNumber pattern="###,###,###" value="${ cartList.pPrice }" />
-									</td>
-									<td>
-										<input style="width: 35px;" type="number" value="${ cartList.amount }">
-										<button type="submit" id="updateBtn">수정</button> 
-										<input type="hidden" name="cartNo" value="${ map.count }">
-										<input type="hidden" name="pNo" value="${ cartList.pNo }">
-									</td>
-									<td>
-										<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderPrice }" />
-									</td>
-									<td id="deleteBtn">
-										<a href="${path}/cart/cartDelete.do?cNo=${cartList.cNo}"> 
-										<i id="deleteIcon" class="fas fa-times"></i></a>
-									</td>
-								</tr>
+					<c:choose><c:when test="${ list != null }">
+					<c:forEach items="${list}" var="cartList" varStatus="i">
+					<tr>
+						<td id="checked"><input type="checkbox"></td>
+						<td id="productImg">
+							<img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png"/>
+						</td>
+						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
+						<td>
+							<fmt:formatNumber pattern="###,###,###" value="${ cartList.pprice }" /> 원
+						</td>
+						<td>
+							<input style="width: 35px; height:23px" type="number" min="1" name="amount" value="${ cartList.amount }">
+							<button type="submit" id="updateBtn">수정</button> 
+							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
+							<input type="hidden" name="pno" value="${ cartList.pno }">
+							<input type="hidden" name="userId" value="${ userId }" />
+						</td>
+						<td>
+							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
+						</td>
+						<td> ###,### 원</td>
+						<td id="deleteBtn">
+							<a href="${path}/cart/cartDelete.do?cno=${ cartList.cno }"> 
+							<i id="deleteIcon" class="fas fa-times"></i></a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<br>
 			<table id="cartList2">
 				<tr>
 					<td><b>Total</b></td>
-					<td style="text-align: right;"><b><fmt:formatNumber
-								pattern="###,###,###" value="${ map.sumPrice }" /></b></td>
+					<td style="text-align: right;"><b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }" /> 원</b>
+					</td>
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td style="text-align: right;">${ map.fee }</td>
+					<td style="text-align: right;">${ map.fee } 원</td>
 				</tr>
 			</table>
 			<br> <br>
@@ -97,23 +99,31 @@
 					<td><b>총 주문 금액</b></td>
 					<td style="text-align: right;">
 						<h3>
-							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" />
+							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
 						</h3>
 					</td>
 				</tr>
 				</c:forEach>
-					</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
-							</tr>
-						</c:otherwise>
-				</c:choose>
+				</c:when>
+				<c:otherwise>
+				<tr>
+					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
+				</tr>
+				</c:otherwise></c:choose>
 			</table>
-
-
 		</div>
-	</section>
+        <br><br>
+        <div class="btnArea">
+            <button id="checkedOrder" onclick="goCheckedOrder();">선택 상품 주문하기</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button id="orderBtn" onclick="goOrder();">주문하기</button>
+        </div>
+    </section>
+    <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
+	
+	<script>
+	
+	</script>
 </body>
 </html>

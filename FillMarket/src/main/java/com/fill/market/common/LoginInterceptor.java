@@ -1,4 +1,4 @@
-package com.kh.spring.common;
+package com.fill.market.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,8 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.kh.spring.member.model.vo.Member;
-// 로그인 후 글쓰기가 가능하게끔 사용함.
+import com.fill.market.admin.model.vo.Member;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 

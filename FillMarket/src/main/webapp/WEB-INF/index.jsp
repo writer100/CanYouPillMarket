@@ -186,7 +186,7 @@
 
 			<hr class="featurette-divider">
 
-			<div class="row featurette">
+			<div class="row featurette mb-5 pb-5">
 				<div class="col-md-7">
 					<h2 class="featurette-heading mb-3">최저가 판매를 약속 드립니다.</h2>
 					<p class="lead">
