@@ -1,9 +1,11 @@
 package com.fill.market.cart.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +23,24 @@ public class CartController {
 
 	@Autowired
 	CartService cartService;
-
+	
 	@RequestMapping("/cart/cartInsert.do")
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		cart.setCartuserid(userId);
 		
-		// 추가하려는 상품이 장바구니에 있는지 검사
+		// 장바구니에 기존 상품이 있는지 확인
 		int count = cartService.countCart(cart.getPno(), userId);
-		count = false ? cartService.updateCart(cart) : cartService.insertCart(cart);
+		count = count == 0 ? cartService.insertCart(cart) : cartService.updateCart(cart);
+		
 		if(count == 0) {
-			// 없으면 isnert
+			// 없으면 insert
+			cart.setAmount(1);
 			cartService.insertCart(cart);
-		} else {
-			// 있으면 update
+			cart.setOrderprice(cart.getAmount() * cart.getPprice());
+	
+			System.out.println("insert : " + cart);
+		} else { 
 			cartService.updateCart(cart);
 		}
 		
@@ -50,6 +56,10 @@ public class CartController {
 			List<Cart> list = cartService.listCart(userId);	//장바구니 정보
 			int sumPrice = cartService.sumPrice(userId);
 			int fee = sumPrice >= 100000 ? 0 : 3000;
+						
+			System.out.println("장바구니 정보 : " + list);
+			System.out.println("총 가격 : " + sumPrice);
+			System.out.println("배송비 : " + fee);
 			// 장바구니 전체 금액에 따라 배송비 구분
 			// 10만원 이상 => 무료, 미만 => 3,000원
 			
@@ -65,12 +75,11 @@ public class CartController {
 	
 	}
 	
-
 	@RequestMapping("/cart/cartDelete.do")
 	public String cartDelete(@RequestParam int cNo) {
 		cartService.deleteCart(cNo);
 		
-		return "cart/cartList.do";
+		return "cart/cartList";
 	}
 	
 	@RequestMapping("/cart/cartUpdate.do")
