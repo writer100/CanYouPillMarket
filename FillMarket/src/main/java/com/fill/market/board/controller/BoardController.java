@@ -50,10 +50,6 @@ public class BoardController {
 		// 페이지 처리 Utils 사용하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "qnaList.do");
 		
-		System.out.println("list : " + list);
-		System.out.println("pageBar : " + pageBar);
-		
-		
 		model.addAttribute("list", list);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
@@ -108,7 +104,6 @@ public class BoardController {
 		
 		Board board = boardService.updateView(boardNo);
 
-		
 		model.addAttribute("board", board);
 
 		return "qna/qnaUpdateView";		
@@ -121,7 +116,7 @@ public class BoardController {
 		System.out.println(boardNo);
 		Board originBoard = boardService.updateView(boardNo);
 		
-		originBoard.setQatitle( board.getQatitle() );
+		originBoard.setQatitle(board.getQatitle() );
 		originBoard.setQacontent( board.getQacontent() );
 
 		int result = boardService.updateBoard(originBoard);  // 서비스 찾아가서 마저 구현해주기
@@ -143,7 +138,6 @@ public class BoardController {
 	
 	@RequestMapping("/qna/qnaDelete.do")
 	public String boardDelete(@RequestParam int boardNo,
-							  HttpServletRequest request,
 							  Model model) {
 		
 		
@@ -153,7 +147,11 @@ public class BoardController {
 		String loc = "/qna/qnaList.do";
 		String msg = "";
 
-		
+		if( result > 0 ) {
+			msg = "삭제 완료!";	
+		} else {
+			msg = "삭제 실패!";
+		}
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
 		

@@ -12,14 +12,14 @@ public interface BoardService {
 
 	int selectBoardTotalContents();
 
-	Board selectOneBoard(int boardNo);
+	Board selectOneBoard(int qano);
 	
 	int insertBoard(Board board);
 
-	Board updateView(int boardNo);
+	Board updateView(int qano);
 	
 	int updateBoard(Board board);
 	
-	int deleteBoard(int boardNo);
+	int deleteBoard(int qano);
 	
 }
