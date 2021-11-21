@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 
 <div class="container footer-0affix affix-item">
-	<footer class="py-5">
-		<div class="row py-4">
+	<footer>
+		<div class="row">
 			<div class="col-3">
 				<h5 style="color: rgb(216, 83, 55);">회사정보</h5>
 				<ul class="nav flex-column">

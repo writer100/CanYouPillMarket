@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,7 +130,7 @@
 		</div>
 	</div>
 
-	<div id="top" class="row mb-2" style="justify-content: center;">
+	<div id="top" class="row mb-5 pb-5" style="justify-content: center;">
 		<div class="col-md-3" style="text-align: center;">
 			<div id="one"
 				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -171,7 +174,7 @@
 		</div>
 	</div>
 	
-	<c:import url="views/common/footer.jsp" />
+	<c:import url="../common/footer.jsp" />
 </body>
 
 </html>
