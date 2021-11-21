@@ -20,6 +20,6 @@ public class QNARE implements Serializable {
 	private int qano;
 	private String qauserid;
 	private String rtitle;
-	private String rcontents;
+	private String rcontent;
 	private Date rdate;
 }
