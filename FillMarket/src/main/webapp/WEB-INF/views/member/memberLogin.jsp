@@ -73,14 +73,100 @@
 				<div class="loginApiBox">
 
 					<!-- 카카오톡 로그인 버튼 -->
-					<button class="btn ApiBtn" type="submit" value="Submit"
-						style="background-color: rgb(252, 233, 78);">카카오톡 로그인</button>
+					<a class="apiAnchor" href="javascript:kakaoLogin();"><button
+							class="btn ApiBtn" type="submit" value="Submit"
+							style="background-color: rgb(252, 233, 78); width: 180px;">카카오톡
+							로그인</button></a>
+
+					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+					<script>
+                        window.Kakao.init('d5a3533686de3ed6c79ba8a195f6d9dd');
+
+                        function kakaoLogin() {
+                            window.Kakao.Auth.login({
+                                scope: 'profile, account_email, gender, age_range, birthday', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                                success: function (response) {
+                                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                                        url: '/v2/user/me',
+                                        success: (res) => {
+                                            const kakao_account = res.kakao_account;
+                                            console.log(kakao_account)
+                                        }
+                                    });
+                                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                                },
+                                fail: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+                    </script>
 					<!-- // 카카오톡 로그인 버튼 -->
 
 					<!-- 네이버 로그인 버튼 -->
-					<button class="btn ApiBtn ms-4" type="submit" value="Submit"
-						style="background-color: rgb(96, 197, 58); color: white;">네이버
+
+					<button id="naverIdLogin_loginButton" class="btn ApiBtn ms-4"
+						type="submit" value="Submit"
+						style="background-color: rgb(96, 197, 58); color: white; width: 190px;">네이버
 						로그인</button>
+
+
+
+					<!-- 네이버 스크립트 -->
+					<script
+						src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+						charset="utf-8"></script>
+
+					<script>
+                    
+                    var naverLogin = new naver.LoginWithNaverId(
+                            {
+                                clientId: "IQ5XsxP1tRJ5A6yl9EMb", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+                                callbackUrl: "http://localhost:8180/market", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+                                isPopup: false,
+                                callbackHandle: true
+                            }
+                        );	
+                    
+                    naverLogin.init();
+                    
+                    window.addEventListener('load', function () {
+                        naverLogin.getLoginStatus(function (status) {
+                            if (status) {
+                                var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+                                
+                                console.log(naverLogin.user); 
+                                
+                                if( email == undefined || email == null) {
+                                    alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+                                    naverLogin.reprompt();
+                                    return;
+                                }
+                            } else {
+                                console.log("callback 처리에 실패하였습니다.");
+                            }
+                        });
+                    });
+                    
+                    
+                    var testPopUp;
+                    function openPopUp() {
+                        testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+                    }
+                    function closePopUp(){
+                        testPopUp.close();
+                    }
+                    
+                    function naverLogout() {
+                        openPopUp();
+                        setTimeout(function() {
+                            closePopUp();
+                            }, 1000);
+                        
+                        
+                    }
+                    </script>
 					<!-- // 네이버 로그인 버튼 -->
 				</div>
 			</div>

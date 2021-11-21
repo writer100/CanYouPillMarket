@@ -103,6 +103,10 @@ wrap_body {
 	margin-top: 20px;
 }
 
+.apiAnchor {
+        text-decoration: none;
+    }
+
 .btn {
 	height: 45px;
 }
