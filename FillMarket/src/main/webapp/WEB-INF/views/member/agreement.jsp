@@ -65,7 +65,6 @@ html, body {
 
 #wrap_body {
 	margin: 0;
-	background-color: #f5f6f7;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -92,7 +91,6 @@ ul {
 
 .wrap .contents {
 	padding: 50px;
-	background-color: #ffffff;
 	border-radius: 5px;
 }
 
@@ -548,9 +546,14 @@ ul {
 							외국 거주자의 경우에는 민사소송법상의 관할법원에 제기합니다. ② 회사와 대한민국 국민 또는 대한민국에 사무소를 가지는
 							이용자 간에 발생한 소송의 준거법은 대한민국법으로 합니다.</div>
 				</ul>
-				<button type="submit" class="next-button mb-3">확인</button>
+				<button type="submit" class="next-button mb-5">확인</button>
 			</form>
 		</div>
+	</div>
+	
+	<div
+		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
+		<a href="#Top">🔝</a>
 	</div>
 	<c:import url="../common/footer.jsp" />
 </body>

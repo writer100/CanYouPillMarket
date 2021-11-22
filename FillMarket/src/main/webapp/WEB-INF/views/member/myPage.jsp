@@ -124,7 +124,7 @@
 					<p class="card-text mb-auto">
 						회원이신 고객님의 개인정보를<br>관리하는 페이지입니다.
 					</p>
-					<a href="#" class="stretched-link"></a>
+					<a href="${pageContext.request.contextPath}/member/memberView.do" class="stretched-link"></a>
 				</div>
 			</div>
 		</div>
@@ -174,6 +174,10 @@
 		</div>
 	</div>
 	
+	<div
+		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
+		<a href="#Top">🔝</a>
+	</div>
 	<c:import url="../common/footer.jsp" />
 </body>
 

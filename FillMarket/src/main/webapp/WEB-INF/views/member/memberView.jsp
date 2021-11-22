@@ -9,9 +9,10 @@
 <head>
 
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>회원정보 수정</title>
+
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/memberEnroll.css">
+	href="${pageContext.request.contextPath}/resources/css/memberUpdate.css">
 
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
@@ -94,7 +95,7 @@
 
 	<div id="header">
 		<h4 style="font-size: 40px; text-align: center;"
-			class="mt-5 mb-5 pt-4">회원가입</h4>
+			class="mt-5 mb-5 pt-4">회원정보 수정</h4>
 	</div>
 
 	<!-- wrapper -->
@@ -102,8 +103,8 @@
 
 		<!-- content-->
 		<div id="content">
-			<form name="memberEnrollFrm" action="memberEnrollEnd.do"
-				method="post" onsubmit="return fn_enroll_validate();">
+			<form name="memberEnrollFrm" action="memberUpdate.do"
+				method="post">
 
 				<!-- ID -->
 				<div>
@@ -111,14 +112,14 @@
 						<label for="id">아이디</label>
 					</h5>
 					<span class="box int_id"> <input type="text" id="id"
-						class="int" maxlength="20" name="userId">
+						class="int" maxlength="20" name="userId" value="${member.userId}" readonly required>
 					</span> <span class="error_next_box"></span>
 				</div>
-
+				
 				<!-- PW1 -->
 				<div>
 					<h5 class="join_title mt-3">
-						<label for="pswd1">비밀번호</label>
+						<label for="pswd1">새로운 비밀번호</label>
 					</h5>
 					<span class="box int_pass"> 
 					<input type="password" id="pswd1"
@@ -145,7 +146,7 @@
 					</h5>
 					<span class="box int_name"> <input type="text" id="name"
 						class="int" maxlength="20"
-						placeholder="한글과 영문 대, 소문자를 사용하세요(특수기호, 공백 사용불가)" name="userName">
+						placeholder="한글과 영문 대, 소문자를 사용하세요(특수기호, 공백 사용불가)" name="userName" value="${member.userName}" required>
 					</span> <span class="error_next_box"></span>
 				</div>
 
@@ -195,20 +196,6 @@
 					<span class="error_next_box"></span>
 				</div>
 
-				<!-- GENDER -->
-				<div name="gender">
-					<h5 class="join_title mt-3">
-						<label for="gender">성별</label>
-					</h5>
-					<span class="box gender_code"> <select id="gender"
-						class="sel" name="gender">
-							<option>성별</option>
-							<option value="M">남자</option>
-							<option value="F">여자</option>
-					</select>
-					</span> <span class="error_next_box">필수 정보입니다.</span>
-				</div>
-
 				<!-- EMAIL -->
 				<div>
 					<h5 class="join_title mt-3">
@@ -216,19 +203,8 @@
 					</h5>
 					<span class="box int_email"> <input type="text" id="email"
 						class="int" maxlength="100" placeholder="user01@example.com"
-						name="email">
+						name="email" value="${member.email}" required>
 					</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
-				</div>
-
-				<!-- MOBILE -->
-				<div>
-					<h5 class="join_title mt-3">
-						<label for="phoneNo">연락처</label>
-					</h5>
-					<span class="box int_mobile"> <input type="tel" id="mobile"
-						class="int" maxlength="16" placeholder="ex)01012345678"
-						name="phone">
-					</span> <span class="error_next_box"></span>
 				</div>
 
 				<div>
@@ -251,7 +227,11 @@
 
 				<!-- JOIN BTN-->
 				<div class="btn_area mt-5">
-					<input type="submit" class="btn btn-outline-success" value="가입하기"
+					<input type="submit" class="btn" value="수정"
+						id="btnJoin">
+					<input type="reset" class="btn ms-1" value="취소"
+						id="btnJoin">
+					<input type="button" class="btn ms-1" onclick="location.href='#'" value="탈퇴"
 						id="btnJoin">
 				</div>
 

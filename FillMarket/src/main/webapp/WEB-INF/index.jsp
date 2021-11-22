@@ -24,8 +24,8 @@
 
 </head>
 <body>
-	<c:import url="views/common/header.jsp"/>
-	<c:import url="views/common/navbar.jsp"/>
+	<c:import url="views/common/header.jsp" />
+	<c:import url="views/common/navbar.jsp" />
 
 	<main>
 
@@ -42,7 +42,8 @@
 			<div class="carousel-inner">
 				<div class="carousel-item">
 					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel1.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/Carousel1.png"
+						alt="">
 					<div class="container">
 						<div class="carousel-caption text-start">
 							<h1>건강을 위한 선택</h1>
@@ -57,7 +58,8 @@
 				</div>
 				<div class="carousel-item active">
 					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel2.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/Carousel2.png"
+						alt="">
 					<div class="container">
 						<div class="carousel-caption text-start">
 							<h1>비타민에 대한 오해와 진실!</h1>
@@ -69,7 +71,8 @@
 				</div>
 				<div class="carousel-item">
 					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel3.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/Carousel3.png"
+						alt="">
 					<div class="container">
 						<div class="carousel-caption text-start">
 							<h1>다량 섭취, 좋은것이 아닙니다!</h1>
@@ -96,7 +99,9 @@
 
 			<div class="row">
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/daniel.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/daniel.png"
+						alt="">
 					<rect width="100%" height="100%" fill="#777"></rect>
 					<h2>God Daniel</h2>
 					<p>
@@ -105,7 +110,9 @@
 				</div>
 
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/gichang.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/gichang.png"
+						alt="">
 					<h2>Gichang</h2>
 					<p>
 						<a class="btn btn-secondary" href="https://github.com/rlckdwkd55">GitHub
@@ -114,7 +121,9 @@
 				</div>
 
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/Jieun.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Jieun.png"
+						alt="">
 					<h2>Jieun</h2>
 					<p>
 						<a class="btn btn-secondary" href="https://github.com/writer100">GitHub
@@ -123,7 +132,9 @@
 				</div>
 
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/Changhwan.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Changhwan.png"
+						alt="">
 					<h2>Changhwan</h2>
 					<p>
 						<a class="btn btn-secondary"
@@ -132,7 +143,9 @@
 				</div>
 
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/Yeji.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Yeji.png"
+						alt="">
 					<h2>Yeji</h2>
 					<p>
 						<a class="btn btn-secondary" href="https://github.com/fiveeasy">GitHub
@@ -141,7 +154,9 @@
 				</div>
 
 				<div class="col-lg-4">
-					<img src="${pageContext.request.contextPath }/resources/images/Seungbyung.png" alt="">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Seungbyung.png"
+						alt="">
 					<h2>Seungbyung</h2>
 					<p>
 						<a class="btn btn-secondary" href="https://github.com/ssgbbo">GitHub
@@ -163,7 +178,8 @@
 				<div class="col-md-5">
 					<img
 						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-						src="${pageContext.request.contextPath }/resources/images/category1.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/category1.png"
+						alt="">
 				</div>
 			</div>
 
@@ -180,7 +196,8 @@
 				<div class="col-md-5 order-md-1 ">
 					<img
 						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-						src="${pageContext.request.contextPath }/resources/images/category2.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/category2.png"
+						alt="">
 				</div>
 			</div>
 
@@ -197,13 +214,19 @@
 				<div class="col-md-5">
 					<img
 						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-						src="${pageContext.request.contextPath }/resources/images/category3.png" alt="">
+						src="${pageContext.request.contextPath }/resources/images/category3.png"
+						alt="">
 				</div>
 			</div>
 
 		</div>
 	</main>
 
-	<c:import url="views/common/footer.jsp"/>
+	<div
+		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
+		<a href="#Top">🔝</a>
+	</div>
+
+	<c:import url="views/common/footer.jsp" />
 </body>
 </html>

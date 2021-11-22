@@ -173,7 +173,10 @@
 		</div>
 	</main>
 
-
+	<div
+		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
+		<a href="#Top">🔝</a>
+	</div>
 	<c:import url="../common/footer.jsp" />
 </body>
 
