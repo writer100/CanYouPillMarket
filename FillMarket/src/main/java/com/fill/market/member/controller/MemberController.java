@@ -27,7 +27,8 @@ public class MemberController {
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	/**
-	 * Auth : GiChang Date : 2021-11-18 로그인 이동 처리
+	 * Auth : GiChang 
+	 * Date : 2021-11-18 로그인 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberLogin.do")
@@ -38,7 +39,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-18 이용약관 이동 처리
+	 * Auth : GiChang 
+	 * Date : 2021-11-18 이용약관 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/agreement.do")
@@ -49,7 +51,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-19 회원가입 이동 처리
+	 * Auth : GiChang 
+	 * Date : 2021-11-19 회원가입 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnroll.do")
@@ -59,7 +62,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-19 회원가입 처리
+	 * Auth : GiChang 
+	 * Date : 2021-11-19 회원가입 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnrollEnd.do")
@@ -105,7 +109,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-19 로그인 처리
+	 * Auth : GiChang 
+	 * Date : 2021-11-19 로그인 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -145,7 +150,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-19 로그아웃 처리
+	 * Auth : GiChang
+	 * Date : 2021-11-19 로그아웃 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLogout.do")
@@ -173,7 +179,8 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-22 정보수정 페이지 이동
+	 * Auth : GiChang 
+	 * Date : 2021-11-22 정보수정 페이지 이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberView.do")
@@ -218,6 +225,32 @@ public class MemberController {
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
 
+		return "common/msg";
+	}
+	
+	/**
+	 * Auth : GiChang 
+	 * Date : 2021-11-22 회원정보 수정
+	 * 
+	 **/
+	@RequestMapping("/member/memberDelete.do")
+	public String memberDelete(Member member, SessionStatus status, Model model) {
+		
+		int result = memberService.deleteMember(member.getUserId());
+		
+		String loc = "/";
+		String msg = "";
+		
+		if( result > 0 ) {
+			msg = "회원 탈퇴 성공!";
+			status.setComplete();
+		} else {
+			msg = "회원 탈퇴 실패!";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
 		return "common/msg";
 	}
 

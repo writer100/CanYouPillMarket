@@ -30,4 +30,8 @@
 		WHERE USERID = #{ userId }
 	
 	</update>
+	
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM MEMBER WHERE USERID = #{ userId }	
+	</delete>
 </mapper>

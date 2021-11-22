@@ -229,9 +229,9 @@
 				<div class="btn_area mt-5">
 					<input type="submit" class="btn" value="수정"
 						id="btnJoin">
-					<input type="reset" class="btn ms-1" value="취소"
+					<input type="reset" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
 						id="btnJoin">
-					<input type="button" class="btn ms-1" onclick="location.href='#'" value="탈퇴"
+					<input type="button" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
 						id="btnJoin">
 				</div>
 
