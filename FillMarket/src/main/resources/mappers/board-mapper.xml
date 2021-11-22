@@ -16,9 +16,6 @@
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO QNA (QANO, QAUSERID, QATITLE, QACONTENT)
 		VALUES (SEQ_QANO.NEXTVAL, #{qauserid}, #{ qatitle }, #{ qacontent })
-		<!-- <selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
-			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
-		</selectKey> -->
 	</insert>
 	
 	
