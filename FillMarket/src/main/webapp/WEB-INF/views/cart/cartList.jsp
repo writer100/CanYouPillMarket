@@ -32,6 +32,9 @@
 	<c:import url="../common/navbar.jsp" />
 	<br>
 	<br>
+	
+	<c:set value="${product}" var="p"/>
+	
 	<section class="section">
 		<div class="top">
 			<span class="cart">장바구니</span>
@@ -39,10 +42,11 @@
 		</div>
 		<br> <br>
 		<div class="cart_tb">
+		<form name="orderFrm" action="${pageContext.request.contextPath}/order/orderInsert.do" method="post">
 			<table id="cartList">
 				<thead>
                         <tr>
-                            <th width="30px"></th>
+                            <th width="30px"><input type="checkbox" name="allCheck" /></th>
                             <th width="160px">이미지</th>
                             <th width="570px">상 품</th>
                             <th width="180px">가 격</th>
@@ -52,19 +56,19 @@
                         </tr>
 				</thead>
 				<tbody>
-					<c:choose><c:when test="${ list != null }">
-					<c:forEach items="${list}" var="cartList" varStatus="i">
+					<c:choose><c:when test="${ map.list != null }">
+					<c:forEach items="${map.list}" var="cartList" varStatus="i">
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
 						<td id="productImg">
-							<img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png"/>
+							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${p.changename}"
 						</td>
 						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.pprice }" /> 원
 						</td>
 						<td>
-							<input style="width: 35px; height:23px" type="number" min="1" name="amount" value="${ cartList.amount }">
+							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
 							<button type="submit" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">
@@ -73,13 +77,13 @@
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
 						</td>
-						<td> ###,### 원</td>
 						<td id="deleteBtn">
-							<a href="${path}/cart/cartDelete.do?cno=${ cartList.cno }"> 
+							<a href="${path}/cart/cartDelete.do?pno=${ cartList.pno }"> 
 							<i id="deleteIcon" class="fas fa-times"></i></a>
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 			<br>
 			<table id="cartList2">
@@ -103,7 +107,7 @@
 						</h3>
 					</td>
 				</tr>
-				</c:forEach>
+				
 				</c:when>
 				<c:otherwise>
 				<tr>
@@ -111,19 +115,25 @@
 				</tr>
 				</c:otherwise></c:choose>
 			</table>
+			</form>
 		</div>
         <br><br>
         <div class="btnArea">
-            <button id="checkedOrder" onclick="goCheckedOrder();">선택 상품 주문하기</button>
+            <button id="backShop" onclick="backShop();">쇼핑 계속하기</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button id="orderBtn" onclick="goOrder();">주문하기</button>
+            <button id="orderBtn" type="submit">주문하기</button>
         </div>
     </section>
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
 	
 	<script>
-	
+		$('#backShop').click(function(){
+			history.back();
+		});
 	</script>
 </body>
 </html>
+
+
+

@@ -9,9 +9,13 @@
 	</insert>
 	
 	<select id="listCart" resultType="Cart">
-		SELECT C.*, (PPRICE * AMOUNT) ORDERPRICE, PA.CHANGENAME, PA.PNO AS ATTACHMENTPNO
+		SELECT C.*, PA.CHANGENAME
 		FROM CART C, PATTACHMENT PA
-		WHERE C.PNO = PA.PNO
+		WHERE C.PNO = PA.PNO(+)
+          AND (
+          PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = C.PNO)
+          OR PA.PANO IS NULL
+          )
 		  AND C.CARTUSERID = #{ cartuserid }
 		ORDER BY C.CARTNO DESC
 	</select>
@@ -32,7 +36,7 @@
 	
 	<delete id="deleteCart" parameterType="int">
 		DELETE FROM CART
-		WHERE CARTNO = #{ cartno }
+		WHERE PNO = #{ pno }
 	</delete>
 	
 	<select id="countCart" resultType="int">
@@ -44,7 +48,7 @@
 	
 	<update id="updateCart" parameterType="Cart">
 		UPDATE CART
-		SET AMOUNT = #{ amount }
+		SET AMOUNT = AMOUNT + #{ amount }
 		WHERE CARTUSERID = #{ cartuserid }
 		AND PNO = #{ pno }
 	</update>

@@ -42,16 +42,9 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h5>ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</h5>
+                            <h5>${ cartList.pname }</h5>
                         </td>
-                        <td>2</td>
-                        <td>140,000</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h5>ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</h5>
-                        </td>
-                        <td>2</td>
+                        <td></td>
                         <td>140,000</td>
                     </tr>
                 </tbody>
@@ -61,15 +54,14 @@
                 <tr>
                     <td><b>Total</b></td>
                     <td style="text-align: right;">
-                        <!-- <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/></b> -->
-                        <b>280,000</b>
+                        <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/></b>
                     </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
                     <td style="text-align: right;">
-                        <!-- ${ map.fee } -->
-                        + 무료
+                         ${ map.fee } 원
+                         (10만원 이상 구입 시 무료배송)
                     </td>
                 </tr>
             </table>
@@ -77,7 +69,9 @@
             <table id="orderList3">
                 <tr>
                     <td>총 결제금액</td>
-                    <td style="text-align: right;">280,000</td>
+                    <td style="text-align: right;">
+                    	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/>
+                    </td>
                 </tr>
             </table>
         </div>

@@ -19,6 +19,7 @@
  		<typeAlias alias="Board" type="com.fill.market.board.model.vo.Board"/>
  		<typeAlias alias="QNA" type="com.fill.market.admin.model.vo.QNA"/>
  		<typeAlias alias="QNARE" type="com.fill.market.admin.model.vo.QNARE"/>
+ 		<!-- <typeAlias alias="Order" type="com.fill.marker.order.model.vo.Order"/> -->
  	</typeAliases>
  	
  </configuration>
