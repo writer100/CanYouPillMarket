@@ -2,8 +2,6 @@ package com.fill.market.member.controller;
 
 import java.sql.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +116,7 @@ public class MemberController {
 		System.out.println("로그인 기능 접근 확인!");
 
 		// 1. 아이디를 통해 회원 정보 조회
-		Member result = memberService.selectOneMember(userId); // -> 서비스로 출발~!
+		Member result = memberService.selectOneMember(userId); 
 
 		String loc = "/";
 		String msg = "";
@@ -260,35 +258,43 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/memberFindId.do")
-	public String findIdAction(Member m, Model model, HttpServletRequest request, HttpServletResponse response) {
-
-		String userName = request.getParameter("userName");
-		String email = request.getParameter("email");
+	public String memberFindId(@RequestParam String userName, @RequestParam String email, Model model) {
 		
-		String alertMsg = "";
-
-		System.out.println("전달받은 데이터" + userName + "/" + email);
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setEmail(email);
 		
-		Member member = memberService.memberFindId(userName, email);
+		String msg = "";
+		String loc = "";
+
+		System.out.println("전달받은 데이터 : " + userName + "/" + email);
+		
+		Member member = memberService.memberFindId(m);
+		System.out.println("member 데이터 : " + userName + "/" + email);
 
 		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
 		if (member == null) {
-			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			msg = "일치하는 회원이 존재하지 않습니다.";
 			
-			System.out.println("결과 : " + member);
+			loc = "/member/memberFind.do";
 			
-			return "member/memberFind";
+			System.out.println("조건문(if) 결과 : " + member);
+			
+			
 		} else {
-
+			
+			loc ="/member/memberLogin.do"; 
+			
 		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
-		request.setAttribute("alertMsg", userName + "회원님의 아이디는 \"" + member.getUserId() + "\"입니다.");
-		request.setAttribute("replaceUrl", "../member/memberLogin");
+			msg = userName + " 회원님의 아이디는 /" + member.getUserId() + "/ 입니다.";
 		
-		System.out.println("결과 : " + member);
+		System.out.println("조건문(else) 결과 : " + member.getUserId());
 		
-		return "member/memberLogin";
+		
 		}
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		return "common/msg";
 	}
 
 }

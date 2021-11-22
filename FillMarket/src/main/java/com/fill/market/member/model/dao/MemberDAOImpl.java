@@ -39,12 +39,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Member memberFindId(String userName, String email) {
+	public Member memberFindId(Member m) {	
 		
-		System.out.println("==> Mybatis로 findId() 기능 처리");		
-		
-		return (Member) sqlSession.selectOne("memberSQL.memberFindId");
-	
+		return sqlSession.selectOne("memberSQL.memberFindId", m);
 	}
 	
 

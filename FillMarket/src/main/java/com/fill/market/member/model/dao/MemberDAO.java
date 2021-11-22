@@ -24,7 +24,7 @@ public interface MemberDAO {
 
 	int deleteMember(String userId);
 
-	Member memberFindId(String userName, String email);
+	Member memberFindId(Member m);
 	
 	
 	

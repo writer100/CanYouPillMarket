@@ -35,79 +35,81 @@
 	<c:import url="../common/header.jsp" />
 	<c:import url="../common/navbar.jsp" />
 
-	<form
-		action="${pageContext.request.contextPath}/member/memberFindId.do"
-		method="post">
-		<div id="content" class="searchI">
+	<div>
+		<form
+			action="${pageContext.request.contextPath}/member/memberFindId.do"
+			method="post">
+			<div id="content" class="searchI">
 
-			<div class="row mb-2" style="justify-content: center;">
-				<h1 id="myPage_header" class="h3 mb-3 fw-normal mt-5 pt-5">
-					<strong>아이디 찾기</strong>
-				</h1>
+				<div class="row mb-2" style="justify-content: center;">
+					<h1 id="myPage_header" class="h3 mb-3 fw-normal mt-5 pt-5">
+						<strong>아이디 찾기</strong>
+					</h1>
 
-				<div style="text-align: center;" class="mb-5">
-					<span>회원가입 시 작성한 이름과 E-MAIL을 입력해주세요.</span>
+					<div style="text-align: center;" class="mb-5">
+						<span>회원가입 시 작성한 이름과 E-MAIL을 입력해주세요.</span>
+					</div>
+				</div>
+
+				<span class="box int_id rounded mb-3"> <input type="text"
+					id="id" class="int" maxlength="20" placeholder="이름"
+					required="required" name="userName">
+				</span> <span class="box int_id rounded"> <input type="text" id="id"
+					class="int" maxlength="20" placeholder="E-MAIL" required="required" name="email">
+				</span>
+
+				<div class="btn_area mt-4" onclick="search_check(1)"
+					checked="checked">
+					<button type="submit" id="btnJoin">
+						<span>아이디 찾기</span>
+					</button>
+				</div>
+				<div class="btn_area mb-5 pb-5">
+
+					<button type="button" id="btnJoin2" onclick="search_check(2)">
+						<span>비밀번호 찾기</span>
+					</button>
 				</div>
 			</div>
 
-			<span class="box int_id rounded mb-3"> <input type="text"
-				id="id" class="int" maxlength="20" placeholder="이름"
-				required="required">
-			</span> <span class="box int_id rounded"> <input type="text" id="id"
-				class="int" maxlength="20" placeholder="E-MAIL" required="required">
-			</span>
+		</form>
 
-			<div class="btn_area mt-4" onclick="search_check(1)"
-				checked="checked">
-				<button type="submit" id="btnJoin">
-					<span>아이디 찾기</span>
-				</button>
-			</div>
-			<div class="btn_area mb-5 pb-5">
+		<form
+			action="${pageContext.request.contextPath}/member/memberFindPw.do"
+			method="post">
+			<div id="content" class="searchP">
 
-				<button type="button" id="btnJoin2" onclick="search_check(2)">
-					<span>비밀번호 찾기</span>
-				</button>
-			</div>
-		</div>
+				<div class="row mb-2" style="justify-content: center;">
+					<h1 id="myPage_header" class="h3 mb-3 fw-normal mt-5 pt-5">
+						<strong>비밀번호 찾기</strong>
+					</h1>
 
-	</form>
+					<div style="text-align: center;" class="mb-5">
+						<span>회원 아이디와 회원가입 시 작성한 이름, E-MAIL을 입력해주세요.</span>
+					</div>
+				</div>
 
-	<form
-		action="${pageContext.request.contextPath}/member/memberFindPw.do"
-		method="post">
-		<div id="content" class="searchP">
+				<span class="box int_id rounded mb-3"> <input type="text"
+					id="id" class="int" maxlength="20" placeholder="아이디" name="userId">
+				</span> <span class="box int_id rounded mb-3"> <input type="text"
+					id="id" class="int" maxlength="20" placeholder="이름" name="userName">
+				</span> <span class="box int_id rounded"> <input type="text" id="id"
+					class="int" maxlength="20" placeholder="E-MAIL" name="email">
+				</span>
 
-			<div class="row mb-2" style="justify-content: center;">
-				<h1 id="myPage_header" class="h3 mb-3 fw-normal mt-5 pt-5">
-					<strong>비밀번호 찾기</strong>
-				</h1>
-
-				<div style="text-align: center;" class="mb-5">
-					<span>회원 아이디와 회원가입 시 작성한 이름, E-MAIL을 입력해주세요.</span>
+				<div class="btn_area mt-4">
+					<button type="submit" id="btnJoin">
+						<span>임시 비밀번호 전송</span>
+					</button>
+				</div>
+				<div class="btn_area mb-5 pb-5">
+					<button type="button" id="btnJoin2" onclick="search_check(1);">
+						<span>아이디 찾기</span>
+					</button>
 				</div>
 			</div>
-
-			<span class="box int_id rounded mb-3"> <input type="text"
-				id="id" class="int" maxlength="20" placeholder="아이디">
-			</span> <span class="box int_id rounded mb-3"> <input type="text"
-				id="id" class="int" maxlength="20" placeholder="이름">
-			</span> <span class="box int_id rounded"> <input type="text" id="id"
-				class="int" maxlength="20" placeholder="E-MAIL">
-			</span>
-
-			<div class="btn_area mt-4">
-				<button type="submit" id="btnJoin">
-					<span>임시 비밀번호 전송</span>
-				</button>
-			</div>
-			<div class="btn_area mb-5 pb-5">
-				<button type="button" id="btnJoin2" onclick="search_check(1);">
-					<span>아이디 찾기</span>
-				</button>
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 
 	<script>
 		function search_check(num) {
