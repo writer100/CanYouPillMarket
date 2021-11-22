@@ -31,15 +31,15 @@ public class ProductDAOImpl implements ProductDAO {
 
 
 	@Override
-	public Product selectOneProduct(int pNo) {
+	public Product selectOneProduct(int pno) {
 		
-		return sqlSession.selectOne("productSQL.selectOneProduct", pNo);
+		return sqlSession.selectOne("productSQL.selectOneProduct", pno);
 	}
 
 	@Override
-	public List<PAttachment> selectPAttachmentList(int pNo) {
+	public List<PAttachment> selectPAttachmentList(int pno) {
 		
-		return sqlSession.selectList("productSQL.selectPAttachmentList", pNo);
+		return sqlSession.selectList("productSQL.selectPAttachmentList", pno);
 	}
 
 }
