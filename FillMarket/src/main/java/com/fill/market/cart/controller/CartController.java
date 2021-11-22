@@ -1,5 +1,6 @@
 package com.fill.market.cart.controller;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +73,7 @@ public class CartController {
 			
 			List<Cart> list = cartService.listCart(userId);	//장바구니 정보
 			int sumPrice = cartService.sumPrice(cart);
-			int fee = sumPrice >= 100000 ? 0 : 3000;
+			int fee = sumPrice >= 30000 ? 0 : 2500;
 						
 //			System.out.println("장바구니 정보 : " + list);
 			System.out.println("총 가격 : " + sumPrice);
@@ -113,6 +114,7 @@ public class CartController {
 		
 		return "cart/cartList"; 
 	}
+
 	
 
 }

@@ -8,78 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 내역 목록</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nanum Gothic', sans-serif;
-        }
-        
-        header {
-            height: 230px;
-            background-color: cornsilk;
-            text-align: center;
-        }
-
-        footer {
-            height: 230px;
-            background-color: cadetblue;
-            text-align: center;
-        }
-
-        section {
-            width: 1400px;
-            /* background-color: crimson; */
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .top {
-            width: 1250px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        .title {
-            font-size: 25px;
-        }
-
-        .myOrder {
-            border : 2px solid lightgray;
-            padding : 20px;
-            width: 1100px;
-            height: 170px;
-            margin-left: auto;
-            margin-right: auto;
-            /* margin-left: 50px; */
-        }
-
-        #myOrder_tb {
-            border-collapse: separate;
-            border-spacing: 0 2px;
-            /* border-collapse: collapse; */
-            /* text-align: center; */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #myOrder_tb tr td:first-child {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        #myOrder_tb tr td {
-            height: 30px;
-        }
-        
-    </style>
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderList.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous">
+</script>
 </head>
 <body>
-    <header>
-        <h1>header</h1>
-    </header>
+	<c:import url="../common/header.jsp" />
+	<c:import url="../common/navbar.jsp" />
     <br><br><br><br><br>
 
     <section>
@@ -117,8 +69,7 @@
 
 
     <br><br><br><br><br><br><br><br><br><br>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
+	<c:import url="../common/footer.jsp" />
+
 </body>
 </html>

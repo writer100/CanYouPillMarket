@@ -8,13 +8,77 @@
 <head>
 <meta charset="UTF-8">
 <title>주문페이지</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderPage.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderPage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous">
+</script>
+	<script>
+    // 우편번호 검색
+    function searchZipcode() {
+      new daum.Postcode({
+          oncomplete: function(data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+              var fullAddr = ''; // 최종 주소 변수
+              var extraAddr = ''; // 조합형 주소 변수
+
+              // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  fullAddr = data.roadAddress;
+
+              } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  fullAddr = data.jibunAddress;
+              }
+
+              // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+              if(data.userSelectedType === 'R'){
+                  //법정동명이 있을 경우 추가한다.
+                  if(data.bname !== ''
+						&& /[동|로|가]$/g.test(data.bname)) {
+						extraAddr += data.bname;
+                  }
+               // 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraAddr += (extraAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+                  // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                  fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+              } 
+
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              document.getElementById('receiverZipcode').value = data.zonecode;
+              document.getElementById('receiverAddress1').value = fullAddr;
+
+              // 커서를 상세주소 필드로 이동한다.
+              document.getElementById('receiverAddress2').focus();
+          }
+      }).open();
+  }
+
+    </script>
 </head>
 
 <body>
@@ -115,24 +179,24 @@
             <div class="deliveryInfo2">
                 <div class="input-label-wrap">
                     <label for="receiverName">수령인 이름</label><br>
-                    <input type="text" id="receiverName" placeholder="수령인 이름을 입력해주세요.">
+                    <input type="text" id="receiverName" name="receivername" placeholder="수령인 이름을 입력해주세요.">
                 </div>
                 <div class="input-label-wrap">
                     <label for="receiverTel">연락처</label><br>
-                    <input type="tel" id="receiverTel" placeholder="수령인 연락처를 입력해주세요. ('-'제외)">
+                    <input type="tel" id="receiverTel" name="receivertel" placeholder="수령인 연락처를 입력해주세요. ('-'제외)">
                 </div>
                 <div class="input-zipcode-wrap">
                     <label for="receiverZipcode">우편번호</label><br>
-                    <input type="text" id="receiverZipcode" placeholder="우편번호를 입력해 주세요." readonly>&nbsp;&nbsp;&nbsp;
-                    <button onclick="searchZipcode();" id="searchZipcodeBtn">우편번호 검색</button>
+                    <input type="text" id="receiverZipcode" name="address1" placeholder="우편번호를 입력해 주세요." readonly>&nbsp;&nbsp;&nbsp;
+                    <input type="button" onclick="searchZipcode();" id="searchZipcodeBtn" value="우편번호 찾기" />
                 </div>
                 <div class="input-label-wrap">
                     <label for="receiverAddress1">도로명 주소</label><br>
-                    <input type="tel" id="receiverAddress1" placeholder="도로명 주소를 입력해 주세요." readonly>
+                    <input type="tel" id="receiverAddress1" name="address2" placeholder="도로명 주소를 입력해 주세요." readonly>
                 </div>
                 <div class="input-label-wrap">
                     <label for="receiverAddress2">나머지 주소</label><br>
-                    <input type="tel" id="receiverAddress2" placeholder="나머지 주소를 입력해 주세요.">
+                    <input type="tel" id="receiverAddress2" name="address2" placeholder="나머지 주소를 입력해 주세요.">
                 </div>
             </div>
             <br><br>
@@ -146,52 +210,6 @@
 
         </form>
     </section>
-
-    <script>
-        // 우편번호 검색
-        function searchZipcode() {
-          new daum.Postcode({
-              oncomplete: function(data) {
-                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-  
-                  // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                  var fullAddr = ''; // 최종 주소 변수
-                  var extraAddr = ''; // 조합형 주소 변수
-  
-                  // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                  if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                      fullAddr = data.roadAddress;
-  
-                  } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                      fullAddr = data.jibunAddress;
-                  }
-  
-                  // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                  if(data.userSelectedType === 'R'){
-                      //법정동명이 있을 경우 추가한다.
-                      if(data.bname !== ''){
-                          extraAddr += data.bname;
-                      }
-                      // 건물명이 있을 경우 추가한다.
-                      if(data.buildingName !== ''){
-                          extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                      }
-                      // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                      fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                  }
-  
-                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                  document.getElementById('receiverZipcode').value = data.zonecode;
-                  document.getElementById('receiverAddress1').value = fullAddr;
-  
-                  // 커서를 상세주소 필드로 이동한다.
-                  document.getElementById('receiverAddress2').focus();
-              }
-          }).open();
-      };
-
-    </script>
 
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />

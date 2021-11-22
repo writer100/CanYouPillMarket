@@ -8,165 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <title>결제완료 페이지</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nanum Gothic', sans-serif;
-        }
-        
-        header {
-            height: 230px;
-            background-color: cornsilk;
-            text-align: center;
-        }
-
-        footer {
-            height: 230px;
-            background-color: cadetblue;
-            text-align: center;
-        }
-
-        section {
-            width: 1400px;
-            /* background-color: crimson; */
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .top {
-            width: 1250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .title {
-            font-size: 25px;
-        }
-
-        .order_tb {
-            width: 1300px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        #orderList, #orderList2, #orderList3 {
-            border-collapse: collapse;
-            text-align: center;
-        }
-
-        #orderList th {
-            height: 35px;
-            border-top: 2px solid lightgray;
-            border-bottom: 1px solid lightgray;
-            background-color: #ececec;
-        }
-
-        #orderList td {
-            border-bottom: 1px solid lightgray;
-        }
-        #orderList2 tr td:first-child {
-            width: 200px;
-            height: 30px;
-            text-align: center;
-        }
-
-        #orderList2 tr td:last-child {
-            width: 1030px
-        }
-
-        #orderList3 tr td:first-child {
-            width: 200px;
-            height: 30px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        #orderList3 tr td:last-child {
-            width: 1030px;
-            font-size: 22px;
-            font-weight: bold;
-            color : rgb(231, 133, 110);
-        }
-
-        #cancelBtn {
-            height: 30px;
-            border: 1px solid lightgray;
-            border-radius: 5px;
-            /* background-color: white; */
-            background-color: #f5f5f5;
-            font-size: 13px;
-        }
-
-        .orderMSG {
-            color : rgb(231, 133, 110);
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .btnArea {
-            height: 40px;
-            text-align: center;
-        }
-
-        #goProductList {
-            width: 300px;
-            height: 50px;
-            border: 1px solid rgb(231, 133, 110);
-            border-radius: 25px;
-            color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        #goOrderList {
-            width: 300px;
-            height: 50px;
-            border: 0px;
-            border-radius: 5px;
-            background-color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* #goProductList:hover {
-            width: 300px;
-            height: 50px;
-            border: 0px;
-            border-radius: 25px;
-            background-color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-        }
-
-        #goOrderList:hover {
-            width: 300px;
-            height: 50px;
-            border: 1px solid rgb(231, 133, 110);
-            border-radius: 25px;
-            color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            background-color: white;
-            cursor: pointer;
-        } */
-    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderFinish.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous">
+</script>
 </head>
 <body>
-    <header>
-        <h1>header</h1>
-    </header>
+	<c:import url="../common/header.jsp" />
+	<c:import url="../common/navbar.jsp" />
     <br><br><br><br><br>
 
     <section>
@@ -231,8 +95,6 @@
 
     
     <br><br><br><br><br><br><br><br><br><br>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
+	<c:import url="../common/footer.jsp" />
 </body>
 </html>

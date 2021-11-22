@@ -8,13 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 <!-- fontawesome 아이콘cdn -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/cartList.css" />
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/cartList.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -23,17 +29,15 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+	crossorigin="anonymous">
+</script>
 </head>
 <body>
 	<c:import url="../common/header.jsp" />
 	<c:import url="../common/navbar.jsp" />
 	<br>
 	<br>
-	
-	<c:set value="${product}" var="p"/>
+
 	
 	<section class="section">
 		<div class="top">
@@ -42,7 +46,7 @@
 		</div>
 		<br> <br>
 		<div class="cart_tb">
-		<form name="orderFrm" action="${pageContext.request.contextPath}/order/orderInsert.do" method="post">
+		<form name="orderFrm" action="${pageContext.request.contextPath}/cart/orderInsert.do" method="post">
 			<table id="cartList">
 				<thead>
                         <tr>
@@ -131,6 +135,11 @@
 		$('#backShop').click(function(){
 			history.back();
 		});
+		
+		$('#orderBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
+		})
+		
 	</script>
 </body>
 </html>
