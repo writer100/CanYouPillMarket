@@ -82,7 +82,7 @@
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
 						</td>
 						<td id="deleteBtn">
-							<a href="${path}/cart/cartDelete.do?pno=${ cartList.pno }"> 
+							<a href="${pageContext.request.contextPath}/cart/cartDelete.do?cartno=${ cartList.cartno }"> 
 							<i id="deleteIcon" class="fas fa-times"></i></a>
 						</td>
 					</tr>

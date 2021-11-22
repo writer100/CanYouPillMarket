@@ -15,9 +15,9 @@ public interface CartDAO {
 
 	List<Cart> listCart(String userId);
 
-	int sumPrice(Cart cart);
+	int sumPrice(String userId);
 
-	void deleteCart(int pno);
+	void deleteCart(int cartno);
 
 	void modifyCart(Cart cart);
 

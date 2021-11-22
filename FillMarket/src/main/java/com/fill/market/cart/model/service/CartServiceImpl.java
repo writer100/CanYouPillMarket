@@ -30,9 +30,9 @@ public class CartServiceImpl implements CartService {
 	
 	// 3. 장바구니 삭제
 	@Override
-	public void deleteCart(int pno) {
+	public void deleteCart(int cartno) {
 		
-		cartDAO.deleteCart(pno);
+		cartDAO.deleteCart(cartno);
 		
 	}
 	
@@ -46,9 +46,9 @@ public class CartServiceImpl implements CartService {
 	
 	// 5. 장바구니 금액 합계
 	@Override
-	public int sumPrice(Cart cart) {
+	public int sumPrice(String userId) {
 		
-		return cartDAO.sumPrice(cart);
+		return cartDAO.sumPrice(userId);
 	}
 	
 	// 6. 장바구니 상품 확인

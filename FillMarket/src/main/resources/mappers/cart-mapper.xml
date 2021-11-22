@@ -21,10 +21,9 @@
 	</select>
 	
 	<select id="sumPrice" resultType="int">
-		SELECT NVL(SUM(PPRICE*AMOUNT), 0) ORDERPRICE
+		SELECT SUM(ORDERPRICE)
 		FROM CART
-		WHERE PNO = #{ pno }
-		  AND CARTUSERID = #{ cartuserid }
+		WHERE CARTUSERID = #{ cartuserid }
 	</select>
 	
 	<update id="modifyCart" parameterType="Cart">
@@ -36,7 +35,7 @@
 	
 	<delete id="deleteCart" parameterType="int">
 		DELETE FROM CART
-		WHERE PNO = #{ pno }
+		WHERE CARTNO = #{ cartno }
 	</delete>
 	
 	<select id="countCart" resultType="int">

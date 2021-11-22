@@ -1,6 +1,5 @@
 package com.fill.market.cart.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +54,7 @@ public class CartController {
 			cart.setAmount(1);
 			cartService.updateCart(cart);
 			
-			msg = "이미 있는 상품의 갯수를 추가하였습니다.";
+			msg = "이미 있는 상품의 수량을 추가하였습니다.";
 		}
 		
 		model.addAttribute("loc", loc);
@@ -72,9 +71,11 @@ public class CartController {
 		System.out.println("세션 확인 : " + userId);
 			
 			List<Cart> list = cartService.listCart(userId);	//장바구니 정보
-			int sumPrice = cartService.sumPrice(cart);
+			int sumPrice = cartService.sumPrice(userId);
 			int fee = sumPrice >= 30000 ? 0 : 2500;
-						
+			
+			System.out.println("카트 확인 : " + cart);
+			
 //			System.out.println("장바구니 정보 : " + list);
 			System.out.println("총 가격 : " + sumPrice);
 			System.out.println("배송비 : " + fee);
@@ -94,10 +95,10 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart/cartDelete.do")
-	public String cartDelete(@RequestParam int pno) {
-		cartService.deleteCart(pno);
+	public String cartDelete(@RequestParam int cartno) {
+		cartService.deleteCart(cartno);
 		
-		return "cart/cartList";
+		return "redirect:/cart/cartList.do";
 	}
 	
 	@RequestMapping("/cart/cartUpdate.do")

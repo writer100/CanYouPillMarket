@@ -32,9 +32,9 @@ public class CartDAOImpl implements CartDAO {
 	
 	// 3. 장바구니 삭제
 	@Override
-	public void deleteCart(int pno) {
+	public void deleteCart(int cartno) {
 		
-		sqlSession.delete("cartSQL.deleteCart", pno);
+		sqlSession.delete("cartSQL.deleteCart", cartno);
 	}
 	
 	// 4. 장바구니 수정
@@ -46,9 +46,9 @@ public class CartDAOImpl implements CartDAO {
 	
 	// 5. 장바구니 금액 합계
 	@Override
-	public int sumPrice(Cart cart) {
+	public int sumPrice(String userId) {
 		
-		return sqlSession.selectOne("cartSQL.sumPrice", cart);
+		return sqlSession.selectOne("cartSQL.sumPrice", userId);
 	}
 	
 	// 6. 장바구니 내 동일한 상품 확인
