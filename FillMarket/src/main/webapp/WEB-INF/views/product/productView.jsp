@@ -28,18 +28,20 @@
 	
 	<div class="container" style="width: 70%">
 		
-		<div class="row"><h1 class="page-header" style="text-align: center; margin-bottom: 50px;">${product.pname}</h1>
+		<div class="row">
+			
+			<h1 class="page-header" style="text-align: center; margin-bottom: 50px;"><br />${product.pname}</h1>
 			<input type="hidden" value="${product.pno}" id="pno">
 		</div>
-		<div class="row" style="float: left; text-align: center; width:35%;">
+		<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
            	<c:forEach items="${pattachmentList}" var="a" varStatus="vs">
 				<img src="${pageContext.request.contextPath}/resources/productUpload/${a.changename}" alt="첨부파일" width="150%;" "/>
 			</c:forEach>
 		</div>
 
-		<div class="row productInfo" style="width: 40%; float: right;" >
+		<div class="row productInfo" style="width: 30%; float: right;" >
 			<div class="form-group" style="text-align: center;">
-				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pname}</small></h3>
+				<h3 class="page-header"><span>${product.pname}</span><br><br /></h3>
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
@@ -70,24 +72,22 @@
 			<hr>	
 		</div>
 	</div>
+	<div class="container" style="width: 70%">
 		
-		<div class="row" style="margin: 50px 0;">
-			<h1 class="jumbotron">
-				<div class="container">
-					<h1>상품 안내</h1>
-					<input type="hidden" value="${product.pinfo}" id="pinfo">
-					<small> ${ pinfo }</small>
-				</div>
-			</h1>
+		<div class="row about_product" style="text-align: left; width: 70%; margin: 80px 0;">
+			<h1 class="page-header"><br />상품 안내</h1>
+				<input type="hidden" value="${product.pinfo}" id="pinfo">
+				<small> ${ product.pinfo }</small>
 		</div>
 		
-		<div class="row about_product" style="text-align: center; ">
+		
+		<div class="row about_product" style="text-align: left; width: 70%; margin: 80px 0;">
 			<h1 class="page-header">주의사항</h1>
 				<input type="hidden" value="${product.fprec}" id="fprec">
-				<small> ${ fprec }</small>
+				<small> ${ product.fprec }</small>
 		</div>
 		
-		<div class="row reviews" style="text-align: center; margin: 80px 0;">
+		<div class="row reviews" style="text-align: center; margin: 80px 0; width: 70%;">
 			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
 			<c:forEach begin="1" end="5">
 			<div class="panel panel-default">
@@ -98,25 +98,8 @@
 			</div>
 			</c:forEach>
 		</div>
-
+	</div>
 <script>
-	/*var pno = $("#pno").val();
-		
-		$.getJSON("/admin/product/getAttaches/" + pno, function(result) {
-			
-			var str = '';
-			
-			$(result).each(function() {
-				var data = this;
-				
-				str += makeHtmlcode_read(data);
-					
-			});
-			
-			$(".about_product").append(str);
-			
-		});
-		*/
 		
 		$("#select_amount").on('blur', function() {
 			var product = $(this).val();
@@ -142,6 +125,21 @@
 			
 			$(".selected_option").html(str);
 		});
+			var divs = document.querySelectorAll('div');
+			divs.forEach(function(div){
+				div.addEventListener('click',logEvent, { 
+					capture : true
+				})
+			});
+			
+			function logEvent(event){
+				console.log(event.currentTarget.className);
+			}
+			
+
+			function goCart(pno, pname, pprice){
+				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
+			}
 </script>
 
 	<c:import url="../common/footer.jsp" />

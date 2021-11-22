@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderSQL">
-	
+	<!-- 
 	<insert id="insertOrder" parameterType="Order">
 		INSERT INTO ORDER (ORDERNO, ORDERUSERID, PNO, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE)
 		VALUES (SEQ_ORDERNO.NEXTVAL, #{ orderuserid }, #{ pno }, #{ totalprice }, 
 				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone })
 	</insert>
-	
+	 -->
 	<!-- Access to #{ field } -->
 </mapper>
