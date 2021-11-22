@@ -69,5 +69,14 @@ public class CartDAOImpl implements CartDAO {
 		return sqlSession.update("cartSQL.updateCart", cart);
 	}
 
+	// 8. 장바구니 상품 전체 삭젝
+	@Override
+	public void deleteAll(String userId) {
+		
+		sqlSession.delete("cartSQL.deleteAll", userId);
+		
+	}
+
+
 
 }

@@ -65,4 +65,12 @@ public class CartServiceImpl implements CartService {
 		return cartDAO.updateCart(cart);
 	}
 
+	// 8. 장바구니 상품 전체 삭제
+	@Override
+	public void deleteAll(String userId) {
+		
+		cartDAO.deleteAll(userId);
+		
+	}
+
 }

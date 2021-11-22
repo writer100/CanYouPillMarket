@@ -20,6 +20,8 @@ public interface CartService {
 
 	void modifyCart(Cart cart);
 
+	void deleteAll(String userId);
+
 
 
 

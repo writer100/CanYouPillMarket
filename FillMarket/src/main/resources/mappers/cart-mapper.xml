@@ -52,5 +52,10 @@
 		AND PNO = #{ pno }
 	</update>
 	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM CART
+		WHERE CARTUSERID = #{ cartuserid }
+	</delete>
+	
 	<!-- Access to #{ field } -->
 </mapper>

@@ -23,7 +23,7 @@
 	height: 300px;
 }
 
-#deleteChecked {
+#deleteAll {
 	float: right;
 	border: 1px solid lightgray;
 	background-color: rgb(240, 240, 240);

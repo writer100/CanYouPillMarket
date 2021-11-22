@@ -42,7 +42,7 @@
 	<section class="section">
 		<div class="top">
 			<span class="cart">장바구니</span>
-			<span><button id="deleteChecked">선택 상품 삭제</button></span>
+			<span><button id="deleteAll" onclick="deleteAll();">전체 삭제</button></span>
 		</div>
 		<br> <br>
 		<div class="cart_tb">
@@ -138,8 +138,19 @@
 		
 		$('#orderBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
-		})
+		});
+		/*
+		$('#deleteAll').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+		});*/
 		
+		function deleteAll(){
+			if(confirm("정말 삭제하시겠습니까?") == true) {
+				location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+			} else {
+				return;
+			}
+		}
 	</script>
 </body>
 </html>

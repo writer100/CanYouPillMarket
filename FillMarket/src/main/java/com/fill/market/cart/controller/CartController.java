@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +25,7 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
-	@RequestMapping("/cart/cartInsert.do")
+	@RequestMapping(value="/cart/cartInsert.do", method = RequestMethod.GET)
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session, Model model) {
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		cart.setCartuserid(userId);
@@ -101,9 +102,18 @@ public class CartController {
 		return "redirect:/cart/cartList.do";
 	}
 	
+	@RequestMapping("/cart/cartDeleteAll.do")
+	public String cartDeleteAll(HttpSession session) {
+		String userId = ((Member)session.getAttribute("member")).getUserId();
+		
+		cartService.deleteAll(userId);
+		
+		return "redirect:/cart/cartList.do";
+	}
+	
 	@RequestMapping("/cart/cartUpdate.do")
 	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
+		String userId = ((Member)session.getAttribute("member")).getUserId();
 		// 레코드의 갯수만큼 반복문 실행
 		for(int i = 0; i < pno.length; i++) {
 			Cart cart = new Cart();
