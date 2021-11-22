@@ -28,7 +28,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-18 로그인 이동 처리
+	 * Date : 2021-11-18 
+	 * 로그인 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberLogin.do")
@@ -40,7 +41,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-18 이용약관 이동 처리
+	 * Date : 2021-11-18 
+	 * 이용약관 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/agreement.do")
@@ -52,7 +54,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-19 회원가입 이동 처리
+	 * Date : 2021-11-19 
+	 * 회원가입 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnroll.do")
@@ -63,7 +66,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-19 회원가입 처리
+	 * Date : 2021-11-19 
+	 * 회원가입 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnrollEnd.do")
@@ -110,7 +114,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-19 로그인 처리
+	 * Date : 2021-11-19 
+	 * 로그인 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -151,7 +156,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang
-	 * Date : 2021-11-19 로그아웃 처리
+	 * Date : 2021-11-19
+	 * 로그아웃 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLogout.do")
@@ -180,7 +186,8 @@ public class MemberController {
 
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-22 정보수정 페이지 이동
+	 * Date : 2021-11-22 
+	 * 정보수정 페이지 이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberView.do")
@@ -191,7 +198,9 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
+	 * Auth : GiChang 
+	 * Date : 2021-11-22 
+	 * 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberUpdate.do")
@@ -230,7 +239,8 @@ public class MemberController {
 	
 	/**
 	 * Auth : GiChang 
-	 * Date : 2021-11-22 회원정보 수정
+	 * Date : 2021-11-22 
+	 * 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberDelete.do")
@@ -252,6 +262,19 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		
 		return "common/msg";
+	}
+	
+	/**
+	 * Auth : GiChang 
+	 * Date : 2021-11-22 
+	 * 아이디 비밀번호 찾기 화면이동 
+	 * 
+	 **/
+	@RequestMapping("/member/memberFind.do")
+	public String memberFind() {
+
+		return "member/memberFind";
+
 	}
 
 }
