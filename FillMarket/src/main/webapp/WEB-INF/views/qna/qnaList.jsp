@@ -342,7 +342,7 @@
 					</tbody>
 				</table>
 				<c:out value="${pageBar}" escapeXml="false" />
-				<div class="d-grid gap-2 col-3 mx-auto">
+				<div class="d-grid gap-2 col-3 mx-auto mb-5">
 					<button class="btn btn-primary" type="button" onclick="location.href='${pageContext.request.contextPath}/qna/qnaWrite.do'" />
 					문의하기
 					</button>

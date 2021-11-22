@@ -21,7 +21,7 @@
 
             <ul class="nav">
                 <c:if test="${!empty member}">
-                    <li class="nav-item"><a href="#" class="nav-link text-dark">MY PAGE</a></li>
+                    <li class="nav-item"><a href="${pageContext.request.contextPath}/member/myPage.do" class="nav-link text-dark">MY PAGE</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark">MY HEART</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/cartList.do" class="nav-link text-dark">SHOPPING BAG</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/memberLogout.do" class="nav-link text-dark">LOGOUT</a></li>
