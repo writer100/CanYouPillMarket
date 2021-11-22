@@ -39,15 +39,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int checkIdDuplicate(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member memberFindId(Member m) {
+		System.out.println("==> Mybatis로 findId() 기능 처리");		
+		
+		return sqlSession.selectOne("memberSQL.memberFindId", m);
+	
 	}
-
-	@Override
-	public int checkIdDuplicate(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 }

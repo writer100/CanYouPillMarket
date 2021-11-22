@@ -34,4 +34,8 @@
 	<delete id="deleteMember" parameterType="string">
 		DELETE FROM MEMBER WHERE USERID = #{ userId }	
 	</delete>
+	
+	<select id="memberFindId" resultType="Member">
+		SELECT USERID FROM MEMBER WHERE USERNAME = #{userName} AND EMAIL = #{email}
+	</select>
 </mapper>

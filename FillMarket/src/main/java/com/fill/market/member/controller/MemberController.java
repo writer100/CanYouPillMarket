@@ -2,6 +2,7 @@ package com.fill.market.member.controller;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -276,5 +277,24 @@ public class MemberController {
 		return "member/memberFind";
 
 	}
+	
+	
+	@RequestMapping("/member/memberFindId")
+	public String findIdAction(Member m, Model model) {
+		Member userName = memberService.memberFindId(m);
+		
+		String msg = "";
+		
+		if(userName == null) { 
+			msg = "회원정보를 확인해주세요.";
+		} else { 
+			msg = "가입하신 아이디는" + m.getUserId() + "입니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		
+		return "member/memberFind";
+	}
+		
 
 }

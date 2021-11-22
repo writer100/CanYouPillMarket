@@ -1,5 +1,10 @@
 package com.fill.market.member.model.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +40,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.deleteMember(userId);
 	}
+
 	@Override
-	public int checkIdDuplicate(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member memberFindId(Member m) {
+		
+		return memberDAO.memberFindId(m);
 	}
+	
+	
 
 }

@@ -23,8 +23,7 @@ public interface MemberDAO {
 	int updateMember(Member member);
 
 	int deleteMember(String userId);
-	
-	int checkIdDuplicate(HashMap<String, Object> hmap);
 
-	int checkIdDuplicate(String userId);
+	Member memberFindId(Member m);
+	
 }
