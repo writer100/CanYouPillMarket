@@ -42,10 +42,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member memberFindId(Member m) {
+	public Member memberFindId(String userName, String email) {
 		
-		return memberDAO.memberFindId(m);
+		return memberDAO.memberFindId(userName, email);
 	}
+
+	
 	
 	
 

@@ -2,6 +2,7 @@ package com.fill.market.member.controller;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,9 +29,7 @@ public class MemberController {
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 
-	 * 로그인 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 로그인 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberLogin.do")
@@ -41,9 +40,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 
-	 * 이용약관 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 이용약관 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/agreement.do")
@@ -54,9 +51,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 회원가입 이동 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnroll.do")
@@ -66,9 +61,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 회원가입 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnrollEnd.do")
@@ -114,9 +107,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 로그인 처리
+	 * Auth : GiChang Date : 2021-11-19 로그인 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -156,9 +147,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang
-	 * Date : 2021-11-19
-	 * 로그아웃 처리
+	 * Auth : GiChang Date : 2021-11-19 로그아웃 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLogout.do")
@@ -186,9 +175,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 정보수정 페이지 이동
+	 * Auth : GiChang Date : 2021-11-22 정보수정 페이지 이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberView.do")
@@ -199,9 +186,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 회원정보 수정
+	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberUpdate.do")
@@ -209,22 +194,22 @@ public class MemberController {
 
 		String pass1 = member.getPassword(); // 원래 비밀번호
 		String pass2 = bcryptPasswordEncoder.encode(pass1); // 비밀번호 암호화
-		
+
 		System.out.println(pass1 + " / " + pass2);
 		member.setPassword(pass2);
-		
+
 		String loc = "/";
 		String msg = "";
-		
+
 		// yyyy-MM-dd 변경
 		String birthCheck = member.getBirthYear() + "-" + member.getBirthMonth() + "-" + member.getBirthDay();
 		System.out.println(birthCheck);
 		member.setBirth(Date.valueOf(birthCheck));
-		
+
 		int result = memberService.updateMember(member);
 
 		System.out.println("받아온 정보 확인 : " + member);
-		
+
 		if (result > 0) {
 			msg = "정보 수정 성공!";
 			model.addAttribute("member", member);
@@ -237,38 +222,34 @@ public class MemberController {
 
 		return "common/msg";
 	}
-	
+
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 회원정보 수정
+	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberDelete.do")
 	public String memberDelete(Member member, SessionStatus status, Model model) {
-		
+
 		int result = memberService.deleteMember(member.getUserId());
-		
+
 		String loc = "/";
 		String msg = "";
-		
-		if( result > 0 ) {
+
+		if (result > 0) {
 			msg = "회원 탈퇴 성공!";
 			status.setComplete();
 		} else {
 			msg = "회원 탈퇴 실패!";
 		}
-		
+
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
-		
+
 		return "common/msg";
 	}
-	
+
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 아이디 비밀번호 찾기 화면이동 
+	 * Auth : GiChang Date : 2021-11-22 아이디 비밀번호 찾기 화면이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberFind.do")
@@ -277,24 +258,37 @@ public class MemberController {
 		return "member/memberFind";
 
 	}
-	
-	
-	@RequestMapping("/member/memberFindId")
-	public String findIdAction(Member m, Model model) {
-		Member userName = memberService.memberFindId(m);
+
+	@RequestMapping("/member/memberFindId.do")
+	public String findIdAction(Member m, Model model, HttpServletRequest request, HttpServletResponse response) {
+
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
 		
-		String msg = "";
+		String alertMsg = "";
+
+		System.out.println("전달받은 데이터" + userName + "/" + email);
 		
-		if(userName == null) { 
-			msg = "회원정보를 확인해주세요.";
-		} else { 
-			msg = "가입하신 아이디는" + m.getUserId() + "입니다.";
+		Member member = memberService.memberFindId(userName, email);
+
+		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
+		if (member == null) {
+			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			
+			System.out.println("결과 : " + member);
+			
+			return "member/memberFind";
+		} else {
+
+		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
+		request.setAttribute("alertMsg", userName + "회원님의 아이디는 \"" + member.getUserId() + "\"입니다.");
+		request.setAttribute("replaceUrl", "../member/memberLogin");
+		
+		System.out.println("결과 : " + member);
+		
+		return "member/memberLogin";
 		}
-		
-		model.addAttribute("msg", msg);
-		
-		return "member/memberFind";
 	}
-		
 
 }
