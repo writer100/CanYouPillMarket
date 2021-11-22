@@ -53,7 +53,7 @@
 			<c:forEach items="${list}" var="product"> 
 			  <div class="col">
 			    <div class="card h-100">
-			        <img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png" class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
 					  <div class="card-body" style="z-index:10;">
 					    <h5 class="card-title" id="${ product.pname }">${ product.pname }</h5>
 					    <p class="card-text" id="${ product.pprice }">${ product.pprice }</p>

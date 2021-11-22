@@ -32,12 +32,14 @@
 			<input type="hidden" value="${product.pno}" id="pno">
 		</div>
 		<div class="row" style="float: left; text-align: center; width:35%;">
-			<img alt="productPhoto" src="/resources/productUpload${pattachment.changename}" width="150%"">
+           	<c:forEach items="${pattachmentList}" var="a" varStatus="vs">
+				<img src="${pageContext.request.contextPath}/resources/productUpload/${a.changename}" alt="첨부파일" width="150%;" "/>
+			</c:forEach>
 		</div>
 
 		<div class="row productInfo" style="width: 40%; float: right;" >
 			<div class="form-group" style="text-align: center;">
-				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pinfo}</small></h3>
+				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pname}</small></h3>
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
@@ -45,14 +47,14 @@
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>배송비 : </label><span>&nbsp;2500원</span>
-				<p>도서산간지역 배송비 5000원</p>
 			</div>
 	
 			<div class="form-horizontal" style="text-align: left;">
 				<label>구매수량 : </label> 
-				<select class="form-control" id="select_count">
-				<c:forEach begin="1" end="${product.pstock}" var="product">
-					<option>${product.pstock}</option>
+				<input type="hidden" value="${product.pstock}" id="pstock">				
+				<select class="form-control" id="select_amount">
+				<c:forEach begin="1" end="${ product.pstock }" var="product" >
+					<option>${ product }</option>
 				</c:forEach>
 				</select>
 			</div>	
@@ -62,46 +64,85 @@
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button class="btn btn-default">장바구니</button>
+					<button type="button" style="z-index:100;" class="btn btn-default" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 				</div>
 			</div>
 			<hr>	
 		</div>
 	</div>
-	<div class="container">
-		<div class="row nav">
-			<nav id="middle_nav">
-				<ul class="nav nav-tabs nav-justified">
-					<li id="about">상품상세</li>
-					<li id="review">리뷰</li>
-				</ul>
-			</nav>
-		</div>
 		
 		<div class="row" style="margin: 50px 0;">
 			<h1 class="jumbotron">
 				<div class="container">
-					<h1>Hello world</h1>
-					<small>This is product page.</small>
+					<h1>상품 안내</h1>
+					<input type="hidden" value="${product.pinfo}" id="pinfo">
+					<small> ${ pinfo }</small>
 				</div>
 			</h1>
 		</div>
 		
-		<div class="row about_product" style="text-align: center;">
-			<h1 class="page-header">상품 상세</h1>
-
+		<div class="row about_product" style="text-align: center; ">
+			<h1 class="page-header">주의사항</h1>
+				<input type="hidden" value="${product.fprec}" id="fprec">
+				<small> ${ fprec }</small>
 		</div>
+		
 		<div class="row reviews" style="text-align: center; margin: 80px 0;">
 			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
 			<c:forEach begin="1" end="5">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Panel title</h3>
+					<h3 class="panel-title">리뷰제목</h3>
 				</div>
-				<div class="panel-body">Panel content</div>
+				<div class="panel-body">리뷰내용</div>
 			</div>
 			</c:forEach>
 		</div>
+
+<script>
+	/*var pno = $("#pno").val();
+		
+		$.getJSON("/admin/product/getAttaches/" + pno, function(result) {
+			
+			var str = '';
+			
+			$(result).each(function() {
+				var data = this;
+				
+				str += makeHtmlcode_read(data);
+					
+			});
+			
+			$(".about_product").append(str);
+			
+		});
+		*/
+		
+		$("#select_amount").on('blur', function() {
+			var product = $(this).val();
+			var pprice = $("#pprice").val();
+			
+			
+			if (product*pprice >= 30000) {
+				var shipping = '무료배송';
+				var finalPrice = product*pprice;
+			} else {
+				var shipping = 2500;
+				var finalPrice = (product*pprice) + shipping;
+			}
+			
+			var str = '';
+			
+			str += '<p><label>수량 : </label><span>&nbsp;' + product + '</span>&nbsp;&nbsp;&nbsp;';	
+			
+			str += '<label>배송비 : </label><span>&nbsp;' + shipping + '</span>&nbsp;&nbsp;&nbsp;';
+			str	+= '<label>가격 : </label><span>&nbsp;' + pprice + ' 원</span></p>';
+			str += '<h4><label>결제금액 : </label><span>&nbsp;' + finalPrice + ' 원</span></h4>'; 
+			str += '<span class="glyphicon glyphicon-exclamation-remove"></span>';
+			
+			$(".selected_option").html(str);
+		});
+</script>
 
 	<c:import url="../common/footer.jsp" />
 		
