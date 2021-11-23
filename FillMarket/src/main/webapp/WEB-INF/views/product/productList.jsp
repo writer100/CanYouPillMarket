@@ -16,7 +16,8 @@
 	<!-- css -->
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
-	
+	<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 	.row {
     display: flex;
