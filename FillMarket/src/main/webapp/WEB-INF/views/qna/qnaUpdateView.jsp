@@ -33,7 +33,7 @@
 				<span class="input-group-text" id="inputGroup-sizing-default"
 					requeird>제목</span> <select name="qasel" class="form-select"
 					aria-label="Default select example">
-					<option value="${board.qasel}" disabled selected hidden>문의 유형 선택</option>
+					<option value="default" disabled selected hidden>${board.qasel}</option>
 					<option value="주문/결제">주문/결제</option>
 					<option value="배송 문의">배송 문의</option>
 					<option value="교환/반품">교환/반품</option>
