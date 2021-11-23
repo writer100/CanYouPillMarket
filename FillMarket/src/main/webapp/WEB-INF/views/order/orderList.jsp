@@ -43,13 +43,14 @@
         <br><br>
         <div class="myOrder">
             <table id="myOrder_tb">
+
                 <tr>
                     <td width="300px">주문번호</td>
-                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do">20211116_1234</a></td>
+                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do">${ order.orderid }</a></td>
                 </tr>
                 <tr>
                     <td width="300px">주문일자</td>
-                    <td width="600px">2021-11-16</td>
+                    <td width="600px">${ order.orderenroll }</td>
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
@@ -57,14 +58,17 @@
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>
-                    <td width="300px">홍길동</td>
+                    <td width="300px">${ order.receivername }</td>
                 </tr>
                 <tr>
                     <td width="300px">주문금액</td>
-                    <td width="300px">280,000</td>
+                    <td width="300px">${ order.totalprice }</td>
                 </tr>
+
             </table>
         </div>
+            <br /><br />
+            <c:out value="${pageBar}" escapeXml="false"/>
     </section>
 
 

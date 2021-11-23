@@ -132,14 +132,14 @@
                 </tr>
             </table>
             <hr><br>
-            <form action="" id="order_frm" method="post">
+            <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="order_frm" method="post">
             <table id="orderList3">
                 <tr>
                     <td>총 결제금액</td>
                     <td style="text-align: right;">
                     	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/> 원
                     	<input type="hidden" name="totalprice" value="${ map.allSum }"/>
-                    	<input type="hidden" name="pno" value="${ cartList.pno }" />
+                    	<!-- <input type="hidden" name="pno" value="${ cartList.pno }" /> -->
                     </td>
                 </tr>
             </table>
@@ -154,11 +154,11 @@
             <div class="customerInfo2">
                 <div class="input-label-wrap">
                     <label for="customerName">이 &nbsp; 름</label><br>
-                    <input type="text" id="customerName" placeholder="이름을 입력해주세요." name="userId" value="${ member.userName }">
+                    <input type="text" id="customerName" placeholder="이름을 입력해주세요." name="customername" value="${ member.userName }">
                 </div>
                 <div class="input-label-wrap">
                     <label for="customerTel">연락처</label><br>
-                    <input type="tel" id="customerTel" placeholder="연락처를 입력해주세요. ('-'제외)" name="phone" value="${ member.phone }">
+                    <input type="tel" id="customerTel" placeholder="연락처를 입력해주세요. ('-'제외)" value="${ member.phone }">
                 </div>
                 <!-- <div class="input-label-wrap">
                     <label for="customerEmail">이메일</label><br>

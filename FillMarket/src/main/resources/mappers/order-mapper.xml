@@ -15,12 +15,27 @@
 		WHERE CARTUSERID = #{ cartuserid }
 	</select>
 
-	<!-- 
 	<insert id="insertOrder" parameterType="Order">
-		INSERT INTO ORDER (ORDERNO, ORDERUSERID, PNO, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE)
-		VALUES (SEQ_ORDERNO.NEXTVAL, #{ orderuserid }, #{ pno }, #{ totalprice }, 
-				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone })
+		INSERT INTO ORDERED (ORDERNO, ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID)
+		VALUES (SEQ_ORDERNO.NEXTVAL, #{ orderuserid }, #{ totalprice }, 
+				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid })
 	</insert>
-	 -->
+	
+	<delete id="deleteCart" parameterType="String">
+		DELETE FROM CART
+		WHERE CARTUSERID = #{ orderuserid }
+	</delete>
+	
+	<select id="orderList" resultType="Order">
+		SELECT ORDERUSERID, TOTALPRICE, ORDERENROLL, RECEIVERNAME, ORDERID
+		FROM ORDERED
+		WHERE ORDERUSERID = #{ orderuserid }
+	</select>
+	
+	<select id="orderTotalContents" resultType="int">
+		SELECT COUNT (*) FROM ORDERED
+		WHERE ORDERUSERID = #{ orderuserid }
+	</select>
+	
 	<!-- Access to #{ field } -->
 </mapper>
