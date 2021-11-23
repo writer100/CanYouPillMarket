@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderSQL">
+
+	<select id="orderPage" resultType="Cart">
+		SELECT PNO, PNAME, PPRICE, AMOUNT, ORDERPRICE
+		FROM CART
+		WHERE CARTUSERID = #{ cartuserid }
+	</select>
+	
+	<select id="sumPrice" resultType="int">
+		SELECT SUM(ORDERPRICE)
+		FROM CART
+		WHERE CARTUSERID = #{ cartuserid }
+	</select>
+
 	<!-- 
 	<insert id="insertOrder" parameterType="Order">
 		INSERT INTO ORDER (ORDERNO, ORDERUSERID, PNO, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE)

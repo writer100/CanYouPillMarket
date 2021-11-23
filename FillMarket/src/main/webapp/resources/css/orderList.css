@@ -4,18 +4,6 @@ body {
 	font-family: 'Nanum Gothic', sans-serif;
 }
 
-header {
-	height: 230px;
-	background-color: cornsilk;
-	text-align: center;
-}
-
-footer {
-	height: 230px;
-	background-color: cadetblue;
-	text-align: center;
-}
-
 section {
 	width: 1400px;
 	/* background-color: crimson; */
@@ -38,7 +26,7 @@ section {
 	border: 2px solid lightgray;
 	padding: 20px;
 	width: 1100px;
-	height: 170px;
+	height: 220px;
 	margin-left: auto;
 	margin-right: auto;
 	/* margin-left: 50px; */

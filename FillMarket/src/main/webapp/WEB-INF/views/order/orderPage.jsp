@@ -104,55 +104,61 @@
                     </tr>
                 </thead>
                 <tbody>
+                	<c:forEach items="${map.list}" var="cartList" varStatus="i">
                     <tr>
                         <td>
                             <h5>${ cartList.pname }</h5>
                         </td>
-                        <td></td>
-                        <td>140,000</td>
+                        <td>${ cartList.amount }</td>
+                        <td><fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /></td>
                     </tr>
                 </tbody>
+            </c:forEach>
             </table>
             <br>
             <table id="orderList2">
                 <tr>
                     <td><b>Total</b></td>
                     <td style="text-align: right;">
-                        <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/></b>
+                        <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/> 원</b>
                     </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
                     <td style="text-align: right;">
-                         ${ map.fee } 원
-                         (10만원 이상 구입 시 무료배송)
+                         ${ map.fee } 원 <br>
+                         (3만원 이상 구입 시 무료배송)
                     </td>
                 </tr>
             </table>
             <hr><br>
+            <form action="" id="order_frm" method="post">
             <table id="orderList3">
                 <tr>
                     <td>총 결제금액</td>
                     <td style="text-align: right;">
-                    	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/>
+                    	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/> 원
+                    	<input type="hidden" name="totalprice" value="${ map.allSum }"/>
+                    	<input type="hidden" name="pno" value="${ cartList.pno }" />
                     </td>
                 </tr>
             </table>
+            
         </div>
         <br><br><br><br>
         <div class="customerInfo">
             <span class="title2">주문자 정보</span>
         </div>
         <br>
-        <form action="" id="order_frm" method="post">
+
             <div class="customerInfo2">
                 <div class="input-label-wrap">
                     <label for="customerName">이 &nbsp; 름</label><br>
-                    <input type="text" id="customerName" placeholder="이름을 입력해주세요.">
+                    <input type="text" id="customerName" placeholder="이름을 입력해주세요." name="userId" value="${ member.userName }">
                 </div>
                 <div class="input-label-wrap">
                     <label for="customerTel">연락처</label><br>
-                    <input type="tel" id="customerTel" placeholder="연락처를 입력해주세요. ('-'제외)">
+                    <input type="tel" id="customerTel" placeholder="연락처를 입력해주세요. ('-'제외)" name="phone" value="${ member.phone }">
                 </div>
                 <!-- <div class="input-label-wrap">
                     <label for="customerEmail">이메일</label><br>
@@ -183,7 +189,7 @@
                 </div>
                 <div class="input-label-wrap">
                     <label for="receiverTel">연락처</label><br>
-                    <input type="tel" id="receiverTel" name="receivertel" placeholder="수령인 연락처를 입력해주세요. ('-'제외)">
+                    <input type="tel" id="receiverTel" name="phone" placeholder="수령인 연락처를 입력해주세요. ('-'제외)">
                 </div>
                 <div class="input-zipcode-wrap">
                     <label for="receiverZipcode">우편번호</label><br>
@@ -205,14 +211,19 @@
             </div>
             <br><br>
             <div class="btnArea">
-                <button id="orderBtn">주문하기</button>
+                <button type="submit" id="orderBtn">주문하기</button>
             </div>
-
         </form>
     </section>
 
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
+	
+	<script>
+		$('#orderBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/order/orderFinish.do";
+		})
+	</script>
 </body>
 
 </html>

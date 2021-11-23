@@ -56,6 +56,10 @@ section {
 	border-bottom: 1px solid lightgray;
 }
 
+#orderList tbody tr td:first-child {
+	padding: 5px 0 0 0;
+}
+
 #orderList2 tr td:first-child {
 	width: 200px;
 	height: 30px;
@@ -76,7 +80,7 @@ section {
 
 #orderList3 tr td:last-child {
 	width: 1030px;
-	font-size: 22px;
+	font-size: 28px;
 	font-weight: bold;
 	color: rgb(231, 133, 110);
 }

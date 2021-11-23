@@ -45,7 +45,7 @@
             <table id="myOrder_tb">
                 <tr>
                     <td width="300px">주문번호</td>
-                    <td width="600px"><a href="../views/orderDetail.html">20211116_1234</a></td>
+                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do">20211116_1234</a></td>
                 </tr>
                 <tr>
                     <td width="300px">주문일자</td>

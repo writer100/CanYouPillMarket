@@ -44,8 +44,8 @@ public class CartController {
 		if(count == 0) {
 			// 없으면 insert
 			cart.setAmount(1);
-			cartService.insertCart(cart);
 			cart.setOrderprice(cart.getAmount() * cart.getPprice());
+			cartService.insertCart(cart);
 			
 			System.out.println("장바구니 추가 : " + cart);
 			
@@ -74,8 +74,6 @@ public class CartController {
 			List<Cart> list = cartService.listCart(userId);	//장바구니 정보
 			int sumPrice = cartService.sumPrice(userId);
 			int fee = sumPrice >= 30000 ? 0 : 2500;
-			
-			System.out.println("카트 확인 : " + cart);
 			
 //			System.out.println("장바구니 정보 : " + list);
 			System.out.println("총 가격 : " + sumPrice);
@@ -111,8 +109,9 @@ public class CartController {
 		return "redirect:/cart/cartList.do";
 	}
 	
+	// 안 됨
 	@RequestMapping("/cart/cartUpdate.do")
-	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, HttpSession session) {
+	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, @RequestParam int[] orderprice, HttpSession session) {
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		// 레코드의 갯수만큼 반복문 실행
 		for(int i = 0; i < pno.length; i++) {
@@ -120,6 +119,7 @@ public class CartController {
 			cart.setCartuserid(userId);
 			cart.setAmount(amount[i]);
 			cart.setPno(pno[i]);
+			cart.setOrderprice(orderprice[i]);
 			cartService.modifyCart(cart);
 		}
 		

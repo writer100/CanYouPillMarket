@@ -73,10 +73,10 @@
 						</td>
 						<td>
 							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
-							<button type="submit" id="updateBtn">수정</button> 
+							<button type="button" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">
-							<input type="hidden" name="userId" value="${ userId }" />
+							<input type="hidden" name="cartuserid" value="${ member.userId }" />
 						</td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
@@ -102,13 +102,11 @@
 				</tr>
 			</table>
 			<br> <br>
-			<table id="cartList2">
+			<table id="cartList3">
 				<tr>
 					<td><b>총 주문 금액</b></td>
-					<td style="text-align: right;">
-						<h3>
-							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
-						</h3>
+					<td id="totalPrice">
+						<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
 					</td>
 				</tr>
 				
@@ -151,6 +149,11 @@
 				return;
 			}
 		}
+		
+		/* 수정 버튼 안 됨
+		$('#updateBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartUpdate.do";
+		})*/
 	</script>
 </body>
 </html>

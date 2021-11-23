@@ -8,148 +8,32 @@
 <head>
 <meta charset="UTF-8">
 <title>주문내역 상세 조회</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nanum Gothic', sans-serif;
-        }
-        
-        header {
-            height: 230px;
-            background-color: cornsilk;
-            text-align: center;
-        }
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderDetail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous">
+</script>
 
-        footer {
-            height: 230px;
-            background-color: cadetblue;
-            text-align: center;
-        }
-
-        section {
-            width: 1400px;
-            /* background-color: crimson; */
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .top {
-            width: 1250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .title {
-            font-size: 25px;
-        }
-
-        .top2 {
-            width: 1180px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 30px;
-        }
-
-        .title2 {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .myOrderDetail, .paymentDetail, .deliveryInfo {
-            /* padding : 10px 0px 0px 20px; */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #myOrderDetail_tb, #paymentDetail_tb, #deliveryInfo_tb {
-            /* border-collapse: separate; */
-            /* border-spacing: 0 2px; */
-            border-collapse: collapse;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #myOrderDetail_tb tr td:first-child,
-        #paymentDetail_tb tr td:first-child,
-        #deliveryInfo_tb tr td:first-child {
-            width : 250px;
-            padding: 11px 13px 10px;
-            border-bottom: 1px solid lightgray;
-            background-color: rgb(245, 245, 245);
-        }
-
-        #myOrderDetail_tb tr td:last-child,
-        #paymentDetail_tb tr td:last-child,
-        #deliveryInfo_tb tr td:last-child {
-            width : 920px;
-            margin-left: 30px;
-            padding: 11px 13px 10px;
-            border-bottom: 1px solid lightgray;
-        }
-
-        #orderProductInfo_tb {
-            border-collapse: collapse;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #orderProductInfo_tb thead tr {
-            background-color: #ececec;
-        }
-
-        #orderProductInfo_tb th {
-            font-size: 14px;
-            height: 35px;
-            border-bottom: 1px solid lightgray;
-        }
-
-        #orderProductInfo_tb tbody td {
-            border-bottom: 1px solid lightgray;
-        }
-
-        #orderProductInfo_tb tr td img {
-            width: 200px;
-            height: 180px;
-        }
-
-        .btnArea {
-            height: 40px;
-            text-align: center;
-        }
-
-        #goProductList {
-            width: 300px;
-            height: 50px;
-            border: 1px solid rgb(231, 133, 110);
-            border-radius: 25px;
-            color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        #goOrderList {
-            width: 300px;
-            height: 50px;
-            border: 0px;
-            border-radius: 5px;
-            background-color: rgb(231, 133, 110);
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <h1>header</h1>
-    </header>
+	<c:import url="../common/header.jsp" />
+	<c:import url="../common/navbar.jsp" />
     <br><br><br><br><br>
     
     <section>
@@ -268,8 +152,6 @@
     </section>
 
     <br><br><br><br><br><br><br><br><br><br>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
+	<c:import url="../common/footer.jsp" />
 </body>
 </html>

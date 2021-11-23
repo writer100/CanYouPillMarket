@@ -1,9 +1,14 @@
 package com.fill.market.order.model.service;
 
-import com.fill.market.order.model.vo.Order;
+import java.util.List;
+
+import com.fill.market.cart.model.vo.Cart;
 
 public interface OrderService {
 
-	void insertOrder(Order order);
+
+	List<Cart> orderPage(String userId);
+
+	int sumPrice(String userId);
 
 }

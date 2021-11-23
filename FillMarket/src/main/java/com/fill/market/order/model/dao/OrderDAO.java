@@ -1,9 +1,13 @@
 package com.fill.market.order.model.dao;
 
-import com.fill.market.order.model.vo.Order;
+import java.util.List;
+
+import com.fill.market.cart.model.vo.Cart;
 
 public interface OrderDAO {
 	
-	void insertOrder(Order order);
+	List<Cart> orderPage(String userId);
+	
+	int sumPrice(String userId);
 
 }
