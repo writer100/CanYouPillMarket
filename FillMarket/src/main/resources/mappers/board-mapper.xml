@@ -4,7 +4,7 @@
 <mapper namespace="boardSQL">
 
 	<select id="selectBoardList" resultType="com.fill.market.board.model.vo.Board">
-		SELECT QANO, QAUSERID, QATITLE, QACONTENT, QAUPLOADDATE, STATUS
+		SELECT QANO, QAUSERID, QATITLE, QACONTENT, QAUPLOADDATE, STATUS, QASEL
 		FROM QNA
 		ORDER BY QAUPLOADDATE DESC, QANO DESC
 	</select>
@@ -14,8 +14,8 @@
 	
 	
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO QNA (QANO, QAUSERID, QATITLE, QACONTENT)
-		VALUES (SEQ_QANO.NEXTVAL, #{qauserid}, #{ qatitle }, #{ qacontent })
+		INSERT INTO QNA (QANO, QAUSERID, QATITLE, QACONTENT, QASEL)
+		VALUES (SEQ_QANO.NEXTVAL, #{qauserid}, #{ qatitle }, #{ qacontent },#{ qasel })
 	</insert>
 	
 	
@@ -24,7 +24,7 @@
 	</select>
 
 	<update id="updateBoard" parameterType="Board">
-		UPDATE QNA SET QATITLE = #{ qatitle }, QACONTENT = #{ qacontent }
+		UPDATE QNA SET QATITLE = #{ qatitle }, QACONTENT = #{ qacontent }, QASEL = #{ qasel }
 		WHERE QANO = #{ qano }
 	</update>
 	

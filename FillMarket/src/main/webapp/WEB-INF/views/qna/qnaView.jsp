@@ -32,16 +32,16 @@
 		<div class="input-group" id="title_write">
 			<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
 			<select class="form-select" aria-label="Default select example">
-				<option value="0" disabled selected hidden>문의 유형 선택</option>
-				<option value="1">주문/결제</option>
-				<option value="2">배송 문의</option>
-				<option value="3">교환/반품</option>
-				<option value="4">기타 문의</option>
+				<option value="${board.qasel}" disabled selected hidden>${board.qasel}</option>
+				<option value="">주문/결제</option>
+				<option value="">배송 문의</option>
+				<option value="">교환/반품</option>
+				<option value="">기타 문의</option>
 			</select> <input type="text" placeholder="제목 입력" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default"
 				value="${board.qatitle }">
-				<input type="text" class="form-control" name="qauserid" value="작성자 : " + "${member.userId}" readonly required>
+				<input type="text" class="form-control" name="qauserid" value="${member.userId}" readonly required>
 		</div>
 		<div class="textarea">
 			<textarea placeholder="문의 내용 입력" rows="15" cols="155">${board.qacontent}</textarea>
