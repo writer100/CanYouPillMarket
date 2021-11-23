@@ -99,7 +99,7 @@
 
 				<div class="btn_area mt-4">
 					<button type="submit" id="btnJoin">
-						<span>임시 비밀번호 전송</span>
+						<span>비밀번호 찾기</span>
 					</button>
 				</div>
 				<div class="btn_area mb-5 pb-5">

@@ -296,5 +296,7 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		return "common/msg";
 	}
-
+	
+	
+	
 }
