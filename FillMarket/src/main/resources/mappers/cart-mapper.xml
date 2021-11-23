@@ -47,7 +47,7 @@
 	
 	<update id="updateCart" parameterType="Cart">
 		UPDATE CART
-		SET AMOUNT = AMOUNT + #{ amount }
+		SET AMOUNT = AMOUNT + #{ amount }, ORDERPRICE = ORDERPRICE + #{ orderprice }
 		WHERE CARTUSERID = #{ cartuserid }
 		AND PNO = #{ pno }
 	</update>

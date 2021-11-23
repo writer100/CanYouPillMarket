@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>결제완료 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 <!-- css 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderFinish.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -38,63 +40,31 @@
             <p>결제가 완료되었습니다. 주문해 주셔서 감사합니다.</p>
         </div>
         <br><br><br>
-        <div class="top">
-            <span class="title">결제내역</span>
-        </div>
-        <br>
-        <div class="order_tb">
-            <table id="orderList">
-                <thead>
-                    <tr>
-                        <th width="100px">주문 일자</th>
-                        <th width="900px">상품 정보</th>
-                        <th width="100px">수량</th>
-                        <th width="200px">주문 가격</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>20211116</td>
-                        <td>
-                            <h5>ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</h5>
-                        </td>
-                        <td>2</td>
-                        <td>140,000</td>
-                        <!-- <td><button id="cancelBtn">주문취소</button></td> -->
-                    </tr>
-                    <tr>
-                        <td>20211116</td>
-                        <td>
-                            <h5>ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</h5>
-                        </td>
-                        <td>2</td>
-                        <td>140,000</td>
-                        <!-- <td><button id="cancelBtn">주문취소</button></td> -->
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-
-            <table id="orderList3">
-                <tr>
-                    <td>총 결제금액</td>
-                    <td style="text-align: right;">280,000</td>
-                </tr>
-            </table>
-            <br><br><br>
-
-        </div>
         <br><br><br><br>
         <div class="btnArea">
+            <button id="goProductList">쇼핑 계속하기</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
             <button id="goOrderList">주문내역 확인</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button id="goProductList">쇼핑 계속하기</button>    
         </div>
     </section>
 
-    
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
+	
+	<script>
+		$('#goProductList').click(function(){
+			location.href = "${pageContext.request.contextPath}/product/productList.do";
+		});
+		
+		$('#goOrderList').click(function(){
+			location.href = "${pageContext.request.contextPath}/order/orderList.do";
+		});
+	</script>
 </body>
 </html>
+
+
+
+
+

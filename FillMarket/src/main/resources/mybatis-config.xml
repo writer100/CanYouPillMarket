@@ -21,7 +21,7 @@
  		<typeAlias alias="QNARE" type="com.fill.market.admin.model.vo.QNARE"/>
  		<typeAlias alias="Review" type="com.fill.market.review.model.vo.Review"/>
  		<typeAlias alias="RAttachment" type="com.fill.market.review.model.vo.RAttachment"/>
- 		<!-- <typeAlias alias="Order" type="com.fill.marker.order.model.vo.Order"/> -->
+ 		<typeAlias alias="Order" type="com.fill.market.order.model.vo.Order"/>
  	</typeAliases>
  	
  </configuration>
