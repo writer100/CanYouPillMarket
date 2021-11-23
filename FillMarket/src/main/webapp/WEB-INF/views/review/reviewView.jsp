@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>리뷰 목록</title>
+	<title>상품 목록</title>
 	<script
 		src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -34,10 +34,7 @@
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
-	#review_header {
-	text-align: center;
-	color: rgb(255, 142, 117);;
-}	
+		
 	</style>
 </head>
 <body>
@@ -46,31 +43,29 @@
 	<c:import url="../common/navbar.jsp" />
 	<div id="container">
 	  			<br />
-                <h1 id="review_header" class="h3 mb-3 fw-normal mt-5 pt-5">
-					<strong>REVIEW PAGE</strong>
-				</h1>
+                <header>
+                    <h1> REVIEW PAGE </h1>
+                </header>
                 <br />
                 <br />
                 <br />
                 <br />
-	    <div class="row product" wieth="70%" style="text-align: center;">
-			<table class="mx-auto" style="width: 80%;">
-                 <thead>
-                     <tr>
-	                     <th>번호</th>
-	                     <th>제목</th>
-	                     <th>수정/삭제</th>
-                     </tr>
-                 </thead>
-                 
-                 <c:forEach items="${list}" var = "review">
-                         <td>${review.reno }</td>
-                         <td>${review.retitle }</td>
-                         <td><button>수정</button><button>삭제</button></td>
-                     </tr>
-                 </c:forEach>
-             
-             </table>
+	    <div class="row product" wieth="90%">
+			<div id="reviw-container">
+			<input type="text" class="form-control" placeholder="제목" name="reviewtitle" id="reviewtitle" value="${review.retitle }" required>
+			<input type="text" class="form-control" name="reviewWriter" value="${review.reuserid}" readonly required>
+		
+			<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
+				<img src="${pageContext.request.contextPath}/resources/reviewUpload/${ra.changename}" alt="첨부파일" width="30%;" "/>	
+			</c:forEach>
+		    <textarea class="form-control" name="reviewcontent" placeholder="내용" required>${review.recontent }</textarea>
+		    <br>
+		    <button class="btn btn-outline-info" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>
+		    <c:if test="${member.userId eq review.reuserid}">
+		    &nbsp;
+			<button class="btn btn-outline-info" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?boardNo=${review.reno}'">수정 페이지</button>
+			</c:if>
+			</div>
 			
 			<div>
 				<br />
@@ -83,9 +78,6 @@
 	</div>
 	<c:import url="../common/footer.jsp" />
 	
-	<script>
-	
-	</script>
 	<!-- JQuery CDN-->
 	<script src="https://code.jquery.com/jquery-2.2.4.js"
 		integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
