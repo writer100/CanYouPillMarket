@@ -160,6 +160,36 @@ public class AdminService {
 		return adminDAO.selectReply(qano);
 	}
 
+	public QNARE inserReply(QNARE qna) {
+		
+		int result = adminDAO.insertReply(qna);
+		
+		if(result > 0) {
+			
+			return adminDAO.selectQNARE();
+			
+		}else {
+			
+			return qna;
+		}
+	
+	}
 
+	public int qnaDelete(int qano) {
+		
+		return adminDAO.deleteQNA(qano);
+	}
 
+	public List<Map<String, String>> selectNameUserList(int cPage, int numPerPage, String userName) {
+		
+		return adminDAO.selectNameUserList(cPage, numPerPage, userName);
+	}
+
+	public int selectUserNameTotalContents(String userName) {
+		
+		return adminDAO.selectUserNameTotalList(userName);
+	}
+
+	
+	
 }
