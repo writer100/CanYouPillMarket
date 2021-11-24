@@ -119,15 +119,7 @@
 					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
 				</tr>
 				</c:otherwise>
-				
-			  	
-			 
-				</c:choose> 
-
-				<tr>	
-					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
-				</tr>
-				</c:otherwise></c:choose>
+			</c:choose>
 
 			</table>
 			
