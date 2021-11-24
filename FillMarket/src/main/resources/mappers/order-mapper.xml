@@ -40,6 +40,7 @@
 	<select id="orderDetail" resultType="Order">
 		SELECT * FROM ORDERED
 		WHERE ORDERUSERID = #{ orderuserid }
+		AND ORDERID = #{ orderid }
 	</select>
 	
 	<!-- Access to #{ field } -->

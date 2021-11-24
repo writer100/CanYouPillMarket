@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.service.OrderService;
 import com.fill.market.order.model.vo.Order;
-import com.fill.market.order.model.vo.OrderList;
 
 @Controller
 public class OrderController {
@@ -128,11 +128,12 @@ public class OrderController {
 	
 	
 	@RequestMapping("order/orderDetail.do")
-	public String orderDetail(HttpSession session, Order order, Model model) {
+	public String orderDetail(HttpSession session, @RequestParam("n") String orderId, Order order, Model model) {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		
 		order.setOrderuserid(userId);
+		order.setOrderid(orderId);
 		
 		List<Order> orderList = orderService.orderDetail(order);
 		
