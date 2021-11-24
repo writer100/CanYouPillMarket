@@ -38,6 +38,13 @@ public interface MemberService {
 
 
 	Member memberFindId(Member m);
+
+	Member selectMemberID(Member member);
+
+	int updateNewPass(Member m);
+
+	
+
 		
 	
 

@@ -1,7 +1,5 @@
 package com.fill.market.member.model.dao;
 
-import java.util.HashMap;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,6 +41,20 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne("memberSQL.memberFindId", m);
 	}
+
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return sqlSession.selectOne("memberSQL.selectMemberID", member);
+	}
+
+	@Override
+	public int updateNewPass(Member m) {
+
+		return sqlSession.update("memberSQL.updateNewPass", m);
+	}
+
 	
+
 
 }

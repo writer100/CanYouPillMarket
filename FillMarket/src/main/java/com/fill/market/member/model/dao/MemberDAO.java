@@ -1,7 +1,5 @@
 package com.fill.market.member.model.dao;
 
-import java.util.HashMap;
-
 import com.fill.market.admin.model.vo.Member;
 
 public interface MemberDAO {
@@ -25,6 +23,12 @@ public interface MemberDAO {
 	int deleteMember(String userId);
 
 	Member memberFindId(Member m);
+
+	Member selectMemberID(Member member);
+
+	int updateNewPass(Member m);
+
+	
 	
 	
 	

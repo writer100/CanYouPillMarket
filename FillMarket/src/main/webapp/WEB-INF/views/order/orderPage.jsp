@@ -140,6 +140,7 @@
                     	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/> 원
                     	<input type="hidden" name="totalprice" value="${ map.allSum }"/>
                     	<!-- <input type="hidden" name="pno" value="${ cartList.pno }" /> -->
+                    	<!-- <input type="hidden" name="amount" ${ cartList.amount } /> -->
                     </td>
                 </tr>
             </table>

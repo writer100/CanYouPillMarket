@@ -12,14 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.cart.model.vo.Cart;
-import com.fill.market.common.Utils;
 import com.fill.market.order.model.service.OrderService;
 import com.fill.market.order.model.vo.Order;
+import com.fill.market.order.model.vo.OrderList;
 
 @Controller
 public class OrderController {
@@ -69,8 +68,6 @@ public class OrderController {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();	// 세션 아이디값
 		
-		System.out.println("orderController[Cart 정보] : " + cart);
-		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
@@ -83,7 +80,7 @@ public class OrderController {
 		
 		String orderId = ymd + "_" + subNum;
 		
-		System.out.println("주문번호 생성 : " + orderId);
+//		System.out.println("주문번호 생성 : " + orderId);
 		
 			
 			order.setOrderid(orderId);
@@ -91,7 +88,7 @@ public class OrderController {
 			
 			int result = orderService.insertOrder(order);
 			
-			System.out.println("주문하기 : " + order);
+//			System.out.println("주문하기 : " + order);
 			
 			String msg = "";
 			
@@ -116,40 +113,30 @@ public class OrderController {
 	}
 	
 	@RequestMapping("order/orderList.do")
-	public String orderList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
-			Model model, HttpSession session, Order order) {
+	public String orderList(HttpSession session, Order order, Model model) {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		
-		System.out.println("orderList : " + userId);
+		order.setOrderuserid(userId);
 		
-		// 한 페이지당 게시글 수
-		int numPerPage = 10;
-
-		// 현재 페이지의 게시글 수
-		List<Map<String, String>> list = orderService.orderList(cPage, numPerPage, userId);
-
-		// 전체 게시글 수
-		int totalContents = orderService.orderTotalContents(userId);
-
-		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminUserManageList.do");
-
-		// System.out.println("pageBar : " + pageBar);
-
-		model.addAttribute("order", order);
-		model.addAttribute("list", list);
-		model.addAttribute("totalContents", totalContents);
-		model.addAttribute("numPerPage", numPerPage);
-		model.addAttribute("pageBar", pageBar);
+		List<Order> orderList = orderService.orderList(order);
 		
-		System.out.println("주문내역 : " + model);
-
+		model.addAttribute("orderList", orderList);
+		
 		return "order/orderList";
 	}
 	
+	
 	@RequestMapping("order/orderDetail.do")
-	public String orderDetail(HttpSession session) {
+	public String orderDetail(HttpSession session, Order order, Model model) {
+		
+		String userId = ((Member)session.getAttribute("member")).getUserId();
+		
+		order.setOrderuserid(userId);
+		
+		List<Order> orderList = orderService.orderDetail(order);
+		
+		model.addAttribute("orderList", orderList);
 		
 		return "order/orderDetail";
 	}

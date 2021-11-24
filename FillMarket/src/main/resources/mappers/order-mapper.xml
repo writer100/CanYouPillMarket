@@ -37,5 +37,10 @@
 		WHERE ORDERUSERID = #{ orderuserid }
 	</select>
 	
+	<select id="orderDetail" resultType="Order">
+		SELECT * FROM ORDERED
+		WHERE ORDERUSERID = #{ orderuserid }
+	</select>
+	
 	<!-- Access to #{ field } -->
 </mapper>

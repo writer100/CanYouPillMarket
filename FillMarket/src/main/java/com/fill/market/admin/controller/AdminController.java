@@ -555,7 +555,7 @@ public class AdminController {
 	@RequestMapping("/admin/adminInfo.do")
 	public String adminInfo() {
 		
-		return "admin/adminInf";
+		return "admin/adminInfo";
 		
 	}
 	

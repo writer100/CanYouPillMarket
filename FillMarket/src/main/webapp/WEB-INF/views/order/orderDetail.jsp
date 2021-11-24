@@ -44,25 +44,27 @@
             <span class="title2">주문정보</span>
         </div>
         <br>
+        	<c:forEach items="${orderList}" var="orderDetail">
         <div class="myOrderDetail">
             <table id="myOrderDetail_tb">
                 <tr>
                     <td>주문정보</td>
-                    <td>20211116-1234</td>
+                    <td>${ orderDetail.orderid }</td>
                 </tr>
                 <tr>
                     <td>주문일자</td>
-                    <td>2021-11-16 20:15:59</td>
+                    <td>${ orderDetail.orderenroll }</td>
                 </tr>
                 <tr>
                     <td>주문자</td>
-                    <td>홍길동</td>
+                    <td>${ orderDetail.customername }</td>
                 </tr>
                 <tr>
                     <td>주문처리상태</td>
                     <td>배송중</td>
                 </tr>
             </table>
+
         </div>
         <br>
         <div class="top2">
@@ -70,10 +72,11 @@
         </div>
         <br>
         <div class="paymentDetail">
+            
             <table id="paymentDetail_tb">
                 <tr>
                     <td>총 주문금액</td>
-                    <td>280,000원</td>
+                    <td>${ orderDetail.totalprice }</td>
                 </tr>
                 <tr>
                     <td>배송비</td>
@@ -81,13 +84,14 @@
                 </tr>
                 <tr>
                     <td>총 결제금액</td>
-                    <td>280,000</td>
+                    <td>${ orderDetail.totalprice }</td>
                 </tr>
                 <tr>
                     <td>결제수단</td>
                     <td>카드 결제</td>
                 </tr>
             </table>
+
         </div>
         <br>
         <div class="top2">
@@ -124,25 +128,27 @@
         </div>
         <br>
         <div class="deliveryInfo">
+        	
             <table id="deliveryInfo_tb">
                 <tr>
                     <td>받으시는 분</td>
-                    <td>홍길동</td>
+                    <td>${ orderDetail.receivername }</td>
                 </tr>
                 <tr>
                     <td>우편번호</td>
-                    <td>54221</td>
+                    <td>${ orderDetail.address1 }</td>
                 </tr>
                 <tr>
                     <td>주소</td>
-                    <td>서울 강남구 테헤란로14길 6 남도빌딩</td>
+                    <td>${ orderDetail.address2 }</td>
                 </tr>
                 <tr>
                     <td>휴대전화</td>
-                    <td>010-1111-2222</td>
+                    <td>${ orderDetail.phone }</td>
                 </tr>
             </table>
         </div>
+            </c:forEach>
         <br><br><br><br><br><br>
         <div class="btnArea">
             <button id="goOrderList">주문 내역 목록</button>

@@ -23,5 +23,4 @@ public interface CartDAO {
 
 	void deleteAll(String userId);
 
-
 }

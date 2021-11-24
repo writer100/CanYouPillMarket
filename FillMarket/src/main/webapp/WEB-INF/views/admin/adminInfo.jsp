@@ -26,9 +26,7 @@
 			$('#memo').on("keyup", function(){
 				var memo = $(this).val();
 				// console.log(memo)
-				if(memo.length==0){
-					$('#check').html("값 넣어주세요");
-				}else{
+				
 					$.ajax({
 						url : "${pageContext.request.contextPath}/admin/adminMemo.do",
 						data : {memo : memo}
@@ -39,7 +37,6 @@
 						}
 					
 					})
-				}
 				
 				
 				

@@ -1,7 +1,6 @@
 package com.fill.market.order.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,15 +41,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Map<String, String>> orderList(int cPage, int numPerPage, String userId) {
+	public List<Order> orderList(Order order) {
 		
-		return orderDAO.orderList(cPage, numPerPage, userId);
+		return orderDAO.orderList(order);
 	}
 
 	@Override
-	public int orderTotalContents(String userId) {
+	public List<Order> orderDetail(Order order) {
 		
-		return orderDAO.orderTotalContents(userId);
+		return orderDAO.orderDetail(order);
 	}
 	
 
