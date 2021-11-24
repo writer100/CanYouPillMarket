@@ -39,7 +39,7 @@
 		<selectKey keyProperty="pno" resultType="_int" order="BEFORE">
 			SELECT SEQ_PNO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, UPLOADDATE, STATUS)
+		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, ENROLL_DATE, STATUS)
 		VALUES (SEQ_PANO.NEXTVAL, #{pno}, #{originalname}, #{changename}, SYSDATE, 'Y')
 	</insert>
 
@@ -83,7 +83,7 @@
 	
 	<select id="selectUserList" resultType="Member">
 		SELECT * FROM MEMBER
-		ORDER BY ENROLLDATE DESC
+		ORDER BY ENROLL_DATE DESC
 	</select>
 	
 	<select id="selectUserTotalContents" resultType="int">
@@ -104,7 +104,7 @@
 	<select id="selectUserNameList" parameterType="String" resultType="Member">
 		SELECT * FROM MEMBER
 		WHERE REGEXP_LIKE(USERNAME, #{userName})
-		ORDER BY ENROLLDATE DESC
+		ORDER BY ENROLL_DATE DESC
 	</select>
 	
 	<select id="selectUserNameTotalList" resultType="int" parameterType="String">
