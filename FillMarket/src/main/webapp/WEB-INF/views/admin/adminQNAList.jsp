@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -17,10 +17,10 @@
 </style>
 </head>
 <body>
-            <div class="container">
+            <div class="col-md-10" style="margin-left:250px;">
             	<br />
                 <header>
-                    <h1> 게시판</h1>
+                    <h1> 문의</h1>
                 </header>
                 <br />
                 <br />
@@ -37,10 +37,15 @@
                             <c:forEach items="${list}" var = "q">
                                 <tr onclick="adminQnAView(${q.qano});">
                                     <td>${q.qano }</td>
-                                    <td>${q.qaTitle }</td>
-                                    <td>${q.qaUserId }</td>
-                                    <td>${q.qaUploadDate }</td>
-                                    <td>${q.cstatus }</td>
+                                    <td>${q.qatitle }</td>
+                                    <td>${q.qauserid }</td>
+                                    <td>${q.qauploaddate }</td>
+                                    <td>
+                                    	<c:choose>
+                        					<c:when test="${q.rcontent eq null }">N</c:when>
+                        					<c:otherwise> Y </c:otherwise>                
+                        	   			</c:choose>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         

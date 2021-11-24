@@ -39,7 +39,7 @@
 		<selectKey keyProperty="pno" resultType="_int" order="BEFORE">
 			SELECT SEQ_PNO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, UPLOADDATE, STATUS)
+		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, ENROLL_DATE, STATUS)
 		VALUES (SEQ_PANO.NEXTVAL, #{pno}, #{originalname}, #{changename}, SYSDATE, 'Y')
 	</insert>
 
@@ -83,7 +83,7 @@
 	
 	<select id="selectUserList" resultType="Member">
 		SELECT * FROM MEMBER
-		ORDER BY ENROLLDATE DESC
+		ORDER BY ENROLL_DATE DESC
 	</select>
 	
 	<select id="selectUserTotalContents" resultType="int">
@@ -101,19 +101,51 @@
 	<update id="userRes" parameterType="String">
 		UPDATE MEMBER SET STATUS = 'Y' WHERE USERID = #{userId}
 	</update>
+	<select id="selectUserNameList" parameterType="String" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE REGEXP_LIKE(USERNAME, #{userName})
+		ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<select id="selectUserNameTotalList" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE REGEXP_LIKE(USERNAME, #{userName})
+	</select>
+	
+	
+	
+	
 	
 	
 	<!-- 문의 게시판 -->
 	<select id="selectQNAList" resultType="QNA">
+	<!-- 
 		SELECT * FROM QNA
 		ORDER BY QAUPLOADDATE DESC
+	-->
+	<!-- 
+		SELECT A.*,B.rcontent, COUNT(*) OVER(PARTITION BY B.QANO ORDER BY B.RDATE) AS OVERLAP
+		FROM QNA A, QNARE B
+		WHERE A.QANO = B.QANO(+) AND OVERLAP = 1
+	-->
+		SELECT MAX(A.QANO) AS QANO,
+		        MAX(A.QAUSERID) AS QAUSERID,
+		        MAX(A.QATITLE) AS QATITLE,
+		        MAX(A.QACONTENT)AS QACONTENT,
+		        MAX(A.QAUPLOADDATE)AS QAUPLOADDATE,
+		        MAX(A.STATUS)AS STATUS,
+		        MAX(B.RCONTENT)AS RCONTENT,
+		        COUNT(1) RESUM
+		FROM QNA A, QNARE B
+		WHERE A.QANO = B.QANO(+) AND A.STATUS = 'Y'
+		GROUP BY A.QANO
 	</select>
 	
 	<select id="selectQNATotalContents" resultType="int">
 		SELECT COUNT(*) FROM QNA
 	</select>
 	
-	<select id="selectQNAView" resultType="QNA" parameterType="int">
+	<select id="selectQNAView" resultType="QNA" parameterType="int">	
 		SELECT * FROM QNA
 		WHERE QANO = #{qano}
 	</select>
@@ -121,6 +153,27 @@
 	<select id="selectReply" resultType="QNARE" parameterType="int">
 		SELECT * FROM QNARE
 		WHERE QANO = #{qano}
-	</select>
 		
+	</select>
+	<insert id="insertReply" parameterType="QNARE">
+		INSERT INTO QNARE (RNO, QANO, QAUSERID, RTITLE, RCONTENT, RDATE)
+		VALUES (SEQ_RNO.nextval, #{qano}, #{qauserid}, #{rtitle}, #{rcontent}, DEFAULT)
+		<!-- <selectKey keyProperty="rno" resultType="_int" order="AFTER">
+			SELECT SEQ_RNO.CURRVAL FROM DUAL
+		</selectKey>  -->
+	</insert>
+	
+	<select id="selectQNARE" resultType="QNARE">
+		SELECT A.*, B.* 
+		FROM QNARE A, (SELECT LAST_NUMBER-1 NO
+                FROM USER_SEQUENCES 
+                WHERE SEQUENCE_NAME = 'SEQ_RNO') B
+		WHERE A.RNO = B.NO
+	</select>
+	<update id="deleteQNA" parameterType="int">
+		UPDATE QNA SET status = 'N'
+		WHERE qano = #{qano}
+	</update>
+	
+	
 </mapper>

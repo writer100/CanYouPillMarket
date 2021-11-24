@@ -1,7 +1,5 @@
 package com.fill.market.member.model.dao;
 
-import java.util.HashMap;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,15 +37,24 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int checkIdDuplicate(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member memberFindId(Member m) {	
+		
+		return sqlSession.selectOne("memberSQL.memberFindId", m);
 	}
 
 	@Override
-	public int checkIdDuplicate(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member selectMemberID(Member member) {
+		
+		return sqlSession.selectOne("memberSQL.selectMemberID", member);
 	}
+
+	@Override
+	public int updateNewPass(Member m) {
+
+		return sqlSession.update("memberSQL.updateNewPass", m);
+	}
+
+	
+
 
 }

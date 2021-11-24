@@ -9,18 +9,21 @@
 	</insert>
 	
 	<select id="listCart" resultType="Cart">
-		SELECT C.*, (PPRICE * AMOUNT) ORDERPRICE, PA.CHANGENAME, PA.PNO AS ATTACHMENTPNO
+		SELECT C.*, PA.CHANGENAME
 		FROM CART C, PATTACHMENT PA
-		WHERE C.PNO = PA.PNO
+		WHERE C.PNO = PA.PNO(+)
+          AND (
+          PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = C.PNO)
+          OR PA.PANO IS NULL
+          )
 		  AND C.CARTUSERID = #{ cartuserid }
 		ORDER BY C.CARTNO DESC
 	</select>
 	
 	<select id="sumPrice" resultType="int">
-		SELECT NVL(SUM(PPRICE*AMOUNT), 0) ORDERPRICE
+		SELECT SUM(ORDERPRICE)
 		FROM CART
-		WHERE PNO = #{ pno }
-		  AND CARTUSERID = #{ cartuserid }
+		WHERE CARTUSERID = #{ cartuserid }
 	</select>
 	
 	<update id="modifyCart" parameterType="Cart">
@@ -44,10 +47,15 @@
 	
 	<update id="updateCart" parameterType="Cart">
 		UPDATE CART
-		SET AMOUNT = #{ amount }
+		SET AMOUNT = AMOUNT + #{ amount }, ORDERPRICE = ORDERPRICE + #{ orderprice }
 		WHERE CARTUSERID = #{ cartuserid }
 		AND PNO = #{ pno }
 	</update>
+	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM CART
+		WHERE CARTUSERID = #{ cartuserid }
+	</delete>
 	
 	<!-- Access to #{ field } -->
 </mapper>

@@ -17,15 +17,16 @@ public class Order implements Serializable {
 	
 	private static final long serialVersionUID = 22L;
 	
-	private int orderNo;
-	private String orderUserId;
-	private int pNo;
-	private int totalPrice;
-	private Date orderEnroll;
-	private String customerName;
-	private String receiverName;
-	private String addRess1;
-	private String addRess2;
+	private int orderno;
+	private String orderuserid;
+	private int pno;
+	private int totalprice;
+	private Date orderenroll;
+	private String customername;
+	private String receivername;
+	private String address1;
+	private String address2;
 	private String phone;
+	private String orderid;		// 날짜와 랜덤숫자 조합한 문자열 ####_####
 
 }

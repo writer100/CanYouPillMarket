@@ -4,13 +4,21 @@
 <mapper namespace="memberSQL">
 
 
-
-
-	<!-- 선언부 resultMap, include-sql -->
-	<!-- 
-	<resultMap id="resultMember" type="Member">
-		<result column="hobby"  property="hobby"  typeHandler="MyTypeHandler"/>
+	<!-- 선언부 resultMap, include-sql -->	
+	<!-- <resultMap id="resultMember" type="Member">
+		<result property="userId" column="userId"/>
+		<result property="levelType" column="levelType"/>
+		<result property="password" column="password"/>
+		<result property="userName" column="userName"/>
+		<result property="birth" column="birth" typeHandler="MyTypeHandler"/>
+		<result property="gender" column="gender"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="address" column="address" typeHandler="MyTypeHandler"/>
+		<result property="enrollDate" column="enrollDate"/>
+		<result property="status" column="status"/>
 	</resultMap> -->
+	
 	
 	<!-- CRUD SQL 선언부 -->
 	<insert id="insertMember" parameterType="Member">
@@ -34,4 +42,22 @@
 	<delete id="deleteMember" parameterType="string">
 		DELETE FROM MEMBER WHERE USERID = #{ userId }	
 	</delete>
+	
+	<select id="memberFindId" resultType="Member">
+		SELECT USERID FROM MEMBER WHERE USERNAME = #{userName} AND EMAIL = #{email}
+	</select>
+	
+	<select id="selectMemberID" parameterType="Member" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE USERID = #{ userId }
+		AND USERNAME = #{ userName }
+		AND EMAIL = #{ email }
+	</select>
+	
+	<update id="updateNewPass" parameterType="Member">
+		UPDATE MEMBER SET PASSWORD = #{ password }
+		WHERE USERID = #{ userId }
+	</update>
+	
+	
 </mapper>

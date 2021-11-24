@@ -4,12 +4,15 @@
 <mapper namespace="productSQL">
 
 	<select id="selectProductList" resultType="Product">
-		SELECT P.*, (SELECT COUNT(*) FROM PATTACHMENT WHERE PNO = P.PNO) FILECOUNT
-		FROM PRODUCT P
+   		SELECT P.*, A.CHANGENAME
+		FROM PRODUCT P, PATTACHMENT A 
+		WHERE P.PNO = A.PNO
+		  AND A.PANO = (SELECT MIN(PANO) FROM PATTACHMENT
+		  				WHERE PNO = P.PNO)
 		<if test="cno != 0">
-		WHERE CNO = #{ cno }
+		  AND P.CNO = #{ cno }
 		</if>
-		ORDER BY PENROLL DESC, PNO DESC
+		ORDER BY PENROLL DESC, P.PNO DESC
 	</select>
 	
 	<select id="selectProductTotalContents" resultType="int">

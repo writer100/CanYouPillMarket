@@ -96,7 +96,7 @@
 					<p class="card-text mb-auto">
 						고객님께서 주문하신 상품의 <br>주문내역을 확인하실 수 있습니다.
 					</p>
-					<a href="#" class="stretched-link"></a>
+					<a href="${pageContext.request.contextPath}/order/orderList.do"; class="stretched-link"></a>
 				</div>
 			</div>
 		</div>
@@ -140,7 +140,7 @@
 					<p class="card-text mb-auto">
 						고객님께서 작성하신 리뷰를<br>한눈에 관리하실 수 있습니다.
 					</p>
-					<a href="#" class="stretched-link"></a>
+					<a href="${pageContext.request.contextPath}/review/reviewList.do" class="stretched-link"></a>
 				</div>
 			</div>
 		</div>

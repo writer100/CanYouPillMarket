@@ -35,10 +35,31 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.deleteMember(userId);
 	}
+
 	@Override
-	public int checkIdDuplicate(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Member memberFindId(Member m) {
+		
+		return memberDAO.memberFindId(m);
 	}
 
-}
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return memberDAO.selectMemberID(member);
+	}
+
+	@Override
+	public int updateNewPass(Member m) {
+		
+		return memberDAO.updateNewPass(m);
+	}
+
+	
+		
+	}
+	
+	
+	
+
+
+

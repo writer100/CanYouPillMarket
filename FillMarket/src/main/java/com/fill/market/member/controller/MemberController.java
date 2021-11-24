@@ -1,10 +1,15 @@
 package com.fill.market.member.controller;
 
 import java.sql.Date;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +20,15 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.fill.market.admin.model.vo.Member;
 import com.fill.market.member.model.service.MemberService;
+import com.fill.market.member.model.vo.MailVO;
 
 @SessionAttributes({ "member" })
 @Controller
 public class MemberController {
 
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
 	@Autowired
 	MemberService memberService;
 
@@ -27,8 +36,7 @@ public class MemberController {
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 로그인 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 로그인 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberLogin.do")
@@ -39,8 +47,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 이용약관 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 이용약관 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/agreement.do")
@@ -51,8 +58,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 회원가입 이동 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnroll.do")
@@ -62,8 +68,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 회원가입 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnrollEnd.do")
@@ -109,8 +114,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 로그인 처리
+	 * Auth : GiChang Date : 2021-11-19 로그인 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -121,7 +125,7 @@ public class MemberController {
 		System.out.println("로그인 기능 접근 확인!");
 
 		// 1. 아이디를 통해 회원 정보 조회
-		Member result = memberService.selectOneMember(userId); // -> 서비스로 출발~!
+		Member result = memberService.selectOneMember(userId); 
 
 		String loc = "/";
 		String msg = "";
@@ -150,8 +154,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang
-	 * Date : 2021-11-19 로그아웃 처리
+	 * Auth : GiChang Date : 2021-11-19 로그아웃 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLogout.do")
@@ -179,8 +182,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 정보수정 페이지 이동
+	 * Auth : GiChang Date : 2021-11-22 정보수정 페이지 이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberView.do")
@@ -199,22 +201,22 @@ public class MemberController {
 
 		String pass1 = member.getPassword(); // 원래 비밀번호
 		String pass2 = bcryptPasswordEncoder.encode(pass1); // 비밀번호 암호화
-		
+
 		System.out.println(pass1 + " / " + pass2);
 		member.setPassword(pass2);
-		
+
 		String loc = "/";
 		String msg = "";
-		
+
 		// yyyy-MM-dd 변경
 		String birthCheck = member.getBirthYear() + "-" + member.getBirthMonth() + "-" + member.getBirthDay();
 		System.out.println(birthCheck);
 		member.setBirth(Date.valueOf(birthCheck));
-		
+
 		int result = memberService.updateMember(member);
 
 		System.out.println("받아온 정보 확인 : " + member);
-		
+
 		if (result > 0) {
 			msg = "정보 수정 성공!";
 			model.addAttribute("member", member);
@@ -227,31 +229,190 @@ public class MemberController {
 
 		return "common/msg";
 	}
-	
+
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 회원정보 수정
+	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberDelete.do")
 	public String memberDelete(Member member, SessionStatus status, Model model) {
-		
+
 		int result = memberService.deleteMember(member.getUserId());
-		
+
 		String loc = "/";
 		String msg = "";
-		
-		if( result > 0 ) {
+
+		if (result > 0) {
 			msg = "회원 탈퇴 성공!";
 			status.setComplete();
 		} else {
 			msg = "회원 탈퇴 실패!";
 		}
-		
+
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
-		
+
 		return "common/msg";
 	}
 
+	/**
+	 * Auth : GiChang Date : 2021-11-22 아이디 비밀번호 찾기 화면이동
+	 * 
+	 **/
+	@RequestMapping("/member/memberFind.do")
+	public String memberFind() {
+
+		return "member/memberFind";
+
+	}
+
+	@RequestMapping("/member/memberFindId.do")
+	public String memberFindId(@RequestParam String userName, @RequestParam String email, Model model) {
+		
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setEmail(email);
+		
+		String msg = "";
+		String loc = "";
+
+		System.out.println("전달받은 데이터 : " + userName + "/" + email);
+		
+		Member member = memberService.memberFindId(m);
+		System.out.println("member 데이터 : " + userName + "/" + email);
+
+		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
+		if (member == null) {
+			msg = "일치하는 회원이 존재하지 않습니다.";
+			
+			loc = "/member/memberFind.do";
+			
+			System.out.println("조건문(if) 결과 : " + member);
+			
+			
+		} else {
+			
+			loc ="/member/memberLogin.do"; 
+			
+		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
+			msg = userName + " 회원님의 아이디는 /" + member.getUserId() + "/ 입니다.";
+		
+		System.out.println("조건문(else) 결과 : " + member.getUserId());
+		
+		
+		}
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		return "common/msg";
+	}
+	
+	@RequestMapping("member/memberFindPw.do")
+	public String sendPwMail(
+			final MailVO vo,
+			Member member,
+			Model model,
+			SessionStatus status
+			) {
+		
+		System.out.println("sendMail Controller 접근 : " + member);
+		
+		Member m;
+		String msg = "";
+		
+		m = memberService.selectMemberID(member);
+		
+		System.out.println("sendMail selectMemberId : " + m );
+		
+		if( m != null) {
+			// member가 있다면
+			
+			String newPass = randomCode(); // 랜덤비밀번호 생성
+			String encryptPass = bcryptPasswordEncoder.encode(newPass); // 생성한 비밀번호 암호화 
+			
+			m.setPassword(encryptPass); // 암호화 한 비밀번호 등록
+			
+			int updateResult = memberService.updateNewPass(m); // 업데이트 정보 숫자로 받아오기
+			
+			if( updateResult > 0) {
+				// 업데이트가 됐다면 
+				vo.setFrom("CanYouPillMarket@gmail.com"); // 보내는사람
+				vo.setTo(m.getEmail());
+				vo.setSubject("[캔유필마켓] 임시 비밀번호 관련 메일");
+				vo.setContents(
+							"<html><body><div style=\"width: 400px; height: 300px; padding: 50px; background: black; text-align: center; color: white;\">"
+							+ "<h2>캔유필마켓 에서 알려드립니다.</h2><br>"
+							+ "<p>비밀번호 찾기 요청을 주신 " + m.getUserId()
+							+ "님의 임시 비밀번호는 <p style='font-weight:bolder; font-size:larger;'>" 
+							+ newPass + "</p> 입니다.<br>"
+							+ "확인 후 캔유필마켓 홈페이지에서 로그인해주세요.<br>"
+							+ "로그인 후 마이페이지 > 회원정보수정 에서 반드시 비밀번호를 재설정 해 주시길 바랍니다."
+							+ "</p></div>"
+							+ "</body></html>"
+						);
+			
+				// 메일 전송을 위해 MimeMessagePreparator 클래스를 사용하는 방식입니다.
+				// 이방식을 사용하기위해 import 되는 클래스는 다음과 같습니다.
+				// import javax.mail.internet.MimeMessage;
+				// import org.springframework.mail.javamail.JavaMailSenderImpl;
+				// import org.springframework.mail.javamail.MimeMessageHelper;
+				// import org.springframework.mail.javamail.MimeMessagePreparator;
+				final MimeMessagePreparator preparator = new MimeMessagePreparator() { 
+					@Override public void prepare(MimeMessage mimeMessage) throws Exception { 
+						final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+						
+						// 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
+			            // 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
+			            // mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
+						// 보내는이(from)은 반드시 있어야합니다. 
+						// mailSender 빈에서 아이디를 기입하였지만 이는 SMTP 사용 권한을 얻어 오는 역할을 수행합니다.
+						helper.setFrom("CanYouPillMarket <rlckdwkd97@gmail.com>"); 
+						helper.setTo(vo.getTo()); 
+						helper.setSubject(vo.getSubject()); 
+						helper.setText(vo.getContents(), true); // true는 html을 사용하겠다는 의미 
+					} 
+				}; 
+				
+				// @Autowired
+				// private JavaMailSenderImpl mailsender;를 잡아주어야 한다.
+				mailSender.send(preparator); 
+				
+				msg = m.getUserName() + "님의 메일주소로 임시 비밀번호를 발송했습니다. 확인 후 로그인해주세요.";
+			
+			} else { // 비밀번호 업데이트 되지 않았다면.
+				System.out.println("임시 비밀번호 업데이트 실패!");
+			}
+			
+		} else { // member가 없다면.
+			msg = "입력하신 정보로 가입된 정보가 없습니다.";
+		}
+		
+		// 세션 등록 방지
+		status.setComplete();
+				
+		model.addAttribute("msg", msg);
+						
+		return "common/msg";
+	}
+	
+	
+	// 랜덤한 임시 비밀번호 생성 메소드
+		public String randomCode() {
+			
+			int leftLimit = 48; // numeral '0'
+			int rightLimit = 122; // letter 'z'
+			int targetStringLength = 8;
+			Random random = new Random();
+
+			String generatedString = random.ints(leftLimit,rightLimit + 1)
+			  .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+			  .limit(targetStringLength)
+			  .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+			  .toString();
+
+			System.out.println(generatedString);
+			
+			return generatedString;
+		}
+	
+	
 }

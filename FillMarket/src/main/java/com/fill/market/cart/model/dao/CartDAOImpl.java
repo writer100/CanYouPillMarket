@@ -32,9 +32,9 @@ public class CartDAOImpl implements CartDAO {
 	
 	// 3. 장바구니 삭제
 	@Override
-	public void deleteCart(int cNo) {
+	public void deleteCart(int cartno) {
 		
-		sqlSession.delete("cartSQL.deleteCart", cNo);
+		sqlSession.delete("cartSQL.deleteCart", cartno);
 	}
 	
 	// 4. 장바구니 수정
@@ -53,10 +53,10 @@ public class CartDAOImpl implements CartDAO {
 	
 	// 6. 장바구니 내 동일한 상품 확인
 	@Override
-	public int countCart(int pNo, String userId) {
+	public int countCart(int pno, String userId) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pNo", pNo);
+		map.put("pno", pno);
 		map.put("userId", userId);
 		
 		return sqlSession.selectOne("cartSQL.countCart", map);
@@ -67,6 +67,14 @@ public class CartDAOImpl implements CartDAO {
 	public int updateCart(Cart cart) {
 		
 		return sqlSession.update("cartSQL.updateCart", cart);
+	}
+
+	// 8. 장바구니 상품 전체 삭젝
+	@Override
+	public void deleteAll(String userId) {
+		
+		sqlSession.delete("cartSQL.deleteAll", userId);
+		
 	}
 
 

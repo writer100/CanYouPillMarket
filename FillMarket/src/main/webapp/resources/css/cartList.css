@@ -23,7 +23,7 @@
 	height: 300px;
 }
 
-#deleteChecked {
+#deleteAll {
 	float: right;
 	border: 1px solid lightgray;
 	background-color: rgb(240, 240, 240);
@@ -40,7 +40,7 @@
 	margin-right: auto;
 }
 
-#cartList, #cartList2 {
+#cartList, #cartList2, #cartList3 {
 	border-collapse: collapse;
 	text-align: center;
 	margin-left : auto;
@@ -81,15 +81,37 @@
 	color: gray;
 	cursor: pointer;
 }
+/*
+#totalPrice {
+	width : 1070px;
+	font-size: 28px;
+	font-weight: bold;
+	color: rgb(231, 133, 110);
+	text-align: right;
+}*/
 
 #cartList2 tr td:first-child {
-	width: 200px;
+	/* width: 200px; */
 	height: 30px;
 	text-align: center;
 }
 
 #cartList2 tr td:last-child {
-	width: 1100px
+	width: 1100px;
+}
+
+#cartList3 tr td:first-child {
+	/* width: 200px; */
+	height: 30px;
+	text-align: center;
+}
+
+#cartList3 tr td:last-child {
+	width: 1070px;
+	font-size: 28px;
+	font-weight: bold;
+	color: rgb(231, 133, 110);
+	text-align: right;
 }
 
 #emptyMsg {
@@ -114,7 +136,7 @@
 	cursor: pointer;
 }
 
-#checkedOrder {
+#backShop {
 	width: 300px;
 	height: 50px;
 	border: 1px solid rgb(231, 133, 110);

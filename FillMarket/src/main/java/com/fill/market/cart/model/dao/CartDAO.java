@@ -7,7 +7,7 @@ import com.fill.market.cart.model.vo.Cart;
 
 public interface CartDAO {
 	
-	int countCart(int pNo, String userId);
+	int countCart(int pno, String userId);
 
 	int updateCart(Cart cart);
 
@@ -17,8 +17,10 @@ public interface CartDAO {
 
 	int sumPrice(String userId);
 
-	void deleteCart(int cNo);
+	void deleteCart(int cartno);
 
 	void modifyCart(Cart cart);
+
+	void deleteAll(String userId);
 
 }

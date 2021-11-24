@@ -16,8 +16,11 @@
 	<!-- css -->
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
-	
+	<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
+
+	.btn{ background-color : rgb(255, 142, 117); color: white; }
 
 	</style>
 </head>
@@ -28,16 +31,20 @@
 	
 	<div class="container" style="width: 70%">
 		
-		<div class="row"><h1 class="page-header" style="text-align: center; margin-bottom: 50px;">${product.pname}</h1>
+		<div class="row">
+			
+			<h1 class="page-header" style="text-align: center; margin-bottom: 50px;"><br />${product.pname}</h1>
 			<input type="hidden" value="${product.pno}" id="pno">
 		</div>
-		<div class="row" style="float: left; text-align: center; width:35%;">
-			<img alt="productPhoto" src="/resources/productUpload${pattachment.changename}" width="150%"">
+		<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
+           	<c:forEach items="${pattachmentList}" var="a" varStatus="vs">
+				<img src="${pageContext.request.contextPath}/resources/productUpload/${a.changename}" alt="첨부파일" width="150%;" "/>
+			</c:forEach>
 		</div>
 
-		<div class="row productInfo" style="width: 40%; float: right;" >
+		<div class="row productInfo" style="width: 30%; float: right;" >
 			<div class="form-group" style="text-align: center;">
-				<h3 class="page-header"><span>${product.pname}</span><br><small>${product.pinfo}</small></h3>
+				<h3 class="page-header"><span>${product.pname}</span><br><br /></h3>
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
@@ -45,14 +52,14 @@
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>배송비 : </label><span>&nbsp;2500원</span>
-				<p>도서산간지역 배송비 5000원</p>
 			</div>
 	
 			<div class="form-horizontal" style="text-align: left;">
 				<label>구매수량 : </label> 
-				<select class="form-control" id="select_count">
-				<c:forEach begin="1" end="${product.pstock}" var="product">
-					<option>${product.pstock}</option>
+				<input type="hidden" value="${product.pstock}" id="pstock">				
+				<select class="form-control" id="select_amount">
+				<c:forEach begin="1" end="${ product.pstock }" var="product" >
+					<option>${ product }</option>
 				</c:forEach>
 				</select>
 			</div>	
@@ -62,46 +69,86 @@
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button class="btn btn-default">장바구니</button>
+					<button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<br />
 				</div>
 			</div>
 			<hr>	
 		</div>
 	</div>
-	<div class="container">
-		<div class="row nav">
-			<nav id="middle_nav">
-				<ul class="nav nav-tabs nav-justified">
-					<li id="about">상품상세</li>
-					<li id="review">리뷰</li>
-				</ul>
-			</nav>
+	<div class="container" style="width: 100%">
+		
+		<div class="row about_product" style="text-align: left; width: 90%; margin: 80px 0;">
+			<h1 class="page-header"><br /><br />상품 안내</h1>
+				<input type="hidden" value="${product.pinfo}" id="pinfo">
+				<small> ${ product.pinfo }</small>
 		</div>
 		
-		<div class="row" style="margin: 50px 0;">
-			<h1 class="jumbotron">
-				<div class="container">
-					<h1>Hello world</h1>
-					<small>This is product page.</small>
-				</div>
-			</h1>
+		
+		<div class="row about_product" style="text-align: left; width: 90%; margin: 80px 0;">
+			<h1 class="page-header">주의사항</h1>
+				<input type="hidden" value="${product.fprec}" id="fprec">
+				<small> ${ product.fprec }</small>
 		</div>
 		
-		<div class="row about_product" style="text-align: center;">
-			<h1 class="page-header">상품 상세</h1>
-
-		</div>
-		<div class="row reviews" style="text-align: center; margin: 80px 0;">
+		<div class="row reviews" style="text-align: center; margin: 80px 0; width: 70%;">
 			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
 			<c:forEach begin="1" end="5">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Panel title</h3>
+					<input type="hidden" value="${review.retitle}" id="retitle">
+					<h3 class="panel-title">${ review.retitle }</h3>
 				</div>
-				<div class="panel-body">Panel content</div>
+				<div class="panel-body">
+					<input type="hidden" value="${review.recontent}" id="recontent">
+					<p>${review.recontent}</p>
+				</div>
 			</div>
 			</c:forEach>
 		</div>
+	</div>
+<script>
+		
+		$("#select_amount").on('blur', function() {
+			var product = $(this).val();
+			var pprice = $("#pprice").val();
+			
+			
+			if (product*pprice >= 30000) {
+				var shipping = '무료배송';
+				var finalPrice = product*pprice;
+			} else {
+				var shipping = 2500;
+				var finalPrice = (product*pprice) + shipping;
+			}
+			
+			var str = '';
+			
+			str += '<p><label>수량 : </label><span>&nbsp;' + product + '</span>&nbsp;&nbsp;&nbsp;';	
+			
+			str += '<label>배송비 : </label><span>&nbsp;' + shipping + '</span>&nbsp;&nbsp;&nbsp;';
+			str	+= '<label>가격 : </label><span>&nbsp;' + pprice + ' 원</span></p>';
+			str += '<h4><label>결제금액 : </label><span>&nbsp;' + finalPrice + ' 원</span></h4>'; 
+			str += '<span class="glyphicon glyphicon-exclamation-remove"></span>';
+			
+			$(".selected_option").html(str);
+		});
+			var divs = document.querySelectorAll('div');
+			divs.forEach(function(div){
+				div.addEventListener('click',logEvent, { 
+					capture : true
+				})
+			});
+			
+			function logEvent(event){
+				console.log(event.currentTarget.className);
+			}
+			
+
+			function goCart(pno, pname, pprice){
+				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
+			}
+</script>
 
 	<c:import url="../common/footer.jsp" />
 		

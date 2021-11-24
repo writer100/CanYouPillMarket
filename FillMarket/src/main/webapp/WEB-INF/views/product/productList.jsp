@@ -16,7 +16,8 @@
 	<!-- css -->
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
-	
+	<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 	.row {
     display: flex;
@@ -28,6 +29,17 @@
 	
 	.search{ text-align: center; }
 	
+	.btn{ background-color : rgb(255, 142, 117); color: white;}
+	
+	.my.pagination > .active > a, 
+	.my.pagination > .active > span, 
+	.my.pagination > .active > a:hover, 
+	.my.pagination > .active > span:hover, 
+	.my.pagination > .active > a:focus, 
+	.my.pagination > .active > span:focus {
+  		background: rgb(255, 142, 117);
+ 		 border-color: rgb(255, 142, 117);
+	}
 		
 	</style>
 </head>
@@ -43,9 +55,7 @@
 		        <div role="group" class="input-group d-flex align-items-center justify-content-center my-3"><!---->
 			        <form class="search" style="width: 1000px;">
 			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; wieth : 80%" id="productSearch">
-			        <button type="submit" class="btn btn-outline-info">
-			        	검색
-			        </button>
+			        <button id="searchBtn" type="submit" class="btn">검색</button>
 			        </form>
 		        </div>
 
@@ -53,11 +63,11 @@
 			<c:forEach items="${list}" var="product"> 
 			  <div class="col">
 			    <div class="card h-100">
-			        <img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png" class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" style="width: 200px;" "class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
 					  <div class="card-body" style="z-index:10;">
 					    <h5 class="card-title" id="${ product.pname }">${ product.pname }</h5>
 					    <p class="card-text" id="${ product.pprice }">${ product.pprice }</p>
-					    <button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					    <button type="button" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					  </div>
 			    </div>
 			  </div>
@@ -69,7 +79,8 @@
 			</div>
 	        <!-- 페이지 번호 -->
 	        <div class="ListNum">
-	           <c:out value=" ${pageBar}" escapeXml="false"/>
+	           <c:out  value=" ${pageBar}" escapeXml="false"/>
+	           <br /><br /><br />
 	        </div>
 	    </div>
 	</div>

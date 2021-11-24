@@ -52,7 +52,7 @@ public class AdminController {
 		int totalContents = adminService.selectProductTotalContents();
 
 		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "" + ".do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminProductList.do");
 
 		// System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
@@ -300,23 +300,8 @@ public class AdminController {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// ------------------- 사용자 관리 ----------------------------------------------------------------- //
+	// ------------------- 사용자 관리
+	// ----------------------------------------------------------------- //
 
 	// 사용자 리스트 뽑아오기
 	@RequestMapping("/admin/adminUserManageList.do")
@@ -324,7 +309,7 @@ public class AdminController {
 			Model model) {
 
 		// 한 페이지당 게시글 수
-		int numPerPage = 10;
+		int numPerPage = 15;
 
 		// 현재 페이지의 게시글 수
 		List<Map<String, String>> list = adminService.selectUserList(cPage, numPerPage);
@@ -392,9 +377,34 @@ public class AdminController {
 		}
 	}
 
-	
-	
-	
+	@RequestMapping("/admin/checkNameList.do")
+	public String checkNameList(@RequestParam String userName,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model) {
+
+		// 한 페이지당 게시글 수
+		int numPerPage = 10;
+
+		// 현재 페이지의 게시글 수
+		List<Map<String, String>> list = adminService.selectNameUserList(cPage, numPerPage, userName);
+
+		// 전체 게시글 수
+		int totalContents = adminService.selectUserNameTotalContents(userName);
+
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "checkNameList.do");
+
+		// System.out.println("list : " + list);
+		// System.out.println("pageBar : " + pageBar);
+
+		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		return "admin/userNameList";
+
+	}
+
 	
 	
 	
@@ -432,22 +442,127 @@ public class AdminController {
 		return "admin/adminQNAList";
 
 	}
-	
-	
+
 	@RequestMapping("admin/QnAView.do")
 	public String qnaView(@RequestParam int qano, Model model) {
-		
+
 		QNA qna = adminService.selectQNAView(qano);
 		List<QNARE> reply = adminService.selectReply(qano);
-		
+
 		// System.out.println(reply);
 		// System.out.println(reply.size());
+
+		model.addAttribute("reply", reply);
+		model.addAttribute("qna", qna);
+
+		return "admin/adminQNAView";
+	}
+
+	@RequestMapping("/admin/adminReplyReg.do")
+	public String adminReplyReg(@RequestParam String comment, @RequestParam int qano, @RequestParam String userId,
+			Model model) {
+
+		System.out.println(comment + " / " + qano + " / " + userId);
+
+		QNARE qna = new QNARE();
+
+		qna.setQano(qano);
+		qna.setQauserid(userId);
+		qna.setRcontent(comment);
+		qna.setRtitle("문의 제목");
+
+		QNARE reply = adminService.inserReply(qna);
+
+		model.addAttribute("reply", reply);
+
+		return "admin/Reply";
+
+	}
+
+	@RequestMapping("/admin/adminQNADelete.do")
+	public String adminQNADelete(@RequestParam int qano) {
+
+		int result = adminService.qnaDelete(qano);
+
+		return "redirect:/admin/adminQNAList.do";
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ------------------------------------ 매출 관리 -------------------------------------------------------//
+	@RequestMapping("/admin/adminSalesManagement.do")
+	public String adminSalesManagement(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Model model) {
 		
-			
-		model.addAttribute("reply",reply);
-		model.addAttribute("qna",qna);
-			
-			return "admin/adminQNAView";
-		}
+		// 한 페이지당 게시글 수
+		int numPerPage = 20;
+
+		// 현재 페이지의 게시글 수
+		List<Map<String, String>> list = adminService.selectProductList(cPage, numPerPage);
+
+		// 전체 게시글 수
+		int totalContents = adminService.selectProductTotalContents();
+
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminSalesManagement.do");
+
+		// System.out.println("list : " + list);
+		// System.out.println("pageBar : " + pageBar);
+
+		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+
+
+		return "admin/adminSalesManagements";
 		
+		
+	}
+	
+	
+	@RequestMapping("/admin/productGraph.do")
+	public String productGraph(Model model, @RequestParam int pno) {
+		
+		//System.out.println(pno);
+		Product productDay = adminService.selectOneProduct(pno);
+		
+		//System.out.println(product.getPprice());
+		//* product.getPprice();
+		int result =  (int) (Math.random()* 100) * productDay.getPprice();
+		productDay.setPsell(result);
+		
+		//System.out.println(product.getPsell());
+		
+		model.addAttribute("productDay", productDay);
+		
+		
+		return "admin/graph";
+	}
+	
+	
+	//---------------------------관리자 정보-----------------------------//
+	
+	
+	
+	@RequestMapping("/admin/adminInfo.do")
+	public String adminInfo() {
+		
+		return "admin/adminInfo";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -6,7 +6,7 @@ import com.fill.market.cart.model.vo.Cart;
 
 public interface CartService {
 	
-	int countCart(int pNo, String userId);
+	int countCart(int pno, String userId);
 
 	int updateCart(Cart cart);
 
@@ -16,11 +16,11 @@ public interface CartService {
 
 	int sumPrice(String userId);
 
-	void deleteCart(int cNo);
+	void deleteCart(int cartno);
 
 	void modifyCart(Cart cart);
 
+	void deleteAll(String userId);
 
-
-
+	
 }

@@ -8,13 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 <!-- fontawesome 아이콘cdn -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/cartList.css" />
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+<!-- css 적용 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/cartList.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -23,26 +29,28 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+	crossorigin="anonymous">
+</script>
 </head>
 <body>
 	<c:import url="../common/header.jsp" />
 	<c:import url="../common/navbar.jsp" />
 	<br>
 	<br>
+
+	
 	<section class="section">
 		<div class="top">
 			<span class="cart">장바구니</span>
-			<span><button id="deleteChecked">선택 상품 삭제</button></span>
+			<span><button id="deleteAll" onclick="deleteAll();">전체 삭제</button></span>
 		</div>
 		<br> <br>
 		<div class="cart_tb">
+		<form name="orderFrm" action="${pageContext.request.contextPath}/cart/orderInsert.do" method="post">
 			<table id="cartList">
 				<thead>
                         <tr>
-                            <th width="30px"></th>
+                            <th width="30px"><input type="checkbox" name="allCheck" /></th>
                             <th width="160px">이미지</th>
                             <th width="570px">상 품</th>
                             <th width="180px">가 격</th>
@@ -52,34 +60,35 @@
                         </tr>
 				</thead>
 				<tbody>
-					<c:choose><c:when test="${ list != null }">
-					<c:forEach items="${list}" var="cartList" varStatus="i">
+					<c:choose> 
+						<c:when test="${ map.list != null }">
+					<c:forEach items="${map.list}" var="cartList" varStatus="i">
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
 						<td id="productImg">
-							<img src="${pageContext.request.contextPath}/resources/productUpload/20211115_171451_674.png"/>
+							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }"
 						</td>
 						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.pprice }" /> 원
 						</td>
 						<td>
-							<input style="width: 35px; height:23px" type="number" min="1" name="amount" value="${ cartList.amount }">
-							<button type="submit" id="updateBtn">수정</button> 
+							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
+							<button type="button" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">
-							<input type="hidden" name="userId" value="${ userId }" />
+							<input type="hidden" name="cartuserid" value="${ member.userId }" />
 						</td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
 						</td>
-						<td> ###,### 원</td>
 						<td id="deleteBtn">
-							<a href="${path}/cart/cartDelete.do?cno=${ cartList.cno }"> 
+							<a href="${pageContext.request.contextPath}/cart/cartDelete.do?cartno=${ cartList.cartno }"> 
 							<i id="deleteIcon" class="fas fa-times"></i></a>
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 			<br>
 			<table id="cartList2">
@@ -94,36 +103,68 @@
 				</tr>
 			</table>
 			<br> <br>
-			<table id="cartList2">
+			<table id="cartList3">
 				<tr>
 					<td><b>총 주문 금액</b></td>
-					<td style="text-align: right;">
-						<h3>
-							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
-						</h3>
+					<td id="totalPrice">
+						<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
 					</td>
 				</tr>
-				</c:forEach>
+				
 				</c:when>
+				
 				<c:otherwise>
+
 				<tr>
 					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
 				</tr>
-				</c:otherwise></c:choose>
+				</c:otherwise>
+			</c:choose>
+
 			</table>
+			
+			
+			
+			</form>
 		</div>
         <br><br>
         <div class="btnArea">
-            <button id="checkedOrder" onclick="goCheckedOrder();">선택 상품 주문하기</button>
+            <button id="backShop" onclick="backShop();">쇼핑 계속하기</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button id="orderBtn" onclick="goOrder();">주문하기</button>
+            <button id="orderBtn" type="submit">주문하기</button>
         </div>
     </section>
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
 	
 	<script>
-	
+		$('#backShop').click(function(){
+			history.back();
+		});
+		
+		$('#orderBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
+		});
+		/*
+		$('#deleteAll').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+		});*/
+		
+		function deleteAll(){
+			if(confirm("정말 삭제하시겠습니까?") == true) {
+				location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+			} else {
+				return;
+			}
+		}
+		
+		/* 수정 버튼 안 됨
+		$('#updateBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartUpdate.do";
+		})*/
 	</script>
 </body>
 </html>
+
+
+

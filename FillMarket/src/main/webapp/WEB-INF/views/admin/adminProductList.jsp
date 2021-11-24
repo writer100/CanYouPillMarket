@@ -44,8 +44,8 @@
 	</script>
 </head>
 <body>
-<div id="container">
-			<section id="board-container" class="container" >
+<div id="container" class="col-md-10" style="margin-left:250px;">
+			<section id="board-container" class="container col-md-11" >
 
 			<br />
 				<h1>상품관리</h1>

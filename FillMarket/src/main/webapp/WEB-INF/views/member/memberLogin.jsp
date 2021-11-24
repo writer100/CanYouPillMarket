@@ -64,7 +64,7 @@
 
 
 			<nav class="findBox mt-3">
-				<a href="#">아이디/비밀번호 찾기</a>
+				<a href="${pageContext.request.contextPath}/member/memberFind.do">아이디/비밀번호 찾기</a>
 			</nav>
 
 			<h3 class="mt-2" style="text-align: left;">간편 로그인</h3>

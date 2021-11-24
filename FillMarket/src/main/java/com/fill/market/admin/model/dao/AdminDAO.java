@@ -151,5 +151,37 @@ public class AdminDAO {
 		return sqlSession.selectList("adminSQL.selectReply", qano);
 	}
 
+	public int insertReply(QNARE qna) {
+		
+		return sqlSession.insert("adminSQL.insertReply", qna);
+	}
+
+
+	public QNARE selectQNARE() {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectOne("adminSQL.selectQNARE");
+	}
+
+	public int deleteQNA(int qano) {
+		
+		return sqlSession.delete("adminSQL.deleteQNA", qano);
+	}
+
+	public List<Map<String, String>> selectNameUserList(int cPage, int numPerPage, String userName) {
+		
+		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
+		
+		return sqlSession.selectList("adminSQL.selectUserNameList", userName, rows);
+	}
+
+	public int selectUserNameTotalList(String userName) {
+		
+		return sqlSession.selectOne("adminSQL.selectUserNameTotalList", userName);
+	}
+
+
+
+	
+
 
 }

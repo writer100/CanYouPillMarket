@@ -1,5 +1,9 @@
 package com.fill.market.member.model.service;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.fill.market.admin.model.vo.Member;
 
 public interface MemberService {
@@ -31,6 +35,17 @@ public interface MemberService {
 	 * @return
 	 */
 	int deleteMember(String userId);
+
+
+	Member memberFindId(Member m);
+
+	Member selectMemberID(Member member);
+
+	int updateNewPass(Member m);
+
 	
-	int checkIdDuplicate(String userId);
+
+		
+	
+
 }
