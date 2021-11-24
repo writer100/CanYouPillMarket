@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +25,7 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
-	@RequestMapping("/cart/cartInsert.do")
+	@RequestMapping(value="/cart/cartInsert.do", method = RequestMethod.GET)
 	public String cartInsert(@ModelAttribute Cart cart, HttpSession session, Model model) {
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		cart.setCartuserid(userId);
@@ -43,8 +44,8 @@ public class CartController {
 		if(count == 0) {
 			// 없으면 insert
 			cart.setAmount(1);
-			cartService.insertCart(cart);
 			cart.setOrderprice(cart.getAmount() * cart.getPprice());
+			cartService.insertCart(cart);
 			
 			System.out.println("장바구니 추가 : " + cart);
 			
@@ -74,8 +75,6 @@ public class CartController {
 			int sumPrice = cartService.sumPrice(userId);
 			int fee = sumPrice >= 30000 ? 0 : 2500;
 			
-			System.out.println("카트 확인 : " + cart);
-			
 //			System.out.println("장바구니 정보 : " + list);
 			System.out.println("총 가격 : " + sumPrice);
 			System.out.println("배송비 : " + fee);
@@ -101,15 +100,26 @@ public class CartController {
 		return "redirect:/cart/cartList.do";
 	}
 	
+	@RequestMapping("/cart/cartDeleteAll.do")
+	public String cartDeleteAll(HttpSession session) {
+		String userId = ((Member)session.getAttribute("member")).getUserId();
+		
+		cartService.deleteAll(userId);
+		
+		return "redirect:/cart/cartList.do";
+	}
+	
+	// 안 됨
 	@RequestMapping("/cart/cartUpdate.do")
-	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
+	public String cartUpdate(@RequestParam int[] amount, @RequestParam int[] pno, @RequestParam int[] orderprice, HttpSession session) {
+		String userId = ((Member)session.getAttribute("member")).getUserId();
 		// 레코드의 갯수만큼 반복문 실행
 		for(int i = 0; i < pno.length; i++) {
 			Cart cart = new Cart();
 			cart.setCartuserid(userId);
 			cart.setAmount(amount[i]);
 			cart.setPno(pno[i]);
+			cart.setOrderprice(orderprice[i]);
 			cartService.modifyCart(cart);
 		}
 		

@@ -42,7 +42,7 @@
 	<section class="section">
 		<div class="top">
 			<span class="cart">장바구니</span>
-			<span><button id="deleteChecked">선택 상품 삭제</button></span>
+			<span><button id="deleteAll" onclick="deleteAll();">전체 삭제</button></span>
 		</div>
 		<br> <br>
 		<div class="cart_tb">
@@ -73,10 +73,10 @@
 						</td>
 						<td>
 							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
-							<button type="submit" id="updateBtn">수정</button> 
+							<button type="button" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">
-							<input type="hidden" name="userId" value="${ userId }" />
+							<input type="hidden" name="cartuserid" value="${ member.userId }" />
 						</td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /> 원
@@ -102,21 +102,20 @@
 				</tr>
 			</table>
 			<br> <br>
-			<table id="cartList2">
+			<table id="cartList3">
 				<tr>
 					<td><b>총 주문 금액</b></td>
-					<td style="text-align: right;">
-						<h3>
-							<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
-						</h3>
+					<td id="totalPrice">
+						<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }" /> 원
 					</td>
 				</tr>
 				
 				</c:when>
 				<c:otherwise>
 				<tr>
+				<c:if test="${ map.sumPrice eq 0 }">
 					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
-				</tr>
+				</tr></c:if>
 				</c:otherwise></c:choose>
 			</table>
 			</form>
@@ -138,8 +137,24 @@
 		
 		$('#orderBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
-		})
+		});
+		/*
+		$('#deleteAll').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+		});*/
 		
+		function deleteAll(){
+			if(confirm("정말 삭제하시겠습니까?") == true) {
+				location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+			} else {
+				return;
+			}
+		}
+		
+		/* 수정 버튼 안 됨
+		$('#updateBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartUpdate.do";
+		})*/
 	</script>
 </body>
 </html>

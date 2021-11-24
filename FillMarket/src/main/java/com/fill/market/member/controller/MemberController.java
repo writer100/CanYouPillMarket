@@ -2,7 +2,6 @@ package com.fill.market.member.controller;
 
 import java.sql.Date;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,7 @@ public class MemberController {
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 
-	 * 로그인 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 로그인 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberLogin.do")
@@ -41,9 +38,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-18 
-	 * 이용약관 이동 처리
+	 * Auth : GiChang Date : 2021-11-18 이용약관 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/agreement.do")
@@ -54,9 +49,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 회원가입 이동 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 이동 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnroll.do")
@@ -66,9 +59,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 회원가입 처리
+	 * Auth : GiChang Date : 2021-11-19 회원가입 처리
 	 * 
 	 */
 	@RequestMapping("/member/memberEnrollEnd.do")
@@ -114,9 +105,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-19 
-	 * 로그인 처리
+	 * Auth : GiChang Date : 2021-11-19 로그인 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLoginEnd.do")
@@ -127,7 +116,7 @@ public class MemberController {
 		System.out.println("로그인 기능 접근 확인!");
 
 		// 1. 아이디를 통해 회원 정보 조회
-		Member result = memberService.selectOneMember(userId); // -> 서비스로 출발~!
+		Member result = memberService.selectOneMember(userId); 
 
 		String loc = "/";
 		String msg = "";
@@ -156,9 +145,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang
-	 * Date : 2021-11-19
-	 * 로그아웃 처리
+	 * Auth : GiChang Date : 2021-11-19 로그아웃 처리
 	 * 
 	 **/
 	@RequestMapping("/member/memberLogout.do")
@@ -186,9 +173,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 정보수정 페이지 이동
+	 * Auth : GiChang Date : 2021-11-22 정보수정 페이지 이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberView.do")
@@ -199,9 +184,7 @@ public class MemberController {
 	}
 
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 회원정보 수정
+	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberUpdate.do")
@@ -209,22 +192,22 @@ public class MemberController {
 
 		String pass1 = member.getPassword(); // 원래 비밀번호
 		String pass2 = bcryptPasswordEncoder.encode(pass1); // 비밀번호 암호화
-		
+
 		System.out.println(pass1 + " / " + pass2);
 		member.setPassword(pass2);
-		
+
 		String loc = "/";
 		String msg = "";
-		
+
 		// yyyy-MM-dd 변경
 		String birthCheck = member.getBirthYear() + "-" + member.getBirthMonth() + "-" + member.getBirthDay();
 		System.out.println(birthCheck);
 		member.setBirth(Date.valueOf(birthCheck));
-		
+
 		int result = memberService.updateMember(member);
 
 		System.out.println("받아온 정보 확인 : " + member);
-		
+
 		if (result > 0) {
 			msg = "정보 수정 성공!";
 			model.addAttribute("member", member);
@@ -237,38 +220,34 @@ public class MemberController {
 
 		return "common/msg";
 	}
-	
+
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 회원정보 수정
+	 * Auth : GiChang Date : 2021-11-22 회원정보 수정
 	 * 
 	 **/
 	@RequestMapping("/member/memberDelete.do")
 	public String memberDelete(Member member, SessionStatus status, Model model) {
-		
+
 		int result = memberService.deleteMember(member.getUserId());
-		
+
 		String loc = "/";
 		String msg = "";
-		
-		if( result > 0 ) {
+
+		if (result > 0) {
 			msg = "회원 탈퇴 성공!";
 			status.setComplete();
 		} else {
 			msg = "회원 탈퇴 실패!";
 		}
-		
+
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
-		
+
 		return "common/msg";
 	}
-	
+
 	/**
-	 * Auth : GiChang 
-	 * Date : 2021-11-22 
-	 * 아이디 비밀번호 찾기 화면이동 
+	 * Auth : GiChang Date : 2021-11-22 아이디 비밀번호 찾기 화면이동
 	 * 
 	 **/
 	@RequestMapping("/member/memberFind.do")
@@ -277,24 +256,47 @@ public class MemberController {
 		return "member/memberFind";
 
 	}
-	
-	
-	@RequestMapping("/member/memberFindId")
-	public String findIdAction(Member m, Model model) {
-		Member userName = memberService.memberFindId(m);
+
+	@RequestMapping("/member/memberFindId.do")
+	public String memberFindId(@RequestParam String userName, @RequestParam String email, Model model) {
+		
+		Member m = new Member();
+		m.setUserName(userName);
+		m.setEmail(email);
 		
 		String msg = "";
-		
-		if(userName == null) { 
-			msg = "회원정보를 확인해주세요.";
-		} else { 
-			msg = "가입하신 아이디는" + m.getUserId() + "입니다.";
-		}
-		
-		model.addAttribute("msg", msg);
-		
-		return "member/memberFind";
-	}
-		
+		String loc = "";
 
+		System.out.println("전달받은 데이터 : " + userName + "/" + email);
+		
+		Member member = memberService.memberFindId(m);
+		System.out.println("member 데이터 : " + userName + "/" + email);
+
+		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
+		if (member == null) {
+			msg = "일치하는 회원이 존재하지 않습니다.";
+			
+			loc = "/member/memberFind.do";
+			
+			System.out.println("조건문(if) 결과 : " + member);
+			
+			
+		} else {
+			
+			loc ="/member/memberLogin.do"; 
+			
+		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
+			msg = userName + " 회원님의 아이디는 /" + member.getUserId() + "/ 입니다.";
+		
+		System.out.println("조건문(else) 결과 : " + member.getUserId());
+		
+		
+		}
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		return "common/msg";
+	}
+	
+	
+	
 }

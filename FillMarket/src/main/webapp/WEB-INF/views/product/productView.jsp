@@ -16,7 +16,8 @@
 	<!-- css -->
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
-	
+	<!-- 타이틀 로고 -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 
 	</style>
@@ -72,16 +73,16 @@
 			<hr>	
 		</div>
 	</div>
-	<div class="container" style="width: 70%">
+	<div class="container" style="width: 100%">
 		
-		<div class="row about_product" style="text-align: left; width: 70%; margin: 80px 0;">
-			<h1 class="page-header"><br />상품 안내</h1>
+		<div class="row about_product" style="text-align: left; width: 90%; margin: 80px 0;">
+			<h1 class="page-header"><br /><br />상품 안내</h1>
 				<input type="hidden" value="${product.pinfo}" id="pinfo">
 				<small> ${ product.pinfo }</small>
 		</div>
 		
 		
-		<div class="row about_product" style="text-align: left; width: 70%; margin: 80px 0;">
+		<div class="row about_product" style="text-align: left; width: 90%; margin: 80px 0;">
 			<h1 class="page-header">주의사항</h1>
 				<input type="hidden" value="${product.fprec}" id="fprec">
 				<small> ${ product.fprec }</small>

@@ -47,10 +47,15 @@
 	
 	<update id="updateCart" parameterType="Cart">
 		UPDATE CART
-		SET AMOUNT = AMOUNT + #{ amount }
+		SET AMOUNT = AMOUNT + #{ amount }, ORDERPRICE = ORDERPRICE + #{ orderprice }
 		WHERE CARTUSERID = #{ cartuserid }
 		AND PNO = #{ pno }
 	</update>
+	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM CART
+		WHERE CARTUSERID = #{ cartuserid }
+	</delete>
 	
 	<!-- Access to #{ field } -->
 </mapper>
