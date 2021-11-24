@@ -1,10 +1,5 @@
 package com.fill.market.member.model.service;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +40,18 @@ public class MemberServiceImpl implements MemberService {
 	public Member memberFindId(Member m) {
 		
 		return memberDAO.memberFindId(m);
+	}
+
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return memberDAO.selectMemberID(member);
+	}
+
+	@Override
+	public int updateNewPass(Member m) {
+		
+		return memberDAO.updateNewPass(m);
 	}
 
 	

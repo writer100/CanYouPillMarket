@@ -42,6 +42,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("memberSQL.memberFindId", m);
 	}
 
+	@Override
+	public Member selectMemberID(Member member) {
+		
+		return sqlSession.selectOne("memberSQL.selectMemberID", member);
+	}
+
+	@Override
+	public int updateNewPass(Member m) {
+
+		return sqlSession.update("memberSQL.updateNewPass", m);
+	}
+
 	
 
 

@@ -24,4 +24,8 @@
  		<typeAlias alias="Order" type="com.fill.market.order.model.vo.Order"/>
  	</typeAliases>
  	
+ 	<typeHandlers>
+ 		<package name="com.fill.market.common"/>
+ 	</typeHandlers>
+ 	
  </configuration>
