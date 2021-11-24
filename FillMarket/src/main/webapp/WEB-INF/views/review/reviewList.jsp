@@ -32,11 +32,23 @@
 	}
 	.search{ text-align: center; }
 	
+	.btn{ background-color : rgb(255, 142, 117); color: white; }
+	
+	.my.pagination > .active > a, 
+	.my.pagination > .active > span, 
+	.my.pagination > .active > a:hover, 
+	.my.pagination > .active > span:hover, 
+	.my.pagination > .active > a:focus, 
+	.my.pagination > .active > span:focus {
+  		background: rgb(255, 142, 117);
+ 		 border-color: rgb(255, 142, 117);
+	}
+	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
 	#review_header {
 	text-align: center;
-	color: rgb(255, 142, 117);;
+	color: rgb(255, 142, 117);
 }	
 	</style>
 </head>
@@ -66,7 +78,13 @@
                  <c:forEach items="${list}" var = "review">
                          <td>${review.reno }</td>
                          <td>${review.retitle }</td>
-                         <td><button>수정</button><button>삭제</button></td>
+                         <td>
+                         	<input type="hidden" name="reno" value="${review.reno}" />
+							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?reno=${review.reno}'">수정</button>
+          	                &nbsp;&nbsp;
+          	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">삭제</button>
+	
+                         </td>
                      </tr>
                  </c:forEach>
              
@@ -77,7 +95,12 @@
 			</div>
 	        <!-- 페이지 번호 -->
 	        <div class="ListNum">
+	           <br />
+	           
 	           <c:out value=" ${pageBar}" escapeXml="false"/>
+	           
+	           <br />
+	           <br />
 	        </div>
 	    </div>
 	</div>
@@ -85,6 +108,7 @@
 	
 	<script>
 	
+
 	</script>
 	<!-- JQuery CDN-->
 	<script src="https://code.jquery.com/jquery-2.2.4.js"

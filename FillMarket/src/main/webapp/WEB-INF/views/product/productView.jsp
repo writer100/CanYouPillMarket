@@ -20,6 +20,8 @@
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 
+	.btn{ background-color : rgb(255, 142, 117); color: white; }
+
 	</style>
 </head>
 <body>
@@ -67,7 +69,8 @@
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button type="button" style="z-index:100;" class="btn btn-default" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<br />
 				</div>
 			</div>
 			<hr>	
@@ -93,9 +96,13 @@
 			<c:forEach begin="1" end="5">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">리뷰제목</h3>
+					<input type="hidden" value="${review.retitle}" id="retitle">
+					<h3 class="panel-title">${ review.retitle }</h3>
 				</div>
-				<div class="panel-body">리뷰내용</div>
+				<div class="panel-body">
+					<input type="hidden" value="${review.recontent}" id="recontent">
+					<p>${review.recontent}</p>
+				</div>
 			</div>
 			</c:forEach>
 		</div>
