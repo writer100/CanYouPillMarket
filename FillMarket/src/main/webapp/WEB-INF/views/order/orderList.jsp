@@ -36,21 +36,22 @@
 
     <section>
         <div class="top">
-            <span class="title">나의 주문내역</span>
+            <span id="title" class="h3 mb-3 fw-normal mt-5 pt-5"><strong>MY ORDER</strong></span>
         </div>
         <br>
         <hr>
         <br><br>
+        <c:forEach items="${orderList}" var="orderList">
         <div class="myOrder">
             <table id="myOrder_tb">
-
+			
                 <tr>
                     <td width="300px">주문번호</td>
-                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do">${ order.orderid }</a></td>
+                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do?n=${ orderList.orderid }">${ orderList.orderid }</a></td>
                 </tr>
                 <tr>
                     <td width="300px">주문일자</td>
-                    <td width="600px">${ order.orderenroll }</td>
+                    <td width="600px">${ orderList.orderenroll }</td>
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
@@ -58,17 +59,17 @@
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>
-                    <td width="300px">${ order.receivername }</td>
+                    <td width="300px">${ orderList.receivername }</td>
                 </tr>
                 <tr>
                     <td width="300px">주문금액</td>
-                    <td width="300px">${ order.totalprice }</td>
+                    <td width="300px">${ orderList.totalprice }</td>
                 </tr>
 
             </table>
         </div>
-            <br /><br />
-            <c:out value="${pageBar}" escapeXml="false"/>
+            <br>
+            </c:forEach>
     </section>
 
 

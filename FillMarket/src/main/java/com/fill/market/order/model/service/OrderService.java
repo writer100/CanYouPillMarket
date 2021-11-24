@@ -1,7 +1,6 @@
 package com.fill.market.order.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.vo.Order;
@@ -17,9 +16,9 @@ public interface OrderService {
 
 	void deleteCart(String userId);
 
-	List<Map<String, String>> orderList(int cPage, int numPerPage, String userId);
+	List<Order> orderList(Order order);
 
-	int orderTotalContents(String userId);
+	List<Order> orderDetail(Order order);
 
 
 }

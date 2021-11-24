@@ -23,5 +23,7 @@ public class Cart implements Serializable {
 	private String pname;
 	private int pprice;
 	private int orderprice;
+	
+	private String changename;
 
 }

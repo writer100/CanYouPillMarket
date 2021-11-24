@@ -18,8 +18,9 @@ section {
 	text-align: center;
 }
 
-.title {
-	font-size: 25px;
+#title {
+	font-size: 32px;
+	color: rgb(231, 133, 110);
 }
 
 .myOrder {

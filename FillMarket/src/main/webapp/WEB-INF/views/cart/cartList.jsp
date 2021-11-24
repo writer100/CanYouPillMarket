@@ -65,7 +65,7 @@
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
 						<td id="productImg">
-							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${p.changename}"
+							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }"
 						</td>
 						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
 						<td>
@@ -112,10 +112,9 @@
 				
 				</c:when>
 				<c:otherwise>
-				<tr>
-				<c:if test="${ map.sumPrice eq 0 }">
+				<tr>	
 					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
-				</tr></c:if>
+				</tr>
 				</c:otherwise></c:choose>
 			</table>
 			</form>

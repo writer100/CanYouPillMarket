@@ -1,9 +1,7 @@
 package com.fill.market.order.model.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,19 +41,16 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public List<Map<String, String>> orderList(int cPage, int numPerPage, String userId) {
+	public List<Order> orderList(Order order) {
 		
-		RowBounds rows = new RowBounds((cPage - 1) * numPerPage, numPerPage);
-		
-		return sqlSession.selectList("orderSQL.orderList", null, rows);
+		return sqlSession.selectList("orderSQL.orderList", order);
 	}
 
 	@Override
-	public int orderTotalContents(String userId) {
+	public List<Order> orderDetail(Order order) {
 		
-		return sqlSession.selectOne("orderSQL.orderTotalContents", userId);
+		return sqlSession.selectList("orderSQL.orderDetail", order);
 	}
-
 
 
 }
