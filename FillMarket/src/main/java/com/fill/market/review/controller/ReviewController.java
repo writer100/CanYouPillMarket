@@ -95,7 +95,7 @@ public class ReviewController {
 					e.printStackTrace();
 				}
 				
-				// 5. attachList에 담기
+				// 5. rattachList에 담기
 				RAttachment ra = new RAttachment();
 				ra.setOriginalname(originName);
 				ra.setChangename(changeName);

@@ -34,7 +34,18 @@
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
-		
+		#header{ color : rgba(0, 0, 0, 0.35) ;
+			 text-align: center; }
+	#reviewUpdate_header {
+	text-align: center;
+	color: rgb(255, 142, 117);;
+}
+.btn-outline-info {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+    display: block;
+    margin: auto;
+}		
 	</style>
 </head>
 <body>
@@ -43,80 +54,76 @@
 	<c:import url="../common/navbar.jsp" />
 	<div id="container">
 	  			<br />
-                <header>
-                    <h1> REVIEW PAGE </h1>
-                </header>
+                <h1 id="reviewUpdate_header" class="h3 mb-3 fw-normal mt-5 pt-5">
+					<strong>REVIEW UPDATE PAGE</strong>
+				</h1>
                 <br />
                 <br />
                 <br />
                 <br />
-	    <div class="row product" wieth="90%">
-			<div id="review-container">
+			<div class="row product" wieth="90%">
+			<div id="review-container" wieth="60%">
 			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 				<input type="hidden" name="reno" value="${ review.reuserid }" />
-				<input type="text" class="form-control" placeholder="제목" name="reviewtitle" id="reviewtitle" value="${board.boardTitle}" required>
-				<input type="text" class="form-control" name="reviewreuserid" value="${review.reuserid}" readonly required>
+				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="reviewtitle" id="reviewtitle" value="${review.retitle}" required>
+				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
+				<!-- 
+				<input type="hidden" name="pno" value="${ review.pno }" />
+				<input type="text" class="form-control" name="productname" value="${product.pname}" readonly required>				
+				 -->
 				<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
-					<div class="rows">
-						<button type="button" class="btn btn-outline-success col-8"
-							onclick="fileDownload('${ra.originalFileName}','${a.renamedFileName }');" download>
-						첨부파일${vs.count} - ${ra.originalFileName }
+					<div class="rows">					
+					<button type="button" class="btn btn-outline-success col-8"
+							onclick="fileDownload('${ra.originalname}','${ra.changename }');" >
+						첨부파일${vs.count} - ${ra.originalname }
 					</button>
-					<button type="button" class="btn btn-outline-danger col-3"
-							onclick="fileDelete(this, '${ra.attachmentNo}', '${ra.renamedFileName }');">파일 삭제</button>
+					<button type="button" class="btn btn-outline-danger col-2"
+							onclick="fileDelete(this, '${ra.rano}', '${ra.changename }');">파일 삭제</button>
 					</div>
 				</c:forEach>
 				<br>
 				<div class="input-group mb-3" style="padding:0px;">
 				  <div class="input-group-prepend" style="padding:0px;">
-				    <span class="input-group-text">첨부파일1</span>
+				    <span class="input-group-text">첨부파일</span>
 				  </div>
 				  <div class="custom-file">
 				    <input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple>
-				    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+				    <label class="custom-file-label" for="upFile"></label>
 				  </div>
 				</div>
-			    <textarea class="form-control" name="boardContent" placeholder="내용" required>${board.boardContent}</textarea>
+			    <textarea class="form-control" name="reviewcontent" placeholder="내용" required>${review.recontent}</textarea>
 				<br />
-				<input type="submit" class="btn btn-outline-success" value="수정 완료" /> &nbsp;
-				<input type="button" class="btn btn-outline-danger" value="삭제" onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?boardNo=${board.boardNo}'"/>
+				<div class="rows" style="padding:0px;">
+				<input type="submit" class="btn btn-outline-info" " value="수정 완료" /> &nbsp;
+				<input type="button" class="btn btn-outline-info" value="삭제" onclick="location.href='${pageContext.request.contextPath}/review/reviewDelete.do?reno=${review.reno}'"/>
+				<br />
+				<br />
+				</div>
 			</form>
 		</div>
-			
-			<div>
-				<br />
-			</div>
-	        <!-- 페이지 번호 -->
-	        <div class="ListNum">
-	           <c:out value=" ${pageBar}" escapeXml="false"/>
-	        </div>
-	    </div>
 	</div>
-	<c:import url="../common/footer.jsp" />
+	<c:import url="../common/footer.jsp"/>
+
 	
 <script>
-	/* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
-	function validate(){
-		var content = $("[name=boardContent]").val();
-		if(content.trim().length==0){
-			alert("내용을 입력하세요");
-			return false;
-		}
-		return true;
+/* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
+function validate(){
+	var content = $("[name=reviewtitle]","[name=reviewcontent]").val();
+	if(content.trim().length==0){
+		alert("내용을 입력하세요");
+		return false;
 	}
-	
-	/*부트스트랩 : file 변경시 파일명 보이기 */
-	$(function(){
-		$('[name=upFile]').on('change',function(){
-		    //var fileName = $(this).val();//C:\fakepath\파일명
-		    //var fileName = this.files[0].name;//파일명(javascript)
-		    //var fileName = $(this)[0].files[0].name;//파일명(jquery)
-		    var fileName = $(this).prop('files')[0].name;//파일명(jquery)
-			//console.log($(this).prop('files'));//FileList {0: File(54955), length: 1}
-		    console.log($(this).val());
-		    $(this).next('.custom-file-label').html(fileName);
-		})
-	});
+	return true;
+}
+
+/*부트스트랩 : file 변경시 파일명 보이기 */
+$(function(){
+	$('[name=upFile]').on('change',function(){
+	    var fileName = $(this).prop('files')[0].name;//파일명(jquery)
+	    console.log($(this).val());
+	    $(this).next('.custom-file-label').html(fileName);
+	})
+});
 	
 	function fileDownload(oName, rName){
 		//한글파일명이 있을 수 있으므로, 명시적으로 encoding

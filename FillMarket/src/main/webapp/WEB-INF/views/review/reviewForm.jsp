@@ -36,25 +36,52 @@
 		border-bottom : 1px solid rgba(0, 0, 0, 0.35);
 	}
 	.search{ text-align: center; }
+
+.form-control {
+    display: block;
+    width: 70%;
+ 	margin:0 auto;
+    }
+.input-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+}
 	
-	#header{ color : rgba(0, 0, 0, 0.35) ;
-			 text-align: center; }
+	#header{ color : rgba(0, 0, 0, 0.35) ; text-align: center; }
 	#reviewForm_header {
 	text-align: center;
-	color: rgb(255, 142, 117);;
-}	
+	color: rgb(255, 142, 117);
+}
+.btn{ background-color : rgb(255, 142, 117); color: white;  display: block;
+    margin: auto;}
+	
 	</style>
 <c:import url="../common/header.jsp" />
 <script>
 	/* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
 	function validate(){
-		var content = $("[name=title]","[name=cont]").val();
+		var content = $("[name=reviewtitle]","[name=reviewcontent]").val();
 		if(content.trim().length==0){
 			alert("내용을 입력하세요");
 			return false;
 		}
 		return true;
 	}
+	
+	/*부트스트랩 : file 변경시 파일명 보이기 */
+	$(function(){
+		$('[name=upFile]').on('change',function(){
+		    var fileName = $(this).prop('files')[0].name;//파일명(jquery)
+		    console.log($(this).val());
+		    $(this).next('.custom-file-label').html(fileName);
+		})
+	});
 </script>
 </head>
 <body>
@@ -68,25 +95,43 @@
                 <br />
                 <br />
                 <br />
-		<form name="boardFrm"
-			action="${pageContext.request.contextPath}/review/reviewForm.do"
-			method="post" onsubmit="return validate();">
-			<div class="input-group" id="title_write">
-				<span class="input-group-text" id="inputGroup-sizing-default"
-					requeird>제목</span> 
-				<input type="text" placeholder="리뷰 제목" class="form-control" name="retitle" >	
-
-				<input type="text" class="form-control" name="reuserid" value="${member.userId}" readonly required>
-			</div>
-			<div class="textarea">
-				<textarea placeholder="리뷰 내용" name="recontent" rows="15" cols="155"></textarea>
-			</div>
-			<div class="button">
-				<input class="btn btn-primary" type="submit" value="등록">
-				<input class="btn btn-primary" type="button" value="취소"
-					onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">
-		</form>
-	</div>
+			<div class="row product" wieth="90%">
+			<div id="review-container" wieth="60%">
+			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+				<input type="hidden" name="reno" value="${ review.reuserid }" />
+				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="reviewtitle" id="reviewtitle" value="${review.retitle}" required>
+				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
+				 
+				<input type="hidden" name="pno" value="${ review.pno }" />
+				<input type="text" class="form-control" name="productname" value="${product.pname}" readonly required>				
+				 
+				<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
+					<div class="rows">					
+					<button type="button" class="btn btn-outline-success col-8"
+							onclick="fileDownload('${ra.originalname}','${ra.changename }');" >
+						첨부파일${vs.count} - ${ra.originalname }
+					</button>
+					<button type="button" class="btn btn-outline-danger col-2"
+							onclick="fileDelete(this, '${ra.rano}', '${ra.changename }');">파일 삭제</button>
+					</div>
+				</c:forEach>
+				<br>
+				<div class="input-group mb-3" style="padding:0px;">
+				  <div class="input-group-prepend" style="padding:0px;">
+				    <span class="input-group-text">첨부파일</span>
+				  </div>
+				  <div class="custom-file">
+				    <input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple>
+				    <label class="custom-file-label" for="upFile"></label>
+				  </div>
+				</div>
+			    <textarea class="form-control" name="reviewcontent" placeholder="내용" required></textarea>
+				<br />
+				<input type="submit" class="btn" " value="등록" /> &nbsp;
+				<br />
+				<br />
+			</form>
+		</div>
 	</div>
 	<c:import url="../common/footer.jsp"/>
 </body>
