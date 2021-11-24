@@ -46,9 +46,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.memberFindId(m);
 	}
+
+	
+		
+	}
 	
 	
 	
 
 
-}
+

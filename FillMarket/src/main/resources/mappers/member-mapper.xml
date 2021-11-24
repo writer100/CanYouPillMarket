@@ -38,4 +38,9 @@
 	<select id="memberFindId" resultType="Member">
 		SELECT USERID FROM MEMBER WHERE USERNAME = #{userName} AND EMAIL = #{email}
 	</select>
+	
+	<update id="updatePassword" parameterType="Member">
+		UPDATE MEMBER SET PASSWORD = #{ password } 
+		WHERE USERID = #{ userId }
+	</update>
 </mapper>

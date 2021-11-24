@@ -38,6 +38,9 @@ public interface MemberService {
 
 
 	Member memberFindId(Member m);
+
+	
+
 		
 	
 
