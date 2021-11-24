@@ -60,7 +60,8 @@
                         </tr>
 				</thead>
 				<tbody>
-					<c:choose><c:when test="${ map.list != null }">
+					<c:choose> 
+						<c:when test="${ map.list != null }">
 					<c:forEach items="${map.list}" var="cartList" varStatus="i">
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
@@ -111,13 +112,20 @@
 				</tr>
 				
 				</c:when>
+				
 				<c:otherwise>
 				<tr>
-				<c:if test="${ map.sumPrice eq 0 }">
 					<td id="emptyMsg" colspan="7"><h3>장바구니가 비어있습니다.</h3></td>
-				</tr></c:if>
-				</c:otherwise></c:choose>
+				</tr>
+				</c:otherwise>
+				
+			  	
+			 
+				</c:choose> 
 			</table>
+			
+			
+			
 			</form>
 		</div>
         <br><br>

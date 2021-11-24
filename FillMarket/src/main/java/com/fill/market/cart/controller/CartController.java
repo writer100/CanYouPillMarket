@@ -72,7 +72,14 @@ public class CartController {
 		System.out.println("세션 확인 : " + userId);
 			
 			List<Cart> list = cartService.listCart(userId);	//장바구니 정보
+			
+			if(list.size() > 0) {
+			
+			
 			int sumPrice = cartService.sumPrice(userId);
+			
+			
+			
 			int fee = sumPrice >= 30000 ? 0 : 2500;
 			
 //			System.out.println("장바구니 정보 : " + list);
@@ -90,7 +97,14 @@ public class CartController {
 			mav.addObject("map", map);			// map의 변수 저장
 			
 			return mav;
-	
+			
+			}else {
+			
+				mav.setViewName("cart/cartList");
+				
+				return mav;
+			}
+			
 	}
 	
 	@RequestMapping("/cart/cartDelete.do")
