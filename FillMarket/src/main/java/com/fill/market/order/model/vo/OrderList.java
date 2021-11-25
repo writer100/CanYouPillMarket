@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Component
-public class Order implements Serializable {
+public class OrderList implements Serializable {
 	
-	private static final long serialVersionUID = 22L;
+	private static final long serialVersionUID = 22222L;
 	
 	private int orderno;
 	private String orderuserid;
@@ -26,6 +26,14 @@ public class Order implements Serializable {
 	private String address1;
 	private String address2;
 	private String phone;
-	private String orderid;		// 날짜와 랜덤숫자 조합한 문자열 ####_####
+	private String orderid;	
+	
+	private int orderdetailno;
+	private int pno;
+	private int amount;
+	
+	private String pname;
+	private int pprice;
+	private String changename;
 
 }

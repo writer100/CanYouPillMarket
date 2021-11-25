@@ -19,6 +19,8 @@ import com.fill.market.admin.model.vo.Member;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.service.OrderService;
 import com.fill.market.order.model.vo.Order;
+import com.fill.market.order.model.vo.OrderDetail;
+import com.fill.market.order.model.vo.OrderList;
 
 @Controller
 public class OrderController {
@@ -62,7 +64,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("order/orderInsert.do")
-	public String OrderInsert(HttpSession session, Cart cart, Order order, Model model) {
+	public String OrderInsert(HttpSession session, Order order, OrderDetail orderDetail, Model model) {
 		
 		System.out.println("orderInsert 접근!");
 		
@@ -86,21 +88,15 @@ public class OrderController {
 			order.setOrderid(orderId);
 			order.setOrderuserid(userId);
 			
-			int result = orderService.insertOrder(order);
+			orderService.insertOrder(order);
+			
+			orderDetail.setOrderid(orderId);
+			orderService.insertOrderDetail(orderDetail);
+			
+			orderService.deleteCart(userId);
 			
 //			System.out.println("주문하기 : " + order);
 			
-			String msg = "";
-			
-			if (result > 0) {
-				msg = "주문 성공!";
-				
-				orderService.deleteCart(userId);
-			} else {
-				msg = "주문 실패!";
-			}
-			
-			model.addAttribute("msg", msg);
 			
 		
 		return "order/orderFinish";
@@ -113,31 +109,31 @@ public class OrderController {
 	}
 	
 	@RequestMapping("order/orderList.do")
-	public String orderList(HttpSession session, Order order, Model model) {
+	public String orderList(HttpSession session, OrderList orderList, Model model) {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		
-		order.setOrderuserid(userId);
+		orderList.setOrderuserid(userId);
 		
-		List<Order> orderList = orderService.orderList(order);
+		List<OrderList> list = orderService.orderList(orderList);
 		
-		model.addAttribute("orderList", orderList);
+		model.addAttribute("list", list);
 		
 		return "order/orderList";
 	}
 	
 	
 	@RequestMapping("order/orderDetail.do")
-	public String orderDetail(HttpSession session, @RequestParam("n") String orderId, Order order, Model model) {
+	public String orderDetail(HttpSession session, @RequestParam("n") String orderId, OrderList orderList, Model model) {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		
-		order.setOrderuserid(userId);
-		order.setOrderid(orderId);
+		orderList.setOrderuserid(userId);
+		orderList.setOrderid(orderId);
 		
-		List<Order> orderList = orderService.orderDetail(order);
+		List<OrderList> list = orderService.orderDetail(orderList);
 		
-		model.addAttribute("orderList", orderList);
+		model.addAttribute("list", list);
 		
 		return "order/orderDetail";
 	}

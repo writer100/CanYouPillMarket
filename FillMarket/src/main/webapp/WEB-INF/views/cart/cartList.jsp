@@ -66,7 +66,7 @@
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
 						<td id="productImg">
-							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }"
+							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }">
 						</td>
 						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
 						<td>
@@ -99,7 +99,8 @@
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td style="text-align: right;">${ map.fee } 원</td>
+					<td style="text-align: right;">${ map.fee } 원<br>
+                         (3만원 이상 구입 시 무료배송)</td>
 				</tr>
 			</table>
 			<br> <br>
@@ -139,16 +140,12 @@
 	
 	<script>
 		$('#backShop').click(function(){
-			history.back();
+			location.href = "${pageContext.request.contextPath}/product/productList.do";
 		});
 		
 		$('#orderBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
 		});
-		/*
-		$('#deleteAll').click(function(){
-			location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
-		});*/
 		
 		function deleteAll(){
 			if(confirm("정말 삭제하시겠습니까?") == true) {

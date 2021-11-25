@@ -41,7 +41,7 @@
         <br>
         <hr>
         <br><br>
-        <c:forEach items="${orderList}" var="orderList">
+        <c:forEach items="${list}" var="orderList">
         <div class="myOrder">
             <table id="myOrder_tb">
 			
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
-                    <td width="600px">ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</td>
+                    <td width="600px">${ orderList.pname }</td>
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>

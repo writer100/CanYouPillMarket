@@ -16,9 +16,15 @@
 	</select>
 
 	<insert id="insertOrder" parameterType="Order">
-		INSERT INTO ORDERED (ORDERNO, ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID)
-		VALUES (SEQ_ORDERNO.NEXTVAL, #{ orderuserid }, #{ totalprice }, 
+		INSERT INTO ORDERED (ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID)
+		VALUES (#{ orderuserid }, #{ totalprice }, 
 				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid })
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="OrderDetail">
+		INSERT INTO ORDERDETAIL (ORDERDETAILNO, ORDERID, PNO, AMOUNT)
+		SELECT SEQ_ORDERDETAILNO.NEXTVAL, #{ orderid }, PNO, AMOUNT
+		FROM CART
 	</insert>
 	
 	<delete id="deleteCart" parameterType="String">
@@ -26,10 +32,14 @@
 		WHERE CARTUSERID = #{ orderuserid }
 	</delete>
 	
-	<select id="orderList" resultType="Order">
-		SELECT ORDERUSERID, TOTALPRICE, ORDERENROLL, RECEIVERNAME, ORDERID
-		FROM ORDERED
-		WHERE ORDERUSERID = #{ orderuserid }
+	<select id="orderList" resultType="OrderList">
+		SELECT O.ORDERUSERID, O.TOTALPRICE, O.ORDERENROLL, O.RECEIVERNAME,
+       	P.PNAME, OD.ORDERID
+		FROM ORDERED O, ORDERDETAIL OD, PRODUCT P
+		WHERE O.ORDERID = OD.ORDERID
+		AND OD.PNO = P.PNO
+		AND P.PNAME = (SELECT MIN(PNAME) FROM PRODUCT P WHERE PNO = OD.PNO)
+		AND ORDERUSERID = #{ orderuserid }
 	</select>
 	
 	<select id="orderTotalContents" resultType="int">
@@ -37,10 +47,20 @@
 		WHERE ORDERUSERID = #{ orderuserid }
 	</select>
 	
-	<select id="orderDetail" resultType="Order">
-		SELECT * FROM ORDERED
-		WHERE ORDERUSERID = #{ orderuserid }
-		AND ORDERID = #{ orderid }
+	<select id="orderDetail" resultType="OrderList">
+		SELECT O.*, 
+		       OD.ORDERDETAILNO, OD.PNO, OD.AMOUNT,
+		       P.PNAME, P.PNO, P.PPRICE,
+		       PA.CHANGENAME
+		FROM ORDERED O
+		INNER JOIN ORDERDETAIL OD ON O.ORDERID = OD.ORDERID
+		INNER JOIN PRODUCT P ON OD.PNO = P.PNO
+		INNER JOIN PATTACHMENT PA ON PA.PNO = OD.PNO
+		WHERE PA.PNO = OD.PNO
+		AND PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT
+		                WHERE PNO = OD.PNO)
+		AND O.ORDERUSERID = #{ orderuserid }
+		AND O.ORDERID = #{ orderid }
 	</select>
 	
 	<!-- Access to #{ field } -->

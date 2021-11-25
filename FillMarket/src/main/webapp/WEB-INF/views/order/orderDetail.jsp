@@ -44,7 +44,7 @@
             <span class="title2">주문정보</span>
         </div>
         <br>
-        	<c:forEach items="${orderList}" var="orderDetail">
+        	<c:forEach items="${list}" var="orderDetail">
         <div class="myOrderDetail">
             <table id="myOrderDetail_tb">
                 <tr>
@@ -76,7 +76,9 @@
             <table id="paymentDetail_tb">
                 <tr>
                     <td>총 주문금액</td>
-                    <td>${ orderDetail.totalprice }</td>
+                    <td>
+                    	<fmt:formatNumber pattern="###,###,###" value="${ orderDetail.totalprice }" /> 원
+                    </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
@@ -84,7 +86,9 @@
                 </tr>
                 <tr>
                     <td>총 결제금액</td>
-                    <td>${ orderDetail.totalprice }</td>
+                    <td>
+                    	<fmt:formatNumber pattern="###,###,###" value="${ orderDetail.totalprice }" /> 원
+                    </td>
                 </tr>
                 <tr>
                     <td>결제수단</td>
@@ -107,16 +111,18 @@
                         <th width="50px">수 량</th>
                         <th width="140px">합 계</th>
                         <th width="130px">처리상태</th>
-                        <th width="100px">취소/교환/반품</th>
+                        <th width="100px">-</th>
                     </tr>
                     <tbody>
                         <tr>
-                            <td><img src="../images/childLife.png"></td>
-                            <td><h5>ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</h5></td>
-                            <td>2</td>
-                            <td>140,000</td>
+                            <td><img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ orderDetail.changename }"></td>
+                            <td><h5>${ orderDetail.pname }</h5></td>
+                            <td>${ orderDetail.amount }</td>
+                            <td>
+                            	<fmt:formatNumber pattern="###,###,###" value="${ orderDetail.pprice * orderDetail.amount}" /> 원
+                            </td>
                             <td>배송중</td>
-                            <td>-</td>
+                            <td><button type="button" id="reviewBtn">리뷰작성</button></td>
                         </tr>
                     </tbody>
                 </thead>
@@ -159,5 +165,15 @@
 
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
+	
+	<script>
+		$('#goOrderList').click(function(){
+			history.back();
+		})
+		
+		$('#goProductList').click(function(){
+			location.href = "${pageContext.request.contextPath}/product/productList.do";
+		})
+	</script>
 </body>
 </html>

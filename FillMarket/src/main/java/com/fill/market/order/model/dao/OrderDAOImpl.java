@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.vo.Order;
+import com.fill.market.order.model.vo.OrderDetail;
+import com.fill.market.order.model.vo.OrderList;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -28,9 +30,9 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public int insertOrder(Order order) {
+	public void insertOrder(Order order) {
 		
-		return sqlSession.insert("orderSQL.insertOrder", order);
+		sqlSession.insert("orderSQL.insertOrder", order);
 	}
 
 	@Override
@@ -41,15 +43,22 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public List<Order> orderList(Order order) {
+	public List<OrderList> orderList(OrderList orderList) {
 		
-		return sqlSession.selectList("orderSQL.orderList", order);
+		return sqlSession.selectList("orderSQL.orderList", orderList);
 	}
 
 	@Override
-	public List<Order> orderDetail(Order order) {
+	public List<OrderList> orderDetail(OrderList orderList) {
 		
-		return sqlSession.selectList("orderSQL.orderDetail", order);
+		return sqlSession.selectList("orderSQL.orderDetail", orderList);
+	}
+
+	@Override
+	public void insertOrderDetail(OrderDetail orderDetail) {
+		
+		sqlSession.insert("orderSQL.insertOrderDetail", orderDetail);
+		
 	}
 
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.dao.OrderDAO;
 import com.fill.market.order.model.vo.Order;
+import com.fill.market.order.model.vo.OrderDetail;
+import com.fill.market.order.model.vo.OrderList;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,9 +30,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int insertOrder(Order order) {
+	public void insertOrder(Order order) {
 		
-		return orderDAO.insertOrder(order);
+		orderDAO.insertOrder(order);
 	}
 
 	@Override
@@ -41,16 +43,24 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> orderList(Order order) {
+	public List<OrderList> orderList(OrderList orderList) {
 		
-		return orderDAO.orderList(order);
+		return orderDAO.orderList(orderList);
+	}
+	
+
+	@Override
+	public List<OrderList> orderDetail(OrderList orderList) {
+		
+		return orderDAO.orderDetail(orderList);
 	}
 
 	@Override
-	public List<Order> orderDetail(Order order) {
+	public void insertOrderDetail(OrderDetail orderDetail) {
 		
-		return orderDAO.orderDetail(order);
+		orderDAO.insertOrderDetail(orderDetail);
+		
 	}
-	
+
 
 }
