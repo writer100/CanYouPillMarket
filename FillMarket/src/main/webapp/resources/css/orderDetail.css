@@ -85,8 +85,9 @@ section {
 }
 
 #orderProductInfo_tb tr td img {
-	width: 200px;
-	height: 180px;
+    /*width: 180px;*/
+    height: 160px;
+    padding: 10px;
 }
 
 #reviewBtn {

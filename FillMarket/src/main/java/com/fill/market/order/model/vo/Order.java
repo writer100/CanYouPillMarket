@@ -27,5 +27,6 @@ public class Order implements Serializable {
 	private String address2;
 	private String phone;
 	private String orderid;		// 날짜와 랜덤숫자 조합한 문자열 ####_####
-
+	private int fee;
+	
 }

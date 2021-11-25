@@ -128,8 +128,9 @@
                 <tr>
                     <td>배송비</td>
                     <td style="text-align: right;">
-                         <fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }" /> 원 <br>
+                         <fmt:formatNumber pattern="###,###,###" value="${ map.fee }" /> 원 <br>
                          (3만원 이상 구입 시 무료배송)
+                         <input type="hidden" name="fee" value="${ map.fee }" />
                     </td>
                 </tr>
             </table>

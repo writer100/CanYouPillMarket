@@ -62,5 +62,11 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	@Override
+	public List<OrderList> orderDetailProduct(OrderList orderList) {
+		
+		return orderDAO.orderDetailProduct(orderList);
+	}
+
 
 }

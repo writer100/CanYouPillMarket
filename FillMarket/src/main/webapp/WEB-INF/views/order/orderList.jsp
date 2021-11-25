@@ -63,7 +63,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문금액</td>
-                    <td width="300px">${ orderList.totalprice }</td>
+                    <td width="300px"><fmt:formatNumber pattern="###,###,###" value="${ orderList.totalprice }" />원</td>
                 </tr>
 
             </table>
