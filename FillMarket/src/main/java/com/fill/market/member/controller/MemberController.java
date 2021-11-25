@@ -431,22 +431,11 @@ public class MemberController {
 	    // sns로그인으로 얻은 정보와 함께 회원 가입페이지로 가기
 	    @RequestMapping("/member/snsMemberJoin.do")
 	    public String kakaoMemberJoin(
-	                @RequestParam String userId, 
-	                @RequestParam String userName,
-	                @RequestParam String email,
 	                Model model
 	            ) {
-	        
-	        System.out.println("kakao joinForm controller access : " + userId + "/" + userName + "/" + email);
-	        
 	        // 임의로 비밀번호 생성
 	        String password = randomCode();
-	        
-	        model.addAttribute("userId", userId);
-	        model.addAttribute("userName", userName);
-	        model.addAttribute("email", email);
-	        model.addAttribute("password", password);
-	        
+	        System.out.println("확인완");
 	        return "member/memberEnroll";
 	    }
 	    
