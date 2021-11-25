@@ -1,26 +1,19 @@
 package com.fill.market.board.controller;
 
-
-import java.io.File;
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fill.market.board.model.service.BoardService;
 import com.fill.market.board.model.vo.Board;
@@ -66,9 +59,9 @@ public class BoardController {
 	
 	@RequestMapping("/qna/qnaWriteEnd.do")
 	public String insertBoard(Board board, Model model, HttpServletRequest req) {
-		
-		System.out.println("board : " + board);
 
+		System.out.println("board : " + board);
+		
 		// 게시글 DB에 등록
 		int result = boardService.insertBoard(board);
 		
@@ -117,7 +110,8 @@ public class BoardController {
 		Board originBoard = boardService.updateView(boardNo);
 		
 		originBoard.setQatitle(board.getQatitle() );
-		originBoard.setQacontent( board.getQacontent() );
+		originBoard.setQacontent(board.getQacontent() );
+		originBoard.setQasel(board.getQasel() );
 
 		int result = boardService.updateBoard(originBoard);  // 서비스 찾아가서 마저 구현해주기
 		

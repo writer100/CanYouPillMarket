@@ -53,6 +53,7 @@ public class CartController {
 	
 		} else { 
 			cart.setAmount(1);
+			cart.setOrderprice(cart.getAmount() * cart.getPprice());
 			cartService.updateCart(cart);
 			
 			msg = "이미 있는 상품의 수량을 추가하였습니다.";

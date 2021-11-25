@@ -334,7 +334,7 @@
 						<c:forEach items="${list}" var="b">
 							<tr id="${b.qano}" class="sel">
 								<th id="no" scope="row">${b.qano}</th>
-								<td id="title">${b.qatitle}</td>
+								<td id="title">[${b.qasel}] ${b.qatitle}</td>
 								<td id="writer">${b.qauserid}</td>
 								<td id="date">${b.qauploaddate}</td>
 							</tr>

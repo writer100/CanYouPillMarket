@@ -365,7 +365,7 @@ public class MemberController {
 			            // mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
 						// 보내는이(from)은 반드시 있어야합니다. 
 						// mailSender 빈에서 아이디를 기입하였지만 이는 SMTP 사용 권한을 얻어 오는 역할을 수행합니다.
-						helper.setFrom("CanYouPillMarket <rlckdwkd97@gmail.com>"); 
+						helper.setFrom("CanYouPillMarket <CanYouPillMarket@gmail.com>"); 
 						helper.setTo(vo.getTo()); 
 						helper.setSubject(vo.getSubject()); 
 						helper.setText(vo.getContents(), true); // true는 html을 사용하겠다는 의미 
