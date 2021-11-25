@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <nav class="navbar navbar-expand-lg navbar-light border-bottom p-3" aria-label="Sixth navbar example"
-        style="background-color: #ffffff;">
+        style="background-color: #ffffff;font-weight: 600;font-size: 17px;">
         <div class="container-fluid">
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample06"

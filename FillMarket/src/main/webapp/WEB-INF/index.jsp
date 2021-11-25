@@ -97,79 +97,9 @@
 
 		<div class="container marketing">
 
-			<div class="row">
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/daniel.png"
-						alt="">
-					<rect width="100%" height="100%" fill="#777"></rect>
-					<h2>God Daniel</h2>
-					<p>
-						<a class="btn btn-secondary" href="#">GitHub »</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/gichang.png"
-						alt="">
-					<h2>Gichang</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/rlckdwkd55">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Jieun.png"
-						alt="">
-					<h2>Jieun</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/writer100">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Changhwan.png"
-						alt="">
-					<h2>Changhwan</h2>
-					<p>
-						<a class="btn btn-secondary"
-							href="https://github.com/ChangHWanChoi">GitHub »</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Yeji.png"
-						alt="">
-					<h2>Yeji</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/fiveeasy">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Seungbyung.png"
-						alt="">
-					<h2>Seungbyung</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/ssgbbo">GitHub
-							»</a>
-					</p>
-				</div>
-			</div>
-
-			<hr class="featurette-divider">
-
 			<div class="row featurette">
 				<div class="col-md-7">
-					<h2 class="featurette-heading mb-3">꼼꼼한 배송에 놀라지마세요.</h2>
+					<h2 class="featurette-heading mb-3 mt-5">꼼꼼한 배송에 놀라지마세요.</h2>
 					<p class="lead">
 						Can You Pill Market만의 차별화된 배송 시스템으로 <br> 여러분의 건강을 안전하게 배송 해
 						드립니다.
@@ -203,7 +133,7 @@
 
 			<hr class="featurette-divider">
 
-			<div class="row featurette mb-5 pb-5">
+			<div class="row featurette pb-5">
 				<div class="col-md-7">
 					<h2 class="featurette-heading mb-3">최저가 판매를 약속 드립니다.</h2>
 					<p class="lead">
@@ -219,6 +149,76 @@
 				</div>
 			</div>
 
+            <hr class="featurette-divider">
+
+            <div class="row">
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/daniel.png"
+						alt="">
+					<rect width="100%" height="100%" fill="#777"></rect>
+					<h2>God Daniel</h2>
+					<p>
+						<a class="btn btn-secondary" href="#">GitHub »</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/gichang.png"
+						alt="">
+					<h2>Gichang</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/rlckdwkd55">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Jieun.png"
+						alt="">
+					<h2>Jieun</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/writer100">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4 mb-5">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Changhwan.png"
+						alt="">
+					<h2>Changhwan</h2>
+					<p>
+						<a class="btn btn-secondary"
+							href="https://github.com/ChangHWanChoi">GitHub »</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Yeji.png"
+						alt="">
+					<h2>Yeji</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/fiveeasy">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Seungbyung.png"
+						alt="">
+					<h2>Seungbyung</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/ssgbbo">GitHub
+							»</a>
+					</p>
+				</div>
+			</div>
+
 		</div>
 	</main>
 
@@ -226,7 +226,9 @@
 		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
 		<a href="#Top">🔝</a>
 	</div>
-
+ 
+ 	<hr class="featurette-divider">
+ 
 	<c:import url="views/common/footer.jsp" />
 </body>
 </html>

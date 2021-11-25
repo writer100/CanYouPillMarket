@@ -5,7 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 
-<div class="container footer-0affix affix-item">
+<div class="container footer-0affix affix-item" style="
+    font-family: Helvetica;
+">
 	<footer>
 		<div class="row">
 			<div class="col-3">
