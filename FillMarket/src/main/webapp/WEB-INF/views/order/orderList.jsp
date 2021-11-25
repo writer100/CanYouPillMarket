@@ -47,7 +47,7 @@
 			
                 <tr>
                     <td width="300px">주문번호</td>
-                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do?n=${ orderList.orderid }">${ orderList.orderid }</a></td>
+                    <td width="600px"><a style="text-decoration: none;" href="${pageContext.request.contextPath}/order/orderDetail.do?n=${ orderList.orderid }">${ orderList.orderid }</a></td>
                 </tr>
                 <tr>
                     <td width="300px">주문일자</td>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
-                    <td width="600px">${ orderList.pname }</td>
+                    <td width="600px">${ orderList.pname } 외 ${ orderList.cnt } 개</td>
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>

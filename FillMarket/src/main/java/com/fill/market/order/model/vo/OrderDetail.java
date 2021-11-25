@@ -20,6 +20,7 @@ public class OrderDetail implements Serializable {
 	private String orderid;
 	private int pno;
 	private int amount;
+	private int cnt;
 
 
 }

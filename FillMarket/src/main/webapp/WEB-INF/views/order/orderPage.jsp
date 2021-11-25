@@ -12,7 +12,10 @@
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- css 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderPage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -77,7 +80,6 @@
           }
       }).open();
   }
-
     </script>
 </head>
 

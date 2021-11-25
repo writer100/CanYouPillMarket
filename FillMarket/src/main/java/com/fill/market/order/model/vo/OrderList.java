@@ -31,6 +31,7 @@ public class OrderList implements Serializable {
 	private int orderdetailno;
 	private int pno;
 	private int amount;
+	private int cnt;
 	
 	private String pname;
 	private int pprice;
