@@ -23,5 +23,7 @@ public class Board implements Serializable {
 	private String qacontent;
 	private Date qauploaddate;
 	private String status;
+	private int replycount;
+	private String qasel;
 	
 }
