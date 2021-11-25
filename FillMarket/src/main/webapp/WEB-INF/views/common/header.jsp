@@ -21,12 +21,16 @@
 
             <ul class="nav">
                 <c:if test="${!empty member}">
+                	<c:if test="${member.levelType eq '2'}">
+                		<li class="nav-item"><a href="#" class="nav-link text-dark">MANAGER</a></li>
+                	</c:if>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/myPage.do" class="nav-link text-dark">MY PAGE</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark">MY HEART</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/cartList.do" class="nav-link text-dark">SHOPPING BAG</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/memberLogout.do" class="nav-link text-dark">LOGOUT</a></li>
                 </c:if>
             </ul>
+             
         </header>
     </div>
 </header>
