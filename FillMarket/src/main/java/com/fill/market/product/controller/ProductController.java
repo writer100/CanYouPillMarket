@@ -13,6 +13,8 @@ import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.common.Utils;
 import com.fill.market.product.model.service.ProductService;
+import com.fill.market.review.model.vo.RAttachment;
+import com.fill.market.review.model.vo.Review;
 
 
 
@@ -23,7 +25,7 @@ public class ProductController {
 	ProductService productService;
 	
 	@RequestMapping("/product/productList.do")
-	public String selectBoardList(
+	public String selectProductList(
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="cno", required=false, defaultValue="0") int cno,
 			Model model
@@ -57,16 +59,27 @@ public class ProductController {
 	}	
 	
 	@RequestMapping("/product/productView.do")
-	public String productView(@RequestParam int pno, Model model) {
+	public String productView(@RequestParam int pno,
+								Model model) {
 		
 		Product product = productService.selectOneProduct(pno);
+		List<Review> review = productService.selectReviewList(pno);
 		
 		List<PAttachment> pattachmentList = productService.selectPAttachmentList(pno);
-		
+		for(int i = 0 ; i < review.size() ; i++) {
+			int reno = review.get(i).getReno();
+			review.get(i).setRattachment(productService.selectRAttachment(reno));
+		}
+		System.out.println(review);
 		model.addAttribute("product", product);
 		model.addAttribute("pattachmentList", pattachmentList);
 		
+		model.addAttribute("List", review);
+		// model.addAttribute("rattachmentList", rattachmentList);
+		
 		return "product/productView";
+		
+		
 	}
-
+	
 }

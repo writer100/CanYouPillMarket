@@ -24,22 +24,19 @@
 		<selectKey keyProperty="reno" resultType="_int" order="BEFORE">
 			SELECT SEQ_RENO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO RATTACHMENT VALUES (SEQ_RATTACHMENTNO.NEXTVAL, 
+		INSERT INTO RATTACHMENT VALUES (SEQ_RANO.NEXTVAL, 
 		  #{ reno }, #{ originalname }, #{ changename }, 
-		  SYSDATE, 0, 'Y' )
+		  SYSDATE, 'Y' )
 	</insert>
 	
 	<select id="selectOneReview" parameterType="int" resultType="Review">
 		SELECT * FROM REVIEW WHERE RENO = #{ reno }
 	</select>
 	
-	<select id="selectRAttachmentList" parameterType="int" resultType="RAttachment">
-		SELECT *FROM RATTACHMENT WHERE RENO = #{ reno }
+	<select id="selectRAttachment" parameterType="int" resultType="RAttachment">
+		SELECT * FROM RATTACHMENT WHERE RENO = #{ reno }
 	</select>
 	
-	<update id="updateReadCount" parameterType="int">
-		UPDATE REVIEW SET REVIEWREADCOUNT = REVIEWREADCOUNT + 1 WHERE RENO = #{ reno }
-	</update>
 	
 	<update id="updateReview" parameterType="Review">
 		UPDATE REVIEW SET RETITLE = #{ retitle }, RECONTENT = #{ recontent }
@@ -65,19 +62,4 @@
 	</delete>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -69,7 +69,7 @@
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<button type="button" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					<br />
 				</div>
 			</div>
@@ -93,18 +93,33 @@
 		
 		<div class="row reviews" style="text-align: center; margin: 80px 0; width: 70%;">
 			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
-			<c:forEach begin="1" end="5">
+			<p>
+			<button type="button" class="btn" onclick="goReview('${ product.pno }', '${ product.pname }');">리뷰 등록</button>
+			<!-- <input type="button" value="리뷰등록" id="btn-add" class="btn" onclick="fn_goRivewForm();"/> -->
+			</p>
+			
+			
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<input type="hidden" value="${review.retitle}" id="retitle">
-					<h3 class="panel-title">${ review.retitle }</h3>
+				<c:forEach items="${List}" var="review" >
+				
+				<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
+		           	<c:forEach items="${rattachment}" var="rattachment" varStatus="vs">
+						<img src="${pageContext.request.contextPath}/resources/reviewUpload/${rattachment.changename}" alt="첨부파일" width="100px;" "/>
+					</c:forEach>
+				</div> 
+				
+				<div class="retitle">
+					<!-- <input type="hidden" value="${review.retitle}" id="retitle"> -->
+					<h3 class="panel-title" float: right;">${ review.retitle }</h3>
 				</div>
-				<div class="panel-body">
-					<input type="hidden" value="${review.recontent}" id="recontent">
+				<div class="recontent" float: right;">
+					<!-- <input type="hidden" value="${review.recontent}" id="recontent">  -->
 					<p>${review.recontent}</p>
 				</div>
+				
+				</c:forEach>
 			</div>
-			</c:forEach>
+			
 		</div>
 	</div>
 <script>
@@ -133,6 +148,7 @@
 			
 			$(".selected_option").html(str);
 		});
+		
 			var divs = document.querySelectorAll('div');
 			divs.forEach(function(div){
 				div.addEventListener('click',logEvent, { 
@@ -147,6 +163,10 @@
 
 			function goCart(pno, pname, pprice){
 				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
+			}
+			
+			function goReview(pno){
+				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno;
 			}
 </script>
 
