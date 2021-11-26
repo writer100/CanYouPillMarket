@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -553,13 +555,65 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/adminInfo.do")
-	public String adminInfo() {
+	public String adminInfo(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Model model, HttpSession session) {
+
+			String myInfo = ((Member) (session.getAttribute("member"))).getUserId();
+			
+			Member myMember = adminService.adminSelectUser(myInfo);
+			
+			
 		
-		return "admin/adminInfo";
+		
+			// 한 페이지당 게시글 수
+			int numPerPage = 15;
+
+			// 현재 페이지의 게시글 수
+			List<Map<String, String>> list = adminService.selectUserList(cPage, numPerPage);
+
+			// 전체 게시글 수
+			int totalContents = adminService.selectUserTotalContents();
+
+			// 페이지 처리 Utils 사용하기
+			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminUserManageList.do");
+
+			// System.out.println("list : " + list);
+			// System.out.println("pageBar : " + pageBar);
+
+			model.addAttribute("myMember", myMember);
+			model.addAttribute("list", list);
+			model.addAttribute("totalContents", totalContents);
+			model.addAttribute("numPerPage", numPerPage);
+			model.addAttribute("pageBar", pageBar);
+
+			return "admin/adminInfo";
 		
 	}
 	
 	
+	
+	
+	
+	@RequestMapping("/admin/memoSave.do")
+	@ResponseBody
+	public boolean memoSave(@RequestParam String memo, @RequestParam String userId) {
+		
+	
+		Map<String, String> memoVal = new HashMap<String, String>();
+		
+		memoVal.put("memo", memo);
+		memoVal.put("userId", userId);
+		
+		// System.out.println(memoVal);
+		
+		int result = adminService.adminMemoInsert(memoVal);
+		
+		if(result == 1) {
+			return true;
+		}else {
+			return false;				
+		}			
+	}
 	
 	
 	

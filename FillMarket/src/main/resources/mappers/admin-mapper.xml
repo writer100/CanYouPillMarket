@@ -175,5 +175,14 @@
 		WHERE qano = #{qano}
 	</update>
 	
+	<select id="selectAdmin" parameterType="String" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE USERID = #{userId} AND LEVELTYPE = 2
+	</select>
+	
+	<update id="adminMemoInsert">
+		UPDATE MEMBER SET MEMO = #{memo}
+		WHERE USERID = #{userId}
+	</update>
 	
 </mapper>

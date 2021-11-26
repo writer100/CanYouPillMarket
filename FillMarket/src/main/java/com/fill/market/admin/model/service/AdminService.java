@@ -190,6 +190,16 @@ public class AdminService {
 		return adminDAO.selectUserNameTotalList(userName);
 	}
 
+	public Member selectAdmin(String userId) {
+		
+		return adminDAO.selectAdmin(userId);
+	}
+
+	public int adminMemoInsert(Map<String, String> memoVal) {
+		
+		return adminDAO.adminMemoInsert(memoVal);
+	}
+
 	
 	
 }

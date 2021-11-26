@@ -28,7 +28,7 @@
 		<div class="sidebar">
 			<header>
 				<img id="logo"
-					src="${pageContext.request.contextPath }/resources/images/logo.png"
+					src="${pageContext.request.contextPath }/resources/images/final_logo.png"
 					alt="">
 			</header>
 			<ul>
