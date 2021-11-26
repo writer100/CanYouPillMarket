@@ -82,7 +82,7 @@
                 </tr>
                 <tr>
                     <td>배송비</td>
-                    <td>무료배송</td>
+                    <td>${ orderDetail.fee ne 0 ? orderDetail.fee : '무료배송' }</td>
                 </tr>
                 <tr>
                     <td>총 결제금액</td>
@@ -113,18 +113,20 @@
                         <th width="130px">처리상태</th>
                         <th width="100px">-</th>
                     </tr>
+                    <c:forEach items="${ detailList }" var="p">
                     <tbody>
                         <tr>
-                            <td><img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ orderDetail.changename }"></td>
-                            <td><h5>${ orderDetail.pname }</h5></td>
-                            <td>${ orderDetail.amount }</td>
+                            <td><img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ p.changename }"></td>
+                            <td><h5>${ p.pname }</h5></td>
+                            <td>${ p.amount }</td>
                             <td>
-                            	<fmt:formatNumber pattern="###,###,###" value="${ orderDetail.pprice * orderDetail.amount}" /> 원
+                            	<fmt:formatNumber pattern="###,###,###" value="${ p.pprice * p.amount}" /> 원
                             </td>
                             <td>배송중</td>
                             <td><button type="button" id="reviewBtn">리뷰작성</button></td>
                         </tr>
                     </tbody>
+                    </c:forEach>
                 </thead>
             </table>
         </div>

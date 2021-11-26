@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.product.model.dao.ProductDAO;
+import com.fill.market.review.model.vo.RAttachment;
+import com.fill.market.review.model.vo.Review;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,6 +41,24 @@ public class ProductServiceImpl implements ProductService {
 	public List<PAttachment> selectPAttachmentList(int pno) {
 		
 		return productDAO.selectPAttachmentList(pno);
+	}
+
+	@Override
+	public Review selectOneReview(int pno) {
+		
+		return productDAO.selectOneReview(pno);
+	}
+
+	@Override
+	public RAttachment selectRAttachment(int reno) {
+		
+		return productDAO.selectRAttachment(reno);
+	}
+
+	@Override
+	public List<Review> selectReviewList(int pno) {
+		
+		return productDAO.selectReviewList(pno);
 	}
 
 

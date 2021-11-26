@@ -132,8 +132,10 @@ public class OrderController {
 		orderList.setOrderid(orderId);
 		
 		List<OrderList> list = orderService.orderDetail(orderList);
+		List<OrderList> detailList = orderService.orderDetailProduct(orderList);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("detailList", detailList);
 		
 		return "order/orderDetail";
 	}

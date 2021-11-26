@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/final_logo.png">
 <header>
 	<div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-1 mb-4">
+        <header class="d-flex flex-wrap justify-content-center py-1 mb-4" style="font-family: Helvetica Neue;">
             <a href="${pageContext.request.contextPath}" class="me-md-auto mt-4 ">
                 <img src="${pageContext.request.contextPath}/resources/images/final_logo.png" width="340">
             </a>
@@ -21,12 +21,16 @@
 
             <ul class="nav">
                 <c:if test="${!empty member}">
+                	<c:if test="${member.levelType eq '2'}">
+                		<li class="nav-item"><a href="${pageContext.request.contextPath}/admin/adminProductList.do" class="nav-link text-dark">MANAGER</a></li>
+                	</c:if>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/myPage.do" class="nav-link text-dark">MY PAGE</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark">MY HEART</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/cartList.do" class="nav-link text-dark">SHOPPING BAG</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/memberLogout.do" class="nav-link text-dark">LOGOUT</a></li>
                 </c:if>
             </ul>
+             
         </header>
     </div>
 </header>

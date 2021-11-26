@@ -22,5 +22,7 @@ public interface OrderDAO {
 	List<OrderList> orderDetail(OrderList orderList);
 	
 	void insertOrderDetail(OrderDetail orderDetail);
+	
+	List<OrderList> orderDetailProduct(OrderList orderList);
 
 }

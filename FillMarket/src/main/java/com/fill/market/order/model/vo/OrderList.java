@@ -27,10 +27,12 @@ public class OrderList implements Serializable {
 	private String address2;
 	private String phone;
 	private String orderid;	
+	private int fee;
 	
 	private int orderdetailno;
 	private int pno;
 	private int amount;
+	private int cnt;
 	
 	private String pname;
 	private int pprice;

@@ -50,12 +50,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return ReviewResult;
 	}
 
+	// selectReview는 List 처리 안 함
 	@Override
 	public Review selectOneReview(int reno) {
 		
 		Review review = reviewDAO.selectOneReview(reno);
-		
-		if( review != null ) reviewDAO.updateReadCount(reno);
 		
 		return review;
 	}
@@ -72,6 +71,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.selectOneReview(reno);
 	}
 
+	
 	@Override
 	public int updateReview(Review review, List<RAttachment> rattachList) {
 		
@@ -97,8 +97,8 @@ public class ReviewServiceImpl implements ReviewService {
 				if(totalResult == 0) throw new ReviewException("게시글 첨부파일 수정 실패!");
 			}
 		}
-		
 		return totalResult;
+		
 	}
 
 	@Override

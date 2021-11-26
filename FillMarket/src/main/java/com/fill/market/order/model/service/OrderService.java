@@ -24,5 +24,7 @@ public interface OrderService {
 
 	void insertOrderDetail(OrderDetail orderDetail);
 
+	List<OrderList> orderDetailProduct(OrderList orderList);
+
 
 }

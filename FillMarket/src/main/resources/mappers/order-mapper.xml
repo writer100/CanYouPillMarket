@@ -21,6 +21,7 @@
 				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid })
 	</insert>
 	
+	<!-- 상품 주문 시 장바구니 정보를 OrderDetail 테이블에 추가 (주문 완료 후 장바구니 값 삭제) -->
 	<insert id="insertOrderDetail" parameterType="OrderDetail">
 		INSERT INTO ORDERDETAIL (ORDERDETAILNO, ORDERID, PNO, AMOUNT)
 		SELECT SEQ_ORDERDETAILNO.NEXTVAL, #{ orderid }, PNO, AMOUNT
@@ -32,21 +33,23 @@
 		WHERE CARTUSERID = #{ orderuserid }
 	</delete>
 	
+	<!-- 주문내역 리스트 조회 -->
 	<select id="orderList" resultType="OrderList">
 		SELECT O.ORDERUSERID, O.TOTALPRICE, O.ORDERENROLL, O.RECEIVERNAME,
-       	P.PNAME, OD.ORDERID
+		P.PNAME, OD.ORDERID, (SELECT COUNT(*) -1 FROM ORDERDETAIL
+		                        WHERE ORDERID = OD.ORDERID
+		                        GROUP BY ORDERID) "CNT"
 		FROM ORDERED O, ORDERDETAIL OD, PRODUCT P
 		WHERE O.ORDERID = OD.ORDERID
 		AND OD.PNO = P.PNO
+		AND OD.ORDERDETAILNO IN (SELECT MIN(ORDERDETAILNO) FROM ORDERDETAIL
+		GROUP BY ORDERID)
 		AND P.PNAME = (SELECT MIN(PNAME) FROM PRODUCT P WHERE PNO = OD.PNO)
 		AND ORDERUSERID = #{ orderuserid }
 	</select>
 	
-	<select id="orderTotalContents" resultType="int">
-		SELECT COUNT (*) FROM ORDERED
-		WHERE ORDERUSERID = #{ orderuserid }
-	</select>
-	
+	<!-- 주문 상세 조회 -->
+	<!-- 
 	<select id="orderDetail" resultType="OrderList">
 		SELECT O.*, 
 		       OD.ORDERDETAILNO, OD.PNO, OD.AMOUNT,
@@ -62,6 +65,23 @@
 		AND O.ORDERUSERID = #{ orderuserid }
 		AND O.ORDERID = #{ orderid }
 	</select>
-	
+	 -->
+	 
+	 <select id="orderDetail" resultType="OrderList">
+	 	SELECT * FROM ORDERED
+		WHERE ORDERUSERID = #{ orderuserid }
+		AND ORDERID = #{ orderid }
+	 </select>
+	 
+	 <select id="orderDetailProduct" resultType="OrderList">
+	 	SELECT PA.CHANGENAME, P.PNAME, P.PPRICE,
+		       OD.PNO,OD.AMOUNT
+		FROM ORDERDETAIL OD, PRODUCT P, PATTACHMENT PA
+		WHERE PA.PNO = OD.PNO
+		AND PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = OD.PNO)
+		AND OD.PNO = P.PNO
+		AND OD.ORDERID = #{ orderid }
+	 </select>
+	 
 	<!-- Access to #{ field } -->
 </mapper>

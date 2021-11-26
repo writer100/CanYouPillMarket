@@ -231,7 +231,7 @@
 						id="btnJoin">
 					<input type="reset" class="btn" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
 						id="btnJoin">
-					<input type="button" class="btn" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
+					<input type="button" class="btn" style="background-color: #00000078;" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
 						id="btnJoin">
 				</div>
 

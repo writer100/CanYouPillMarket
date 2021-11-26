@@ -39,6 +39,7 @@ public class AdminController {
 
 		return "admin/adminMain";
 	}
+	
 
 	@RequestMapping("/admin/adminProductList.do")
 	public String adminProductList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,

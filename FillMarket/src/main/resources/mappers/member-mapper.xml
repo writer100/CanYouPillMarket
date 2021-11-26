@@ -59,5 +59,10 @@
 		WHERE USERID = #{ userId }
 	</update>
 	
+	<select id="selectEmailCheck" parameterType="string" resultType="string">
+		SELECT USERID FROM MEMBER
+		WHERE EMAIL = #{ email }
+	</select>
+	
 	
 </mapper>

@@ -32,6 +32,8 @@
 	}
 	.search{ text-align: center; }
 	
+	.btn{ background-color : rgb(255, 142, 117); color: white; }
+	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
 		
@@ -63,10 +65,10 @@
 			</c:forEach>
 		    <textarea class="form-control" name="reviewcontent" placeholder="내용" required>${review.recontent }</textarea>
 		    <br>
-		    <button class="btn btn-outline-info" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>
+		    <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>
 		    <c:if test="${member.userId eq review.reuserid}">
 		    &nbsp;
-			<button class="btn btn-outline-info" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?reno=${review.reno}'">수정 페이지</button>
+			<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?reno=${review.reno}'">수정 페이지</button>
 			</c:if>
 			</div>
 			

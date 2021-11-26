@@ -61,5 +61,11 @@ public class OrderDAOImpl implements OrderDAO {
 		
 	}
 
+	@Override
+	public List<OrderList> orderDetailProduct(OrderList orderList) {
+		
+		return sqlSession.selectList("orderSQL.orderDetailProduct", orderList);
+	}
+
 
 }
