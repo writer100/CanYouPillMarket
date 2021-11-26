@@ -36,7 +36,7 @@ public class ReviewController {
 			) {
 		
 		// 한 페이지당 게시글 수
-		int numPerPage = 10;
+		int numPerPage = 5;
 		
 		// 현재 페이지와 한 페이지당 게시글 수를 같이 가지고 DB에 조회
 		// 현재  페이지의 게시글 수 
@@ -63,7 +63,10 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/reviewForm.do")
-	public String reviewForm() { // 글쓰기 메소드!
+	public String reviewForm(String pno, String pname, Model model) { // 글쓰기 메소드!
+		
+		model.addAttribute("pno",  pno);
+		model.addAttribute("pname",  pname);
 		
 		return "review/reviewForm";
 	}
@@ -111,9 +114,9 @@ public class ReviewController {
 		String msg = "";
 		
 		if( result > 0 ) {
-			msg = "게시글 등록 성공!";
+			msg = "리뷰 등록 성공!";
 		} else {
-			msg = "게시글 등록 실패!";
+			msg = "리뷰 등록 실패!";
 		}
 		
 		model.addAttribute("loc", loc);
@@ -133,7 +136,7 @@ public class ReviewController {
 		return sdf.format(new Date(System.currentTimeMillis())) + "_" + rnd + "." + ext; 
 			
 	}
-
+	
 	@RequestMapping("/review/reviewView.do")
 	public String reviewView(@RequestParam int reno, Model model) {
 		
@@ -235,14 +238,14 @@ public class ReviewController {
 	
 	@RequestMapping("/review/fileDelete.do")
 	@ResponseBody
-	public boolean fileDelete(@RequestParam int attNo,
+	public boolean fileDelete(@RequestParam int reno,
 							   @RequestParam String rName,
 							   HttpServletRequest request) {
 		
 		String savePath = request.getServletContext().getRealPath("/resources/reviewUpload");
 		
 		// 1. DB에서 첨부파일 삭제
-		int result = reviewService.deleteFile(attNo);
+		int result = reviewService.deleteFile(reno);
 		
 		if( result == 1 ) {
 			File goodbye = new File(savePath + "/" + rName);
@@ -274,8 +277,8 @@ public class ReviewController {
 		if( result > 0 ) {
 			msg = "삭제 완료!";
 			
-			for(RAttachment a : deList ) {
-				new File(savePath + "/" + a.getChangename()).delete();
+			for(RAttachment ra : deList ) {
+				new File(savePath + "/" + ra.getChangename()).delete();
 			}
 		} else { 
 			msg = "삭제 실패!";

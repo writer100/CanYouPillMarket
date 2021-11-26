@@ -131,10 +131,10 @@ $(function(){
 		location.href="${pageContext.request.contextPath}/review/fileDownload.do?oName="+oName+"&rName="+rName;
 	}
 
-	function fileDelete(obj, attNo, rName){
+	function fileDelete(obj, reno, rName){
 		$.ajax({
 			url : '${pageContext.request.contextPath}/review/fileDelete.do',
-			data : { attNo : attNo, rName : rName }, 
+			data : { reno : reno, rName : rName }, 
 			dataType : 'json',
 			success : function(data){
 				if(data == true) {

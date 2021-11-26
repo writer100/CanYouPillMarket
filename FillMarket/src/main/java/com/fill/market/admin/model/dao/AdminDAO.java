@@ -179,6 +179,16 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminSQL.selectUserNameTotalList", userName);
 	}
 
+	public Member selectAdmin(String userId) {
+		
+		return sqlSession.selectOne("adminSQL.selectAdmin", userId);
+	}
+
+	public int adminMemoInsert(Map<String, String> memoVal) {
+		
+		return sqlSession.insert("adminMemoInsert", memoVal);
+	}
+
 
 
 	

@@ -63,7 +63,7 @@
 			<c:forEach items="${list}" var="product"> 
 			  <div class="col">
 			    <div class="card h-100">
-			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" style="width: 200px;" "class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" style="width: 200px h;" "class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
 					  <div class="card-body" style="z-index:10;">
 					    <h5 class="card-title" id="${ product.pname }">${ product.pname }</h5>
 					    <p class="card-text" id="${ product.pprice }">${ product.pprice }</p>
@@ -115,6 +115,40 @@
 				console.log("pno="+pno);
 				location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
 			});
+		});
+		
+		$(function(){
+			$(".card-img-top[name]").on("click",function(){
+				var userId = $(this).attr("name");
+				console.log("pname="+pname);
+				location.href = "${pageContext.request.contextPath}/product/productView.do?pname="+pname;
+			});
+			
+			$('#pname').on("keyup",function(){
+				var userName = $(this).val().trim();
+				console.log("pname="+pname);
+				
+				if(pname.length == 0){
+					//$('#AllList').show()
+					$('#pnameList').hide()
+				}else{
+					$.ajax({
+						 url  : "${pageContext.request.contextPath}/product/productList.do",
+				         data : {pname : pname},
+				         dataType: "html",
+				         success : function(data){
+				        	 
+				        	// $('#AllList').hide()
+				        	 $('#pnameList').show()
+				        	 $('#pnameList').html(data)
+				        	 
+				         }
+					})
+				}
+				
+				
+			});
+			
 		});
 	</script>
 	<!-- JQuery CDN-->

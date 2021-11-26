@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
+import com.fill.market.review.model.vo.RAttachment;
+import com.fill.market.review.model.vo.Review;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -40,6 +42,24 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<PAttachment> selectPAttachmentList(int pno) {
 		
 		return sqlSession.selectList("productSQL.selectPAttachmentList", pno);
+	}
+
+	@Override
+	public Review selectOneReview(int pno) {
+		
+		return sqlSession.selectOne("productSQL.selectOneReview", pno);
+	}
+
+	@Override
+	public RAttachment selectRAttachment(int reno) {
+		
+		return sqlSession.selectOne("productSQL.selectRAttachment", reno);
+	}
+
+	@Override
+	public List<Review> selectReviewList(int pno) {
+		
+		return sqlSession.selectList("productSQL.selectReviewList", pno);
 	}
 
 }
