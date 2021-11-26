@@ -46,7 +46,7 @@
 	<insert id="updateRAttachment" parameterType="RAttachment">
 		INSERT INTO RATTACHMENT VALUES (SEQ_RATTACHMENTNO.NEXTVAL, 
 		  #{ reno }, #{ originalname }, #{ changename }, 
-		  SYSDATE, 0, 'Y' )
+		  SYSDATE, 'Y' )
 	</insert>
 	
 	<delete id="deleteRAttachment" parameterType="int">
@@ -54,7 +54,7 @@
 	</delete>
 	
 	<delete id="deleteFile" parameterType="int">
-		DELETE FROM RRATTACHMENT WHERE RATTACHMENTNO = #{ reno } 
+		DELETE FROM RATTACHMENT WHERE RANO = #{ rano } 
 	</delete>
 	
 	<delete id="deleteReview" parameterType="int">

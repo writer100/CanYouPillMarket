@@ -78,20 +78,22 @@
                      </tr>
                  </thead>
                  <c:forEach items="${list}" var = "review">
+                 <c:if test="${member.userId eq review.reuserid}">
                  	<tr id="${ review.reno }">
                          <td>${review.reno }</td>
                          <td>${review.retitle }</td>
                          <td>${review.reuploaddate }</td>
                          <td class="updateFrm">
+                         <c:if test="${member.userId eq review.reuserid}">
                          	<input type="hidden" name="reno" value="${review.reno}" />
 							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewUpdateForm('${ review.reno }');">수정</button>
           	                &nbsp;&nbsp;
           	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewDelete('${ review.reno }');">삭제</button>
-	
+						</c:if>
                          </td>
                      </tr>
+                 </c:if>
                  </c:forEach>
-             
              </table>
 			
 			<div>

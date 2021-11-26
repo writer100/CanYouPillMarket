@@ -63,8 +63,8 @@
 			<div class="row product" wieth="90%">
 			<div id="review-container" wieth="60%">
 			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-				<input type="hidden" name="reno" value="${ review.reuserid }" />
-				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="reviewtitle" id="reviewtitle" value="${review.retitle}" required>
+				<input type="hidden" name="reno" value="${ review.reno }" />
+				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
 				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
 				<!-- 
 				<input type="hidden" name="pno" value="${ review.pno }" />
@@ -79,6 +79,7 @@
 					<button type="button" class="btn btn-outline-danger col-2"
 							onclick="fileDelete(this, '${ra.rano}', '${ra.changename }');">파일 삭제</button>
 					</div>
+					<input type="hidden" name="rano" value="${ra.rano}" />
 				</c:forEach>
 				<br>
 				<div class="input-group mb-3" style="padding:0px;">
@@ -90,7 +91,7 @@
 				    <label class="custom-file-label" for="upFile"></label>
 				  </div>
 				</div>
-			    <textarea class="form-control" name="reviewcontent" placeholder="내용" required>${review.recontent}</textarea>
+			    <textarea class="form-control" name="recontent" placeholder="내용" required>${review.recontent}</textarea>
 				<br />
 				<div class="rows" style="padding:0px;">
 				<input type="submit" class="btn btn-outline-info" " value="수정 완료" /> &nbsp;
@@ -107,7 +108,7 @@
 <script>
 /* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
 function validate(){
-	var content = $("[name=reviewtitle]","[name=reviewcontent]").val();
+	var content = $("[name=retitle]","[name=recontent]").val();
 	if(content.trim().length==0){
 		alert("내용을 입력하세요");
 		return false;

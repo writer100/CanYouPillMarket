@@ -101,7 +101,8 @@
 			
 			<div class="row-cols-1 row-cols-md-1 g-1" ">
 				<c:forEach items="${List}" var="review" >
-				<div id="${ reuserid }">
+				<div id="${ review.reno }">
+				<input type="hidden" value="${review.reno}" id="reno">
 				<div class="rattachment" style="float: left; text-align: center; width:40px ; height :40px">
 					<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
 				</div> 
@@ -109,7 +110,7 @@
 				<div class="retitle">
 					<!-- <input type="hidden" value="${review.retitle}" id="retitle"> -->
 					<h3 class="panel-title" float: right;">${ review.retitle }</h3>
-					<h5 class="panel-writer" float: right;"> ${ reuserid }</h5>
+					<h5 class="panel-writer" float: right;">${ review.reuserid } </h5>
 				</div>
 				<div class="recontent" float: right;">
 					<!-- <input type="hidden" value="${review.recontent}" id="recontent">  -->
@@ -170,8 +171,8 @@
 			}
 			
 			$(function(){
-				$("td:not(.updateFrm)").on("click",function(){
-					var reno = $(this).parent().attr("id");
+				$("div[id]").on("click",function(){
+					var reno = $(this).attr("id");
 					console.log("reno="+reno);
 					location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
 				});
