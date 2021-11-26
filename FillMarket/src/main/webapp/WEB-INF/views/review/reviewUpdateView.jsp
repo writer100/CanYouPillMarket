@@ -19,6 +19,9 @@
 	<!-- 타이틀 로고 -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
+	
+	div#review-container{  margin:0 auto; text-align:center;}
+	
 	.row {
     display: flex;
     flex-wrap: wrap;
@@ -30,20 +33,34 @@
 		text-align: center;
 		border-bottom : 1px solid rgba(0, 0, 0, 0.35);
 	}
-	.search{ text-align: center; }
+.form-control {
+    display: block;
+    width: 70%;
+ 	margin:0 auto;
+    }
+.input-group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+}
+	div#review-container input {margin-bottom:15px;}
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
 	#reviewUpdate_header {
 	text-align: center;
 	color: rgb(255, 142, 117);
-}
-.btn-outline-info {
-    color: #0dcaf0;
-    border-color: #0dcaf0;
-    display: block;
-    margin: auto;
-}
+	}
+
+	.btn-outline {
+    background-color : rgb(255, 142, 117); color: white;
+
+	}
 		
 	</style>
 </head>
@@ -60,8 +77,8 @@
                 <br />
                 <br />
                 <br />
-			<div class="row product" wieth="90%">
-			<div id="review-container" wieth="60%">
+			<div class="row product" width="90%">
+			<div id="review-container" width="60%">
 			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 				<input type="hidden" name="reno" value="${ review.reno }" />
 				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
@@ -72,11 +89,11 @@
 				 -->
 				<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
 					<div class="rows">					
-					<button type="button" class="btn btn-outline-success col-8"
+					<button type="button" class="btn btn-outline col-4"
 							onclick="fileDownload('${ra.originalname}','${ra.changename }');" >
 						첨부파일${vs.count} - ${ra.originalname }
 					</button>
-					<button type="button" class="btn btn-outline-danger col-2"
+					<button type="button" class="btn btn-outline col-1"
 							onclick="fileDelete(this, '${ra.rano}', '${ra.changename }');">파일 삭제</button>
 					</div>
 					<input type="hidden" name="rano" value="${ra.rano}" />
@@ -94,8 +111,8 @@
 			    <textarea class="form-control" name="recontent" placeholder="내용" required>${review.recontent}</textarea>
 				<br />
 				<div class="rows" style="padding:0px;">
-				<input type="submit" class="btn btn-outline-info" " value="수정 완료" /> &nbsp;
-				<input type="button" class="btn btn-outline-info" value="삭제" onclick="location.href='${pageContext.request.contextPath}/review/reviewDelete.do?reno=${review.reno}'"/>
+				<input type="submit" class="btn btn-outline col-1" " value="수정 완료" /> &nbsp;
+				<input type="button" class="btn btn-outline col-1" value="삭제" onclick="location.href='${pageContext.request.contextPath}/review/reviewDelete.do?reno=${review.reno}'"/>
 				<br />
 				<br />
 				</div>

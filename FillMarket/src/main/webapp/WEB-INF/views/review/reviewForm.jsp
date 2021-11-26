@@ -22,7 +22,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <!-- 타이틀 로고 -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 	.row {
     display: flex;
@@ -35,7 +35,6 @@
 		text-align: center;
 		border-bottom : 1px solid rgba(0, 0, 0, 0.35);
 	}
-	.search{ text-align: center; }
 
 .form-control {
     display: block;
