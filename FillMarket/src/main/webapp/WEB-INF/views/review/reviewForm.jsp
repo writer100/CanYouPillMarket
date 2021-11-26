@@ -100,9 +100,9 @@
 			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewFormEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="reno" value="${ review.reuserid }" />  -->
 				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
-				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
-				<input type="hidden" name="pno" value="${ product.pno }" required /> 
-				<input type="text" class="form-control" name="productno" value="${ pno }" readonly required>
+				<input type="text" class="form-control" name="reuserid" value="${member.userId}" readonly required>
+				<input type="hidden" name="pno" value="${ pno }" required /> 
+				<input type="text" class="form-control" name="productno" value="${ pname }" readonly required>
 				
 				
 			

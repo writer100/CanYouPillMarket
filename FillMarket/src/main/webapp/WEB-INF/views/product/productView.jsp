@@ -99,20 +99,22 @@
 			</p>
 			
 			
-			<div class="panel panel-default">
+			<div class="row-cols-1 row-cols-md-1 g-1" ">
 				<c:forEach items="${List}" var="review" >
-				
-				<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
-						<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
+				<div id="${ reuserid }">
+				<div class="rattachment" style="float: left; text-align: center; width:40px ; height :40px">
+					<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
 				</div> 
 				
 				<div class="retitle">
 					<!-- <input type="hidden" value="${review.retitle}" id="retitle"> -->
 					<h3 class="panel-title" float: right;">${ review.retitle }</h3>
+					<h5 class="panel-writer" float: right;"> ${ reuserid }</h5>
 				</div>
 				<div class="recontent" float: right;">
 					<!-- <input type="hidden" value="${review.recontent}" id="recontent">  -->
 					<p>${review.recontent}</p>
+				</div>
 				</div>
 				
 				</c:forEach>
@@ -166,6 +168,14 @@
 			function goReview(pno, pname){
 				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno+"&pname="+pname;
 			}
+			
+			$(function(){
+				$("td:not(.updateFrm)").on("click",function(){
+					var reno = $(this).parent().attr("id");
+					console.log("reno="+reno);
+					location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
+				});
+			});
 </script>
 
 	<c:import url="../common/footer.jsp" />

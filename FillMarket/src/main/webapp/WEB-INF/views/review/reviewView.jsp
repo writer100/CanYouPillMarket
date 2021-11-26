@@ -19,6 +19,7 @@
 	<!-- 타이틀 로고 -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
+	div#review-container{ margin:0 auto; text-align:center;}
 	.row {
     display: flex;
     flex-wrap: wrap;
@@ -36,7 +37,10 @@
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
-		
+	#reviewView_header {
+	text-align: center;
+	color: rgb(255, 142, 117);
+}		
 	</style>
 	<script>
 
@@ -48,21 +52,21 @@
 	<c:import url="../common/navbar.jsp" />
 	<div id="container">
 	  			<br />
-                <header>
-                    <h1> REVIEW PAGE </h1>
-                </header>
+                <h1 id="reviewView_header" class="h3 mb-3 fw-normal mt-5 pt-5">
+					<strong>REVIEW PAGE</strong>
+				</h1>
                 <br />
                 <br />
                 <br />
                 <br />
-	    <div class="row product" wieth="90%">
-			<div id="reviw-container">
+	    <div class="row product" width="90%">
+			<div id="reviw-container" width="60%">
 			<input type="text" class="form-control" placeholder="제목" name="retitle" id="retitle" value="${review.retitle }" required>
 			<input type="text" class="form-control" name="reuserid" value="${review.reuserid}" readonly required>
 		
-			<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
+			<!--<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">-->
 				<img src="${pageContext.request.contextPath}/resources/reviewUpload/${ra.changename}" alt="첨부파일" width="30%;" "/>	
-			</c:forEach>
+			<!--</c:forEach> -->
 		    <textarea class="form-control" name="recontent" placeholder="내용" required>${review.recontent }</textarea>
 		    <br>
 		    <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>

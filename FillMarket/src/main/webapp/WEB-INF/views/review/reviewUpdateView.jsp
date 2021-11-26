@@ -34,18 +34,17 @@
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
-		#header{ color : rgba(0, 0, 0, 0.35) ;
-			 text-align: center; }
 	#reviewUpdate_header {
 	text-align: center;
-	color: rgb(255, 142, 117);;
+	color: rgb(255, 142, 117);
 }
 .btn-outline-info {
     color: #0dcaf0;
     border-color: #0dcaf0;
     display: block;
     margin: auto;
-}		
+}
+		
 	</style>
 </head>
 <body>
