@@ -88,12 +88,12 @@ public class OrderController {
 			order.setOrderid(orderId);
 			order.setOrderuserid(userId);
 			
-			orderService.insertOrder(order);
+			orderService.insertOrder(order);	// 카트내역 주문
 			
 			orderDetail.setOrderid(orderId);
-			orderService.insertOrderDetail(orderDetail);
+			orderService.insertOrderDetail(orderDetail);	// 주문 후 카트정보 orderDetail 테이블에 담음
 			
-			orderService.deleteCart(userId);
+			orderService.deleteCart(userId);	// 주문완료 한 카트내역 삭제
 			
 //			System.out.println("주문하기 : " + order);
 			

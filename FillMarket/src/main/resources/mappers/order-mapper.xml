@@ -16,9 +16,9 @@
 	</select>
 
 	<insert id="insertOrder" parameterType="Order">
-		INSERT INTO ORDERED (ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID)
+		INSERT INTO ORDERED (ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID, FEE)
 		VALUES (#{ orderuserid }, #{ totalprice }, 
-				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid })
+				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid }, #{ fee })
 	</insert>
 	
 	<!-- 상품 주문 시 장바구니 정보를 OrderDetail 테이블에 추가 (주문 완료 후 장바구니 값 삭제) -->

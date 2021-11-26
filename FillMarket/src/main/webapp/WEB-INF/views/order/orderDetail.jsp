@@ -117,13 +117,20 @@
                     <tbody>
                         <tr>
                             <td><img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ p.changename }"></td>
-                            <td><h5>${ p.pname }</h5></td>
+                            <td>
+                            	<h5>${ p.pname }</h5>
+                            	<input type="hidden" name="pno" value="${ p.pno }" />
+                            </td>
                             <td>${ p.amount }</td>
                             <td>
                             	<fmt:formatNumber pattern="###,###,###" value="${ p.pprice * p.amount}" /> 원
                             </td>
                             <td>배송중</td>
-                            <td><button type="button" id="reviewBtn">리뷰작성</button></td>
+                            <td>
+                            	<button type="button" id="exchangeBtn">교&nbsp;&nbsp;&nbsp;&nbsp;환</button>
+                            	<button type="button" id="refundBtn">환&nbsp;&nbsp;&nbsp;&nbsp;불</button>
+                            	<button type="button" id="reviewBtn">리뷰작성</button>
+                            </td>
                         </tr>
                     </tbody>
                     </c:forEach>
@@ -175,6 +182,10 @@
 		
 		$('#goProductList').click(function(){
 			location.href = "${pageContext.request.contextPath}/product/productList.do";
+		})
+		
+		$('#reviewBtn').click(function(){
+			location.href = "${pageContext.request.contextPath}/review/reviewForm.do";
 		})
 	</script>
 </body>
