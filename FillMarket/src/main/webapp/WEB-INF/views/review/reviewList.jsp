@@ -32,7 +32,9 @@
 	}
 	.search{ text-align: center; }
 	
-	.btn{ background-color : rgb(255, 142, 117); color: white; }
+	.btn{ background-color : rgb(255, 142, 117); color: white; 
+		  height: 30px; font-size: small;
+	}
 	
 	.my.pagination > .active > a, 
 	.my.pagination > .active > span, 
@@ -66,23 +68,25 @@
                 <br />
                 <br />
 	    <div class="row product" wieth="70%" style="text-align: center;">
-			<table class="mx-auto" style="width: 80%;">
+			<table class="table table-hover" style="width: 80%;">
                  <thead>
                      <tr>
 	                     <th>번호</th>
 	                     <th>제목</th>
+	                     <th>작성일</th>
 	                     <th>수정/삭제</th>
                      </tr>
                  </thead>
-                 
                  <c:forEach items="${list}" var = "review">
+                 	<tr id="${ review.reno }">
                          <td>${review.reno }</td>
                          <td>${review.retitle }</td>
-                         <td>
+                         <td>${review.reuploaddate }</td>
+                         <td class="updateFrm">
                          	<input type="hidden" name="reno" value="${review.reno}" />
-							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?reno=${review.reno}'">수정</button>
+							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewUpdateForm('${ review.reno }');">수정</button>
           	                &nbsp;&nbsp;
-          	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">삭제</button>
+          	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewDelete('${ review.reno }');">삭제</button>
 	
                          </td>
                      </tr>
@@ -107,7 +111,21 @@
 	<c:import url="../common/footer.jsp" />
 	
 	<script>
+	function fn_goReviewUpdateForm(reno){
+		location.href = "${pageContext.request.contextPath}/review/reviewUpdateView.do?reno="+reno;
+	}
 	
+	function fn_goReviewDelete(reno){
+		location.href = "${pageContext.request.contextPath}/review/reviewDelete.do?reno="+reno;
+	}
+	
+	$(function(){
+		$("td:not(.updateFrm)").on("click",function(){
+			var reno = $(this).parent().attr("id");
+			console.log("reno="+reno);
+			location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
+		});
+	});
 
 	</script>
 	<!-- JQuery CDN-->

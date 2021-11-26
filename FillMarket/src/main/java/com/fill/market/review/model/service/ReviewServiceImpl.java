@@ -50,7 +50,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return ReviewResult;
 	}
 
-	// selectReview는 List 처리 안 함
+	
 	@Override
 	public Review selectOneReview(int reno) {
 		
@@ -108,9 +108,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int deleteFile(int attNo) {
+	public int deleteFile(int reno) {
 		
-		return reviewDAO.deleteFile(attNo);
+		return reviewDAO.deleteFile(reno);
 	}
 
 }

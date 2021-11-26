@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>상품 목록</title>
+	<title>리뷰 상세보기</title>
 	<script
 		src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -57,13 +57,13 @@
                 <br />
 	    <div class="row product" wieth="90%">
 			<div id="reviw-container">
-			<input type="text" class="form-control" placeholder="제목" name="reviewtitle" id="reviewtitle" value="${review.retitle }" required>
-			<input type="text" class="form-control" name="reviewWriter" value="${review.reuserid}" readonly required>
+			<input type="text" class="form-control" placeholder="제목" name="retitle" id="retitle" value="${review.retitle }" required>
+			<input type="text" class="form-control" name="reuserid" value="${review.reuserid}" readonly required>
 		
 			<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
 				<img src="${pageContext.request.contextPath}/resources/reviewUpload/${ra.changename}" alt="첨부파일" width="30%;" "/>	
 			</c:forEach>
-		    <textarea class="form-control" name="reviewcontent" placeholder="내용" required>${review.recontent }</textarea>
+		    <textarea class="form-control" name="recontent" placeholder="내용" required>${review.recontent }</textarea>
 		    <br>
 		    <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>
 		    <c:if test="${member.userId eq review.reuserid}">

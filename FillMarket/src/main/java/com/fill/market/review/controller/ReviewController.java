@@ -63,7 +63,10 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/reviewForm.do")
-	public String reviewForm() { // 글쓰기 메소드!
+	public String reviewForm(String pno, String pname, Model model) { // 글쓰기 메소드!
+		
+		model.addAttribute("pno",  pno);
+		model.addAttribute("pname",  pname);
 		
 		return "review/reviewForm";
 	}
@@ -235,14 +238,14 @@ public class ReviewController {
 	
 	@RequestMapping("/review/fileDelete.do")
 	@ResponseBody
-	public boolean fileDelete(@RequestParam int attNo,
+	public boolean fileDelete(@RequestParam int reno,
 							   @RequestParam String rName,
 							   HttpServletRequest request) {
 		
 		String savePath = request.getServletContext().getRealPath("/resources/reviewUpload");
 		
 		// 1. DB에서 첨부파일 삭제
-		int result = reviewService.deleteFile(attNo);
+		int result = reviewService.deleteFile(reno);
 		
 		if( result == 1 ) {
 			File goodbye = new File(savePath + "/" + rName);
@@ -274,8 +277,8 @@ public class ReviewController {
 		if( result > 0 ) {
 			msg = "삭제 완료!";
 			
-			for(RAttachment a : deList ) {
-				new File(savePath + "/" + a.getChangename()).delete();
+			for(RAttachment ra : deList ) {
+				new File(savePath + "/" + ra.getChangename()).delete();
 			}
 		} else { 
 			msg = "삭제 실패!";

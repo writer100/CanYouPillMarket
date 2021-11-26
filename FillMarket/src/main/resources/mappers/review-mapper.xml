@@ -33,7 +33,7 @@
 		SELECT * FROM REVIEW WHERE RENO = #{ reno }
 	</select>
 	
-	<select id="selectRAttachment" parameterType="int" resultType="RAttachment">
+	<select id="selectRAttachmentList" parameterType="int" resultType="RAttachment">
 		SELECT * FROM RATTACHMENT WHERE RENO = #{ reno }
 	</select>
 	
@@ -54,7 +54,7 @@
 	</delete>
 	
 	<delete id="deleteFile" parameterType="int">
-		DELETE FROM RRATTACHMENT WHERE RATTACHMENTNO = #{ attNo } 
+		DELETE FROM RRATTACHMENT WHERE RATTACHMENTNO = #{ reno } 
 	</delete>
 	
 	<delete id="deleteReview" parameterType="int">

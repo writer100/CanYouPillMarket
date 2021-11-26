@@ -101,9 +101,9 @@
 				<!-- <input type="hidden" name="reno" value="${ review.reuserid }" />  -->
 				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
 				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
-				 
-				<!-- <input type="hidden" name="pno" value="${ product.pno }" required />  -->
-				 
+				<input type="hidden" name="pno" value="${ product.pno }" required /> 
+				<input type="text" class="form-control" name="productno" value="${ pno }" readonly required>
+				
 				
 			
 				<br>

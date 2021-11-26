@@ -80,9 +80,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public int deleteFile(int attNo) {
+	public int deleteFile(int reno) {
 		
-		return sqlSession.delete("reviewSQL.deleteFile", attNo);
+		return sqlSession.delete("reviewSQL.deleteFile", reno);
 	}
 
 }

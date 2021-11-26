@@ -103,9 +103,7 @@
 				<c:forEach items="${List}" var="review" >
 				
 				<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
-		           	<c:forEach items="${rattachment}" var="rattachment" varStatus="vs">
-						<img src="${pageContext.request.contextPath}/resources/reviewUpload/${rattachment.changename}" alt="첨부파일" width="100px;" "/>
-					</c:forEach>
+						<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
 				</div> 
 				
 				<div class="retitle">
@@ -165,8 +163,8 @@
 				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
 			}
 			
-			function goReview(pno){
-				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno;
+			function goReview(pno, pname){
+				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno+"&pname="+pname;
 			}
 </script>
 
