@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
-                    <td width="600px">${ orderList.pname } 외 ${ orderList.cnt } 개</td>
+                    <td width="600px">${ orderList.pname } <b>외 ${ orderList.cnt }개</b></td>
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>

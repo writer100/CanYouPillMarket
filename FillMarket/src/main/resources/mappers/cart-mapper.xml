@@ -57,5 +57,10 @@
 		WHERE CARTUSERID = #{ cartuserid }
 	</delete>
 	
+	<insert id="cartDetailInsert" parameterType="Cart">
+		INSERT INTO CART (CARTNO, CARTUSERID, PNO, AMOUNT, PNAME, PPRICE, ORDERPRICE)
+		VALUES (SEQ_CARTNO.NEXTVAL, #{ cartuserid }, #{ pno }, #{ amount }, #{ pname }, #{ pprice }, #{ orderprice })
+	</insert>
+	
 	<!-- Access to #{ field } -->
 </mapper>

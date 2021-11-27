@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                     <td>주문처리상태</td>
-                    <td>배송중</td>
+                    <td>${ orderDetail.status }</td>
                 </tr>
             </table>
 
@@ -90,10 +90,10 @@
                     	<fmt:formatNumber pattern="###,###,###" value="${ orderDetail.totalprice }" /> 원
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>결제수단</td>
                     <td>카드 결제</td>
-                </tr>
+                </tr> -->
             </table>
 
         </div>
@@ -106,9 +106,9 @@
             <table id="orderProductInfo_tb">
                 <thead>
                     <tr>
-                        <th width="200px">이미지</th>
-                        <th width="590px">상 품</th>
-                        <th width="50px">수 량</th>
+                        <th width="180px">이미지</th>
+                        <th width="560px">상 품</th>
+                        <th width="60px">수 량</th>
                         <th width="140px">합 계</th>
                         <th width="130px">처리상태</th>
                         <th width="100px">-</th>
@@ -118,14 +118,14 @@
                         <tr>
                             <td><img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ p.changename }"></td>
                             <td>
-                            	<h5>${ p.pname }</h5>
+                            	${ p.pname }
                             	<input type="hidden" name="pno" value="${ p.pno }" />
                             </td>
                             <td>${ p.amount }</td>
                             <td>
                             	<fmt:formatNumber pattern="###,###,###" value="${ p.pprice * p.amount}" /> 원
                             </td>
-                            <td>배송중</td>
+                            <td>${ orderDetail.status }</td>
                             <td>
                             	<button type="button" id="exchangeBtn">교&nbsp;&nbsp;&nbsp;&nbsp;환</button>
                             	<button type="button" id="refundBtn">환&nbsp;&nbsp;&nbsp;&nbsp;불</button>

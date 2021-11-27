@@ -22,5 +22,7 @@ public interface CartDAO {
 	void modifyCart(Cart cart);
 
 	void deleteAll(String userId);
+	
+	int cartDetailInsert(Cart cart);
 
 }
