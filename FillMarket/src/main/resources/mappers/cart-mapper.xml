@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cartSQL">
 	
+	<!-- 제품 목록에서 장바구니 추가 -->
 	<insert id="insertCart" parameterType="Cart">
 		INSERT INTO CART (CARTNO, CARTUSERID, PNO, AMOUNT, PNAME, PPRICE, ORDERPRICE)
 		VALUES (SEQ_CARTNO.NEXTVAL, #{ cartuserid }, #{ pno }, #{ amount }, #{ pname }, #{ pprice }, #{ orderprice })
@@ -57,6 +58,7 @@
 		WHERE CARTUSERID = #{ cartuserid }
 	</delete>
 	
+	<!-- 제품 상세 페이지에서 장바구니 추가 -->
 	<insert id="cartDetailInsert" parameterType="Cart">
 		INSERT INTO CART (CARTNO, CARTUSERID, PNO, AMOUNT, PNAME, PPRICE, ORDERPRICE)
 		VALUES (SEQ_CARTNO.NEXTVAL, #{ cartuserid }, #{ pno }, #{ amount }, #{ pname }, #{ pprice }, #{ orderprice })
