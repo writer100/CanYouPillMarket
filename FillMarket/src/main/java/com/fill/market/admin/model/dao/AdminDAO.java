@@ -200,6 +200,11 @@ public class AdminDAO {
 		return sqlSession.selectOne("selectOrderTotal", userId);
 	}
 
+	public int updateUserAuthor(Member member) {
+		
+		return sqlSession.update("updateUserAuthor", member);
+	}
+
 
 
 	

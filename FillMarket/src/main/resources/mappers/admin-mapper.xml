@@ -203,4 +203,9 @@
 		where orderuserid = #{userId}
 	</select>
 	
+	<update id="updateUserAuthor" parameterType="Member">
+		UPDATE MEMBER SET LEVELTYPE = #{levelType}
+		WHERE USERID = #{userId}
+	</update>
+	
 </mapper>

@@ -233,7 +233,7 @@
 				
 					<div class="container">
 						<div class="row">
-							<h3>유저 정보</h3>
+							<h3>${myMember.userId }님의 정보</h3>
 							<table class="table">
 								<tr>
 									<td class="td col-2">아이디</td>
@@ -394,10 +394,31 @@ function orderList(userId){
 	function adminAuthorA(userId){
 		var selectAuthor = $('#selectVala').val();
 		var myAuthor = ${myMember.levelType}
-		alert("나의 권한은 ?????"+myAuthor)
+		
 		
 		if(selectAuthor == myAuthor){
-			alert("이미 ")
+			alert("회원님의 권한은 이미 같은 권한입니다.");
+		}else{
+			var result = confirm("정말 회원님의 권한을 바꾸시겠습니까?");
+			
+			if(result == false){
+				alert("취소되었습니다.")
+			}else{
+				$.ajax({
+					url : "${pageContext.request.contextPath}/admin/userAuthorUpdate.do",
+					data : {userId : userId, selectAuthor : selectAuthor},
+					dataType : "json",
+					success : function(data){
+						if(data == true){
+							alert("권한이 수정되었습니다.")
+						}else if(data == false){
+							alert("수정이 안되었어요ㅠㅠ")
+						}
+					}
+				})
+				
+			}
+			
 		}
 		
 		

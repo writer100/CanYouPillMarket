@@ -211,6 +211,11 @@ public class AdminService {
 		return adminDAO.selectOrderTotal(userId);
 	}
 
+	public int updateUserAuthor(Member member) {
+		
+		return adminDAO.updateUserAuthor(member);
+	}
+
 	
 	
 }

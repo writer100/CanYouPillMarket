@@ -139,5 +139,23 @@ public class OrderController {
 		
 		return "order/orderDetail";
 	}
+	
+	@RequestMapping("order/orderDetailAdmin.do")
+	public String  adminOrderDetail(@RequestParam("n") String orderId, @RequestParam(value="u") String userId, Model model, OrderList orderList) {
+		System.out.println(orderId);
+		System.out.println(userId);
+		
+		orderList.setOrderuserid(userId);
+		orderList.setOrderid(orderId);
+	
+		List<OrderList> list = orderService.orderDetail(orderList);
+		List<OrderList> detailList = orderService.orderDetailProduct(orderList);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("detailList", detailList);
+		
+		return "order/orderDetail";
+		
+	}
 
 }

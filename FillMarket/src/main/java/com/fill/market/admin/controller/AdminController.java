@@ -679,6 +679,31 @@ public class AdminController {
 		} 
 		
 	}
+
+	
+	
+	@RequestMapping("/admin/userAuthorUpdate.do")
+	@ResponseBody
+	public boolean userAuthorUpdate(@RequestParam String userId, @RequestParam int selectAuthor) {
+		System.out.println(userId + "/" +selectAuthor);
+		
+		Member member = new Member();
+		
+		member.setUserId(userId);
+		member.setLevelType(selectAuthor);
+		
+		int result = adminService.updateUserAuthor(member);
+		
+		if(result > 0) {
+			
+			return true;
+		}else {
+			
+			return false;
+			
+		}
+
+	}
 	
 	
 }
