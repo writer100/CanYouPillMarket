@@ -16,9 +16,9 @@
 	</select>
 
 	<insert id="insertOrder" parameterType="Order">
-		INSERT INTO ORDERED (ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID, FEE)
+		INSERT INTO ORDERED (ORDERUSERID, TOTALPRICE, ORDERENROLL, CUSTOMERNAME, RECEIVERNAME, ADDRESS1, ADDRESS2, PHONE, ORDERID, FEE, STATUSNO)
 		VALUES (#{ orderuserid }, #{ totalprice }, 
-				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid }, #{ fee })
+				SYSDATE, #{ customername }, #{ receivername }, #{ address1 }, #{ address2 }, #{ phone }, #{ orderid }, #{ fee }, DEFAULT)
 	</insert>
 	
 	<!-- 상품 주문 시 장바구니 정보를 OrderDetail 테이블에 추가 (주문 완료 후 장바구니 값 삭제) -->
@@ -48,40 +48,24 @@
 		AND ORDERUSERID = #{ orderuserid }
 	</select>
 	
-	<!-- 주문 상세 조회 -->
-	<!-- 
+	<!-- 주문상세 정보 조회 -->
 	<select id="orderDetail" resultType="OrderList">
-		SELECT O.*, 
-		       OD.ORDERDETAILNO, OD.PNO, OD.AMOUNT,
-		       P.PNAME, P.PNO, P.PPRICE,
-		       PA.CHANGENAME
+		SELECT O.*, (SELECT STATUS FROM DELIVERY WHERE O.STATUSNO = STATUSNO) "STATUS"
 		FROM ORDERED O
-		INNER JOIN ORDERDETAIL OD ON O.ORDERID = OD.ORDERID
-		INNER JOIN PRODUCT P ON OD.PNO = P.PNO
-		INNER JOIN PATTACHMENT PA ON PA.PNO = OD.PNO
-		WHERE PA.PNO = OD.PNO
-		AND PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT
-		                WHERE PNO = OD.PNO)
-		AND O.ORDERUSERID = #{ orderuserid }
-		AND O.ORDERID = #{ orderid }
-	</select>
-	 -->
-	 
-	 <select id="orderDetail" resultType="OrderList">
-	 	SELECT * FROM ORDERED
 		WHERE ORDERUSERID = #{ orderuserid }
 		AND ORDERID = #{ orderid }
-	 </select>
-	 
-	 <select id="orderDetailProduct" resultType="OrderList">
-	 	SELECT PA.CHANGENAME, P.PNAME, P.PPRICE,
-		       OD.PNO,OD.AMOUNT
+	</select>
+	
+	<!-- 주문한 상품 조회 -->
+	<select id="orderDetailProduct" resultType="OrderList">
+		SELECT PA.CHANGENAME, P.PNAME, P.PPRICE,
+	       	   OD.PNO,OD.AMOUNT
 		FROM ORDERDETAIL OD, PRODUCT P, PATTACHMENT PA
 		WHERE PA.PNO = OD.PNO
 		AND PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = OD.PNO)
 		AND OD.PNO = P.PNO
 		AND OD.ORDERID = #{ orderid }
-	 </select>
+	</select>
 	 
 	<!-- Access to #{ field } -->
 </mapper>

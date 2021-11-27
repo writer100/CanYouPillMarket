@@ -28,6 +28,7 @@ public class OrderList implements Serializable {
 	private String phone;
 	private String orderid;	
 	private int fee;
+	private int statusno;
 	
 	private int orderdetailno;
 	private int pno;
@@ -37,5 +38,7 @@ public class OrderList implements Serializable {
 	private String pname;
 	private int pprice;
 	private String changename;
+	
+	private String status;	// 배송 상태
 
 }

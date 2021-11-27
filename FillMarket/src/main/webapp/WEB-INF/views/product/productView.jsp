@@ -30,11 +30,12 @@
 	<c:import url="../common/navbar.jsp" />
 	
 	<div class="container" style="width: 70%">
-		
+		<form name="insertFrm2" action="${pageContext.request.contextPath}/cart/cartDetailInsert.do" method="post">
 		<div class="row">
 			
 			<h1 class="page-header" style="text-align: center; margin-bottom: 50px;"><br />${product.pname}</h1>
-			<input type="hidden" value="${product.pno}" id="pno">
+			<input type="hidden" value="${product.pno}" id="pno" name="pno">
+			<input type="hidden" value="${product.pname}" name="pname"/>
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
            	<c:forEach items="${pattachmentList}" var="a" varStatus="vs">
@@ -48,7 +49,7 @@
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
-				<input type="hidden" value="${product.pprice}" id="pprice">
+				<input type="hidden" value="${product.pprice}" id="pprice" name="pprice">
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>배송비 : </label><span>&nbsp;2500원</span>
@@ -57,19 +58,20 @@
 			<div class="form-horizontal" style="text-align: left;">
 				<label>구매수량 : </label> 
 				<input type="hidden" value="${product.pstock}" id="pstock">				
-				<select class="form-control" id="select_amount">
+				<select class="form-control" id="select_amount"  name="amount">
 				<c:forEach begin="1" end="${ product.pstock }" var="product" >
 					<option>${ product }</option>
 				</c:forEach>
 				</select>
 			</div>	
+			</form>
 			<hr>
 			
 			<div class="row">
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button type="button" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<button type="submit" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					<br />
 				</div>
 			</div>
@@ -161,10 +163,10 @@
 				console.log(event.currentTarget.className);
 			}
 			
-
+			/*
 			function goCart(pno, pname, pprice){
-				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
-			}
+				location.href = "${pageContext.request.contextPath}/cart/cartDetailInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
+			}*/
 			
 			function goReview(pno, pname){
 				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno+"&pname="+pname;
@@ -177,6 +179,7 @@
 					location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
 				});
 			});
+			
 </script>
 
 	<c:import url="../common/footer.jsp" />

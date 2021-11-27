@@ -22,5 +22,7 @@ public interface CartService {
 
 	void deleteAll(String userId);
 
+	int cartDetailInsert(Cart cart);
+
 	
 }

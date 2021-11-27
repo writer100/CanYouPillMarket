@@ -14,8 +14,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- iamport.payment.js 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
 <!-- css 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderPage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -97,6 +97,7 @@
         </div>
         <br>
         <div class="order_tb">
+        <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="order_frm" method="post">
             <table id="orderList">
                 <thead>
                     <tr>
@@ -109,7 +110,7 @@
                 	<c:forEach items="${map.list}" var="cartList" varStatus="i">
                     <tr>
                         <td>
-                            <h5>${ cartList.pname }</h5>
+                            ${ cartList.pname }
                             <input type="hidden" name="pname" value="${cartList.pname }" />
                         </td>
                         <td>${ cartList.amount }</td>
@@ -119,12 +120,13 @@
             </c:forEach>
             </table>
             <br>
-            <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="order_frm" method="post">
+            
             <table id="orderList2">
                 <tr>
                     <td><b>Total</b></td>
                     <td style="text-align: right;">
                         <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/> 원</b>
+                        
                     </td>
                 </tr>
                 <tr>
@@ -211,12 +213,12 @@
                 </div>
             </div>
             <br><br>
-            <div class="paymentInfo">
+            <!-- <div class="paymentInfo">
                 <span class="title2">결제 방법</span>
-            </div>
+            </div> -->
             <br><br>
             <div class="btnArea">
-                <button type="submit" id="orderBtn">주문하기</button>
+                <button id="orderBtn">주문하기</button>
             </div>
         </form>
     </section>
@@ -230,55 +232,57 @@
 		})
 	</script>
 	 -->
+	<script type="text/javascript"
+		src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script>
-		$(document).ready(function(){
-			var IMP = window.IMP;
-			var code = imp10320709;		// 가맹점 식별코드
-			IMP.init(code);
+		var IMP = window.IMP; // 생략가능
+		var iamportKey = 'imp10320709';
+		
+		$(function() {
+			IMP.init( iamportKey );
+		}); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		
+		$('#orderBtn').on('click', function(){
+			// 문서 로딩될 때 바로 호출
 			
-			$('#orderBtn').click(function(){
 				IMP.request_pay({
-				    pg : 'html5_inicis',
+					pg : 'kakao',
 				    pay_method : 'card',
-					merchant_uid : 'merchant_' + new Date().getTime(),
-					name : '결제 테스트',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+					name : '영양제',
 					amount : '${ map.allSum }',
-					buyer_name : '${ member.userName }',
+					buyer_email : '${ member.email }',
+					buyer_name : '${ member.userId }',
 					buyer_tel : '${ member.phone }',
-					buyer_addr : 'address2',
-					buyer_postcode : 'address1'
+					buyer_addr : '서울시 강남구 역삼동',
+					buyer_postcode : '01234'
 				}, function(rsp) {
-				    if ( rsp.success ) {
-				    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-				    	jQuery.ajax({
-				    		url: "${pageContext.request.contextPath}/order/orderFinish.do", 
-				    		type: 'POST',
-				    		dataType: 'json',
-				    		data: {
-					    		imp_uid : rsp.imp_uid
-					    		//기타 필요한 데이터가 있으면 추가 전달
-				    		}
-				    	}).done(function(data) {
-				    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-				    		if ( everythings_fine ) {
-				    			var msg = '결제가 완료되었습니다.';
-				    			
-				    			alert(msg);
-				    		} else {
-				    			//[3] 아직 제대로 결제가 되지 않았습니다.
-				    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-				    		}
-				    	});
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				        
-				        alert(msg);
-				    }
+					if (rsp.success) {
+						//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+						$.ajax({
+							url : "/order/orderInsert.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+							type : 'POST',
+							dataType : 'json',
+							data : {
+								imp_uid : rsp.imp_uid,
+								pay_method : rsp.pay_method,
+								price : rsp.paid_amount,
+								status : rsp.status,
+								title : rsp.name,
+								pg_tid : rsp.pg_tid,
+								buyer_name : rsp.buyer_name,
+								paid_at : rsp.paid_at
+							//기타 필요한 데이터가 있으면 추가 전달
+							}
+						});
+						location.href = "${pageContext.request.contextPath}/order/orderFinish.do";
+					} else {
+						var msg = '결제에 실패하였습니다.';
+						msg += '\n에러내용 : ' + rsp.error_msg;
+						alert(msg);
+					}
 				});
-			})
-		}
-
+		});
 	</script>
 </body>
 

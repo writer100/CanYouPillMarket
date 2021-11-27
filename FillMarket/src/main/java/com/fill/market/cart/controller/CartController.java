@@ -64,6 +64,37 @@ public class CartController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/cart/cartDetailInsert.do")
+	public String cartDetailInsert(@ModelAttribute Cart cart, HttpSession session, Model model) {
+		String userId = ((Member)session.getAttribute("member")).getUserId();
+		
+		cart.setCartuserid(userId);
+		
+		String loc = "/cart/cartList.do";
+		String msg = "";
+		
+		int count = cartService.countCart(cart.getPno(), userId);
+		count = count ==0 ? cartService.updateCart(cart) : cartService.cartDetailInsert(cart);
+		if(count == 0) {
+			cart.setOrderprice(cart.getAmount() * cart.getPprice());
+			cartService.cartDetailInsert(cart);
+			
+			msg = "상품이 장바구니에 담겼습니다.";
+			
+		} else {
+			cart.setOrderprice(cart.getAmount() * cart.getPprice());
+			cartService.updateCart(cart);
+			
+			msg = "이미 있는 상품의 수량을 추가하였습니다.";
+		}
+		
+		model.addAttribute("loc", loc);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
+		
+	}
 
 	
 	@RequestMapping("/cart/cartList.do")
@@ -88,7 +119,7 @@ public class CartController {
 			System.out.println("총 가격 : " + sumPrice);
 			System.out.println("배송비 : " + fee);
 			// 장바구니 전체 금액에 따라 배송비 구분
-			// 10만원 이상 => 무료, 미만 => 3,000원
+			// 3만원 이상 무료배송 , 미만 배송비 2500원
 			
 			map.put("list", list);				// 장바구니 정보를 map에 저장
 			map.put("count", list.size());		// 장바구니 안 상품의 유무

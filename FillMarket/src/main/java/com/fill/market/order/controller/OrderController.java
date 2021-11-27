@@ -44,7 +44,7 @@ public class OrderController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("orderPage 세션 확인 : " + userId + "/" + userName + "/" + userPhone);
+		// System.out.println("orderPage 세션 확인 : " + userId + "/" + userName + "/" + userPhone);
 		
 		List<Cart> list = orderService.orderPage(userId);
 		int sumPrice = orderService.sumPrice(userId);
