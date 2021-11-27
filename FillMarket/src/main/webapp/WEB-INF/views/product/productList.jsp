@@ -129,7 +129,7 @@
 				console.log("pname="+pname);
 				
 				if(pname.length == 0){
-					//$('#AllList').show()
+					$('#AllList').show()
 					$('#pnameList').hide()
 				}else{
 					$.ajax({
@@ -138,7 +138,7 @@
 				         dataType: "html",
 				         success : function(data){
 				        	 
-				        	// $('#AllList').hide()
+				        	 $('#AllList').hide()
 				        	 $('#pnameList').show()
 				        	 $('#pnameList').html(data)
 				        	 

@@ -72,7 +72,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/reviewFormEnd.do")
-	public String insertBoard(Review review, Model model, HttpServletRequest req,
+	public String insertReview(Review review, Model model, HttpServletRequest req,
 							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles) {
 		
 		System.out.println("review : " + review);
@@ -138,14 +138,15 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/reviewView.do")
-	public String reviewView(@RequestParam int reno, Model model) {
+	public String reviewView(@RequestParam int reno, String pname, Model model) {
 		
 		Review review = reviewService.selectOneReview(reno);
-		
 		List<RAttachment> rattachmentList = reviewService.selectRAttachmentList(reno);
 		
 		model.addAttribute("review", review);
+		model.addAttribute("pname",  pname);
 		model.addAttribute("rattachmentList", rattachmentList);
+		System.out.println("pname:"+pname);
 		
 		return "review/reviewView";
 	}

@@ -77,9 +77,11 @@
 			<div id="reviw-container" width="60%">
 			<input type="text" class="form-control" placeholder="제목" name="retitle" id="retitle" value="${review.retitle }" required>
 			<input type="text" class="form-control" name="reuserid" value="${review.reuserid}" readonly required>
-			<input type="hidden" class="form-control" name="reuserid" value="${product.pno}" readonly required>
-			<input type="text" class="form-control" name="reuserid" value="${product.pname}" readonly required>
-			
+			<input type="hidden" class="form-control" name="reuserid" value="${review.pno}" readonly required>
+			<input type="text" class="form-control" name="reuserid" value="${review.pname}" readonly required>
+			<!--<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">-->
+				<img src="${pageContext.request.contextPath}/resources/reviewUpload/${ra.changename}" alt="첨부파일" width="30%;" "/>	
+			<!--</c:forEach> -->
 		    <textarea class="form-control" name="recontent" placeholder="내용" required>${review.recontent }</textarea>
 		    <br>
 		    <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">리스트로</button>

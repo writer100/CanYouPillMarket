@@ -25,6 +25,6 @@ public class Review implements Serializable {
 	private Date reuploaddate;
 	private String status;
 	private RAttachment rattachment;
-	// private String changename;
+	private String pname;
 	
 }
