@@ -13,6 +13,7 @@ import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.admin.model.vo.QNA;
 import com.fill.market.admin.model.vo.QNARE;
+import com.fill.market.order.model.vo.OrderList;
 
 @Repository
 public class AdminDAO {
@@ -187,6 +188,16 @@ public class AdminDAO {
 	public int adminMemoInsert(Map<String, String> memoVal) {
 		
 		return sqlSession.insert("adminMemoInsert", memoVal);
+	}
+
+	public List<OrderList> adminOrderList(String userId) {
+		
+		return sqlSession.selectList("adminOrderList",userId);
+	}
+
+	public int selectOrderTotal(String userId) {
+		
+		return sqlSession.selectOne("selectOrderTotal", userId);
 	}
 
 

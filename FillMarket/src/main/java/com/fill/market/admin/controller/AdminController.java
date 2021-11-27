@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import com.fill.market.admin.model.vo.Product;
 import com.fill.market.admin.model.vo.QNA;
 import com.fill.market.admin.model.vo.QNARE;
 import com.fill.market.common.Utils;
+import com.fill.market.order.model.vo.OrderList;
 
 @Controller
 public class AdminController {
@@ -388,7 +390,7 @@ public class AdminController {
 		int numPerPage = 10;
 
 		// 현재 페이지의 게시글 수
-		List<Map<String, String>> list = adminService.selectNameUserList(cPage, numPerPage, userName);
+		List<Map<String, String>> listud = adminService.selectNameUserList(cPage, numPerPage, userName);
 
 		// 전체 게시글 수
 		int totalContents = adminService.selectUserNameTotalContents(userName);
@@ -399,7 +401,7 @@ public class AdminController {
 		// System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
 
-		model.addAttribute("list", list);
+		model.addAttribute("listud", listud);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
@@ -576,7 +578,7 @@ public class AdminController {
 			int totalContents = adminService.selectUserTotalContents();
 
 			// 페이지 처리 Utils 사용하기
-			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminUserManageList.do");
+			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminInfo.do");
 
 			// System.out.println("list : " + list);
 			// System.out.println("pageBar : " + pageBar);
@@ -617,7 +619,66 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/admin/userClick.do")
+	public String userClick(@RequestParam String userId, Model model) {
+		
+		Member userMember = adminService.adminSelectUser(userId);
+		
+		if(userMember != null) {
+			
+			model.addAttribute("userMember" ,userMember);
+			
+		}else {
+			String str = "찾으신 사용자가 없습니다.";
+			model.addAttribute("str", str);
+			
+		}
+		
+		return "admin/selectUser";
+		
+	}
 	
+	@RequestMapping("/admin/adminOrderList.do")
+	public String orderList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, 
+							Model model, @RequestParam String userId) {
+		
+		// 한 페이지당 게시글 수
+		int numPerPage = 3;
+
+		// 현재 페이지의 게시글 수
+		List<OrderList> orderlist = adminService.selectOrderList(userId);
+		System.out.println(orderlist);
+
+		// 전체 게시글 수
+		int totalContents = adminService.selectOrderTotalContents(userId);
+
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "checkNameList.do");
+
+		// System.out.println("list : " + list);
+		// System.out.println("pageBar : " + pageBar);
+
+		
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		
+		
+		
+		
+		if(orderlist.size() > 0) {
+			
+			model.addAttribute("orderlist", orderlist);
+			return "admin/adminOrderList";
+			
+		}else {
+			
+			return "null";
+			
+		} 
+		
+	}
 	
 	
 }

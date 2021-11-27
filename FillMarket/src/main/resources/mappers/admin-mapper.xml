@@ -185,4 +185,22 @@
 		WHERE USERID = #{userId}
 	</update>
 	
+	<select id="adminOrderList" parameterType="String" resultType="OrderList">
+		SELECT O.ORDERUSERID, O.TOTALPRICE, O.ORDERENROLL, O.RECEIVERNAME,
+		P.PNAME, OD.ORDERID, (SELECT COUNT(*) -1 FROM ORDERDETAIL
+		                        WHERE ORDERID = OD.ORDERID
+		                        GROUP BY ORDERID) "CNT"
+		FROM ORDERED O, ORDERDETAIL OD, PRODUCT P
+		WHERE O.ORDERID = OD.ORDERID
+		AND OD.PNO = P.PNO
+		AND OD.ORDERDETAILNO IN (SELECT max(ORDERDETAILNO) FROM ORDERDETAIL
+		GROUP BY ORDERID)
+		AND P.PNAME = (SELECT MIN(PNAME) FROM PRODUCT P WHERE PNO = OD.PNO)
+		AND ORDERUSERID = #{ orderuserid }
+	</select>
+	<select id="selectOrderTotal" parameterType="String" resultType="int">
+		select COUNT(*) from ordered
+		where orderuserid = #{userId}
+	</select>
+	
 </mapper>

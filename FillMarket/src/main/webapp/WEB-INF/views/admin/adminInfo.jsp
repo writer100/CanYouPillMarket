@@ -15,13 +15,45 @@
 	height: 30px;
 }
 
-#chartdiv {
-	transition: 5s;
+#myInfo {
+	margin-left: 50px;
 }
-#myInfo{
-	margin-left : 50px;
+
+#result {
+	display: none;
 }
-#result{
+
+#members {
+	display: none;
+	height: auto;
+}
+
+#myInfo {
+	width: 100%;
+	height: auto;
+}
+
+#firstCont {
+	display: inline-block;
+	height: auto;
+}
+
+#secondCont {
+	display: inline-table;
+	width: 100%;
+	height: 385px;
+}
+
+#memoge {
+	width: 100%;
+}
+#orderList{
+	display: none;
+}
+#userName{
+	float : right;
+}
+#userNameList{
 	display: none;
 }
 </style>
@@ -29,55 +61,41 @@
 
 <c:import url="../common/adminSide.jsp" />
 <script>
-	function yearMonth(){
-		$('#productChart').hide();
-		$('#chartdiv').show(100);
-		//$('#chartdiv').css('visibility', 'visible');
+	function myInfo(){
+		$('#members').hide();
+		$('#firstCont').show();
+		
 	}
 	
-		$(function(){
-			$("#selectVal").val('${myMember.levelType}')
+
 			
+	
+		$(function(){
+			
+			
+		
 			
 			$("tr[id]").on("click",function(){
 				var userId = $(this).attr("id");
 				console.log("userId="+userId);
 				
 				$.ajax({
-					url : "${pageContext.request.contextPath}/admin/productGraph.do",
-					data : {pno : pno},
+					url : "${pageContext.request.contextPath}/admin/userClick.do",
+					data : {userId : userId},
 					dataType: "html",
 			        success : function(data){
-			        	$('#productChart').show();
-			        	 $('#chartdiv').hide(100);
-			        	// $('#chartdiv').css('visibility', 'hidden');
-			        	$('#productChart').html(data);
+			        	
+			        	$('#members').show().css("display", 'inline-block');
+			        	$('#firstCont').hide();
+			        	$('#members').html(data);
+			        	
 			        }
 					
 				})
 				
 			});
 			
-			$("#Export").on("click", function(){
-				// 캡쳐 라이브러리를 통해서 canvas 오브젝트를 받고 이미지 파일로 리턴한다.
-				html2canvas(document.querySelector("#capture")).then(canvas => {
-				saveAs(canvas.toDataURL('image/png'),"capture-test.png");
-				});
-				});
-				function saveAs(uri, filename) {
-				// 캡쳐된 파일을 이미지 파일로 내보낸다.
-				var link = document.createElement('a');
-				if (typeof link.download === 'string') {
-				link.href = uri;
-				link.download = filename;
-				document.body.appendChild(link);
-				link.click();
-				document.body.removeChild(link);
-				} else {
-				window.open(uri);
-				}
-				}
-				
+
 				
 				
 				$('#memoge').on('keyup', function(){
@@ -95,21 +113,44 @@
 	
 				        			$('#result').show(500);
 					        		$('#result').html('메모가 저장되었습니다.').css('color', 'blue');
- 								
-				
+ 				
 				        		}
-				        		
-
 				        	
 				        }
 					})
-					
-					
 				})
 				
+				 
 				setInterval(function(){
 					$('#result').hide(3000);
 				},6000)
+				
+				
+				
+				$('#userName').on("keyup",function(){
+					var userName = $(this).val().trim();
+					console.log("userName="+userName);
+					
+					if(userName.length == 0){
+						$('#AlluserList').show()
+						$('#userNameList').hide()
+					}else{
+						$.ajax({
+							 url  : "${pageContext.request.contextPath}/admin/checkNameList.do",
+					         data : {userName : userName},
+					         dataType: "html",
+					         success : function(data){
+					        	 
+					        	 $('#AlluserList').hide()
+					        	 $('#userNameList').show()
+					        	 $('#userNameList').html(data)
+					        	 
+					         }
+						})
+					}
+					
+					
+				});
 				
 			
 		});
@@ -160,33 +201,7 @@
 		
 	</script>
 
-<style>
-#myInfo {
-	width: 100%;
-	height: auto;
-}
 
-#firstCont {
-	display: inline-block;
-	height: auto;
-}
-
-#secondCont {
-	display: inline-table;
-	width: 100%;
-	height: 385px;
-}
-#memoge{
-	width: 100%;
-}
-</style>
-
-<!-- Resources -->
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-<!-- Chart code -->
 
 </head>
 <body>
@@ -201,13 +216,13 @@
 		</div>
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
-			<h1 class="h2">매출</h1>
+			<h1 class="h2">사용자 관리</h1>
 			<div class="btn-toolbar mb-2 mb-md-0">
 				<div class="btn-group me-2">
 					<button type="button" class="btn btn-sm btn-outline-secondary"
-						onclick="yearMonth()">년/월</button>
+						onclick="myInfo()">내정보</button>
 					<button type="button" class="btn btn-sm btn-outline-secondary"
-						id="Export">Export</button>
+						onclick="memoView()">메모장</button>
 				</div>
 
 			</div>
@@ -215,94 +230,106 @@
 
 		<div id="myInfo" class="col-md-12">
 			<div id="firstCont" class="col-md-7">
-				<form name="signUpForm" class="form" role="form">
+				
 					<div class="container">
 						<div class="row">
-						<h3>유저 정보</h3>
-									<table class="table">
-										<tr>
-											<td>아이디</td>
-											<td>${myMember.userId } <select class="form-select" name="levelType" id="selectVal">
-													<option value="1">사용자</option>
-													<option value="2">관리자</option>
-												</select></td>
+							<h3>유저 정보</h3>
+							<table class="table">
+								<tr>
+									<td class="td col-2">아이디</td>
+									<td>${myMember.userId }<select class="form-select"
+										name="levelType" id="selectVala">
+											<option value="1" <c:if test="${myMember.levelType == 1}">selected</c:if>>사용자</option>
+											<option value="2" <c:if test="${myMember.levelType == 2}">selected</c:if>>관리자</option>
+									</select></td>
+
+
+								</tr>
+
+								<tr>
+									<td>이름</td>
+									<td>${myMember.userName }</td>
+
+								</tr>
+
+								<tr>
+									<td>이메일</td>
+									<td>${myMember.email }</td>
+
+								</tr>
+
+								<tr>
+									<td>전화</td>
+									<td>${myMember.phone }</td>
+
+								</tr>
+
+								<tr>
+									<td>주소</td>
+									<td>${myMember.address }</td>
+
+								</tr>
+
+								<tr>
+									<td>생년월일</td>
+									<td>${myMember.birth }</td>
+
+								</tr>
+
+								<tr>
+									<td>상태</td>
+									<td>${myMember.status }</td>
+
+								</tr>
+
+								<tr>
+									<td></td>
+									<td>
+										<button onclick="adminAuthorA('${myMember.userId}');"
+											class="btn btn-primary">회원수정</button>
 											
-										</tr>
+										<button class="btn btn-success" onclick="orderList('${myMember.userId}');">주문내역</button>
+										
+										 <c:set
+											var="status" value="${myMember.status}" /> <c:choose>
+											<c:when test="${status eq 'Y'}">
+												<button onclick="userDelete('${myMember.userId}');"
+													class="btn btn-danger">회원삭제</button>
+											</c:when>
+											<c:when test="${status eq 'N'}">
 
-										<tr>
-											<td>이름</td>
-											<td>${myMember.userName }</td>
-										</tr>
-
-										<tr>
-											<td>이메일</td>
-											<td>${myMember.email }</td>
-										</tr>
-
-										<tr>
-											<td>전화</td>
-											<td>${myMember.phone }</td>
-										</tr>
-
-										<tr>
-											<td>주소</td>
-											<td>${myMember.address }</td>
-										</tr>
-
-										<tr>
-											<td>생년월일</td>
-											<td>${myMember.birth }</td>
-										</tr>
-
-										<tr>
-											<td>상태</td>
-											<td>${myMember.status }</td>
-										</tr>
-
-										<tr id="menu">
-											  <td class="text-center">
-								<button onclick="location.href='MemberUpdateForm.jsp?id='"
-									class="btn btn-primary">회원수정</button>  
-											<td><c:set var="status"
-													value="${myMember.status}" /> <c:choose>
-													<c:when test="${status eq 'Y'}">
-
-														<button onclick="userDelete('${member.userId}');"
-															class="btn btn-danger">회원삭제</button>
-
-													</c:when>
-													<c:when test="${status eq 'N'}">
-
-														<button onclick="userRes('${member.userId}');"
-															class="btn btn-danger">회원복구</button>
-
-													</c:when>
-												</c:choose>
-												
-											</td>
-											
-										</tr>
+												<button onclick="userRes('${myMember.userId}');"
+													class="btn btn-danger">회원복구</button>
+											</c:when>
+										</c:choose>
+									
+									</td>
+								</tr>
 
 
-									</table>
-								
-							
+							</table>
+
+
 						</div>
 						<!-- row -->
 					</div>
-				</form>
+				
 			</div>
+			<div id="members" class="col-md-7"></div>
 			<div id="secondCont" class="col-md-4">
 				<h1>메모장</h1>
 				<textarea id="memoge" rows="15" style="resize: none;">${myMember.memo }</textarea>
-				<span id="result"></span>			
+				<span id="result"></span>
 			</div>
-		<div id="members"></div>
+			<div id="orderList" class="col-md-4"></div>
+
 		</div>
 		<!--<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="912" height="385" style="display: block; width: 912px; height: 385px;"></canvas>
  		-->
-		<h2>상품</h2>
+		<h2 style="display : inline;">유저</h2><br />
+		<input type="text" id="userName" placeholder="이름"/>
 		<div class="table-responsive justify-content-md-center">
+		<div id="AlluserList">
 			<table class="table table-hover table-sm">
 				<thead>
 					<tr>
@@ -318,6 +345,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				
 					<c:forEach items="${list}" var="u">
 						<tr id="${u.userId}">
 							<td style="text-align: center;">${u.userId}</td>
@@ -333,12 +361,50 @@
 							<td style="text-align: center;">${u.status }</td>
 						</tr>
 					</c:forEach>
-
+				
 				</tbody>
 			</table>
 			<c:out value="${pageBar}" escapeXml="false" />
 		</div>
+		<div id="userNameList"></div>
 	</div>
-
+<script>
+function orderList(userId){
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/adminOrderList.do",
+		data : {userId : userId},
+		dataType :"html",
+		success : function(data){
+			
+			$('#orderList').show().css("display", 'inline-table');
+			$('#secondCont').hide();
+			$('#orderList').html(data);
+			},
+		error: function() {
+            alert("주문하신 정보가 없습니다.");
+			}
+		})
+	}
+	function memoView(){
+		$('#orderList').hide()
+		$('#secondCont').show();
+	}
+	
+	function adminAuthorA(userId){
+		var selectAuthor = $('#selectVala').val();
+		var myAuthor = ${myMember.levelType}
+		alert("나의 권한은 ?????"+myAuthor)
+		
+		if(selectAuthor == myAuthor){
+			alert("이미 ")
+		}
+		
+		
+	
+	}
+	
+	
+</script>
 </body>
 </html>
