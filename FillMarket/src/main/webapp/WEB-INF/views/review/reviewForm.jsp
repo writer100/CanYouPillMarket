@@ -22,7 +22,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <!-- 타이틀 로고 -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 	.row {
     display: flex;
@@ -35,7 +35,6 @@
 		text-align: center;
 		border-bottom : 1px solid rgba(0, 0, 0, 0.35);
 	}
-	.search{ text-align: center; }
 
 .form-control {
     display: block;
@@ -100,9 +99,9 @@
 			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewFormEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="reno" value="${ review.reuserid }" />  -->
 				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
-				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
-				<input type="hidden" name="pno" value="${ product.pno }" required /> 
-				<input type="text" class="form-control" name="productno" value="${ pno }" readonly required>
+				<input type="text" class="form-control" name="reuserid" value="${member.userId}" readonly required>
+				<input type="hidden" name="pno" value="${ pno }" required /> 
+				<input type="text" class="form-control" name="productno" value="${ pname }" readonly required>
 				
 				
 			

@@ -166,7 +166,8 @@ public class ReviewController {
 	
 	@RequestMapping("/review/reviewUpdate.do")
 	public String reviewUpdate(Review review, HttpServletRequest request, Model model, 
-							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles) {
+							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
+							  @RequestParam(value="rano", required=false, defaultValue="0") int rano) {
 		// 1. 원본 게시글 불러와 수정하기
 		int reno = review.getReno();
 		
@@ -177,9 +178,12 @@ public class ReviewController {
 		
 		// 2. 첨부파일 수정하기
 		String savePath = request.getServletContext().getRealPath("/resources/reviewUpload");
+		List<RAttachment> rattachList = null;
 		
-		List<RAttachment> rattachList = reviewService.selectRAttachmentList(reno);
-		if( rattachList == null ) rattachList = new ArrayList<RAttachment>();
+		if(rano != 0) {
+			rattachList = reviewService.selectRAttachmentList(rano);
+		}
+		if( rano == 0 && rattachList == null ) rattachList = new ArrayList<RAttachment>();
 		
 		int idx = 0;
 		for(MultipartFile f : upFiles) {
@@ -195,7 +199,7 @@ public class ReviewController {
 					temp = rattachList.get(idx);
 				} else {
 					temp = new RAttachment();
-					temp.setReno(reno);
+					temp.setReno(rano);
 					
 					rattachList.add(temp);
 				}
@@ -212,7 +216,7 @@ public class ReviewController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+				temp.setReno(reno);
 				temp.setOriginalname(originName);
 				temp.setChangename(changeName);
 				

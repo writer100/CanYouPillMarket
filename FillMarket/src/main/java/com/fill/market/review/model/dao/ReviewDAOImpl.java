@@ -74,9 +74,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public int deleteRAttachment(int reno) {
+	public int deleteRAttachment(int rano) {
 		
-		return sqlSession.delete("reviewSQL.deleteRAttachment", reno);
+		return sqlSession.delete("reviewSQL.deleteRAttachment", rano);
 	}
 
 	@Override

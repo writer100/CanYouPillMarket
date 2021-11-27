@@ -36,18 +36,9 @@
 		  height: 30px; font-size: small;
 	}
 	
-	.my.pagination > .active > a, 
-	.my.pagination > .active > span, 
-	.my.pagination > .active > a:hover, 
-	.my.pagination > .active > span:hover, 
-	.my.pagination > .active > a:focus, 
-	.my.pagination > .active > span:focus {
-  		background: rgb(255, 142, 117);
- 		 border-color: rgb(255, 142, 117);
-	}
-	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
+			 
 	#review_header {
 	text-align: center;
 	color: rgb(255, 142, 117);
@@ -68,7 +59,7 @@
                 <br />
                 <br />
 	    <div class="row product" wieth="70%" style="text-align: center;">
-			<table class="table table-hover" style="width: 80%;">
+			<table class="table table-borderless table-hover" style="width: 80%;">
                  <thead>
                      <tr>
 	                     <th>번호</th>
@@ -78,20 +69,22 @@
                      </tr>
                  </thead>
                  <c:forEach items="${list}" var = "review">
+                 <c:if test="${member.userId eq review.reuserid}">
                  	<tr id="${ review.reno }">
                          <td>${review.reno }</td>
                          <td>${review.retitle }</td>
                          <td>${review.reuploaddate }</td>
                          <td class="updateFrm">
+                         <c:if test="${member.userId eq review.reuserid}">
                          	<input type="hidden" name="reno" value="${review.reno}" />
 							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewUpdateForm('${ review.reno }');">수정</button>
           	                &nbsp;&nbsp;
           	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewDelete('${ review.reno }');">삭제</button>
-	
+						</c:if>
                          </td>
                      </tr>
+                 </c:if>
                  </c:forEach>
-             
              </table>
 			
 			<div>
