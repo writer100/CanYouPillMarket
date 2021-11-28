@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fill.market.admin.model.vo.Member;
@@ -64,6 +65,7 @@ public class OrderController {
 		return mav;
 	}
 	
+	@ResponseBody
 	@RequestMapping("order/orderInsert.do")
 	public String OrderInsert(HttpSession session, Order order, OrderDetail orderDetail, Product product, Model model) {
 		
