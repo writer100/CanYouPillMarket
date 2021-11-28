@@ -46,6 +46,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/adminSalesManagement.do"><ion-icon name="cash-outline"></ion-icon></ion-icon></i>매출관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/adminProductList.do"><ion-icon name="bag-outline"></ion-icon>상품관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/adminQNAList.do"><ion-icon name="bag-outline"></ion-icon>문의</a></li>
+				<li><a href="${pageContext.request.contextPath}"><ion-icon name="home-outline"></ion-icon>홈</a></li>
 			</ul>
 		</div>
 	</header>
