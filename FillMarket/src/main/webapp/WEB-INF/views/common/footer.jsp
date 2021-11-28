@@ -53,7 +53,7 @@
 			<div class="col-3">
 				<h5 style="color: rgb(216, 83, 55);">반품</h5>
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#"
+					<li class="nav-item mb-2"><a href="${pageContext.request.contextPath}/qna/qnaList.do"
 						class="nav-link p-0 text-dark">교환/반품 정책 확인 ▶︎</a></li>
 
 					<li class="nav-item mb-1 p-0 text-secondary">서울특별시 강남구 테헤란로

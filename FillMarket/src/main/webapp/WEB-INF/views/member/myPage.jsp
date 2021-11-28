@@ -168,7 +168,7 @@
 					<p class="card-text mb-auto">
 						불편을 겪은 일이 있으시다면<br>고객센터를 찾아주세요.
 					</p>
-					<a href="#" class="stretched-link"></a>
+					<a href="${pageContext.request.contextPath}/qna/qnaList.do" class="stretched-link"></a>
 				</div>
 			</div>
 		</div>
