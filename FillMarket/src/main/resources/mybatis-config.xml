@@ -22,7 +22,8 @@
  		<typeAlias alias="Review" type="com.fill.market.review.model.vo.Review"/>
  		<typeAlias alias="RAttachment" type="com.fill.market.review.model.vo.RAttachment"/>
  		<typeAlias alias="Order" type="com.fill.market.order.model.vo.Order"/>
- 		<typeAlias alias="Survey" type="com.fill.market.survey.model.vo.Survey"/>
+ 		<typeAlias alias="OrderDetail" type="com.fill.market.order.model.vo.OrderDetail"/>
+ 		<typeAlias alias="OrderList" type="com.fill.market.order.model.vo.OrderList"/>
  	</typeAliases>
  	
  	<typeHandlers>

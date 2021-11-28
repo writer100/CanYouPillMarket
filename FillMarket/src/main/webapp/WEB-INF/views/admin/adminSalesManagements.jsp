@@ -18,6 +18,12 @@
 	
 	#chartdiv{
 		transition: 5s;
+		box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+	}
+	#productChart{
+		box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
 	}
 </style>
 

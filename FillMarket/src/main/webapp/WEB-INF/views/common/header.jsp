@@ -5,6 +5,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/final_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+   *{
+      font-family: 'Nanum Gothic', sans-serif;
+   }
+</style>
 <header>
 	<div class="container">
         <header class="d-flex flex-wrap justify-content-center py-1 mb-4">
@@ -21,6 +29,9 @@
 
             <ul class="nav">
                 <c:if test="${!empty member}">
+                	<c:if test="${member.levelType eq '2'}">
+                		<li class="nav-item"><a href="${pageContext.request.contextPath}/admin/adminProductList.do" class="nav-link text-dark">MANAGER</a></li>
+                	</c:if>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/member/myPage.do" class="nav-link text-dark">MY PAGE</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-dark">MY HEART</a></li>
                     <li class="nav-item"><a href="${pageContext.request.contextPath}/cart/cartList.do" class="nav-link text-dark">SHOPPING BAG</a></li>

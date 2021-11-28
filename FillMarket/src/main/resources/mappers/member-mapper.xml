@@ -23,7 +23,7 @@
 	<!-- CRUD SQL 선언부 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES( #{ userId }, default, #{ password }, #{ userName },#{ birth }, #{ gender }, #{ email }, 
-		#{ phone }, #{ address }, SYSDATE, default )
+		#{ phone }, #{ address }, SYSDATE, default, default)
 	</insert>
 		
 	<select id="selectOne" parameterType="string" resultType="Member">
@@ -58,6 +58,11 @@
 		UPDATE MEMBER SET PASSWORD = #{ password }
 		WHERE USERID = #{ userId }
 	</update>
+	
+	<select id="selectEmailCheck" parameterType="string" resultType="string">
+		SELECT USERID FROM MEMBER
+		WHERE EMAIL = #{ email }
+	</select>
 	
 	
 </mapper>

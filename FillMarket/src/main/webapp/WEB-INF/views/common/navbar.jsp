@@ -13,7 +13,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample06">
+            <div class="collapse navbar-collapse" id="navbarsExample06" style="
+    font-weight: 700;
+">
                 
                 <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                     <li class="nav-item dropdown">
@@ -52,17 +54,6 @@
                     <li class="nav-item">
                         
                         <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do?cno=5">모발</a>
-                    
-                    </li>
-                    
-                 	<li class="nav-item">
-                        
-                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/survey/surveyList.do">맞춤진단</a>
-                    
-                    </li>
-                    <li class="nav-item">
-                        
-                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/qna/qnaList.do">고객센터</a>
                     
                     </li>
                 </ul>

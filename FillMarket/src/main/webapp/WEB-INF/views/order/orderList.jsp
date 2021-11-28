@@ -41,13 +41,13 @@
         <br>
         <hr>
         <br><br>
-        <c:forEach items="${orderList}" var="orderList">
+        <c:forEach items="${list}" var="orderList">
         <div class="myOrder">
             <table id="myOrder_tb">
 			
                 <tr>
                     <td width="300px">주문번호</td>
-                    <td width="600px"><a href="${pageContext.request.contextPath}/order/orderDetail.do?n=${ orderList.orderid }">${ orderList.orderid }</a></td>
+                    <td width="600px"><a style="text-decoration: none;" href="${pageContext.request.contextPath}/order/orderDetail.do?n=${ orderList.orderid }">${ orderList.orderid }</a></td>
                 </tr>
                 <tr>
                     <td width="300px">주문일자</td>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문상품</td>
-                    <td width="600px">ChildLife 차일드라이프 비타민D3 천연 베리맛 30ml</td>
+                    <td width="600px">${ orderList.pname } <b>외 ${ orderList.cnt }개</b></td>
                 </tr>
                 <tr>
                     <td width="300px">수령인</td>
@@ -63,7 +63,7 @@
                 </tr>
                 <tr>
                     <td width="300px">주문금액</td>
-                    <td width="300px">${ orderList.totalprice }</td>
+                    <td width="300px"><fmt:formatNumber pattern="###,###,###" value="${ orderList.totalprice }" />원</td>
                 </tr>
 
             </table>

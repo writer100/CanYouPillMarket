@@ -14,8 +14,8 @@
 	</select>
 	
 	<insert id="insertReview" parameterType="Review">
-		INSERT INTO REVIEW (RENO, RETITLE, REUSERID, RECONTENT)
-		VALUES (SEQ_RENO.NEXTVAL, #{ retitle }, #{ reuserid }, #{ recontent })
+		INSERT INTO REVIEW (RENO, PNO, RETITLE, REUSERID, RECONTENT)
+		VALUES (SEQ_RENO.NEXTVAL, #{ pno }, #{ retitle }, #{ reuserid }, #{ recontent })
 	</insert>
 	
 	<insert id="insertRAttachment" parameterType="RAttachment">
@@ -24,22 +24,22 @@
 		<selectKey keyProperty="reno" resultType="_int" order="BEFORE">
 			SELECT SEQ_RENO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO RATTACHMENT VALUES (SEQ_RATTACHMENTNO.NEXTVAL, 
+		INSERT INTO RATTACHMENT VALUES (SEQ_RANO.NEXTVAL, 
 		  #{ reno }, #{ originalname }, #{ changename }, 
-		  SYSDATE, 0, 'Y' )
+		  SYSDATE, 'Y' )
 	</insert>
-	
+
 	<select id="selectOneReview" parameterType="int" resultType="Review">
-		SELECT * FROM REVIEW WHERE RENO = #{ reno }
+	SELECT R.*, P.PNAME 
+		FROM REVIEW R, PRODUCT P
+		WHERE R.PNO = P.PNO
+		AND RENO = #{ reno }
 	</select>
 	
 	<select id="selectRAttachmentList" parameterType="int" resultType="RAttachment">
-		SELECT *FROM RATTACHMENT WHERE RENO = #{ reno }
+		SELECT * FROM RATTACHMENT WHERE RENO = #{ reno }
 	</select>
 	
-	<update id="updateReadCount" parameterType="int">
-		UPDATE REVIEW SET REVIEWREADCOUNT = REVIEWREADCOUNT + 1 WHERE RENO = #{ reno }
-	</update>
 	
 	<update id="updateReview" parameterType="Review">
 		UPDATE REVIEW SET RETITLE = #{ retitle }, RECONTENT = #{ recontent }
@@ -49,7 +49,7 @@
 	<insert id="updateRAttachment" parameterType="RAttachment">
 		INSERT INTO RATTACHMENT VALUES (SEQ_RATTACHMENTNO.NEXTVAL, 
 		  #{ reno }, #{ originalname }, #{ changename }, 
-		  SYSDATE, 0, 'Y' )
+		  SYSDATE, 'Y' )
 	</insert>
 	
 	<delete id="deleteRAttachment" parameterType="int">
@@ -57,7 +57,7 @@
 	</delete>
 	
 	<delete id="deleteFile" parameterType="int">
-		DELETE FROM RRATTACHMENT WHERE RATTACHMENTNO = #{ attNo } 
+		DELETE FROM RATTACHMENT WHERE RANO = #{ rano } 
 	</delete>
 	
 	<delete id="deleteReview" parameterType="int">
@@ -65,19 +65,4 @@
 	</delete>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

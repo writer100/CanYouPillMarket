@@ -244,7 +244,7 @@
 								aria-labelledby="panelsStayOpen-headingThree">
 								<div class="accordion-body fs-6">
 									<p>
-										A. [카드결제 환불] 결제 당일 취소는 카드사에서 당일 취소확인이 가능합니다. 익일 이후 취소일 경우 카드사 사정에
+										[카드결제 환불] 결제 당일 취소는 카드사에서 당일 취소확인이 가능합니다. 익일 이후 취소일 경우 카드사 사정에
 										따라 3~5일 후 해당 카드사에서 취소 내역을 확인하실 수 있습니다. <br>
 
 
@@ -335,9 +335,6 @@
 							<tr id="${b.qano}" class="sel">
 								<th id="no" scope="row">${b.qano}</th>
 								<td id="title">[${b.qasel}] ${b.qatitle}</td>
-								<c:if test="${row.cnt > 0}"> //댓글의 개수가 0보다 크면 실행되는 구문
-    <span style="color:red;">( ${row.cnt} )</span> //댓글의 개수를 출력하고 색깔을 빨간색으로 한다.
-</c:if> 
 								<td id="writer">${b.qauserid}</td>
 								<td id="date">${b.qauploaddate}</td>
 							</tr>

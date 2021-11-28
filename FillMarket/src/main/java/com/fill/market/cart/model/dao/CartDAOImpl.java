@@ -77,5 +77,11 @@ public class CartDAOImpl implements CartDAO {
 		
 	}
 
+	@Override
+	public int cartDetailInsert(Cart cart) {
+		
+		return sqlSession.insert("cartSQL.cartDetailInsert", cart);
+	}
+
 
 }
