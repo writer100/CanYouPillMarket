@@ -12,10 +12,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>find</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/memberFind.css">
 
@@ -31,8 +27,6 @@
 
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 
 </head>
 

@@ -8,10 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>FillMarket</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link
@@ -25,63 +21,81 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+
 </head>
-<body>
+<body id="index_body">
+	
 	<c:import url="views/common/header.jsp" />
 	<c:import url="views/common/navbar.jsp" />
-
+<c:import url="views/common/slideBar.jsp"/>
 	<main>
 
 		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+					data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
 				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="1" aria-label="Slide 2" class="active"
+					data-bs-slide-to="1" aria-label="Slide 2" class=""
 					aria-current="true"></button>
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+					<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="2" aria-label="Slide 3" class=""
+					aria-current="true"></button>
+					<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="3" aria-label="Slide 4" class=""
+					aria-current="true"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item">
-					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel1.png"
-						alt="">
+				<div class="carousel-item active">
+					<video class="bd-placeholder-img" width="100%" height="auto" autoplay loop muted >
+						<source src="${pageContext.request.contextPath }/resources/images/Carousel1.mp4" type="video/mp4" />
+					</video>
 					<div class="container">
 						<div class="carousel-caption text-start">
-							<h1>건강을 위한 선택</h1>
+							<h1 style="color: black;">젊음 건강 행복회복의 비결</h1>
+							<p style="color: black;">
+								 그 행복한 꿈<br> 캔유필마켓이 이루어 드립니다! 
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<video class="bd-placeholder-img" width="100%" height="auto" autoplay loop muted >
+						<source src="${pageContext.request.contextPath }/resources/images/Carousel2.mp4" type="video/mp4" />
+					</video>
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<h1>온 가족에게 필요합니다</h1>
 							<p>
+								 건강 적신호<br> 내가 아닐거라 장담할 수 없습니다. 
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<video class="bd-placeholder-img" width="100%" height="auto" autoplay loop muted >
+						<source src="${pageContext.request.contextPath }/resources/images/Carousel3.mp4" type="video/mp4" />
+					</video>
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<h1>부모님께 최고의 선물입니다.</h1>
+							<p>
+								 키워주시느라 고생한 부모님<br> 이제는 저희가 챙겨드릴게요. 
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item" >
+					<video class="bd-placeholder-img" width="100%" height="auto" autoplay loop muted >
+						<source src="${pageContext.request.contextPath }/resources/images/Carousel4.mp4" type="video/mp4" />
+					</video>
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<h1 style="color: black;">전문의사가 선택 해 드립니다.</h1>
+							<p style="color: black;">
 								나만을 위한 맞춤영양제를 찾아보세요! <br> 효과적인 방법으로 부작용 없는 영양제를 추천 해 드립니다!!
 							</p>
 							<p>
-								<a class="btn btn-lg btn-primary" href="#">시작하기</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item active">
-					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel2.png"
-						alt="">
-					<div class="container">
-						<div class="carousel-caption text-start">
-							<h1>비타민에 대한 오해와 진실!</h1>
-							<p>
-								비타민 좋다고 무조건 드시나요?<br>알고먹으면 내 몸을 소중히 할 수 있습니다!
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<img class="bd-placeholder-img" width="100%" height="100%"
-						src="${pageContext.request.contextPath }/resources/images/Carousel3.png"
-						alt="">
-					<div class="container">
-						<div class="carousel-caption text-start">
-							<h1>다량 섭취, 좋은것이 아닙니다!</h1>
-							<p>
-								건강에 도움을 주는 영양제, 많이 복용한다고 좋은것이 아닙니다 <br> 영양제 오 남용에 대해 알아봅시다!
+								<a class="btn btn-lg" style="background-color:rgb(216, 83, 55); color:white;" href="#">시작하기</a>
 							</p>
 						</div>
 					</div>
@@ -101,79 +115,9 @@
 
 		<div class="container marketing">
 
-			<div class="row">
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/daniel.png"
-						alt="">
-					<rect width="100%" height="100%" fill="#777"></rect>
-					<h2>God Daniel</h2>
-					<p>
-						<a class="btn btn-secondary" href="#">GitHub »</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/gichang.png"
-						alt="">
-					<h2>Gichang</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/rlckdwkd55">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Jieun.png"
-						alt="">
-					<h2>Jieun</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/writer100">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Changhwan.png"
-						alt="">
-					<h2>Changhwan</h2>
-					<p>
-						<a class="btn btn-secondary"
-							href="https://github.com/ChangHWanChoi">GitHub »</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Yeji.png"
-						alt="">
-					<h2>Yeji</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/fiveeasy">GitHub
-							»</a>
-					</p>
-				</div>
-
-				<div class="col-lg-4">
-					<img
-						src="${pageContext.request.contextPath }/resources/images/Seungbyung.png"
-						alt="">
-					<h2>Seungbyung</h2>
-					<p>
-						<a class="btn btn-secondary" href="https://github.com/ssgbbo">GitHub
-							»</a>
-					</p>
-				</div>
-			</div>
-
-			<hr class="featurette-divider">
-
 			<div class="row featurette">
 				<div class="col-md-7">
-					<h2 class="featurette-heading mb-3">꼼꼼한 배송에 놀라지마세요.</h2>
+					<h2 class="featurette-heading mb-3 mt-5 pt-5">꼼꼼한 배송에 놀라지마세요.</h2>
 					<p class="lead">
 						Can You Pill Market만의 차별화된 배송 시스템으로 <br> 여러분의 건강을 안전하게 배송 해
 						드립니다.
@@ -207,7 +151,7 @@
 
 			<hr class="featurette-divider">
 
-			<div class="row featurette mb-5 pb-5">
+			<div class="row featurette pb-5">
 				<div class="col-md-7">
 					<h2 class="featurette-heading mb-3">최저가 판매를 약속 드립니다.</h2>
 					<p class="lead">
@@ -223,6 +167,76 @@
 				</div>
 			</div>
 
+            <hr class="featurette-divider">
+
+            <div class="row">
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/daniel.png"
+						alt="">
+					<rect width="100%" height="100%" fill="#777"></rect>
+					<h2>God Daniel</h2>
+					<p>
+						<a class="btn btn-secondary" href="#">GitHub »</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/gichang.png"
+						alt="">
+					<h2>Gichang</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/rlckdwkd55">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Jieun.png"
+						alt="">
+					<h2>Jieun</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/writer100">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4 mb-5">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Changhwan.png"
+						alt="">
+					<h2>Changhwan</h2>
+					<p>
+						<a class="btn btn-secondary"
+							href="https://github.com/ChangHWanChoi">GitHub »</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Yeji.png"
+						alt="">
+					<h2>Yeji</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/fiveeasy">GitHub
+							»</a>
+					</p>
+				</div>
+
+				<div class="col-lg-4">
+					<img
+						src="${pageContext.request.contextPath }/resources/images/Seungbyung.png"
+						alt="">
+					<h2>Seungbyung</h2>
+					<p>
+						<a class="btn btn-secondary" href="https://github.com/ssgbbo">GitHub
+							»</a>
+					</p>
+				</div>
+			</div>
+
 		</div>
 	</main>
 
@@ -230,7 +244,9 @@
 		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
 		<a href="#Top">🔝</a>
 	</div>
-
+ 
+ 	<hr class="featurette-divider">
+ 
 	<c:import url="views/common/footer.jsp" />
 </body>
 </html>

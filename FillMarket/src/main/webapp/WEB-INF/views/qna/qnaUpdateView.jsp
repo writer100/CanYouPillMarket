@@ -41,7 +41,7 @@
 				</select> <input type="text" placeholder="제목 입력" name="qatitle"
 					class="form-control" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-default"  value="${board.qatitle}" requeird>
-				<input type="hidden" class="form-control" name="qauserid" value="${member.userId}" readonly required>
+				<input type="text" class="form-control" name="qauserid" value="${member.userId}" readonly required>
 			</div>
 			<div class="textarea">
 				<textarea placeholder="문의 내용 입력" name="qacontent" rows="15" cols="155">${board.qacontent}</textarea>

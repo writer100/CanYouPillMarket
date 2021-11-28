@@ -11,10 +11,6 @@
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/memberUpdate.css">
 
@@ -89,7 +85,7 @@
 	}
 </script>
 
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+
 </head>
 
 <body>
@@ -230,12 +226,12 @@
 				</div>
 
 				<!-- JOIN BTN-->
-				<div class="btn_area mt-5">
+				<div class="btn_area mt-5" style="display:flex; justify-content:space-between;">
 					<input type="submit" class="btn" value="수정"
 						id="btnJoin">
-					<input type="reset" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
+					<input type="reset" class="btn" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
 						id="btnJoin">
-					<input type="button" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
+					<input type="button" class="btn" style="background-color: #00000078;" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
 						id="btnJoin">
 				</div>
 

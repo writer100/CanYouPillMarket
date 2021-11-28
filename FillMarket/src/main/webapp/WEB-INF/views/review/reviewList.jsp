@@ -18,6 +18,10 @@
 		href="${pageContext.request.contextPath}/resources/css/style.css">
 	<!-- 타이틀 로고 -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+<!-- 구글 폰트 cdn -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">	
 	<style>
 	.row {
     display: flex;
@@ -32,20 +36,13 @@
 	}
 	.search{ text-align: center; }
 	
-	.btn{ background-color : rgb(255, 142, 117); color: white; }
-	
-	.my.pagination > .active > a, 
-	.my.pagination > .active > span, 
-	.my.pagination > .active > a:hover, 
-	.my.pagination > .active > span:hover, 
-	.my.pagination > .active > a:focus, 
-	.my.pagination > .active > span:focus {
-  		background: rgb(255, 142, 117);
- 		 border-color: rgb(255, 142, 117);
+	.btn{ background-color : rgb(255, 142, 117); color: white; 
+		  height: 30px; font-size: small;
 	}
 	
 	#header{ color : rgba(0, 0, 0, 0.35) ;
 			 text-align: center; }
+			 
 	#review_header {
 	text-align: center;
 	color: rgb(255, 142, 117);
@@ -66,28 +63,32 @@
                 <br />
                 <br />
 	    <div class="row product" wieth="70%" style="text-align: center;">
-			<table class="mx-auto" style="width: 80%;">
+			<table class="table table-borderless table-hover" style="width: 80%;">
                  <thead>
                      <tr>
 	                     <th>번호</th>
 	                     <th>제목</th>
+	                     <th>작성일</th>
 	                     <th>수정/삭제</th>
                      </tr>
                  </thead>
-                 
                  <c:forEach items="${list}" var = "review">
+                 <c:if test="${member.userId eq review.reuserid}">
+                 	<tr id="${ review.reno }">
                          <td>${review.reno }</td>
                          <td>${review.retitle }</td>
-                         <td>
+                         <td>${review.reuploaddate }</td>
+                         <td class="updateFrm">
+                         <c:if test="${member.userId eq review.reuserid}">
                          	<input type="hidden" name="reno" value="${review.reno}" />
-							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewUpdateView.do?reno=${review.reno}'">수정</button>
+							<button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewUpdateForm('${ review.reno }');">수정</button>
           	                &nbsp;&nbsp;
-          	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="location.href='${pageContext.request.contextPath}/review/reviewList.do'">삭제</button>
-	
+          	                <button class="btn" style="background-color: rgb(255, 142, 117);" type="button" onclick="fn_goReviewDelete('${ review.reno }');">삭제</button>
+						</c:if>
                          </td>
                      </tr>
+                 </c:if>
                  </c:forEach>
-             
              </table>
 			
 			<div>
@@ -107,7 +108,21 @@
 	<c:import url="../common/footer.jsp" />
 	
 	<script>
+	function fn_goReviewUpdateForm(reno){
+		location.href = "${pageContext.request.contextPath}/review/reviewUpdateView.do?reno="+reno;
+	}
 	
+	function fn_goReviewDelete(reno){
+		location.href = "${pageContext.request.contextPath}/review/reviewDelete.do?reno="+reno;
+	}
+	
+	$(function(){
+		$("td:not(.updateFrm)").on("click",function(){
+			var reno = $(this).parent().attr("id");
+			console.log("reno="+reno);
+			location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
+		});
+	});
 
 	</script>
 	<!-- JQuery CDN-->

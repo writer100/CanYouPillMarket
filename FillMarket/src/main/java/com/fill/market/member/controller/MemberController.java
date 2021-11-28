@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -365,7 +366,7 @@ public class MemberController {
 			            // mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
 						// 보내는이(from)은 반드시 있어야합니다. 
 						// mailSender 빈에서 아이디를 기입하였지만 이는 SMTP 사용 권한을 얻어 오는 역할을 수행합니다.
-						helper.setFrom("CanYouPillMarket <rlckdwkd97@gmail.com>"); 
+						helper.setFrom("CanYouPillMarket <CanYouPillMarket@gmail.com>"); 
 						helper.setTo(vo.getTo()); 
 						helper.setSubject(vo.getSubject()); 
 						helper.setText(vo.getContents(), true); // true는 html을 사용하겠다는 의미 
@@ -414,5 +415,64 @@ public class MemberController {
 			return generatedString;
 		}
 	
-	
+		@RequestMapping(value={"member/emailCheck.do", "*/member/emailCheck.do"})
+	    @ResponseBody
+	    public String emailCheck(@RequestParam String email) {
+	        
+	        System.out.println("kakaoCheck Controller Access");
+	        
+	        String userId = memberService.selectEmailCount(email);
+	        
+	        
+	        return userId;
+	    }
+
+		// sns로그인 시 해당 메일주소의 회원이 없다면, 
+	    // sns로그인으로 얻은 정보와 함께 회원 가입페이지로 가기
+	    @RequestMapping("/member/snsMemberJoin.do")
+	    public String kakaoMemberJoin(
+	                Model model
+	            ) {
+	        // 임의로 비밀번호 생성
+	        String password = randomCode();
+	        System.out.println("확인완");
+	        return "member/memberEnroll";
+	    }
+	    
+	    // sns 로그인 시 받아오는 정보로 로그인
+	    @RequestMapping(value={"member/snsLogin.do", "*/member/snsLogin.do"})
+	    public String kakaoLogin(
+	                @RequestParam String userId,
+	                Model model,
+	                SessionStatus status
+	            ) {
+	        
+	        System.out.println("login Access");
+	        
+	        // 이미 sns 로그인 계정이 확인되었기 때문에 비밀번호는 검사하지 않음
+	        Member result = memberService.selectOneMember(userId);
+	        
+	        System.out.println("로그인 조회 결과 : " + result);
+	        
+	        String loc = "/";
+	        String msg = "";
+	        
+	        if ( result != null ) {
+	            
+	            msg = "로그인 성공";
+	            model.addAttribute("member", result);
+	                
+	        } else {
+	            msg = "아이디를 다시 확인해주세요.";
+	        }
+	        
+	        
+	        model.addAttribute("msg", msg);
+	        model.addAttribute("loc", loc);
+	        
+	        return "common/msg";
+	    }
+
 }
+
+

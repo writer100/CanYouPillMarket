@@ -19,23 +19,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-	<!-- 서머노트를 위해 추가해야할 부분 -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-<script src="/resources/summernote/summernote-lite.js"></script>
-<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <c:import url="../common/header.jsp" />
-<script>
-$('.summernote').summernote({
-	  height: 150,
-	  lang: "ko-KR"
-	});
-</script>
 <script>
 	/* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
 	function validate(){
@@ -68,16 +54,17 @@ $('.summernote').summernote({
 				</select> <input type="text" placeholder="제목 입력" name="qatitle"
 					class="form-control" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-default" requeird>
-				<input type="hidden" class="form-control" name="qauserid" value="${member.userId}" readonly required>
+				<input type="text" class="form-control" name="qauserid" value="${member.userId}" readonly required>
 			</div>
 			<div class="textarea">
-				<textarea class="summernote" placeholder="문의 내용 입력" name="qacontent" style="width: 100%; height:412px;" class="form-control" rows="3"></textarea>
+				<textarea placeholder="문의 내용 입력" name="qacontent" rows="15" cols="155"></textarea>
 			</div>
 			<div class="button">
 				<input class="btn btn-primary" type="submit" value="등록">
 				<input class="btn btn-primary" type="button" value="취소"
 					onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do'">
 		</form>
+	</div>
 	</div>
 	<c:import url="../common/footer.jsp"/>
 </body>

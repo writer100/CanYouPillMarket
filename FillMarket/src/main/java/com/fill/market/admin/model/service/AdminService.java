@@ -12,6 +12,7 @@ import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.admin.model.vo.QNA;
 import com.fill.market.admin.model.vo.QNARE;
+import com.fill.market.order.model.vo.OrderList;
 
 
 @Service
@@ -188,6 +189,46 @@ public class AdminService {
 	public int selectUserNameTotalContents(String userName) {
 		
 		return adminDAO.selectUserNameTotalList(userName);
+	}
+
+	public Member selectAdmin(String userId) {
+		
+		return adminDAO.selectAdmin(userId);
+	}
+
+	public int adminMemoInsert(Map<String, String> memoVal) {
+		
+		return adminDAO.adminMemoInsert(memoVal);
+	}
+
+	public List<OrderList> selectOrderList(String userId) {
+		
+		return adminDAO.adminOrderList(userId);
+	}
+
+	public int selectOrderTotalContents(String userId) {
+		// TODO Auto-generated method stub
+		return adminDAO.selectOrderTotal(userId);
+	}
+
+	public int updateUserAuthor(Member member) {
+		
+		return adminDAO.updateUserAuthor(member);
+	}
+
+	public int memberCount() {
+		
+		return adminDAO.memberCount();
+	}
+
+	public int productCount() {
+		
+		return adminDAO.productCount();
+	}
+
+	public int qnaCount() {
+		
+		return adminDAO.qnaCount();
 	}
 
 	

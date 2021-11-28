@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,7 @@ import com.fill.market.admin.model.vo.Product;
 import com.fill.market.admin.model.vo.QNA;
 import com.fill.market.admin.model.vo.QNARE;
 import com.fill.market.common.Utils;
+import com.fill.market.order.model.vo.OrderList;
 
 @Controller
 public class AdminController {
@@ -37,6 +41,7 @@ public class AdminController {
 
 		return "admin/adminMain";
 	}
+	
 
 	@RequestMapping("/admin/adminProductList.do")
 	public String adminProductList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
@@ -385,7 +390,7 @@ public class AdminController {
 		int numPerPage = 10;
 
 		// 현재 페이지의 게시글 수
-		List<Map<String, String>> list = adminService.selectNameUserList(cPage, numPerPage, userName);
+		List<Map<String, String>> listud = adminService.selectNameUserList(cPage, numPerPage, userName);
 
 		// 전체 게시글 수
 		int totalContents = adminService.selectUserNameTotalContents(userName);
@@ -396,7 +401,7 @@ public class AdminController {
 		// System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
 
-		model.addAttribute("list", list);
+		model.addAttribute("listud", listud);
 		model.addAttribute("totalContents", totalContents);
 		model.addAttribute("numPerPage", numPerPage);
 		model.addAttribute("pageBar", pageBar);
@@ -553,9 +558,38 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/adminInfo.do")
-	public String adminInfo() {
+	public String adminInfo(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Model model, HttpSession session) {
+
+			String myInfo = ((Member) (session.getAttribute("member"))).getUserId();
+			
+			Member myMember = adminService.adminSelectUser(myInfo);
+			
+			
 		
-		return "admin/adminInfo";
+		
+			// 한 페이지당 게시글 수
+			int numPerPage = 15;
+
+			// 현재 페이지의 게시글 수
+			List<Map<String, String>> list = adminService.selectUserList(cPage, numPerPage);
+
+			// 전체 게시글 수
+			int totalContents = adminService.selectUserTotalContents();
+
+			// 페이지 처리 Utils 사용하기
+			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminInfo.do");
+
+			// System.out.println("list : " + list);
+			// System.out.println("pageBar : " + pageBar);
+
+			model.addAttribute("myMember", myMember);
+			model.addAttribute("list", list);
+			model.addAttribute("totalContents", totalContents);
+			model.addAttribute("numPerPage", numPerPage);
+			model.addAttribute("pageBar", pageBar);
+
+			return "admin/adminInfo";
 		
 	}
 	
@@ -563,6 +597,162 @@ public class AdminController {
 	
 	
 	
+	@RequestMapping("/admin/memoSave.do")
+	@ResponseBody
+	public boolean memoSave(@RequestParam String memo, @RequestParam String userId) {
+		
 	
+		Map<String, String> memoVal = new HashMap<String, String>();
+		
+		memoVal.put("memo", memo);
+		memoVal.put("userId", userId);
+		
+		// System.out.println(memoVal);
+		
+		int result = adminService.adminMemoInsert(memoVal);
+		
+		if(result == 1) {
+			return true;
+		}else {
+			return false;				
+		}			
+	}
+	
+	
+	@RequestMapping("/admin/userClick.do")
+	public String userClick(@RequestParam String userId, Model model) {
+		
+		Member userMember = adminService.adminSelectUser(userId);
+		
+		if(userMember != null) {
+			
+			model.addAttribute("userMember" ,userMember);
+			
+		}else {
+			String str = "찾으신 사용자가 없습니다.";
+			model.addAttribute("str", str);
+			
+		}
+		
+		return "admin/selectUser";
+		
+	}
+	
+	@RequestMapping("/admin/adminOrderList.do")
+	public String orderList(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, 
+							Model model, @RequestParam String userId) {
+		
+		// 한 페이지당 게시글 수
+		int numPerPage = 3;
+
+		// 현재 페이지의 게시글 수
+		List<OrderList> orderlist = adminService.selectOrderList(userId);
+		System.out.println(orderlist);
+
+		// 전체 게시글 수
+		int totalContents = adminService.selectOrderTotalContents(userId);
+
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "checkNameList.do");
+
+		// System.out.println("list : " + list);
+		// System.out.println("pageBar : " + pageBar);
+
+		
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		
+		
+		
+		
+		if(orderlist.size() > 0) {
+			
+			model.addAttribute("orderlist", orderlist);
+			return "admin/adminOrderList";
+			
+		}else {
+			
+			return "null";
+			
+		} 
+		
+	}
+
+	
+	
+	@RequestMapping("/admin/userAuthorUpdate.do")
+	@ResponseBody
+	public boolean userAuthorUpdate(@RequestParam String userId, @RequestParam int selectAuthor) {
+		System.out.println(userId + "/" +selectAuthor);
+		
+		Member member = new Member();
+		
+		member.setUserId(userId);
+		member.setLevelType(selectAuthor);
+		
+		int result = adminService.updateUserAuthor(member);
+		
+		if(result > 0) {
+			
+			return true;
+		}else {
+			
+			return false;
+			
+		}
+
+	}
+	
+	
+	
+	//---------------------------------- 대시 보드 -----------------------------------------------------//
+	@RequestMapping("/admin/admindashBoard.do")
+	public String admindashBoard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Model model) {
+
+		// 한 페이지당 게시글 수
+		int numPerPage = 10;
+
+		// 유저 수
+		int memberCount = adminService.memberCount();
+		// 상품 수
+		int productCount = adminService.productCount();
+		// 문의 수
+		int qnaCount = adminService.qnaCount();
+		
+		// 상품리스트
+		List<Map<String, String>> productList = adminService.selectProductList(cPage, numPerPage);
+		// 사용자리스트
+		List<Map<String, String>> userList = adminService.selectUserList(cPage, numPerPage);
+		// 문의리스트
+		List<Map<String, String>> QnAList = adminService.selectQNAList(cPage, numPerPage);
+		
+		
+		int totalContents = adminService.selectProductTotalContents();
+		
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminProductList.do");
+
+		//System.out.println(producList);
+		//System.out.println(userList);
+		//System.out.println(QnAList);
+		
+		// System.out.println("pageBar : " + pageBar);
+
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("QnAList", QnAList);
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("productCount", productCount);
+		model.addAttribute("qnaCount", qnaCount);
+		
+		return "admin/dashBoard";
+	}
 	
 }

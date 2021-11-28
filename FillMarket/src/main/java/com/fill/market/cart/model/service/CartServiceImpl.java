@@ -73,4 +73,10 @@ public class CartServiceImpl implements CartService {
 		
 	}
 
+	@Override
+	public int cartDetailInsert(Cart cart) {
+		
+		return cartDAO.cartDetailInsert(cart);
+	}
+
 }
