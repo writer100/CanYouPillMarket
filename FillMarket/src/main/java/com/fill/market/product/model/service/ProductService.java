@@ -23,4 +23,6 @@ public interface ProductService {
 	RAttachment selectRAttachment(int reno);
 
 	List<Review> selectReviewList(int pno);
+
+	Product Selectproduct(String pList);
 }

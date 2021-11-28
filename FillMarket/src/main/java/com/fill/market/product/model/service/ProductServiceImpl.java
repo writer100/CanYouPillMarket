@@ -61,5 +61,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectReviewList(pno);
 	}
 
+	@Override
+	public Product Selectproduct(String pList) {
+		
+		return productDAO.Selectproduct(pList);
+	}
+
 
 }

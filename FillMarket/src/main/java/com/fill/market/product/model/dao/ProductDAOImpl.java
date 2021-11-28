@@ -62,4 +62,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("productSQL.selectReviewList", pno);
 	}
 
+	@Override
+	public Product Selectproduct(String pList) {
+		
+		return sqlSession.selectOne("productSQL.Selectproduct", pList);
+	}
+
 }

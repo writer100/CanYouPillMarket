@@ -28,20 +28,7 @@
 		  #{ reno }, #{ originalname }, #{ changename }, 
 		  SYSDATE, 'Y' )
 	</insert>
-	<!-- 
 
-	<select id="orderDetailProduct" resultType="OrderList">
-		SELECT PA.CHANGENAME, P.PNAME, P.PPRICE,
-	       	   OD.PNO,OD.AMOUNT
-		FROM ORDERDETAIL OD, PRODUCT P, PATTACHMENT PA
-		WHERE PA.PNO = OD.PNO
-		AND PA.PANO = (SELECT MIN(PANO) FROM PATTACHMENT WHERE PNO = OD.PNO)
-		AND OD.PNO = P.PNO
-		AND OD.ORDERID = #{ orderid }
-
-원래 쿼리:		SELECT * FROM REVIEW WHERE RENO = #{ reno }
-	</select>
-	 -->
 	<select id="selectOneReview" parameterType="int" resultType="Review">
 	SELECT R.*, P.PNAME 
 		FROM REVIEW R, PRODUCT P

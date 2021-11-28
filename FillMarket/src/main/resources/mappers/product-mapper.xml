@@ -47,5 +47,9 @@
 		SELECT * FROM RATTACHMENT 
 		WHERE RENO = #{ reno }
 	</select>
+	
+	<select id="Selectproduct" parameterType="String" resultType="Product">
+		SELECT * FROM PRODUCT WHERE PNAME = #{pname}
+	</select>
 	 
 </mapper>

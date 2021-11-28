@@ -146,20 +146,21 @@ public class ReviewController {
 		model.addAttribute("review", review);
 		model.addAttribute("pname",  pname);
 		model.addAttribute("rattachmentList", rattachmentList);
-		System.out.println("pname:"+pname);
+		// System.out.println("pname:"+pname);
 		
 		return "review/reviewView";
 	}
 	
 	
 	@RequestMapping("/review/reviewUpdateView.do")
-	public String reviewUpdateView(@RequestParam int reno, Model model) {
+	public String reviewUpdateView(@RequestParam int reno, String pname, Model model) {
 		
 		Review review = reviewService.updateView(reno);
 		
 		List<RAttachment> rattachmentList = reviewService.selectRAttachmentList(reno);
 		
 		model.addAttribute("review", review);
+		model.addAttribute("pname",  pname);
 		model.addAttribute("rattachmentList", rattachmentList);
 		
 		return "review/reviewUpdateView";		
