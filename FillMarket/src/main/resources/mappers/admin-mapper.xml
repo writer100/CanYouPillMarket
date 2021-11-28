@@ -208,4 +208,15 @@
 		WHERE USERID = #{userId}
 	</update>
 	
+	<select id="memberCount" resultType="int">
+		SELECT COUNT(*)FROM MEMBER
+	</select>
+	
+	<select id="productCount" resultType="int">
+		SELECT COUNT(*)FROM PRODUCT
+	</select>
+	<select id="qnaCount" resultType="int">
+		SELECT COUNT(*)FROM QNA
+	</select>
+	
 </mapper>

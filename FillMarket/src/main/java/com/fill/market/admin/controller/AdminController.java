@@ -706,4 +706,53 @@ public class AdminController {
 	}
 	
 	
+	
+	//---------------------------------- 대시 보드 -----------------------------------------------------//
+	@RequestMapping("/admin/admindashBoard.do")
+	public String admindashBoard(@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage,
+			Model model) {
+
+		// 한 페이지당 게시글 수
+		int numPerPage = 10;
+
+		// 유저 수
+		int memberCount = adminService.memberCount();
+		// 상품 수
+		int productCount = adminService.productCount();
+		// 문의 수
+		int qnaCount = adminService.qnaCount();
+		
+		// 상품리스트
+		List<Map<String, String>> productList = adminService.selectProductList(cPage, numPerPage);
+		// 사용자리스트
+		List<Map<String, String>> userList = adminService.selectUserList(cPage, numPerPage);
+		// 문의리스트
+		List<Map<String, String>> QnAList = adminService.selectQNAList(cPage, numPerPage);
+		
+		
+		int totalContents = adminService.selectProductTotalContents();
+		
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminProductList.do");
+
+		//System.out.println(producList);
+		//System.out.println(userList);
+		//System.out.println(QnAList);
+		
+		// System.out.println("pageBar : " + pageBar);
+
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("QnAList", QnAList);
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("productCount", productCount);
+		model.addAttribute("qnaCount", qnaCount);
+		
+		return "admin/dashBoard";
+	}
+	
 }
