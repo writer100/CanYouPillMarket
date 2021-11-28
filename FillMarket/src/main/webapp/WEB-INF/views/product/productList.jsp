@@ -44,8 +44,8 @@
 	    <div class="row product" wieth="90%">
 	        <!-- 검색창 -->
 		        <div role="group" class="input-group d-flex align-items-center justify-content-center my-3"><!---->
-			        <form class="search" style="width: 1000px;">
-			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; " id="productSearch">
+			        <form action="${pageContext.request.contextPath}/product/checkproductList.do" class="search" style="width: 1000px;">
+			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; " name="productSearch">
 			        <button id="searchBtn" type="submit" class="btn">검색</button>
 			        </form>
 		        </div>
@@ -88,73 +88,60 @@
 	function logEvent(event){
 		console.log(event.currentTarget.className);
 	}
-		function goCart(pno, pname, pprice){
-			location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
-		}
+	
+	function goCart(pno, pname, pprice){
+		location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
+	}
 		
-		$(function(){
-			$("img[id]").on("click",function(){
-				var pno = $(this).attr('id');
-				location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
-			});
+	$(function(){
+		$("img[id]").on("click",function(){
+			var pno = $(this).attr('id');
+			location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
 		});
+	});
 		
 		
-		$(function(){
-			$(".card-img-top[id]").on("click",function(){
-				var pno = $(this).attr("id");
-				console.log("pno="+pno);
-				location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
-			});
+	$(function(){
+		$(".card-img-top[id]").on("click",function(){
+			var pno = $(this).attr("id");
+			console.log("pno="+pno);
+			location.href = "${pageContext.request.contextPath}/product/productView.do?pno="+pno;
 		});
+	});
 		
-		$(function(){
-			$(".card-img-top[name]").on("click",function(){
-				var pname = $(this).attr("pname");
-				console.log("pname="+pname);
-				location.href = "${pageContext.request.contextPath}/product/productView.do?pname="+pname;
-			});
+	$(function(){
+		$(".card-img-top[name]").on("click",function(){
+			var pname = $(this).attr("pname");
+			console.log("pname="+pname);
+			location.href = "${pageContext.request.contextPath}/product/productView.do?pname="+pname;
+	});
 			
-			$('#pname').on("keyup",function(){
-				var pname = $(this).val().trim();
-				console.log("pname="+pname);
-				/*
-						if(target == null && keyword == null) {
-			// 검색을 하지 않았을 때
-			listCount = service.getListCount(cateNo);
-		} else if(target.equals("title") && keyword != null) {
-			// 제목으로 검색
-			listCount = service.getTitleListCount(cateNo, keyword);
-		} else if(target.equals("writerId") && keyword != null) {
-			// 작성자 아이디로 검색
-			listCount = service.getWriterIdListCount(cateNo, keyword);
-		} else if(target.equals("writerNick") && keyword != null) {
-			// 작성자 닉네임으로 검색
-			listCount = service.getWriterNickListCount(cateNo, keyword);
-		}
-				*/
-				if(pname.length == 0){
-					$('#AllList').show()
-					$('#pnameList').hide()
-				}else{
-					$.ajax({
-						 url  : "${pageContext.request.contextPath}/product/productList.do",
-				         data : {pname : pname},
-				         dataType: "html",
-				         success : function(data){
-				        	 
-				        	 $('#AllList').hide()
-				        	 $('#pnameList').show()
-				        	 $('#pnameList').html(data)
-				        	 
-				         }
-					})
-				}
-				
-				
-			});
+		$('#productSearch').on("keyup",function(){
+			var pname = $(this).val().trim();
+			console.log("productSearch="+productSearch);
+
+			if(pname.length == 0){
+				$('#AllpnameList').show()
+				$('#productSearchList').hide()
+			}else{
+				$.ajax({
+					 url  : "${pageContext.request.contextPath}/product/productList.do",
+			         data : {pname : pname},
+			         dataType: "html",
+			         success : function(data){
+			        	 
+			        	 $('#AllList').hide()
+			        	 $('#productSearchList').show()
+			        	 $('#productSearchList').html(data)
+			        	 
+			         }
+				})
+			}
+			
 			
 		});
+		
+	});
 	</script>
 	<!-- JQuery CDN-->
 	<script src="https://code.jquery.com/jquery-2.2.4.js"

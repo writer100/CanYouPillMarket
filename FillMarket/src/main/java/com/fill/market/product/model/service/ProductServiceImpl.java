@@ -62,9 +62,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product Selectproduct(String pList) {
+	public Product selectProduct(String pList) {
 		
-		return productDAO.Selectproduct(pList);
+		return productDAO.selectProduct(pList);
+	}
+
+	@Override
+	public List<Product> selectSearch(int cPage, int numPerPage, Product pro) {
+		
+		return productDAO.selectSearch(cPage, numPerPage, pro);
+	}
+
+
+	@Override
+	public int selectAllSearch(Product pro) {
+		// TODO Auto-generated method stub
+		return productDAO.selectAllSearch(pro);
 	}
 
 

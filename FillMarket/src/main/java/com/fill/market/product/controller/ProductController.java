@@ -19,8 +19,6 @@ import com.fill.market.product.model.service.ProductService;
 import com.fill.market.review.model.vo.RAttachment;
 import com.fill.market.review.model.vo.Review;
 
-
-
 @Controller
 public class ProductController {
 	
@@ -31,13 +29,11 @@ public class ProductController {
 	public String selectProductList(
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="cno", required=false, defaultValue="0") int cno,
-			Model model, HttpSession session
+			Model model
 			) {
-		
 		//String pList = ((Product) (session.getAttribute("product"))).getPname();
 		
 		//Product productSearch = productService.Selectproduct(pList);
-		
 		
 		// 한 페이지당 상품 수
 		int numPerPage = 8;
@@ -54,9 +50,8 @@ public class ProductController {
 		// 페이지 처리 Utils 사용하기
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "productList.do");
 		
-		System.out.println("list : " + list);
-		System.out.println("pageBar : " + pageBar);
-		
+		//System.out.println("list : " + list);
+		//System.out.println("pageBar : " + pageBar);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalContents", totalContents);
@@ -65,6 +60,39 @@ public class ProductController {
 		
 		return "product/productList";
 	}	
+	
+	@RequestMapping("/product/checkproductList.do")
+	public String checkNameList(@RequestParam String productSearch,
+			@RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model) {
+		
+		// 한 페이지당 게시글 수
+		int numPerPage = 8;
+		
+		// System.out.println(productSearch);
+		Product pro = new Product();
+		
+		pro.setPname(productSearch);
+		
+		List<Product> list = productService.selectSearch(cPage, numPerPage, pro);
+		
+		// 전체 게시글 수
+		int totalContents = productService.selectAllSearch(pro);
+		System.out.println(totalContents);
+
+		// 페이지 처리 Utils 사용하기
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "checkproductList.do");
+
+		// System.out.println("list : " + list);
+		// System.out.println("pageBar : " + pageBar);
+
+		model.addAttribute("list", list);
+		model.addAttribute("totalContents", totalContents);
+		model.addAttribute("numPerPage", numPerPage);
+		model.addAttribute("pageBar", pageBar);
+		
+		return "product/productSearch";
+
+	}
 	
 	@RequestMapping("/product/productView.do")
 	public String productView(@RequestParam int pno,

@@ -24,6 +24,10 @@ public interface ProductDAO {
 
 	List<Review> selectReviewList(int pno);
 
-	Product Selectproduct(String pList);
+	Product selectProduct(String pList);
+
+	List<Product> selectSearch(int cPage, int numPerPage, Product pro);
+
+	int selectAllSearch(Product pro);
 	
 }

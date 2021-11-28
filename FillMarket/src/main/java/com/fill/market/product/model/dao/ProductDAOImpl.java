@@ -63,9 +63,24 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product Selectproduct(String pList) {
+	public Product selectProduct(String pList) {
 		
-		return sqlSession.selectOne("productSQL.Selectproduct", pList);
+		return sqlSession.selectOne("productSQL.selectProduct", pList);
+	}
+
+	@Override
+	public List<Product> selectSearch(int cPage, int numPerPage, Product pro) {
+		
+		RowBounds rows = new RowBounds((cPage - 1 )* numPerPage, numPerPage);
+		
+		return sqlSession.selectList("productSQL.selectSearch", pro, rows);
+	}
+
+	
+	@Override
+	public int selectAllSearch(Product pro) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("productSQL.selectAllSearch", pro);
 	}
 
 }

@@ -48,8 +48,23 @@
 		WHERE RENO = #{ reno }
 	</select>
 	
-	<select id="Selectproduct" parameterType="String" resultType="Product">
-		SELECT * FROM PRODUCT WHERE PNAME = #{pname}
+	<select id="selectSearch" resultType="Product">
+		<!-- SELECT * FROM PRODUCT WHERE REGEXP_LIKE( pname , #{pname}) -->
+		
+		SELECT P.*, A.CHANGENAME
+		FROM PRODUCT P, PATTACHMENT A 
+		WHERE P.PNO = A.PNO
+		  AND A.PANO = (SELECT MIN(PANO) FROM PATTACHMENT
+		  				WHERE PNO = P.PNO)
+		<if test="cno != 0">
+		  AND P.CNO = #{ cno }
+		</if>
+		AND REGEXP_LIKE( pname , #{pname})
+		ORDER BY PENROLL DESC, P.PNO DESC
+	</select>
+	
+	<select id="selectAllSearch" resultType="int" parameterType="Product">
+		SELECT COUNT(*) FROM PRODUCT WHERE REGEXP_LIKE( pname, #{pname})
 	</select>
 	 
 </mapper>
