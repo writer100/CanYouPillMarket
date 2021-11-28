@@ -139,6 +139,7 @@
 	<br />
 
 	<script>
+	
  		function replyReg(comment){
 		
 			var form = {
@@ -156,6 +157,7 @@
  					success : function(data){
  						
  						$('#recomment').append(data);
+ 						$('#content').val('');
  						
  					}
  				})

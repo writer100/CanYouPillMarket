@@ -643,7 +643,7 @@ public class AdminController {
 							Model model, @RequestParam String userId) {
 		
 		// 한 페이지당 게시글 수
-		int numPerPage = 3;
+		int numPerPage = 4;
 
 		// 현재 페이지의 게시글 수
 		List<OrderList> orderlist = adminService.selectOrderList(userId);
@@ -651,9 +651,10 @@ public class AdminController {
 
 		// 전체 게시글 수
 		int totalContents = adminService.selectOrderTotalContents(userId);
+		System.out.println(totalContents);
 
 		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "checkNameList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminOrderList.do");
 
 		// System.out.println("list : " + list);
 		// System.out.println("pageBar : " + pageBar);
@@ -733,7 +734,7 @@ public class AdminController {
 		int totalContents = adminService.selectProductTotalContents();
 		
 		// 페이지 처리 Utils 사용하기
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminProductList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "admindashBoard.do");
 
 		//System.out.println(producList);
 		//System.out.println(userList);
