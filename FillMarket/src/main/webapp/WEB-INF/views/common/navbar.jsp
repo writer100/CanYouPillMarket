@@ -54,17 +54,6 @@
                         <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/product/productList.do?cno=5">모발</a>
                     
                     </li>
-                    
-                 	<li class="nav-item">
-                        
-                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/survey/surveyList.do">맞춤진단</a>
-                    
-                    </li>
-                    <li class="nav-item">
-                        
-                        <a class="nav-link ms-4 ps-5" href="${pageContext.request.contextPath}/qna/qnaList.do">고객센터</a>
-                    
-                    </li>
                 </ul>
             </div>
         </div>
