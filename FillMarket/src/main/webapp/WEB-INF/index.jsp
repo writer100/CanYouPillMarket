@@ -95,7 +95,7 @@
 								나만을 위한 맞춤영양제를 찾아보세요! <br> 효과적인 방법으로 부작용 없는 영양제를 추천 해 드립니다!!
 							</p>
 							<p>
-								<a class="btn btn-lg" style="background-color:rgb(216, 83, 55); color:white;" href="#">시작하기</a>
+								<a class="btn btn-lg" style="background-color:rgb(216, 83, 55); color:white;" href="${pageContext.request.contextPath}/survey/surveyList.do">시작하기</a>
 							</p>
 						</div>
 					</div>
