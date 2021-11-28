@@ -46,15 +46,7 @@
 		</interceptor>
 	</interceptors>
 	
-<interceptors>
-		<interceptor>
-			<mapping path="/qna/qnaUpdate.do" />
-			<mapping path="/qna/qnaDelete.do" />
-			<mapping path="/qna/qnaUpdateView.do" />
-			<exclude-mapping path="/qna/qnaView.do" />
-			<beans:bean id="writerCheck" class="com.fill.market.common.WriterInterceptor"/>
-		</interceptor>
-	</interceptors>
+
 	
 	<context:component-scan base-package="com.fill.market.*" />
 </beans:beans>

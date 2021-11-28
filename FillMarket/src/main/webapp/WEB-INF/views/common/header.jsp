@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/final_logo.png">
+
 <header>
 	<div class="container">
         <header class="d-flex flex-wrap justify-content-center py-1 mb-4">
