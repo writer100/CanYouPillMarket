@@ -26,5 +26,4 @@ public interface ReviewService {
 	int deleteReview(int reno);
 
 	int deleteFile(int attNo);
-
 }

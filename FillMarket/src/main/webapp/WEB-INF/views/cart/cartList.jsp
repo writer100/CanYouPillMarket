@@ -66,14 +66,14 @@
 					<tr>
 						<td id="checked"><input type="checkbox"></td>
 						<td id="productImg">
-							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }">
+							<img alt="첨부파일" src="${pageContext.request.contextPath}/resources/productUpload/${ cartList.changename }"
 						</td>
-						<td style="text-align: left;">${ cartList.pname }</td>
+						<td style="text-align: left;"><h5>${ cartList.pname }</h5></td>
 						<td>
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.pprice }" /> 원
 						</td>
 						<td>
-							<input style="width: 36px; height:23px" type="number" name="amount" value="${ cartList.amount }">
+							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
 							<button type="button" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">
@@ -99,8 +99,7 @@
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td style="text-align: right;"><fmt:formatNumber pattern="###,###,###" value="${ map.fee }" /> 원<br>
-                         (3만원 이상 구입 시 무료배송)</td>
+					<td style="text-align: right;">${ map.fee } 원</td>
 				</tr>
 			</table>
 			<br> <br>
@@ -140,12 +139,16 @@
 	
 	<script>
 		$('#backShop').click(function(){
-			location.href = "${pageContext.request.contextPath}/product/productList.do";
+			history.back();
 		});
 		
 		$('#orderBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/order/orderPage.do";
 		});
+		/*
+		$('#deleteAll').click(function(){
+			location.href = "${pageContext.request.contextPath}/cart/cartDeleteAll.do";
+		});*/
 		
 		function deleteAll(){
 			if(confirm("정말 삭제하시겠습니까?") == true) {

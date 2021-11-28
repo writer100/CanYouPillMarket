@@ -12,10 +12,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- iamport.payment.js 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> -->
 <!-- css 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderPage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -80,6 +77,7 @@
           }
       }).open();
   }
+
     </script>
 </head>
 
@@ -97,7 +95,6 @@
         </div>
         <br>
         <div class="order_tb">
-        <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="orderFrm" method="post">
             <table id="orderList">
                 <thead>
                     <tr>
@@ -110,8 +107,7 @@
                 	<c:forEach items="${map.list}" var="cartList" varStatus="i">
                     <tr>
                         <td>
-                            ${ cartList.pname }
-                            <input type="hidden" name="pname" value="${cartList.pname }" />
+                            <h5>${ cartList.pname }</h5>
                         </td>
                         <td>${ cartList.amount }</td>
                         <td><fmt:formatNumber pattern="###,###,###" value="${ cartList.orderprice }" /></td>
@@ -120,31 +116,29 @@
             </c:forEach>
             </table>
             <br>
-            
             <table id="orderList2">
                 <tr>
                     <td><b>Total</b></td>
                     <td style="text-align: right;">
                         <b><fmt:formatNumber pattern="###,###,###" value="${ map.sumPrice }"/> 원</b>
-                        
                     </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
                     <td style="text-align: right;">
-                         <fmt:formatNumber pattern="###,###,###" value="${ map.fee }" /> 원 <br>
+                         ${ map.fee } 원 <br>
                          (3만원 이상 구입 시 무료배송)
-                         <input type="hidden" name="fee" value="${ map.fee }" />
                     </td>
                 </tr>
             </table>
             <hr><br>
+            <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="order_frm" method="post">
             <table id="orderList3">
                 <tr>
                     <td>총 결제금액</td>
                     <td style="text-align: right;">
                     	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/> 원
-                    	<input type="hidden" id="totalprice" name="totalprice" value="${ map.allSum }"/>
+                    	<input type="hidden" name="totalprice" value="${ map.allSum }"/>
                     	<!-- <input type="hidden" name="pno" value="${ cartList.pno }" /> -->
                     	<!-- <input type="hidden" name="amount" ${ cartList.amount } /> -->
                     </td>
@@ -213,87 +207,24 @@
                 </div>
             </div>
             <br><br>
-            <!-- <div class="paymentInfo">
+            <div class="paymentInfo">
                 <span class="title2">결제 방법</span>
-            </div> -->
+            </div>
             <br><br>
             <div class="btnArea">
-                <button type="button" onclick="requestPay();" id="orderBtn">주문하기</button>
+                <button type="submit" id="orderBtn">주문하기</button>
             </div>
         </form>
     </section>
 
     <br><br><br><br><br><br><br><br><br><br>
 	<c:import url="../common/footer.jsp" />
-	<!-- 
+	
 	<script>
 		$('#orderBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/order/orderFinish.do";
 		})
 	</script>
-	 -->
-	<script type="text/javascript"
-		src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-	<script>
-		var IMP = window.IMP; // 생략가능
-		var iamportKey = 'imp10320709';
-		
-		$(function() {
-			IMP.init( iamportKey );
-		}); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		
-		function requestPay() {
-			// 문서 로딩될 때 바로 호출
-			
-				IMP.request_pay({
-					pg : 'kakao',
-				    pay_method : 'card',
-				    merchant_uid : 'merchant_' + new Date().getTime(),
-					name : '영양제',
-					amount : '${ map.allSum }',
-					buyer_tel : '${ member.phone }'
-				}, function(rsp) {
-					
-					console.log(rsp);
-					if (rsp.success) {
-						//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-						jQuery.ajax({
-							url : "${pageContext.request.contextPath}/order/orderInsert.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-							type : "POST",
-							dataType : 'json',
-							data : /*{
-								imp_uid : rsp.imp_uid,
-								pay_method : rsp.pay_method,
-								price : rsp.paid_amount,
-								status : rsp.status,
-								title : rsp.name,
-								pg_tid : rsp.pg_tid,
-								paid_at : rsp.paid_at
-							//기타 필요한 데이터가 있으면 추가 전달
-							}*/ $('#orderFrm').serialize()
-							
-						});
-						
-						// console.log(data);
-						location.href = "${pageContext.request.contextPath}/order/orderFinish.do";
-					} else {
-						var msg = '결제에 실패하였습니다.';
-						msg += '\n에러내용 : ' + rsp.error_msg;
-						alert(msg);
-					}
-				});
-		};
-	</script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-

@@ -70,8 +70,7 @@
 
 
 			<nav class="findBox mt-3">
-				<a href="${pageContext.request.contextPath}/member/memberFind.do">아이디/비밀번호
-					찾기</a>
+				<a href="${pageContext.request.contextPath}/member/memberFind.do">아이디/비밀번호 찾기</a>
 			</nav>
 
 			<h3 class="mt-2" style="text-align: left;">간편 로그인</h3>
@@ -84,83 +83,31 @@
 							class="btn ApiBtn" type="submit" value="Submit"
 							style="background-color: rgb(252, 233, 78); width: 180px;">카카오톡
 							로그인</button></a>
+
 					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 					<script>
-						Kakao.init('46392ec51113c15db7b2310161d13fb7'); //발급받은 키 중 javascript키를 사용해준다.
-						console.log(Kakao.isInitialized()); // sdk초기화여부판단
-						//카카오로그인
-						function kakaoLogin() {
-							Kakao.Auth.login({
-				                success: function (response) {
-				                    Kakao.API.request({
-				                        url: '/v2/user/me',
-				                        success: function (response) {
-				                            console.log(response)
-				                            console.log(response.id)
-				                            console.log(response['kakao_account']['profile']['nickname'])
-				                              
-				                            var id = response.id;
-				                            var name = response['kakao_account']['profile']['nickname'];
-				                            var email = response['kakao_account']['email'];
-				                              
-				                            kakaoLogout();
-				                              
-				                            $.ajax({
-				                                type: "POST",
-				                                url: "${pageContext.request.contextPath}/member/emailCheck.do",
-				                                data: { email : email }, 
-				                                success: function(data){
-				                                    console.log(data);
-				                                    console.log("Kakao email 검사 성공")
-				                                    
-				                                    if ( data == "" ) {
-				                                        location.href = "${pageContext.request.contextPath}/member/snsMemberJoin.do";
-				                                    } else {
-				                                        
-				                                        if ( data == id ) {
-				                                            location.href = "${pageContext.request.contextPath}/member/snsLogin.do";
-				                                        } else {
-				                                            alert("이미 해당 이메일로 가입되어 있는 계정이 존재합니다.");
-				                                        }
-				                            
-				                        			}
-				                                    
-				                                },
-				                                
-				                                error: function(){
-				                                    alert('Kakao email 검사 실패');
-				                                }
-				                                
-				                            });
-				                          },
-				                          
-				                          fail: function (error) {
-				                            console.log(error)
-				                          },
-				                        })
-				                      },
-				                      fail: function (error) {
-				                        console.log(error)
-				                      },
-				                    })
-				                  
-				          }
-				        
-				        function kakaoLogout() {
-				            if (Kakao.Auth.getAccessToken()) {
-				              Kakao.API.request({
-				                url: '/v1/user/unlink',
-				                success: function (response) {
-				                    console.log(response)
-				                },
-				                fail: function (error) {
-				                  console.log(error)
-				                },
-				              })
-				              Kakao.Auth.setAccessToken(undefined)
-				            }
-				          }
-					</script>
+                        window.Kakao.init('d5a3533686de3ed6c79ba8a195f6d9dd');
+
+                        function kakaoLogin() {
+                            window.Kakao.Auth.login({
+                                scope: 'profile, account_email, gender, age_range, birthday', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                                success: function (response) {
+                                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                                        url: '/v2/user/me',
+                                        success: (res) => {
+                                            const kakao_account = res.kakao_account;
+                                            console.log(kakao_account)
+                                        }
+                                    });
+                                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                                },
+                                fail: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+                    </script>
 					<!-- // 카카오톡 로그인 버튼 -->
 
 					<!-- 네이버 로그인 버튼 -->
@@ -178,53 +125,54 @@
 						charset="utf-8"></script>
 
 					<script>
-						var naverLogin = new naver.LoginWithNaverId({
-							clientId : "IQ5XsxP1tRJ5A6yl9EMb", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-							callbackUrl : "http://localhost:8180/market", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
-							isPopup : false,
-							callbackHandle : true
-						});
-
-						naverLogin.init();
-
-						window.addEventListener('load', function() {
-							naverLogin.getLoginStatus(function(status) {
-								if (status) {
-									var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-
-									console.log(naverLogin.user);
-
-									if (email == undefined || email == null) {
-										alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
-										naverLogin.reprompt();
-										return;
-									}
-								} else {
-									console.log("callback 처리에 실패하였습니다.");
-								}
-							});
-						});
-
-						var testPopUp;
-						function openPopUp() {
-							testPopUp = window
-									.open(
-											"https://nid.naver.com/nidlogin.logout",
-											"_blank",
-											"toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
-						}
-						function closePopUp() {
-							testPopUp.close();
-						}
-
-						function naverLogout() {
-							openPopUp();
-							setTimeout(function() {
-								closePopUp();
-							}, 1000);
-
-						}
-					</script>
+                    
+                    var naverLogin = new naver.LoginWithNaverId(
+                            {
+                                clientId: "IQ5XsxP1tRJ5A6yl9EMb", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+                                callbackUrl: "http://localhost:8180/market", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+                                isPopup: false,
+                                callbackHandle: true
+                            }
+                        );	
+                    
+                    naverLogin.init();
+                    
+                    window.addEventListener('load', function () {
+                        naverLogin.getLoginStatus(function (status) {
+                            if (status) {
+                                var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+                                
+                                console.log(naverLogin.user); 
+                                
+                                if( email == undefined || email == null) {
+                                    alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+                                    naverLogin.reprompt();
+                                    return;
+                                }
+                            } else {
+                                console.log("callback 처리에 실패하였습니다.");
+                            }
+                        });
+                    });
+                    
+                    
+                    var testPopUp;
+                    function openPopUp() {
+                        testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+                    }
+                    function closePopUp(){
+                        testPopUp.close();
+                    }
+                    
+                    function naverLogout() {
+                        openPopUp();
+                        setTimeout(function() {
+                            closePopUp();
+                            }, 1000);
+                        
+                        
+                    }
+                    </script>
 					<!-- // 네이버 로그인 버튼 -->
 				</div>
 			</div>

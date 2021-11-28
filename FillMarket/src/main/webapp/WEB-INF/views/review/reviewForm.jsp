@@ -22,7 +22,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <!-- 타이틀 로고 -->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 	<style>
 	.row {
     display: flex;
@@ -35,6 +35,7 @@
 		text-align: center;
 		border-bottom : 1px solid rgba(0, 0, 0, 0.35);
 	}
+	.search{ text-align: center; }
 
 .form-control {
     display: block;
@@ -96,15 +97,24 @@
                 <br />
 			<div class="row product" wieth="90%">
 			<div id="review-container" wieth="60%">
-			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewFormEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-				<!-- <input type="hidden" name="reno" value="${ review.reuserid }" />  -->
-				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="retitle" id="retitle" value="${review.retitle}" required>
-				<input type="text" class="form-control" name="reuserid" value="${member.userId}" readonly required>
-				<input type="hidden" name="pno" value="${ pno }" required /> 
-				<input type="text" class="form-control" name="productno" value="${ pname }" readonly required>
-				
-				
-			
+			<form name="reviewFrm" action="${pageContext.request.contextPath}/review/reviewUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+				<input type="hidden" name="reno" value="${ review.reuserid }" />
+				<input type="text" class="form-control" placeholder="리뷰 제목을 입력해주세요" name="reviewtitle" id="reviewtitle" value="${review.retitle}" required>
+				<input type="text" class="form-control" name="reviewreuserid" value="${member.userId}" readonly required>
+				 
+				<input type="hidden" name="pno" value="${ review.pno }" />
+				<input type="text" class="form-control" name="productname" value="${product.pname}" readonly required>				
+				 
+				<c:forEach items="${rattachmentList}" var="ra" varStatus="vs">
+					<div class="rows">					
+					<button type="button" class="btn btn-outline-success col-8"
+							onclick="fileDownload('${ra.originalname}','${ra.changename }');" >
+						첨부파일${vs.count} - ${ra.originalname }
+					</button>
+					<button type="button" class="btn btn-outline-danger col-2"
+							onclick="fileDelete(this, '${ra.rano}', '${ra.changename }');">파일 삭제</button>
+					</div>
+				</c:forEach>
 				<br>
 				<div class="input-group mb-3" style="padding:0px;">
 				  <div class="input-group-prepend" style="padding:0px;">
@@ -115,7 +125,7 @@
 				    <label class="custom-file-label" for="upFile"></label>
 				  </div>
 				</div>
-			    <textarea class="form-control" name="recontent" placeholder="내용" required></textarea>
+			    <textarea class="form-control" name="reviewcontent" placeholder="내용" required></textarea>
 				<br />
 				<input type="submit" class="btn" " value="등록" /> &nbsp;
 				<br />

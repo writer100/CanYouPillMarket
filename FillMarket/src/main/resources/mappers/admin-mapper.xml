@@ -39,7 +39,7 @@
 		<selectKey keyProperty="pno" resultType="_int" order="BEFORE">
 			SELECT SEQ_PNO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, UPLOADDATE, STATUS)
+		INSERT INTO PATTACHMENT (PANO, PNO, ORIGINALNAME, CHANGENAME, ENROLL_DATE, STATUS)
 		VALUES (SEQ_PANO.NEXTVAL, #{pno}, #{originalname}, #{changename}, SYSDATE, 'Y')
 	</insert>
 
@@ -175,48 +175,5 @@
 		WHERE qano = #{qano}
 	</update>
 	
-	<select id="selectAdmin" parameterType="String" resultType="Member">
-		SELECT * FROM MEMBER
-		WHERE USERID = #{userId} AND LEVELTYPE = 2
-	</select>
-	
-	<update id="adminMemoInsert">
-		UPDATE MEMBER SET MEMO = #{memo}
-		WHERE USERID = #{userId}
-	</update>
-	
-	<select id="adminOrderList" parameterType="String" resultType="OrderList">
-		SELECT O.ORDERUSERID, O.TOTALPRICE, O.ORDERENROLL, O.RECEIVERNAME,
-		P.PNAME, OD.ORDERID, (SELECT COUNT(*) -1 FROM ORDERDETAIL
-		                        WHERE ORDERID = OD.ORDERID
-		                        GROUP BY ORDERID) "CNT"
-		FROM ORDERED O, ORDERDETAIL OD, PRODUCT P
-		WHERE O.ORDERID = OD.ORDERID
-		AND OD.PNO = P.PNO
-		AND OD.ORDERDETAILNO IN (SELECT max(ORDERDETAILNO) FROM ORDERDETAIL
-		GROUP BY ORDERID)
-		AND P.PNAME = (SELECT MIN(PNAME) FROM PRODUCT P WHERE PNO = OD.PNO)
-		AND ORDERUSERID = #{ orderuserid }
-	</select>
-	<select id="selectOrderTotal" parameterType="String" resultType="int">
-		select COUNT(*) from ordered
-		where orderuserid = #{userId}
-	</select>
-	
-	<update id="updateUserAuthor" parameterType="Member">
-		UPDATE MEMBER SET LEVELTYPE = #{levelType}
-		WHERE USERID = #{userId}
-	</update>
-	
-	<select id="memberCount" resultType="int">
-		SELECT COUNT(*)FROM MEMBER
-	</select>
-	
-	<select id="productCount" resultType="int">
-		SELECT COUNT(*)FROM PRODUCT
-	</select>
-	<select id="qnaCount" resultType="int">
-		SELECT COUNT(*)FROM QNA
-	</select>
 	
 </mapper>

@@ -36,7 +36,7 @@ public class ReviewController {
 			) {
 		
 		// 한 페이지당 게시글 수
-		int numPerPage = 5;
+		int numPerPage = 10;
 		
 		// 현재 페이지와 한 페이지당 게시글 수를 같이 가지고 DB에 조회
 		// 현재  페이지의 게시글 수 
@@ -63,16 +63,13 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/reviewForm.do")
-	public String reviewForm(String pno, String pname, Model model) { // 글쓰기 메소드!
-		
-		model.addAttribute("pno",  pno);
-		model.addAttribute("pname",  pname);
+	public String reviewForm() { // 글쓰기 메소드!
 		
 		return "review/reviewForm";
 	}
 	
 	@RequestMapping("/review/reviewFormEnd.do")
-	public String insertReview(Review review, Model model, HttpServletRequest req,
+	public String insertBoard(Review review, Model model, HttpServletRequest req,
 							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles) {
 		
 		System.out.println("review : " + review);
@@ -114,9 +111,9 @@ public class ReviewController {
 		String msg = "";
 		
 		if( result > 0 ) {
-			msg = "리뷰 등록 성공!";
+			msg = "게시글 등록 성공!";
 		} else {
-			msg = "리뷰 등록 실패!";
+			msg = "게시글 등록 실패!";
 		}
 		
 		model.addAttribute("loc", loc);
@@ -136,31 +133,29 @@ public class ReviewController {
 		return sdf.format(new Date(System.currentTimeMillis())) + "_" + rnd + "." + ext; 
 			
 	}
-	
+
 	@RequestMapping("/review/reviewView.do")
-	public String reviewView(@RequestParam int reno, String pname, Model model) {
+	public String reviewView(@RequestParam int reno, Model model) {
 		
 		Review review = reviewService.selectOneReview(reno);
+		
 		List<RAttachment> rattachmentList = reviewService.selectRAttachmentList(reno);
 		
 		model.addAttribute("review", review);
-		model.addAttribute("pname",  pname);
 		model.addAttribute("rattachmentList", rattachmentList);
-		// System.out.println("pname:"+pname);
 		
 		return "review/reviewView";
 	}
 	
 	
 	@RequestMapping("/review/reviewUpdateView.do")
-	public String reviewUpdateView(@RequestParam int reno, String pname, Model model) {
+	public String reviewUpdateView(@RequestParam int reno, Model model) {
 		
 		Review review = reviewService.updateView(reno);
 		
 		List<RAttachment> rattachmentList = reviewService.selectRAttachmentList(reno);
 		
 		model.addAttribute("review", review);
-		model.addAttribute("pname",  pname);
 		model.addAttribute("rattachmentList", rattachmentList);
 		
 		return "review/reviewUpdateView";		
@@ -168,8 +163,7 @@ public class ReviewController {
 	
 	@RequestMapping("/review/reviewUpdate.do")
 	public String reviewUpdate(Review review, HttpServletRequest request, Model model, 
-							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
-							  @RequestParam(value="rano", required=false, defaultValue="0") int rano) {
+							  @RequestParam(value="upFile", required=false) MultipartFile[] upFiles) {
 		// 1. 원본 게시글 불러와 수정하기
 		int reno = review.getReno();
 		
@@ -180,12 +174,9 @@ public class ReviewController {
 		
 		// 2. 첨부파일 수정하기
 		String savePath = request.getServletContext().getRealPath("/resources/reviewUpload");
-		List<RAttachment> rattachList = null;
 		
-		if(rano != 0) {
-			rattachList = reviewService.selectRAttachmentList(rano);
-		}
-		if( rano == 0 && rattachList == null ) rattachList = new ArrayList<RAttachment>();
+		List<RAttachment> rattachList = reviewService.selectRAttachmentList(reno);
+		if( rattachList == null ) rattachList = new ArrayList<RAttachment>();
 		
 		int idx = 0;
 		for(MultipartFile f : upFiles) {
@@ -201,7 +192,7 @@ public class ReviewController {
 					temp = rattachList.get(idx);
 				} else {
 					temp = new RAttachment();
-					temp.setReno(rano);
+					temp.setReno(reno);
 					
 					rattachList.add(temp);
 				}
@@ -218,7 +209,7 @@ public class ReviewController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				temp.setReno(reno);
+				
 				temp.setOriginalname(originName);
 				temp.setChangename(changeName);
 				
@@ -244,14 +235,14 @@ public class ReviewController {
 	
 	@RequestMapping("/review/fileDelete.do")
 	@ResponseBody
-	public boolean fileDelete(@RequestParam int reno,
+	public boolean fileDelete(@RequestParam int attNo,
 							   @RequestParam String rName,
 							   HttpServletRequest request) {
 		
 		String savePath = request.getServletContext().getRealPath("/resources/reviewUpload");
 		
 		// 1. DB에서 첨부파일 삭제
-		int result = reviewService.deleteFile(reno);
+		int result = reviewService.deleteFile(attNo);
 		
 		if( result == 1 ) {
 			File goodbye = new File(savePath + "/" + rName);
@@ -283,8 +274,8 @@ public class ReviewController {
 		if( result > 0 ) {
 			msg = "삭제 완료!";
 			
-			for(RAttachment ra : deList ) {
-				new File(savePath + "/" + ra.getChangename()).delete();
+			for(RAttachment a : deList ) {
+				new File(savePath + "/" + a.getChangename()).delete();
 			}
 		} else { 
 			msg = "삭제 실패!";

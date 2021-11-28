@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의게시판</title>
+<title>Insert title here</title>
 <c:import url="../common/adminSide.jsp" />
 <style>
 	.table{

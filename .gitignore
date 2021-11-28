@@ -2,4 +2,3 @@
 FillMarket/src/main/webapp/WEB-INF/views/product/productList2.jsp
 FillMarket/src/main/resources/mappers/product-mapper.xml
 FillMarket/src/main/resources/mappers/product-mapper.xml
-FillMarket/src/main/java/com/fill/market/member/controller/MemberController.java

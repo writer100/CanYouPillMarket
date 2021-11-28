@@ -141,7 +141,7 @@ text-align: center;
 				success : function(data){
 					if(data == true) {
 						alert("회원 복구 완료!");
-						//location.href="${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userId;
+						location.href="${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userId;
 					} else {
 						alert("회원 복구 실패!");
 					}

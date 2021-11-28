@@ -20,6 +20,8 @@ public interface ReviewDAO {
 
 	List<RAttachment> selectRAttachmentList(int reno);
 	
+	int updateReadCount(int reno);
+	
 	int updateReview(Review review);
 
 	int updateRAttachment(RAttachment ra);

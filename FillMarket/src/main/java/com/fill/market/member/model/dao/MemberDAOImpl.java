@@ -54,12 +54,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("memberSQL.updateNewPass", m);
 	}
 
-	@Override
-	public String selectEmailCount(String email) {
-		
-		return sqlSession.selectOne("memberSQL.selectEmailCheck", email);
-	}
-
 	
 
 

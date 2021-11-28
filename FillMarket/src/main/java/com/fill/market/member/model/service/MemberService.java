@@ -43,8 +43,6 @@ public interface MemberService {
 
 	int updateNewPass(Member m);
 
-	String selectEmailCount(String email);
-
 	
 
 		

@@ -33,7 +33,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public int insertReview(Review review) {
 		
-		return sqlSession.insert("reviewSQL.insertReview", review);
+		return sqlSession.insert("reviewSQL.insertRevie", review);
 	}
 
 	@Override
@@ -56,9 +56,15 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
+	public int updateReadCount(int reno) {
+		
+		return sqlSession.update("reviewSQL.updateReadCount", reno);
+	}
+
+	@Override
 	public int updateReview(Review review) {
 		
-		return sqlSession.update("reviewSQL.updateReview", review);
+		return sqlSession.update("reviewSQL.updateBoard", review);
 	}
 
 	@Override
@@ -70,19 +76,19 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public int deleteReview(int reno) {
 		
-		return sqlSession.delete("reviewSQL.deleteReview", reno);
+		return sqlSession.delete("reviewSQL.deleteBoard", reno);
 	}
 
 	@Override
-	public int deleteRAttachment(int rano) {
+	public int deleteRAttachment(int reno) {
 		
-		return sqlSession.delete("reviewSQL.deleteRAttachment", rano);
+		return sqlSession.delete("reviewSQL.deleteRAttachment", reno);
 	}
 
 	@Override
-	public int deleteFile(int reno) {
+	public int deleteFile(int attNo) {
 		
-		return sqlSession.delete("reviewSQL.deleteFile", reno);
+		return sqlSession.delete("reviewSQL.deleteFile", attNo);
 	}
 
 }

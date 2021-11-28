@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="surveySQL">
+	<insert id="insertSurvey" parameterType="Survey">
+		INSERT INTO SURVEY (q1, q2, q3, q4, q5, q6, surveyuserid)
+		VALUES (SEQ_QANO.NEXTVAL, #{yyyy}, #{gender}, #{sun},#{food},#{dung},#{info},#{surveyuserid})
+	</insert>
+	
+	<select id="surveyResult" parameterType="int" resultType="Survey">
+		SELECT * FROM SURVEY WHERE SURVEYID = #{ SURVEYID }
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

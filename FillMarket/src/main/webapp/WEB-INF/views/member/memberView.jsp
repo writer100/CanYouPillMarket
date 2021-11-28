@@ -230,12 +230,12 @@
 				</div>
 
 				<!-- JOIN BTN-->
-				<div class="btn_area mt-5" style="display:flex; justify-content:space-between;">
+				<div class="btn_area mt-5">
 					<input type="submit" class="btn" value="수정"
 						id="btnJoin">
-					<input type="reset" class="btn" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
+					<input type="reset" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath }'" value="취소"
 						id="btnJoin">
-					<input type="button" class="btn" style="background-color: #00000078;" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
+					<input type="button" class="btn ms-1" onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do'" value="탈퇴"
 						id="btnJoin">
 				</div>
 

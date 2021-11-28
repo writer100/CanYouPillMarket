@@ -3,6 +3,7 @@ package com.fill.market.board.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.fill.market.admin.model.vo.QNARE;
 import com.fill.market.board.model.vo.Board;
 
 public interface BoardDAO {
@@ -18,4 +19,5 @@ public interface BoardDAO {
 	int updateBoard(Board board);
 
 	int deleteBoard(int boardNo);
+
 }

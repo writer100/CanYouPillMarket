@@ -163,10 +163,6 @@ select {
     font-family: Dotum,'돋움',Helvetica,sans-serif;
     border-radius: 5px;
 	transition-duration: 0.2s;
-    height: 47px;
-    padding-top: 11px;
-    padding-bottom: 17px;
-
 }
 
 #address_id {

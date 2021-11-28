@@ -5,12 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fill.market.admin.model.vo.Product;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.dao.OrderDAO;
 import com.fill.market.order.model.vo.Order;
-import com.fill.market.order.model.vo.OrderDetail;
-import com.fill.market.order.model.vo.OrderList;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -31,9 +28,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void insertOrder(Order order) {
+	public int insertOrder(Order order) {
 		
-		orderDAO.insertOrder(order);
+		return orderDAO.insertOrder(order);
 	}
 
 	@Override
@@ -44,44 +41,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderList> orderList(OrderList orderList) {
+	public List<Order> orderList(Order order) {
 		
-		return orderDAO.orderList(orderList);
+		return orderDAO.orderList(order);
+	}
+
+	@Override
+	public List<Order> orderDetail(Order order) {
+		
+		return orderDAO.orderDetail(order);
 	}
 	
-
-	@Override
-	public List<OrderList> orderDetail(OrderList orderList) {
-		
-		return orderDAO.orderDetail(orderList);
-	}
-
-	@Override
-	public void insertOrderDetail(OrderDetail orderDetail) {
-		
-		orderDAO.insertOrderDetail(orderDetail);
-		
-	}
-
-	@Override
-	public List<OrderList> orderDetailProduct(OrderList orderList) {
-		
-		return orderDAO.orderDetailProduct(orderList);
-	}
-
-	@Override
-	public void psellUpdate(Product product) {
-		
-		orderDAO.psellUpdate(product);
-		
-	}
-
-	@Override
-	public void pstockUpdate(Product product) {
-		
-		orderDAO.pstockUpdate(product);
-		
-	}
-
 
 }

@@ -28,8 +28,6 @@ public interface MemberDAO {
 
 	int updateNewPass(Member m);
 
-	String selectEmailCount(String email);
-
 	
 	
 	

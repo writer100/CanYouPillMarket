@@ -48,7 +48,6 @@ section #headerreg {
 
 <c:import url="../common/adminSide.jsp" />
 <script>
-
 	function updateProduct() {
 		//location.href = "${pageContext.request.contextPath}/admin/productFrom.do";
 	}
@@ -94,7 +93,7 @@ section #headerreg {
 			<br />
 			<br />
 			<h1 id="titleh">수정</h1>
-			
+
 			<form
 				action="${pageContext.request.contextPath}/admin/productUpdateEnd.do"
 				method="post" onsubmit="return validate();"
@@ -104,12 +103,12 @@ section #headerreg {
 					<tr>
 						<td class="title">분류</td>
 						<td>
-						<select name="cno" id="cnoSel">
-								<option value="1" <c:if test="${product.cno == 1}">selected</c:if>>뼈/관절</option>
-								<option value="2" <c:if test="${product.cno == 2}">selected</c:if>>면역력</option>
-								<option value="3" <c:if test="${product.cno == 3}">selected</c:if>>소화/장</option>
-								<option value="4" <c:if test="${product.cno == 4}">selected</c:if>>눈</option>
-								<option value="5" <c:if test="${product.cno == 5}">selected</c:if>>모발</option>
+						<select name="cno" id="">
+								<option value="1">뼈/관절</option>
+								<option value="2">면역력</option>
+								<option value="3">소화/장</option>
+								<option value="4">눈</option>
+								<option value="5">모발</option>
 						</select>
 						</td>
 					</tr>

@@ -30,12 +30,11 @@
 	<c:import url="../common/navbar.jsp" />
 	
 	<div class="container" style="width: 70%">
-		<form name="insertFrm2" action="${pageContext.request.contextPath}/cart/cartDetailInsert.do" method="post">
+		
 		<div class="row">
 			
 			<h1 class="page-header" style="text-align: center; margin-bottom: 50px;"><br />${product.pname}</h1>
-			<input type="hidden" value="${product.pno}" id="pno" name="pno">
-			<input type="hidden" value="${product.pname}" name="pname"/>
+			<input type="hidden" value="${product.pno}" id="pno">
 		</div>
 		<div class="row row-cols-1 row-cols-md-2 g-2" style="float: left; text-align: center; width:40%">
            	<c:forEach items="${pattachmentList}" var="a" varStatus="vs">
@@ -49,7 +48,7 @@
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>가격 : </label><span>&nbsp;<fmt:formatNumber value="${product.pprice}" type="number"/></span><span>&nbsp;원</span>
-				<input type="hidden" value="${product.pprice}" id="pprice" name="pprice">
+				<input type="hidden" value="${product.pprice}" id="pprice">
 			</div>
 			<div class="form-group" style="text-align: left;">
 				<label>배송비 : </label><span>&nbsp;2500원</span>
@@ -58,20 +57,19 @@
 			<div class="form-horizontal" style="text-align: left;">
 				<label>구매수량 : </label> 
 				<input type="hidden" value="${product.pstock}" id="pstock">				
-				<select class="form-control" id="select_amount"  name="amount">
+				<select class="form-control" id="select_amount">
 				<c:forEach begin="1" end="${ product.pstock }" var="product" >
 					<option>${ product }</option>
 				</c:forEach>
 				</select>
 			</div>	
-			</form>
 			<hr>
 			
 			<div class="row">
 				<div class="selected_option" style="text-align: right;">
 				</div>
 				<div style="text-align: center;">
-					<button type="submit" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
+					<button type="button" style="z-index:100;" class="btn btn-outline-info" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					<br />
 				</div>
 			</div>
@@ -95,33 +93,18 @@
 		
 		<div class="row reviews" style="text-align: center; margin: 80px 0; width: 70%;">
 			<h1 class="page-header" style="margin-bottom: 50px;">Review</h1>
-			<p>
-			<button type="button" class="btn" onclick="goReview('${ product.pno }', '${ product.pname }');">리뷰 등록</button>
-			<!-- <input type="button" value="리뷰등록" id="btn-add" class="btn" onclick="fn_goRivewForm();"/> -->
-			</p>
-			
-			
-			<div class="row-cols-1 row-cols-md-1 g-1" ">
-				<c:forEach items="${List}" var="review" >
-				<div id="${ review.reno }">
-				<input type="hidden" value="${review.reno}" id="reno">
-				<div class="rattachment" style="float: left; text-align: center; width:45px ; height :40px">
-					<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
-				</div> 
-				
-				<div class="retitle">
-					<!-- <input type="hidden" value="${review.retitle}" id="retitle"> -->
-					<h3 class="panel-title" >${ review.retitle }</h3>
-					<h6 class="panel-writer" style="margin: 20px 0; text-overflow: ellipsis; overflow: hidden; display:-webkitit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;" >💊 ${ review.reuserid } 님의 후기입니다.
-					&nbsp;&nbsp; 상세한 리뷰 내용을 보시려면 클릭하세요! 💊 <br />
- 				    </h6>
+			<c:forEach begin="1" end="5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<input type="hidden" value="${review.retitle}" id="retitle">
+					<h3 class="panel-title">${ review.retitle }</h3>
 				</div>
-				
+				<div class="panel-body">
+					<input type="hidden" value="${review.recontent}" id="recontent">
+					<p>${review.recontent}</p>
 				</div>
-				
-				</c:forEach>
 			</div>
-			
+			</c:forEach>
 		</div>
 	</div>
 <script>
@@ -150,7 +133,6 @@
 			
 			$(".selected_option").html(str);
 		});
-		
 			var divs = document.querySelectorAll('div');
 			divs.forEach(function(div){
 				div.addEventListener('click',logEvent, { 
@@ -162,23 +144,10 @@
 				console.log(event.currentTarget.className);
 			}
 			
-			/*
+
 			function goCart(pno, pname, pprice){
-				location.href = "${pageContext.request.contextPath}/cart/cartDetailInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
-			}*/
-			
-			function goReview(pno, pname){
-				location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno+"&pname="+pname;
+				location.href = "${pageContext.request.contextPath}/cart/cartInsert.do?pno="+pno + "&pname="+pname + "&pprice="+pprice;
 			}
-			
-			$(function(){
-				$("div[id]").on("click",function(){
-					var reno = $(this).attr("id");
-					console.log("reno="+reno);
-					location.href = "${pageContext.request.contextPath}/review/reviewView.do?reno="+reno;
-				});
-			});
-			
 </script>
 
 	<c:import url="../common/footer.jsp" />

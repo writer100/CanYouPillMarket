@@ -54,12 +54,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateNewPass(m);
 	}
 
-	@Override
-	public String selectEmailCount(String email) {
-		
-		return memberDAO.selectEmailCount(email);
-	}
-
 	
 		
 	}
