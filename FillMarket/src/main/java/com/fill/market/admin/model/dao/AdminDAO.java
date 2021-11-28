@@ -205,6 +205,21 @@ public class AdminDAO {
 		return sqlSession.update("updateUserAuthor", member);
 	}
 
+	public int memberCount() {
+		
+		return sqlSession.selectOne("memberCount");
+	}
+
+	public int productCount() {
+		
+		return sqlSession.selectOne("productCount");
+	}
+
+	public int qnaCount() {
+		
+		return sqlSession.selectOne("qnaCount");
+	}
+
 
 
 	

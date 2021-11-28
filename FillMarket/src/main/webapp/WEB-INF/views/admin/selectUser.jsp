@@ -53,7 +53,7 @@
 											<td></td>
 											<td>
 											<button onclick="adminAuthorB('${userMember.userId}');"
-											class="btn btn-primary">회원수정</button>  
+											class="btn btn-primary">권한수정</button>  
 											
 											<button class="btn btn-success" onclick="orderList('${userMember.userId}');">주문내역</button>
 											
@@ -105,6 +105,7 @@
 									success : function(data){
 										if(data == true){
 											alert("권한이 수정되었습니다.")
+											location.href="${pageContext.request.contextPath}/admin/adminInfo.do";
 										}else if(data == false){
 											alert("수정이 안되었어요ㅠㅠ")
 										}

@@ -216,6 +216,21 @@ public class AdminService {
 		return adminDAO.updateUserAuthor(member);
 	}
 
+	public int memberCount() {
+		
+		return adminDAO.memberCount();
+	}
+
+	public int productCount() {
+		
+		return adminDAO.productCount();
+	}
+
+	public int qnaCount() {
+		
+		return adminDAO.qnaCount();
+	}
+
 	
 	
 }

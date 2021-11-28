@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사용자관리</title>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
 <style>
 #imagefile {
 	width: 30px;
@@ -26,6 +26,7 @@
 #members {
 	display: none;
 	height: auto;
+	
 }
 
 #myInfo {
@@ -42,6 +43,7 @@
 	display: inline-table;
 	width: 100%;
 	height: 385px;
+	
 }
 
 #memoge {
@@ -56,6 +58,11 @@
 #userNameList{
 	display: none;
 }
+.container{
+	box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    
+}
 </style>
 
 
@@ -66,139 +73,11 @@
 		$('#firstCont').show();
 		
 	}
+	function memoView(){
+		$('#orderList').hide()
+		$('#secondCont').show();
+	}
 	
-
-			
-	
-		$(function(){
-			
-			
-		
-			
-			$("tr[id]").on("click",function(){
-				var userId = $(this).attr("id");
-				console.log("userId="+userId);
-				
-				$.ajax({
-					url : "${pageContext.request.contextPath}/admin/userClick.do",
-					data : {userId : userId},
-					dataType: "html",
-			        success : function(data){
-			        	
-			        	$('#members').show().css("display", 'inline-block');
-			        	$('#firstCont').hide();
-			        	$('#members').html(data);
-			        	
-			        }
-					
-				})
-				
-			});
-			
-
-				
-				
-				$('#memoge').on('keyup', function(){
-					var memo = $('#memoge').val();
-					var userId = '${myMember.userId}'
-					// console.log(memo);
-					
-					$.ajax({
-						url : "${pageContext.request.contextPath}/admin/memoSave.do",
-						data : {memo : memo, userId : userId},
-						dataType: "json",
-				        success : function(data){
-				        	
-				        		if(data){
-	
-				        			$('#result').show(500);
-					        		$('#result').html('메모가 저장되었습니다.').css('color', 'blue');
- 				
-				        		}
-				        	
-				        }
-					})
-				})
-				
-				 
-				setInterval(function(){
-					$('#result').hide(3000);
-				},6000)
-				
-				
-				
-				$('#userName').on("keyup",function(){
-					var userName = $(this).val().trim();
-					console.log("userName="+userName);
-					
-					if(userName.length == 0){
-						$('#AlluserList').show()
-						$('#userNameList').hide()
-					}else{
-						$.ajax({
-							 url  : "${pageContext.request.contextPath}/admin/checkNameList.do",
-					         data : {userName : userName},
-					         dataType: "html",
-					         success : function(data){
-					        	 
-					        	 $('#AlluserList').hide()
-					        	 $('#userNameList').show()
-					        	 $('#userNameList').html(data)
-					        	 
-					         }
-						})
-					}
-					
-					
-				});
-				
-			
-		});
-				
-		function userDelete(userId){
-			var check = confirm("회원 " +userId+ " 님의 아이디를 삭제하시겠습니까");
-			
-			if(check == true){
-				$.ajax({
-					url : '${pageContext.request.contextPath}/admin/userDelete.do',
-					data : { userId : userId }, 
-					dataType : 'json',
-					success : function(data){
-						if(data == true) {
-							alert("회원 삭제 완료!");
-							// location.href="${pageContext.request.contextPath}/admin/adminUserManageList.do";
-						} else {
-							alert("회원 삭제 실패!");
-						}
-					}
-				})
-			}else{
-				alert("취소되었습니다.")
-			}
-		}
-		function userRes(userId){
-			var check = confirm("회원 " +userId+ " 님의 아이디를 복구하시겠습니까");
-			
-			if(check == true){
-				$.ajax({
-					url : '${pageContext.request.contextPath}/admin/userRes.do',
-					data : {userId : userId}, 
-					dataType : 'json',
-					success : function(data){
-						if(data == true) {
-							alert("회원 복구 완료!");
-							//location.href="${pageContext.request.contextPath}/admin/adminUserView.do?userid="+userId;
-						} else {
-							alert("회원 복구 실패!");
-						}
-					}
-				})
-			}else{
-				alert("취소되었습니다.")
-			}
-		}
-		
-		
 	</script>
 
 
@@ -286,7 +165,7 @@
 									<td></td>
 									<td>
 										<button onclick="adminAuthorA('${myMember.userId}');"
-											class="btn btn-primary">회원수정</button>
+											class="btn btn-primary">권한수정</button>
 											
 										<button class="btn btn-success" onclick="orderList('${myMember.userId}');">주문내역</button>
 										
@@ -324,8 +203,7 @@
 			<div id="orderList" class="col-md-4"></div>
 
 		</div>
-		<!--<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="912" height="385" style="display: block; width: 912px; height: 385px;"></canvas>
- 		-->
+
 		<h2 style="display : inline;">유저</h2><br />
 		<input type="text" id="userName" placeholder="이름"/>
 		<div class="table-responsive justify-content-md-center">
@@ -368,64 +246,164 @@
 		</div>
 		<div id="userNameList"></div>
 	</div>
+
+
 <script>
-function orderList(userId){
-	
-	$.ajax({
-		url : "${pageContext.request.contextPath}/admin/adminOrderList.do",
-		data : {userId : userId},
-		dataType :"html",
-		success : function(data){
+		$("tr[id]").on("click",function(){
+			var userId = $(this).attr("id");
+			console.log("userId="+userId);
 			
-			$('#orderList').show().css("display", 'inline-table');
-			$('#secondCont').hide();
-			$('#orderList').html(data);
-			},
-		error: function() {
-            alert("주문하신 정보가 없습니다.");
-			}
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/userClick.do",
+				data : {userId : userId},
+				dataType: "html",
+		        success : function(data){
+		        	
+		        	$('#members').show().css("display", 'inline-block');
+		        	$('#firstCont').hide();
+		        	$('#members').html(data);
+		        }
+			})
+		});
+		$('#memoge').on('keyup', function(){
+			var memo = $('#memoge').val();
+			var userId = '${myMember.userId}';
+			
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/memoSave.do",
+				data : {memo : memo, userId : userId},
+				dataType: "json",
+		        success : function(data){
+		        	
+		        		if(data){
+
+		        			$('#result').show(500);
+			        		$('#result').html('메모가 저장되었습니다.').css('color', 'blue');				
+		        		}
+		        }
+			})
 		})
-	}
-	function memoView(){
-		$('#orderList').hide()
-		$('#secondCont').show();
-	}
-	
-	function adminAuthorA(userId){
-		var selectAuthor = $('#selectVala').val();
-		var myAuthor = ${myMember.levelType}
-		
-		
-		if(selectAuthor == myAuthor){
-			alert("회원님의 권한은 이미 같은 권한입니다.");
-		}else{
-			var result = confirm("정말 회원님의 권한을 바꾸시겠습니까?");
-			
-			if(result == false){
-				alert("취소되었습니다.")
-			}else{
-				$.ajax({
-					url : "${pageContext.request.contextPath}/admin/userAuthorUpdate.do",
-					data : {userId : userId, selectAuthor : selectAuthor},
-					dataType : "json",
-					success : function(data){
-						if(data == true){
-							alert("권한이 수정되었습니다.")
-						}else if(data == false){
-							alert("수정이 안되었어요ㅠㅠ")
+		setInterval(function(){
+			$('#result').hide(3000)},6000);
+
+				$('#userName').on("keyup",function(){
+					var userName = $(this).val().trim();
+					console.log("userName="+userName);
+					
+					if(userName.length == 0){
+						$('#AlluserList').show()
+						$('#userNameList').hide()
+					}else{
+						$.ajax({
+							 url  : "${pageContext.request.contextPath}/admin/checkNameList.do",
+					         data : {userName : userName},
+					         dataType: "html",
+					         success : function(data){
+					        	 
+					        	 $('#AlluserList').hide()
+					        	 $('#userNameList').show()
+					        	 $('#userNameList').html(data)
+					         }
+						})
+					}				
+				});
+				
+				function userDelete(userId){
+					var check = confirm("회원 " +userId+ " 님의 아이디를 삭제하시겠습니까");
+					
+					if(check == true){
+						$.ajax({
+							url : '${pageContext.request.contextPath}/admin/userDelete.do',
+							data : { userId : userId }, 
+							dataType : 'json',
+							success : function(data){
+								if(data == true) {
+									alert("회원 삭제 완료!");
+									location.href="${pageContext.request.contextPath}/admin/adminInfo.do";
+								} else {
+									alert("회원 삭제 실패!");
+									
+								}
+							}
+						})
+					}else{
+						alert("취소되었습니다.")
+					}
+				};
+				function userRes(userId){
+					var check = confirm("회원 " +userId+ " 님의 아이디를 복구하시겠습니까");
+					
+					if(check == true){
+						$.ajax({
+							url : '${pageContext.request.contextPath}/admin/userRes.do',
+							data : {userId : userId}, 
+							dataType : 'json',
+							success : function(data){
+								if(data == true) {
+									alert("회원 복구 완료!");
+									location.href="${pageContext.request.contextPath}/admin/adminInfo.do";
+									
+									
+								} else {
+									alert("회원 복구 실패!");
+								}
+							}
+						})
+					}else{
+						alert("취소되었습니다.")
+					}
+				};
+				function orderList(userId){
+					
+					$.ajax({
+						url : "${pageContext.request.contextPath}/admin/adminOrderList.do",
+						data : {userId : userId},
+						dataType :"html",
+						success : function(data){
+							
+							$('#orderList').show().css("display", 'inline-table');
+							$('#secondCont').hide();
+							$('#orderList').html(data);
+							},
+						error: function() {
+				            alert("주문하신 정보가 없습니다.");
+							}
+						})
+					};
+				function adminAuthorA(userId){
+					var selectAuthor = $('#selectVala').val();
+					var myAuthor = ${myMember.levelType}
+					
+					
+					if(selectAuthor == myAuthor){
+						alert("회원님의 권한은 이미 같은 권한입니다.");
+					}else{
+						var result = confirm("정말 회원님의 권한을 바꾸시겠습니까?");
+						
+						if(result == false){
+							alert("취소되었습니다.")
+						}else{
+							$.ajax({
+								url : "${pageContext.request.contextPath}/admin/userAuthorUpdate.do",
+								data : {userId : userId, selectAuthor : selectAuthor},
+								dataType : "json",
+								success : function(data){
+									if(data == true){
+										alert("권한이 수정되었습니다.")										
+										location.href="${pageContext.request.contextPath}/admin/adminInfo.do";											
+									
+									}else if(data == false){
+										alert("수정이 안되었어요ㅠㅠ")
+									}
+								}
+							})
 						}
 					}
-				})
+				};
 				
-			}
-			
-		}
-		
-		
-	
-	}
-	
 	
 </script>
+
 </body>
 </html>
