@@ -51,7 +51,7 @@
 			<mapping path="/qna/qnaUpdate.do" />
 			<mapping path="/qna/qnaDelete.do" />
 			<mapping path="/qna/qnaUpdateView.do" />
-			<exclude-mapping path="/qna/qnaView.do" />	
+			<exclude-mapping path="/qna/qnaView.do" />
 			<beans:bean id="writerCheck" class="com.fill.market.common.WriterInterceptor"/>
 		</interceptor>
 	</interceptors>
