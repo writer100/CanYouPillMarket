@@ -13,7 +13,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample06">
+            <div class="collapse navbar-collapse" id="navbarsExample06" style="
+    font-weight: 700;
+">
                 
                 <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                     <li class="nav-item dropdown">
