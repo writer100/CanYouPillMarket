@@ -126,7 +126,9 @@
             </div>
             <div class="bt_wrap_update">
                 <div class="bt_wrap_update_q">
-                <input class="btn btn-primary" type="sumbit" value="결과 보기">
+                <button class="btn btn-primary" type="sumbit" value="submit">
+                	결과보
+                </button>
                 </div>
             </div>
             </form>

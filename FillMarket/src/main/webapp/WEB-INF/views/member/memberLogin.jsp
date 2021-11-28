@@ -52,7 +52,8 @@
 						아이디 기억하기
 					</label>
 				</div>
-				<button class="btn" type="submit" value="Submit" id="loginBtn">로그인</button>
+				<button class="btn" type="submit" value="Submit" id="loginBtn"
+					onclick="loginProcess();">로그인</button>
 			</form>
 
 
@@ -220,10 +221,13 @@
 						}
 					</script>
 					<!-- // 네이버 로그인 버튼 -->
+
 				</div>
 			</div>
 		</div>
 	</main>
+
+
 
 	<div
 		style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; text-decoration-line: none;">
