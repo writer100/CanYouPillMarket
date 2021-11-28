@@ -105,19 +105,18 @@
 				<c:forEach items="${List}" var="review" >
 				<div id="${ review.reno }">
 				<input type="hidden" value="${review.reno}" id="reno">
-				<div class="rattachment" style="float: left; text-align: center; width:40px ; height :40px">
+				<div class="rattachment" style="float: left; text-align: center; width:45px ; height :40px">
 					<img src="${pageContext.request.contextPath}/resources/reviewUpload/${review.rattachment.changename}" alt="첨부파일" width="100px;" "/>
 				</div> 
 				
 				<div class="retitle">
 					<!-- <input type="hidden" value="${review.retitle}" id="retitle"> -->
-					<h3 class="panel-title" float: right;">${ review.retitle }</h3>
-					<h5 class="panel-writer" float: right;">${ review.reuserid } </h5>
+					<h3 class="panel-title" >${ review.retitle }</h3>
+					<h6 class="panel-writer" style="margin: 20px 0; text-overflow: ellipsis; overflow: hidden; display:-webkitit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical;" >💊 ${ review.reuserid } 님의 후기입니다.
+					&nbsp;&nbsp; 상세한 리뷰 내용을 보시려면 클릭하세요! 💊 <br />
+ 				    </h6>
 				</div>
-				<div class="recontent" float: right;">
-					<!-- <input type="hidden" value="${review.recontent}" id="recontent">  -->
-					<p>${review.recontent}</p>
-				</div>
+				
 				</div>
 				
 				</c:forEach>

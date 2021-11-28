@@ -3,12 +3,15 @@ package com.fill.market.product.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fill.market.admin.model.vo.Member;
 import com.fill.market.admin.model.vo.PAttachment;
 import com.fill.market.admin.model.vo.Product;
 import com.fill.market.common.Utils;
@@ -28,8 +31,13 @@ public class ProductController {
 	public String selectProductList(
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="cno", required=false, defaultValue="0") int cno,
-			Model model
+			Model model, HttpSession session
 			) {
+		
+		//String pList = ((Product) (session.getAttribute("product"))).getPname();
+		
+		//Product productSearch = productService.Selectproduct(pList);
+		
 		
 		// 한 페이지당 상품 수
 		int numPerPage = 8;

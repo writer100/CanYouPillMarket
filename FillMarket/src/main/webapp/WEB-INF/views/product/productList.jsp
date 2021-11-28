@@ -31,15 +31,6 @@
 	
 	.btn{ background-color : rgb(255, 142, 117); color: white;}
 	
-	.my.pagination > .active > a, 
-	.my.pagination > .active > span, 
-	.my.pagination > .active > a:hover, 
-	.my.pagination > .active > span:hover, 
-	.my.pagination > .active > a:focus, 
-	.my.pagination > .active > span:focus {
-  		background: rgb(255, 142, 117);
- 		 border-color: rgb(255, 142, 117);
-	}
 		
 	</style>
 </head>
@@ -54,18 +45,18 @@
 	        <!-- 검색창 -->
 		        <div role="group" class="input-group d-flex align-items-center justify-content-center my-3"><!---->
 			        <form class="search" style="width: 1000px;">
-			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; wieth : 80%" id="productSearch">
+			        <input type="text" placeholder="제품명, 브랜드를 입력하세요" style="width: 600px; border-radius: 2px; border: 0px; " id="productSearch">
 			        <button id="searchBtn" type="submit" class="btn">검색</button>
 			        </form>
 		        </div>
 
 			<div class="row row-cols-1 row-cols-md-4 g-4" style="width: 1024px;">
 			<c:forEach items="${list}" var="product"> 
-			  <div class="col">
+			  <div class="col" style="width: 250px; height:500px;">
 			    <div class="card h-100">
-			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" style="width: 200px h;" "class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
+			        <img src="${pageContext.request.contextPath}/resources/productUpload/${ product.changename }" style="width: 200px; height:325px;" "class="card-img-top" alt="${ product.pname }" id="${ product.pno }">
 					  <div class="card-body" style="z-index:10;">
-					    <h5 class="card-title" id="${ product.pname }">${ product.pname }</h5>
+					    <h5 class="card-title" style="width: 192px; height:70px; text-overflow: ellipsis; overflow: hidden; display:-webkitit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; " id="${ product.pname }">${ product.pname }</h5>
 					    <p class="card-text" id="${ product.pprice }">${ product.pprice }</p>
 					    <button type="button" style="z-index:100;" class="btn" onclick="goCart('${ product.pno }', '${ product.pname }', '${ product.pprice }');">장바구니 담기</button>
 					  </div>
@@ -119,15 +110,29 @@
 		
 		$(function(){
 			$(".card-img-top[name]").on("click",function(){
-				var userId = $(this).attr("name");
+				var pname = $(this).attr("pname");
 				console.log("pname="+pname);
 				location.href = "${pageContext.request.contextPath}/product/productView.do?pname="+pname;
 			});
 			
 			$('#pname').on("keyup",function(){
-				var userName = $(this).val().trim();
+				var pname = $(this).val().trim();
 				console.log("pname="+pname);
-				
+				/*
+						if(target == null && keyword == null) {
+			// 검색을 하지 않았을 때
+			listCount = service.getListCount(cateNo);
+		} else if(target.equals("title") && keyword != null) {
+			// 제목으로 검색
+			listCount = service.getTitleListCount(cateNo, keyword);
+		} else if(target.equals("writerId") && keyword != null) {
+			// 작성자 아이디로 검색
+			listCount = service.getWriterIdListCount(cateNo, keyword);
+		} else if(target.equals("writerNick") && keyword != null) {
+			// 작성자 닉네임으로 검색
+			listCount = service.getWriterNickListCount(cateNo, keyword);
+		}
+				*/
 				if(pname.length == 0){
 					$('#AllList').show()
 					$('#pnameList').hide()
