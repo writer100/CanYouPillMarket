@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>FillMarket</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <link
@@ -21,7 +25,7 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 </head>
 <body id="index_body">
 	

@@ -11,6 +11,10 @@
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Secular+One&display=swap" rel="stylesheet">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/memberUpdate.css">
 
@@ -85,7 +89,7 @@
 	}
 </script>
 
-
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/finalLogo.ico" />
 </head>
 
 <body>
