@@ -41,7 +41,6 @@
 		<interceptor>
 			<mapping path="/cart/**/*.do" />
 			<mapping path="/qna/**/*.do" />
-			<mapping path="/survey/surveyList.do" />
 			<mapping path="/admin/**/*.do" />
 			<exclude-mapping path="/qna/qnaList.do" />			
 			<beans:bean id="loginCheck" class="com.fill.market.common.LoginInterceptor"/>
