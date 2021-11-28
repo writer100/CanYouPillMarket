@@ -27,7 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 			return false;
 		}
-
+		/*
 		if (loginMember.getLevelType() != 2) {
 			System.out.println("비 로그인 상태에서 접근 시도 : " + request.getRequestURI());
 
@@ -36,7 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 
 			return false;
-		}
+		}*/
 
 		return super.preHandle(request, response, handler);
 

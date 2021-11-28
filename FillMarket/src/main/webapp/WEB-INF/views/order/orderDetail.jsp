@@ -48,7 +48,7 @@
         <div class="myOrderDetail">
             <table id="myOrderDetail_tb">
                 <tr>
-                    <td>주문정보</td>
+                    <td>주문번호</td>
                     <td>${ orderDetail.orderid }</td>
                 </tr>
                 <tr>

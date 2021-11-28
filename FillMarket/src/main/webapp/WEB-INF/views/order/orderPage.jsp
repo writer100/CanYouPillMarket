@@ -218,7 +218,7 @@
             </div> -->
             <br><br>
             <div class="btnArea">
-                <button type="button" onclick="requestPay();" id="orderBtn">주문하기</button>
+                <button type="button" onclick="requestPay();" id="orderBtn">결제하기</button>
             </div>
         </form>
     </section>

@@ -39,7 +39,6 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/cart/**/*.do" />
 			<mapping path="/qna/**/*.do" />
 			<mapping path="/admin/**/*.do" />
 			<exclude-mapping path="/qna/qnaList.do" />			
