@@ -4,8 +4,8 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -22,12 +22,12 @@
 	</beans:bean>
 	
 	<!-- @ResponseBody 사용을 위한 jackson 객체 의존성 주입 -->
-	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 	
 	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<beans:property name="messageConverters">
 			<beans:list>
-				<beans:ref bean="jacksonMessageConverter" />
+				<beans:ref bean="jacksonMessageConverter"/>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -37,7 +37,24 @@
 		<beans:property name="maxUploadSize" value="10485760"/> <!-- 최대 파일 크기 -->
 	</beans:bean>
 	
-	<context:component-scan base-package="com.fill.market.*" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/qna/**/*.do" />
+			<mapping path="/survey/surveyList.do" />
+			<exclude-mapping path="/qna/qnaList.do" />			
+			<beans:bean id="loginCheck" class="com.fill.market.common.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
-
+<interceptors>
+		<interceptor>
+			<mapping path="/qna/qnaUpdate.do" />
+			<mapping path="/qna/qnaDelete.do" />
+			<mapping path="/qna/qnaUpdateView.do" />
+			<exclude-mapping path="/qna/qnaView.do" />	
+			<beans:bean id="writerCheck" class="com.fill.market.common.WriterInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<context:component-scan base-package="com.fill.market.*" />
 </beans:beans>

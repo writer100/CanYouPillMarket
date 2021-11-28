@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fill.market.board.model.dao.BoardDAO;
 import com.fill.market.board.model.vo.Board;
+import com.fill.market.admin.model.vo.QNARE;
 import com.fill.market.board.exception.BoardException;
 
 @Service
@@ -68,4 +69,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		return boardDAO.deleteBoard(boardNo);
 	}
+
+	
 }

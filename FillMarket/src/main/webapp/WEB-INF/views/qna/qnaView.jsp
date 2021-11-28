@@ -41,7 +41,7 @@
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default"
 				value="${board.qatitle }">
-				<input type="text" class="form-control" name="qauserid" value="${member.userId}" readonly required>
+				<input type="hidden" class="form-control" name="qauserid" value="${member.userId}" readonly required>
 		</div>
 		<div class="textarea">
 			<textarea placeholder="문의 내용 입력" rows="15" cols="155">${board.qacontent}</textarea>
@@ -52,8 +52,8 @@
 			<input class="btn btn-primary" type="reset" value="목 록" onclick="location.href='${pageContext.request.contextPath}/qna/qnaList.do'"/>
 		</div>
 		<hr>	
-	</div>
 
+</div>
 	<c:import url="../common/footer.jsp" />
 </body>
 </html>
