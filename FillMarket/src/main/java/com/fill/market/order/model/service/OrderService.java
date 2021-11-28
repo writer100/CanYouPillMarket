@@ -2,6 +2,7 @@ package com.fill.market.order.model.service;
 
 import java.util.List;
 
+import com.fill.market.admin.model.vo.Product;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.vo.Order;
 import com.fill.market.order.model.vo.OrderDetail;
@@ -25,6 +26,10 @@ public interface OrderService {
 	void insertOrderDetail(OrderDetail orderDetail);
 
 	List<OrderList> orderDetailProduct(OrderList orderList);
+
+	void psellUpdate(Product product);
+
+	void pstockUpdate(Product product);
 
 
 }

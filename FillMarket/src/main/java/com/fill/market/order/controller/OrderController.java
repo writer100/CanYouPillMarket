@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fill.market.admin.model.vo.Member;
+import com.fill.market.admin.model.vo.Product;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.service.OrderService;
 import com.fill.market.order.model.vo.Order;
@@ -64,7 +65,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("order/orderInsert.do")
-	public String OrderInsert(HttpSession session, Order order, OrderDetail orderDetail, Model model) {
+	public String OrderInsert(HttpSession session, Order order, OrderDetail orderDetail, Product product, Model model) {
 		
 		System.out.println("orderInsert 접근!");
 		
@@ -94,6 +95,8 @@ public class OrderController {
 			orderService.insertOrderDetail(orderDetail);	// 주문 후 카트정보 orderDetail 테이블에 담음
 			
 			orderService.deleteCart(userId);	// 주문완료 한 카트내역 삭제
+			orderService.psellUpdate(product);
+			orderService.pstockUpdate(product);
 			
 //			System.out.println("주문하기 : " + order);
 			

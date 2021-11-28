@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fill.market.admin.model.vo.Product;
 import com.fill.market.cart.model.vo.Cart;
 import com.fill.market.order.model.vo.Order;
 import com.fill.market.order.model.vo.OrderDetail;
@@ -65,6 +66,19 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderList> orderDetailProduct(OrderList orderList) {
 		
 		return sqlSession.selectList("orderSQL.orderDetailProduct", orderList);
+	}
+
+	@Override
+	public void psellUpdate(Product product) {
+		
+		sqlSession.update("orderSQL.psellUpdate", product);
+	}
+
+	@Override
+	public void pstockUpdate(Product product) {
+		
+		sqlSession.update("orderSQL.pstockUpdate", product);
+		
 	}
 
 

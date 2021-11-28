@@ -73,7 +73,7 @@
 							<fmt:formatNumber pattern="###,###,###" value="${ cartList.pprice }" /> 원
 						</td>
 						<td>
-							<input style="width: 35px; height:23px" type="number" name="amount" value="${ cartList.amount }">
+							<input style="width: 36px; height:23px" type="number" name="amount" value="${ cartList.amount }">
 							<button type="button" id="updateBtn">수정</button> 
 							<input type="hidden" name="cartno" value="${ cartList.cartno }"> 
 							<input type="hidden" name="pno" value="${ cartList.pno }">

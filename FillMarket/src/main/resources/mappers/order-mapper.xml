@@ -66,6 +66,20 @@
 		AND OD.PNO = P.PNO
 		AND OD.ORDERID = #{ orderid }
 	</select>
+	
+	<update id="psellUpdate" parameterType="Product">
+		UPDATE PRODUCT P
+		SET PSELL = 
+		    PSELL + (SELECT AMOUNT FROM ORDERDETAIL O WHERE PNO = P.PNO)
+		WHERE PNO = #{ pno }
+	</update>
+	
+	<!-- 주문 시 상품 테이블에 판매량, 재고량 반영 -->
+	<update id="pstockUpdate" parameterType="Product">
+		UPDATE PRODUCT P
+		SET PSTOCK = PSTOCK - PSELL
+		WHERE PNO = #{ pno }
+	</update>
 	 
 	<!-- Access to #{ field } -->
 </mapper>

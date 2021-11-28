@@ -97,7 +97,7 @@
         </div>
         <br>
         <div class="order_tb">
-        <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="order_frm" method="post">
+        <form action="${pageContext.request.contextPath}/order/orderInsert.do" id="orderFrm" method="post">
             <table id="orderList">
                 <thead>
                     <tr>
@@ -144,7 +144,7 @@
                     <td>총 결제금액</td>
                     <td style="text-align: right;">
                     	<fmt:formatNumber pattern="###,###,###" value="${ map.allSum }"/> 원
-                    	<input type="hidden" name="totalprice" value="${ map.allSum }"/>
+                    	<input type="hidden" id="totalprice" name="totalprice" value="${ map.allSum }"/>
                     	<!-- <input type="hidden" name="pno" value="${ cartList.pno }" /> -->
                     	<!-- <input type="hidden" name="amount" ${ cartList.amount } /> -->
                     </td>
@@ -218,7 +218,7 @@
             </div> -->
             <br><br>
             <div class="btnArea">
-                <button type="button" id="orderBtn">주문하기</button>
+                <button type="button" onclick="requestPay();" id="orderBtn">주문하기</button>
             </div>
         </form>
     </section>
@@ -242,7 +242,7 @@
 			IMP.init( iamportKey );
 		}); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		
-		$('#orderBtn').on('click', function(){
+		function requestPay() {
 			// 문서 로딩될 때 바로 호출
 			
 				IMP.request_pay({
@@ -251,38 +251,39 @@
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 					name : '영양제',
 					amount : '${ map.allSum }',
-					buyer_email : '${ member.email }',
-					buyer_name : '${ member.userId }',
-					buyer_tel : '${ member.phone }',
-					buyer_addr : '서울시 강남구 역삼동',
-					buyer_postcode : '01234'
+					buyer_tel : '${ member.phone }'
 				}, function(rsp) {
+					
+					console.log(rsp);
 					if (rsp.success) {
 						//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-						$.ajax({
-							url : "/order/orderFinish.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-							type : 'POST',
-							dataType : 'json',
-							data : {
+						jQuery.ajax({
+							url : "/order/orderInsert.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+							type : "POST",
+							headers: { "Content-Type": "application/json" },
+							// dataType : 'json',
+							data : /*{
 								imp_uid : rsp.imp_uid,
 								pay_method : rsp.pay_method,
 								price : rsp.paid_amount,
 								status : rsp.status,
 								title : rsp.name,
 								pg_tid : rsp.pg_tid,
-								buyer_name : rsp.buyer_name,
 								paid_at : rsp.paid_at
 							//기타 필요한 데이터가 있으면 추가 전달
-							}
+							}*/ $('#orderFrm').serialize()
+							
 						});
-						location.href = "${pageContext.request.contextPath}/order/orderFinish.do";
+						
+						// console.log(data);
+						// location.href = "${pageContext.request.contextPath}/order/orderInsert.do";
 					} else {
 						var msg = '결제에 실패하였습니다.';
 						msg += '\n에러내용 : ' + rsp.error_msg;
 						alert(msg);
 					}
 				});
-		});
+		};
 	</script>
 </body>
 

@@ -129,7 +129,7 @@
                             <td>
                             	<button type="button" id="exchangeBtn">교&nbsp;&nbsp;&nbsp;&nbsp;환</button>
                             	<button type="button" id="refundBtn">환&nbsp;&nbsp;&nbsp;&nbsp;불</button>
-                            	<button type="button" id="reviewBtn">리뷰작성</button>
+                            	<button type="button" id="reviewBtn" onclick="goReview('${p.pname}', '${p.pname }');">리뷰작성</button>
                             </td>
                         </tr>
                     </tbody>
@@ -183,10 +183,14 @@
 		$('#goProductList').click(function(){
 			location.href = "${pageContext.request.contextPath}/product/productList.do";
 		})
-		
+		/*
 		$('#reviewBtn').click(function(){
 			location.href = "${pageContext.request.contextPath}/review/reviewForm.do";
-		})
+		})*/
+		
+		function goReview(pno, pname){
+			location.href = "${pageContext.request.contextPath}/review/reviewForm.do?pno="+pno+"&pname="+pname;
+		}
 	</script>
 </body>
 </html>
