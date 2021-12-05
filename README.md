@@ -32,3 +32,4 @@
 
 ## 구현기능 및 기능설명
 * 상품 목록에서 장바구니 추가
+![addCart](https://user-images.githubusercontent.com/91815909/144743116-2252337b-c591-4b70-b35d-1297abe7d2cf.gif)
